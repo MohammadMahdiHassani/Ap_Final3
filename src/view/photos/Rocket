@@ -1,0 +1,860 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <meta name="yandex-verification" content="c8b1853ce105cdf4" />
+  <meta name="csrf-token" content="tAVLC2SV76tWf4SD3UnFKcUXE2zwuF8fdiyOxoBv">
+
+  <meta name="view-name" content="pages-card">
+    
+            <meta property="og:description" content="Rocket - Rare Clash Royale Card">
+          <meta property="og:image" content="https://cdn.statsroyale.com/images/og.png" />
+
+    
+  
+    <title>Rocket - Rare Clash Royale Card</title>
+  <meta name="description" content="Rocket - Rare Clash Royale Card">
+  
+  <link href="https://cdn.statsroyale.com/fonts.css?v=1623596624" rel="stylesheet">
+  <link href="https://cdn.statsroyale.com/build.css?v=1623596624" rel="stylesheet">
+
+  <link rel="apple-touch-icon-precomposed" sizes="180x180" href="https://cdn.statsroyale.com/images/favicon/apple-touch-icon-180x180-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://cdn.statsroyale.com/images/favicon/apple-touch-icon-152x152-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://cdn.statsroyale.com/images/favicon/apple-touch-icon-144x144-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="120x120" href="https://cdn.statsroyale.com/images/favicon/apple-touch-icon-120x120-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://cdn.statsroyale.com/images/favicon/apple-touch-icon-114x114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="76x76" href="https://cdn.statsroyale.com/images/favicon/apple-touch-icon-76x76-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://cdn.statsroyale.com/images/favicon/apple-touch-icon-72x72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="https://cdn.statsroyale.com/images/favicon/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" sizes="310x310" href="https://cdn.statsroyale.com/images/favicon/large.png">
+
+  
+    <link rel="alternate" hreflang="en" href="/card/Rocket">
+  <link rel="alternate" hreflang="fr" href="/fr/card/Rocket">
+  <link rel="alternate" hreflang="ru" href="/ru/card/Rocket">
+  <link rel="alternate" hreflang="it" href="/it/card/Rocket">
+  <link rel="alternate" hreflang="es" href="/es/card/Rocket">
+  <link rel="alternate" hreflang="de" href="/de/card/Rocket">
+  <link rel="alternate" hreflang="ja" href="/ja/card/Rocket">
+  <link rel="alternate" hreflang="ko" href="/ko/card/Rocket">
+  <link rel="alternate" hreflang="id" href="/id/card/Rocket">
+  <link rel="alternate" hreflang="tr" href="/tr/card/Rocket">
+  <link rel="alternate" hreflang="fi" href="/fi/card/Rocket">
+  <link rel="alternate" hreflang="zh-Hans" href="/zh/card/Rocket">
+  
+      <script>
+        var sw = (function (w, d) {
+            return Math.min(w.screen.width, d.documentElement.clientWidth || w.innerWidth || d.body.clientWidth)
+        })(window, document);
+        window.AdSlots = window.AdSlots || {cmd: [], moat: sw < 480 ? true : false};
+    </script>
+    <script async src="https://cdn.statsroyale.com/nn/statsroyale.min.js?v=23a5dd434534379d6889"></script>
+
+<!--Google Tag Manager Header Code-->
+<script>(function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+            'gtm.start':
+                new Date().getTime(), event: 'gtm.js'
+        });
+        var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src =
+            'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-TR9RPDK');</script>
+<!--End Google Tag Manager Header code-->
+
+
+  
+  
+  <script>
+    window.Laravel = {"csrfToken":"tAVLC2SV76tWf4SD3UnFKcUXE2zwuF8fdiyOxoBv"};
+
+        window.userInfo = null;
+    
+    window.envConfiguration = {
+      apiUrl: "https://statsroyale.com",
+      cdnUrl: "https://cdn.statsroyale.com"
+    };
+
+  </script>
+
+</head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TR9RPDK" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<div >
+  <div id="nn_skinl"></div>
+</div>
+<div >
+  <div id="nn_skinr"></div>
+</div>
+<div id="celtra-reveal-wrapper" style="position:fixed; height: auto; width: 100%">
+  <div id="nn_1by1"></div>
+</div>
+
+    <div class="layout__page">
+              <div class="header">
+            <div class="layout__container header__container">
+                <a href="https://statsroyale.com" class="header__logo">
+                    <div class="header__logoIcon"></div>
+                </a>
+                <div class="header__search">
+                    <form id="search-bar" class="header__searchInput">
+                        <div class="ui__button ui__buttonWhite ui__mediumButton header__typeButton">
+                            <div class="header__typeCaption">Players</div>
+                            <div class="header__arrow"></div>
+                        </div>
+
+                        <input type="text" class="ui__input ui__inputMedium ui__inputRound header__input" placeholder="Tag #XXXXXX" />
+                        <div class="header__info header__guide" data-modal-handler="true" data-name="guide"></div>
+                        <div class="header__settingsIcon" data-modal-handler="true" data-name="clan-advanced-search" style="display: none"></div>
+
+                        <button class="ui__button ui__buttonWhite ui__mediumButton header__searchButton">
+                           <div class="header__searchIcon"></div>
+                        </button>
+
+                        <div class="ui__tooltip header__dropdown" style="display: none">
+                            <a href="#" class="header__dropdownLink" data-type="Player">Players</a>
+                            <a href="#" class="header__dropdownLink" data-type="Clan">Clans</a>
+                        </div>
+                    </form>
+
+                    <div class="modal__overlay" data-modal="clan-advanced-search">
+                      <div class="modal__content header__clanModal">
+                        <span class="modal__close"></span>
+                        <div class="ui__headerSmall">
+                          Advanced search
+                        </div>
+                        <div id="clan-advanced-search"></div>
+                      </div>
+                    </div>
+
+                    <div class="modal__overlay" data-modal="guide">
+                      <div class="modal__content header__guideModal">
+                        <span class="modal__close"></span>
+                        <div class="header__guideSlider">
+                          <div class="header__guideSlide">
+                            <div class="ui__mediumText">
+                              <strong>Step 1</strong> <br/>
+                              Launch Clash Royale and tap your name
+                            </div>
+                            <img src="https://cdn.statsroyale.com/images/guide-1b.png" alt="" class="header__guideImage" />
+                          </div>
+                          <div class="header__guideSlide">
+                            <div class="ui__mediumText">
+                              <strong>Step 2</strong> <br/>
+                              Copy your Player Tag by tapping it under your name
+                            </div>
+                            <img src="https://cdn.statsroyale.com/images/guide-2b.jpg" alt="" class="header__guideImage" />
+                          </div>
+                          <div class="header__guideSlide">
+                            <div class="ui__mediumText">
+                                <strong>Step 3</strong> <br/>
+                                Paste your Player Tag in the search field and click the Search button
+                            </div>
+                            <img src="https://cdn.statsroyale.com/images/guide-3b.gif" alt="" class="header__guideImage" />
+                          </div>
+                        </div>
+
+                        <div class="header__guideNavigation">
+                          <div class="header__dot header__dotActive" data-index="0"></div>
+                          <div class="header__dot" data-index="1"></div>
+                          <div class="header__dot" data-index="2"></div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div id="header-menu"></div>
+            </div>
+        </div>
+          <div  class="adUnit__topLandingTablet" >
+  <div id="nn_lb1"></div>
+</div>
+
+  <div class="layout__container">
+    <div class="ui__card layout__wrapper" id="card-table">
+
+      <div  class="adUnit__cardAd" >
+  <div id="nn_mpu1"></div>
+</div>
+
+      <div class="card__header">
+        <div class="card__share addthis_inline_share_toolbox"></div>
+
+        <div class="card__headerContent">
+          <div class="ui__headerMedium card__cardName">Rocket</div>
+          <img src='https://cdn.statsroyale.com/images/cards/full/rocket.png'>
+          <div class="card__headerContentWrapper">
+            <div class="ui__mediumText card__description">
+              Deals high damage to a small area. Looks really awesome doing it. Reduced damage to Crown Towers.
+              <div class="card__rarity">Spell, Arena 6</div>
+            </div>
+
+            <!-- SR_TopCards_300x250 -->
+            <div  class="adUnit__listViewMobileAd" >
+  <div id="nn_mobile_mpu1"></div>
+</div>
+
+                          <div class="card__metrics">
+                
+                                  <div class="card__metric">
+                    <div class="card__metricContent card__rarityCaption">
+                      <div class="card__metricCaption ui__mediumText">Rarity</div>
+                      <div class="card__metricDots"></div>
+                      <div class="ui__mediumText card__count"><span class="card__rare">Rare</span></div>
+                    </div>
+                  </div>
+                
+                                  <div class="card__metric card__target">
+                    <div class="card__metricContent">
+                      <div class="card__metricCaption card__targetCaption ui__mediumText">Targets</div>
+                      <div class="card__metricDots"></div>
+                      <div class="ui__mediumText card__count">Air &amp; Ground</div>
+                    </div>
+                  </div>
+                                  <div class="card__metric card__radius">
+                    <div class="card__metricContent">
+                      <div class="card__metricCaption card__radiusCaption ui__mediumText">Radius</div>
+                      <div class="card__metricDots"></div>
+                      <div class="ui__mediumText card__count">2.0</div>
+                    </div>
+                  </div>
+                              </div>
+            
+          </div>
+        </div>
+
+      </div>
+
+      <div class="card__pairings">
+        <div class="ui__headerSmall">Usually paired with</div>
+        <div class="card__pairingsCards">
+                      <a href='https://statsroyale.com/card/Knight'><img src='https://cdn.statsroyale.com/images/cards/full/knight.png'></a>
+                      <a href='https://statsroyale.com/card/Skeletons'><img src='https://cdn.statsroyale.com/images/cards/full/skeletons.png'></a>
+                      <a href='https://statsroyale.com/card/Ice+Wizard'><img src='https://cdn.statsroyale.com/images/cards/full/ice_wizard.png'></a>
+                      <a href='https://statsroyale.com/card/Tesla'><img src='https://cdn.statsroyale.com/images/cards/full/building_tesla.png'></a>
+                      <a href='https://statsroyale.com/card/X-Bow'><img src='https://cdn.statsroyale.com/images/cards/full/building_xbow.png'></a>
+                      <a href='https://statsroyale.com/card/The+Log'><img src='https://cdn.statsroyale.com/images/cards/full/the_log.png'></a>
+                      <a href='https://statsroyale.com/card/Tornado'><img src='https://cdn.statsroyale.com/images/cards/full/tornado.png'></a>
+                      <a href='https://statsroyale.com/card/Goblins'><img src='https://cdn.statsroyale.com/images/cards/full/goblins.png'></a>
+                  </div>
+      </div>
+
+      <div class="card__createButton">
+        <a href='https://statsroyale.com/deckbuilder?arena=11&amp;include=Rocket'><div class="ui__button ui__buttonWhite ui__mediumButton">Build Deck<img class="card__buildDeckImage" src="https://cdn.statsroyale.com/images/cards/full/rocket.png"></div></a>
+      </div>
+
+      <div class="card__statistics">
+        <div class="ui__headerSmall">Statistics</div>
+
+        <div class="statistics__tabs" data-tabs="true" data-target=".statistics__tabContainer" data-container=".statistics__tabsContainer">
+                  </div>
+
+        <div class="statistics__tabsContainer">
+                                    <div class="statistics__tabContainer" style="display: block">
+                <table class="card__desktopTable card__table">
+                  <colgroup>
+                    <col width="180">
+                                          <col width="65">
+                                          <col width="65">
+                                          <col width="65">
+                                          <col width="65">
+                                          <col width="65">
+                                          <col width="65">
+                                          <col width="65">
+                                          <col width="65">
+                                          <col width="65">
+                                          <col width="65">
+                                          <col width="65">
+                                      </colgroup>
+
+                  <thead>
+                    <tr class="card__tableHeaders">
+                      <td class="card__tableHeader">
+                        <img src="https://cdn.statsroyale.com/images/level.png"/>
+                        <strong>Card Level</strong>
+                      </td>
+                                              <th class="card__tableHeader ">3</th>
+                                              <th class="card__tableHeader ">4</th>
+                                              <th class="card__tableHeader ">5</th>
+                                              <th class="card__tableHeader ">6</th>
+                                              <th class="card__tableHeader ">7</th>
+                                              <th class="card__tableHeader ">8</th>
+                                              <th class="card__tableHeader card__isActiveHeader">9</th>
+                                              <th class="card__tableHeader ">10</th>
+                                              <th class="card__tableHeader ">11</th>
+                                              <th class="card__tableHeader ">12</th>
+                                              <th class="card__tableHeader ">13</th>
+                                          </tr>
+                  </thead>
+                  <tbody>
+
+                                          <tr class="card__tableValues">
+                        <td class="card__tableValue">
+                          <img src="https://cdn.statsroyale.com/images/attribs/areadamage.png"/>
+                          <strong>Area Damage</strong>
+                        </td>
+                                                  <td class="card__tableValue ">
+                            700
+                                                      </td>
+                                                  <td class="card__tableValue ">
+                            770
+                                                      </td>
+                                                  <td class="card__tableValue ">
+                            847
+                                                      </td>
+                                                  <td class="card__tableValue ">
+                            931
+                                                      </td>
+                                                  <td class="card__tableValue ">
+                            1022
+                                                      </td>
+                                                  <td class="card__tableValue ">
+                            1120
+                                                      </td>
+                                                  <td class="card__tableValue card__isActive">
+                            1232
+                                                      </td>
+                                                  <td class="card__tableValue ">
+                            1351
+                                                      </td>
+                                                  <td class="card__tableValue ">
+                            1484
+                                                      </td>
+                                                  <td class="card__tableValue ">
+                            1631
+                                                      </td>
+                                                  <td class="card__tableValue ">
+                            1792
+                                                      </td>
+                                              </tr>
+                                          <tr class="card__tableValues">
+                        <td class="card__tableValue">
+                          <img src="https://cdn.statsroyale.com/images/attribs/crowntowerdamage.png"/>
+                          <strong>Crown Tower Damage</strong>
+                        </td>
+                                                  <td class="card__tableValue ">
+                            210
+                                                      </td>
+                                                  <td class="card__tableValue ">
+                            231
+                                                      </td>
+                                                  <td class="card__tableValue ">
+                            254
+                                                      </td>
+                                                  <td class="card__tableValue ">
+                            279
+                                                      </td>
+                                                  <td class="card__tableValue ">
+                            306
+                                                      </td>
+                                                  <td class="card__tableValue ">
+                            336
+                                                      </td>
+                                                  <td class="card__tableValue card__isActive">
+                            369
+                                                      </td>
+                                                  <td class="card__tableValue ">
+                            405
+                                                      </td>
+                                                  <td class="card__tableValue ">
+                            445
+                                                      </td>
+                                                  <td class="card__tableValue ">
+                            489
+                                                      </td>
+                                                  <td class="card__tableValue ">
+                            537
+                                                      </td>
+                                              </tr>
+                    
+                  </tbody>
+                </table>
+                <table class="card__mobileTable card__table">
+                  <colgroup>
+                    <col width="40">
+                    <col width="65">
+                    <col width="65">
+                    <col width="65">
+                    <col width="65">
+                  </colgroup>
+
+                  <thead>
+                    <tr class="card__tableHeaders">
+                      <td class="card__tableHeader">
+                        <img src="https://cdn.statsroyale.com/images/level.png"/>
+                        <div class="ui__tooltip ui__tooltipMiddle ui__tooltipTop">Card Level</div>
+                      </td>
+                                              <td class="card__tableHeader">
+                          <img src="https://cdn.statsroyale.com/images/attribs/areadamage.png"/>
+                          <div class="ui__tooltip ui__tooltipMiddle ui__tooltipTop">Area Damage</div>
+                        </td>
+                                              <td class="card__tableHeader">
+                          <img src="https://cdn.statsroyale.com/images/attribs/crowntowerdamage.png"/>
+                          <div class="ui__tooltip ui__tooltipMiddle ui__tooltipTop">Crown Tower Damage</div>
+                        </td>
+                                          </tr>
+                  </thead>
+
+                  <tbody>
+                                                                  <tr class="card__tableValues">
+                          <td class="card__tableValue ">
+                            lvl.3
+                          </td>
+                                                      <td class="card__tableValue ">700</td>
+                                                      <td class="card__tableValue ">210</td>
+                                                  </tr>
+                                              <tr class="card__tableValues">
+                          <td class="card__tableValue ">
+                            lvl.4
+                          </td>
+                                                      <td class="card__tableValue ">770</td>
+                                                      <td class="card__tableValue ">231</td>
+                                                  </tr>
+                                              <tr class="card__tableValues">
+                          <td class="card__tableValue ">
+                            lvl.5
+                          </td>
+                                                      <td class="card__tableValue ">847</td>
+                                                      <td class="card__tableValue ">254</td>
+                                                  </tr>
+                                              <tr class="card__tableValues">
+                          <td class="card__tableValue ">
+                            lvl.6
+                          </td>
+                                                      <td class="card__tableValue ">931</td>
+                                                      <td class="card__tableValue ">279</td>
+                                                  </tr>
+                                              <tr class="card__tableValues">
+                          <td class="card__tableValue ">
+                            lvl.7
+                          </td>
+                                                      <td class="card__tableValue ">1022</td>
+                                                      <td class="card__tableValue ">306</td>
+                                                  </tr>
+                                              <tr class="card__tableValues">
+                          <td class="card__tableValue ">
+                            lvl.8
+                          </td>
+                                                      <td class="card__tableValue ">1120</td>
+                                                      <td class="card__tableValue ">336</td>
+                                                  </tr>
+                                              <tr class="card__tableValues">
+                          <td class="card__tableValue card__isActive">
+                            lvl.9
+                          </td>
+                                                      <td class="card__tableValue card__isActive">1232</td>
+                                                      <td class="card__tableValue card__isActive">369</td>
+                                                  </tr>
+                                              <tr class="card__tableValues">
+                          <td class="card__tableValue ">
+                            lvl.10
+                          </td>
+                                                      <td class="card__tableValue ">1351</td>
+                                                      <td class="card__tableValue ">405</td>
+                                                  </tr>
+                                              <tr class="card__tableValues">
+                          <td class="card__tableValue ">
+                            lvl.11
+                          </td>
+                                                      <td class="card__tableValue ">1484</td>
+                                                      <td class="card__tableValue ">445</td>
+                                                  </tr>
+                                              <tr class="card__tableValues">
+                          <td class="card__tableValue ">
+                            lvl.12
+                          </td>
+                                                      <td class="card__tableValue ">1631</td>
+                                                      <td class="card__tableValue ">489</td>
+                                                  </tr>
+                                              <tr class="card__tableValues">
+                          <td class="card__tableValue ">
+                            lvl.13
+                          </td>
+                                                      <td class="card__tableValue ">1792</td>
+                                                      <td class="card__tableValue ">537</td>
+                                                  </tr>
+                                                            </tbody>
+                </table>
+              </div>
+                      
+          <div class="card__tournamentCap">Challenge Cap</div>
+        </div>
+
+        <div  class="adUnit__listViewMobileAd" >
+  <div id="nn_mobile_mpu2"></div>
+</div>
+
+        <div class="card__graph">
+          <div class="ui__headerSmall">Adoption Rates</div>
+
+                      <div id="card-graph"></div>
+          
+        </div>
+
+        <div class="deckbuilder__suggestions">
+          <div class="deckbuilder__suggestionsGroup">
+            <div class="ui__headerSmall">Top 3 Ladder Decks</div>
+
+            <div class="popularDecks__decks">
+              <div class="deckBuilderResults__container">
+                                                  <div class="deckBuilderDeck">
+                      <div class="deckBuilderDeck__decklist">
+                                                                            <a href='https://statsroyale.com/card/Spear+Goblins'><img src='https://cdn.statsroyale.com/images/cards/small/goblin_archer.png' alt="" /></a>
+                                                                                                      <a href='https://statsroyale.com/card/Princess'><img src='https://cdn.statsroyale.com/images/cards/small/princess.png' alt="" /></a>
+                                                                                                      <a href='https://statsroyale.com/card/Dark+Prince'><img src='https://cdn.statsroyale.com/images/cards/small/dark_prince.png' alt="" /></a>
+                                                                                                      <a href='https://statsroyale.com/card/Rascals'><img src='https://cdn.statsroyale.com/images/cards/small/rascals.png' alt="" /></a>
+                                                                                                      <a href='https://statsroyale.com/card/Cannon+Cart'><img src='https://cdn.statsroyale.com/images/cards/small/cannon_cart.png' alt="" /></a>
+                                                                                                      <a href='https://statsroyale.com/card/Goblin+Drill'><img src='https://cdn.statsroyale.com/images/cards/small/goblindrill.png' alt="" /></a>
+                                                                                                      <a href='https://statsroyale.com/card/Rocket'><img src='https://cdn.statsroyale.com/images/cards/small/rocket.png' alt="" /></a>
+                                                                                                      <a href='https://statsroyale.com/card/Giant+Snowball'><img src='https://cdn.statsroyale.com/images/cards/small/snowball.png' alt="" /></a>
+                                                                        </div>
+                      <div class="deckBuilderDeck__footer">
+                        <div class="deckBuilderDeck__metrics">
+                          <div>
+                            <div class="deckBuilderDeck__trophyContainer"><img src="https://cdn.statsroyale.com/images/trophy.png" alt="" class="deckBuilderDeck__trophy"> <span class="ui__headerMedium">7117</span></div>
+                            <div class="deckBuilderDeck__elixirText">Highest Trophies</div>
+                          </div>
+                          <div class="deckBuilderDeck__elixirContainer"><div class="deckBuilderDeck__elixir"><img src="https://cdn.statsroyale.com/images/elixir.png" alt=""> <span class="ui__headerMedium">3.9</span></div>
+                            <div class="deckBuilderDeck__elixirText">Elixir Cost</div>
+                          </div>
+                          <a href="https://link.clashroyale.com/deck/en?deck=26000019;26000026;26000027;26000053;26000054;27000013;28000003;28000017"><div class="copyButton"></div></a>
+                        </div>
+                      </div>
+                    </div>
+                                    <div class="deckBuilderDeck">
+                      <div class="deckBuilderDeck__decklist">
+                                                                            <a href='https://statsroyale.com/card/Knight'><img src='https://cdn.statsroyale.com/images/cards/small/knight.png' alt="" /></a>
+                                                                                                      <a href='https://statsroyale.com/card/Archers'><img src='https://cdn.statsroyale.com/images/cards/small/archers.png' alt="" /></a>
+                                                                                                      <a href='https://statsroyale.com/card/Skeletons'><img src='https://cdn.statsroyale.com/images/cards/small/skeletons.png' alt="" /></a>
+                                                                                                      <a href='https://statsroyale.com/card/Electro+Spirit'><img src='https://cdn.statsroyale.com/images/cards/small/electrospirit.png' alt="" /></a>
+                                                                                                      <a href='https://statsroyale.com/card/Tesla'><img src='https://cdn.statsroyale.com/images/cards/small/building_tesla.png' alt="" /></a>
+                                                                                                      <a href='https://statsroyale.com/card/X-Bow'><img src='https://cdn.statsroyale.com/images/cards/small/building_xbow.png' alt="" /></a>
+                                                                                                      <a href='https://statsroyale.com/card/Rocket'><img src='https://cdn.statsroyale.com/images/cards/small/rocket.png' alt="" /></a>
+                                                                                                      <a href='https://statsroyale.com/card/The+Log'><img src='https://cdn.statsroyale.com/images/cards/small/the_log.png' alt="" /></a>
+                                                                        </div>
+                      <div class="deckBuilderDeck__footer">
+                        <div class="deckBuilderDeck__metrics">
+                          <div>
+                            <div class="deckBuilderDeck__trophyContainer"><img src="https://cdn.statsroyale.com/images/trophy.png" alt="" class="deckBuilderDeck__trophy"> <span class="ui__headerMedium">7101</span></div>
+                            <div class="deckBuilderDeck__elixirText">Highest Trophies</div>
+                          </div>
+                          <div class="deckBuilderDeck__elixirContainer"><div class="deckBuilderDeck__elixir"><img src="https://cdn.statsroyale.com/images/elixir.png" alt=""> <span class="ui__headerMedium">3.3</span></div>
+                            <div class="deckBuilderDeck__elixirText">Elixir Cost</div>
+                          </div>
+                          <a href="https://link.clashroyale.com/deck/en?deck=26000000;26000001;26000010;26000084;27000006;27000008;28000003;28000011"><div class="copyButton"></div></a>
+                        </div>
+                      </div>
+                    </div>
+                                    <div class="deckBuilderDeck">
+                      <div class="deckBuilderDeck__decklist">
+                                                                            <a href='https://statsroyale.com/card/Skeletons'><img src='https://cdn.statsroyale.com/images/cards/small/skeletons.png' alt="" /></a>
+                                                                                                      <a href='https://statsroyale.com/card/Valkyrie'><img src='https://cdn.statsroyale.com/images/cards/small/valkyrie.png' alt="" /></a>
+                                                                                                      <a href='https://statsroyale.com/card/Ice+Wizard'><img src='https://cdn.statsroyale.com/images/cards/small/ice_wizard.png' alt="" /></a>
+                                                                                                      <a href='https://statsroyale.com/card/Tesla'><img src='https://cdn.statsroyale.com/images/cards/small/building_tesla.png' alt="" /></a>
+                                                                                                      <a href='https://statsroyale.com/card/X-Bow'><img src='https://cdn.statsroyale.com/images/cards/small/building_xbow.png' alt="" /></a>
+                                                                                                      <a href='https://statsroyale.com/card/Rocket'><img src='https://cdn.statsroyale.com/images/cards/small/rocket.png' alt="" /></a>
+                                                                                                      <a href='https://statsroyale.com/card/The+Log'><img src='https://cdn.statsroyale.com/images/cards/small/the_log.png' alt="" /></a>
+                                                                                                      <a href='https://statsroyale.com/card/Tornado'><img src='https://cdn.statsroyale.com/images/cards/small/tornado.png' alt="" /></a>
+                                                                        </div>
+                      <div class="deckBuilderDeck__footer">
+                        <div class="deckBuilderDeck__metrics">
+                          <div>
+                            <div class="deckBuilderDeck__trophyContainer"><img src="https://cdn.statsroyale.com/images/trophy.png" alt="" class="deckBuilderDeck__trophy"> <span class="ui__headerMedium">7099</span></div>
+                            <div class="deckBuilderDeck__elixirText">Highest Trophies</div>
+                          </div>
+                          <div class="deckBuilderDeck__elixirContainer"><div class="deckBuilderDeck__elixir"><img src="https://cdn.statsroyale.com/images/elixir.png" alt=""> <span class="ui__headerMedium">3.6</span></div>
+                            <div class="deckBuilderDeck__elixirText">Elixir Cost</div>
+                          </div>
+                          <a href="https://link.clashroyale.com/deck/en?deck=26000010;26000011;26000023;27000006;27000008;28000003;28000011;28000012"><div class="copyButton"></div></a>
+                        </div>
+                      </div>
+                    </div>
+                                          </div>
+            </div>
+          </div>
+          <div class="deckbuilder__suggestionsGroup">
+            <div class="ui__headerSmall">Top 3 Challenge Decks</div>
+
+            <div class="popularDecks__decks">
+              <div class="deckBuilderResults__container">
+                                                  <div class="deckBuilderDeck">
+                      <div class="deckBuilderDeck__decklist">
+                                                                              <a href='https://statsroyale.com/card/Skeletons'><img src='https://cdn.statsroyale.com/images/cards/small/skeletons.png' alt="" /></a>
+                                                                                                        <a href='https://statsroyale.com/card/Spear+Goblins'><img src='https://cdn.statsroyale.com/images/cards/small/goblin_archer.png' alt="" /></a>
+                                                                                                        <a href='https://statsroyale.com/card/Dark+Prince'><img src='https://cdn.statsroyale.com/images/cards/small/dark_prince.png' alt="" /></a>
+                                                                                                        <a href='https://statsroyale.com/card/Miner'><img src='https://cdn.statsroyale.com/images/cards/small/miner.png' alt="" /></a>
+                                                                                                        <a href='https://statsroyale.com/card/Tesla'><img src='https://cdn.statsroyale.com/images/cards/small/building_tesla.png' alt="" /></a>
+                                                                                                        <a href='https://statsroyale.com/card/Rocket'><img src='https://cdn.statsroyale.com/images/cards/small/rocket.png' alt="" /></a>
+                                                                                                        <a href='https://statsroyale.com/card/The+Log'><img src='https://cdn.statsroyale.com/images/cards/small/the_log.png' alt="" /></a>
+                                                                                                        <a href='https://statsroyale.com/card/Royal+Delivery'><img src='https://cdn.statsroyale.com/images/cards/small/royal_delivery.png' alt="" /></a>
+                                                                        </div>
+                      <div class="deckBuilderDeck__footer">
+                        <div class="deckBuilderDeck__metrics">
+                          <div>
+                            <div class="deckBuilderDeck__trophyContainer"><img src="https://cdn.statsroyale.com/images/battles/battleLadder.png" alt="" class="deckBuilderDeck__wins"> <span class="ui__headerMedium">73.97%</span></div>
+                            <div class="deckBuilderDeck__elixirText">Win rate</div>
+                          </div>
+                          <div class="deckBuilderDeck__elixirContainer"><div class="deckBuilderDeck__elixir"><img src="https://cdn.statsroyale.com/images/elixir.png" alt=""> <span class="ui__headerMedium">3.1</span></div>
+                            <div class="deckBuilderDeck__elixirText">Elixir Cost</div>
+                          </div>
+                          <a href="https://link.clashroyale.com/deck/en?deck=26000010;26000019;26000027;26000032;27000006;28000003;28000011;28000018"><div class="copyButton"></div></a>
+                        </div>
+                      </div>
+                    </div>
+                                    <div class="deckBuilderDeck">
+                      <div class="deckBuilderDeck__decklist">
+                                                                              <a href='https://statsroyale.com/card/Knight'><img src='https://cdn.statsroyale.com/images/cards/small/knight.png' alt="" /></a>
+                                                                                                        <a href='https://statsroyale.com/card/Princess'><img src='https://cdn.statsroyale.com/images/cards/small/princess.png' alt="" /></a>
+                                                                                                        <a href='https://statsroyale.com/card/Ice+Spirit'><img src='https://cdn.statsroyale.com/images/cards/small/snow_spirits.png' alt="" /></a>
+                                                                                                        <a href='https://statsroyale.com/card/Goblin+Gang'><img src='https://cdn.statsroyale.com/images/cards/small/goblin_gang.png' alt="" /></a>
+                                                                                                        <a href='https://statsroyale.com/card/Inferno+Tower'><img src='https://cdn.statsroyale.com/images/cards/small/building_inferno.png' alt="" /></a>
+                                                                                                        <a href='https://statsroyale.com/card/Rocket'><img src='https://cdn.statsroyale.com/images/cards/small/rocket.png' alt="" /></a>
+                                                                                                        <a href='https://statsroyale.com/card/Goblin+Barrel'><img src='https://cdn.statsroyale.com/images/cards/small/goblin_barrel.png' alt="" /></a>
+                                                                                                        <a href='https://statsroyale.com/card/The+Log'><img src='https://cdn.statsroyale.com/images/cards/small/the_log.png' alt="" /></a>
+                                                                        </div>
+                      <div class="deckBuilderDeck__footer">
+                        <div class="deckBuilderDeck__metrics">
+                          <div>
+                            <div class="deckBuilderDeck__trophyContainer"><img src="https://cdn.statsroyale.com/images/battles/battleLadder.png" alt="" class="deckBuilderDeck__wins"> <span class="ui__headerMedium">50.34%</span></div>
+                            <div class="deckBuilderDeck__elixirText">Win rate</div>
+                          </div>
+                          <div class="deckBuilderDeck__elixirContainer"><div class="deckBuilderDeck__elixir"><img src="https://cdn.statsroyale.com/images/elixir.png" alt=""> <span class="ui__headerMedium">3.3</span></div>
+                            <div class="deckBuilderDeck__elixirText">Elixir Cost</div>
+                          </div>
+                          <a href="https://link.clashroyale.com/deck/en?deck=26000000;26000026;26000030;26000041;27000003;28000003;28000004;28000011"><div class="copyButton"></div></a>
+                        </div>
+                      </div>
+                    </div>
+                                          </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="ui__mediumText card__note">Note: Ladder stats and decks are based on legendary arena only. Tournament stats and decks include all arenas.</div>
+      </div>
+
+              <div class="card__guides">
+          <div class="guidesList__widget">
+            <div class="ui__headerCaption">Deck Guides with Rocket</div>
+            <div class="guidesList__carousel">
+              <div></div>
+                              <a href='https://statsroyale.com/guides/5fb1468aa9214679eb2353d2' class="guidesList__guide ui__card ui__link">
+                  <img style="background-image: url('//i.ytimg.com/vi/BJpHo_lMpLU/hqdefault.jpg');" alt="" class="guidesList__image" />
+                  <div class="guidesList__wrapper">
+                    <div class="guidesList__author">
+                      <img class="guidesList__authorImage" style=&quot;background-image: url(&#039;https://yt3.ggpht.com/-hFEznJh6VI8/AAAAAAAAAAI/AAAAAAAAAAA/GYxjX9UQNpA/s176-c-k-no-mo-rj-c0xffffff/photo.jpg&#039;)&quot; />
+                      <div class="guidesList__authorName">Ash</div>
+                    </div>
+
+                    <div class="guidesList__guideName ui__headerSmall">THE PERFECT META COUNTER DECK...</div>
+                  </div>
+                </a>
+                              <a href='https://statsroyale.com/guides/5fac503f531f4523a13a6093' class="guidesList__guide ui__card ui__link">
+                  <img style="background-image: url('//i.ytimg.com/vi/IX1Y_J7Kvpw/hqdefault.jpg');" alt="" class="guidesList__image" />
+                  <div class="guidesList__wrapper">
+                    <div class="guidesList__author">
+                      <img class="guidesList__authorImage" style=&quot;background-image: url(&#039;https://yt3.ggpht.com/-hFEznJh6VI8/AAAAAAAAAAI/AAAAAAAAAAA/GYxjX9UQNpA/s176-c-k-no-mo-rj-c0xffffff/photo.jpg&#039;)&quot; />
+                      <div class="guidesList__authorName">Ash</div>
+                    </div>
+
+                    <div class="guidesList__guideName ui__headerSmall">EASY 3 CROWNS!!!</div>
+                  </div>
+                </a>
+                              <a href='https://statsroyale.com/guides/5fa189db79ad853fe3715853' class="guidesList__guide ui__card ui__link">
+                  <img style="background-image: url('//i.ytimg.com/vi/h6kjlL_wv5w/hqdefault.jpg');" alt="" class="guidesList__image" />
+                  <div class="guidesList__wrapper">
+                    <div class="guidesList__author">
+                      <img class="guidesList__authorImage" style=&quot;background-image: url(&#039;https://yt3.ggpht.com/-hFEznJh6VI8/AAAAAAAAAAI/AAAAAAAAAAA/GYxjX9UQNpA/s176-c-k-no-mo-rj-c0xffffff/photo.jpg&#039;)&quot; />
+                      <div class="guidesList__authorName">Ash</div>
+                    </div>
+
+                    <div class="guidesList__guideName ui__headerSmall">#1 MINI PEKKA DECK</div>
+                  </div>
+                </a>
+              
+              <a href="https://statsroyale.com/guides" class="guidesList__moreContainer ui__card ui__link">
+                <div class="guidesList__more"></div>
+                <div class="guidesList__moreText">View All Deck Guides</div>
+              </a>
+            </div>
+          </div>
+        </div>
+          </div>
+  </div>
+
+  <script type='text/javascript'>
+  var CARD_PAGE_GRAPH = [
+    [
+                        { x: new Date("2021-06-18"), y: 0 },
+                        { x: new Date("2021-06-19"), y: 0 },
+                        { x: new Date("2021-06-20"), y: 0 },
+                        { x: new Date("2021-06-21"), y: 0 },
+                        { x: new Date("2021-06-22"), y: 0 },
+                        { x: new Date("2021-06-23"), y: 0 },
+                        { x: new Date("2021-06-24"), y: 0 },
+                        { x: new Date("2021-06-25"), y: 0 },
+                        { x: new Date("2021-06-26"), y: 0 },
+                        { x: new Date("2021-06-27"), y: 0 },
+                        { x: new Date("2021-06-28"), y: 0 },
+                        { x: new Date("2021-06-29"), y: 0 },
+                        { x: new Date("2021-06-30"), y: 0 },
+                        { x: new Date("2021-07-01"), y: 0 },
+                        { x: new Date("2021-07-02"), y: 0 },
+                        { x: new Date("2021-07-03"), y: 0 },
+                        { x: new Date("2021-07-04"), y: 0 },
+                        { x: new Date("2021-07-05"), y: 0 },
+                        { x: new Date("2021-07-06"), y: 0 },
+                        { x: new Date("2021-07-07"), y: 0 },
+                                  ],
+    [
+                        { x: new Date("2021-06-18"), y:  0  },
+                              { x: new Date("2021-06-19"), y:  0  },
+                              { x: new Date("2021-06-20"), y:  0  },
+                              { x: new Date("2021-06-21"), y:  0  },
+                              { x: new Date("2021-06-22"), y:  0  },
+                              { x: new Date("2021-06-23"), y:  0  },
+                              { x: new Date("2021-06-24"), y:  0  },
+                              { x: new Date("2021-06-25"), y:  0  },
+                              { x: new Date("2021-06-26"), y:  0  },
+                              { x: new Date("2021-06-27"), y:  0  },
+                              { x: new Date("2021-06-28"), y:  0  },
+                              { x: new Date("2021-06-29"), y:  0  },
+                              { x: new Date("2021-06-30"), y:  0  },
+                              { x: new Date("2021-07-01"), y:  0  },
+                              { x: new Date("2021-07-02"), y:  0  },
+                              { x: new Date("2021-07-03"), y:  0  },
+                              { x: new Date("2021-07-04"), y:  0  },
+                              { x: new Date("2021-07-05"), y:  0  },
+                              { x: new Date("2021-07-06"), y:  0  },
+                              { x: new Date("2021-07-07"), y:  0  },
+                                        ]
+  ];
+  </script>
+
+      
+      <div class="footer">
+  <div class="layout__container">
+    <div class="footer__container">
+      <div class="footer__navigation">
+        <div class="footer__links">
+          <a href="https://statsroyale.com/deckbuilder" class="ui__link ui__whiteText ui__mediumText footer__link">Deck Builder</a>
+          <a href="https://statsroyale.com/guides" class="ui__link ui__whiteText ui__mediumText footer__link">Guides</a>
+          <a href="https://statsroyale.com/decks/popular" class="ui__link ui__whiteText ui__mediumText footer__link">Popular Decks</a>
+          <a href="https://statsroyale.com/decks/challenge-winners?type=grand" class="ui__link ui__whiteText ui__mediumText footer__link">Challenge Winners</a>
+          <a href="https://statsroyale.com/tournaments" class="ui__link ui__whiteText ui__mediumText footer__link">Tournaments</a>
+        </div>
+
+        <div class="footer__links">
+
+          <a href="https://statsroyale.com/cards" class="ui__link ui__whiteText ui__mediumText footer__link">Cards</a>
+          <a href="https://statsroyale.com/top/cards" class="ui__link ui__whiteText ui__mediumText footer__link">Top Cards</a>
+          <a href="https://statsroyale.com/top/players" class="ui__link ui__whiteText ui__mediumText footer__link">Top Players</a>
+          <a href="https://statsroyale.com/top/clans" class="ui__link ui__whiteText ui__mediumText footer__link">Top Clans</a>
+        </div>
+
+        <div class="footer__links footer__social">
+          <a href="https://facebook.com/statsroyale" target="_blank" class="footer__icon footer__facebook ui__link ui__whiteText ui__mediumText footer__link">
+            Facebook
+          </a>
+          <a href="https://vk.com/statsroyale" target="_blank" class="footer__icon footer__vk ui__link ui__whiteText ui__mediumText footer__link">
+            Vkontakte
+          </a>
+          <a href="https://discord.gg/statsroyale" target="_blank"  class="footer__icon footer__discord ui__link ui__whiteText ui__mediumText footer__link">
+            Discord
+          </a>
+          <a href="https://twitter.com/statsroyale" target="_blank" class="footer__icon footer__twitter ui__link ui__whiteText ui__mediumText footer__link">
+            Twitter
+          </a>
+        </div>
+        <div class="footer__links footer__apps">
+          <div class="footer__link ui__whiteText ui__mediumText">
+            Official Apps
+          </div>
+            <a href="https://itunes.apple.com/us/app/stats-royale/id1264722932?mt=8" class="appbadge__link">
+              <div class="app-store-badge"></div>
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=com.overwolf.statsroyale" class="appbadge__link">
+              <div class="google-play-badge"></div>
+            </a>
+        </div>
+      </div>
+      <div class="footer__brand"><a href="https://www.overwolf.com/" class="footer__overwolf footer__icon"></a></div>
+      <div class="footer__supercell">
+        <div class="ui__mediumText ui__whiteText">
+          
+    This content is not affiliated with, endorsed, sponsored, or specifically approved by Supercell and  Supercell is not responsible for it.
+    For more information see <strong><a href='https://www.supercell.com/fan-content-policy' class='ui__link ui__whiteText'>Supercell's Fan Content Policy</a></strong>.
+    See our <a href='https://statsroyale.com/privacy' class='ui__link ui__whiteText'>Privacy Policy</a> for additional details.
+  
+          <a class="nn-cmp-show ui__link ui__whiteText" href="#">Manage Cookie Settings</a>.
+          <font style="color: #333">v1.2</font>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="container" style="display: none"></div>
+
+<script type="text/javascript" src="https://cdn.statsroyale.com/vendor.js?v=1623596624"></script>
+<script type="text/javascript" src="https://cdn.statsroyale.com/build.js?v=1623596624"></script>
+
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '778945222267918',
+        cookie     : true,
+        xfbml      : true,
+        version    : 'v2.8'
+      });
+      FB.AppEvents.logPageView();
+    };
+
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+  </script>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-87846423-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-87846423-1');
+  </script>
+
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript" >
+     (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+     m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+     (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+     ym(44640748, "init", {
+          clickmap:true,
+          trackLinks:true,
+          accurateTrackBounce:true
+     });
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/44640748" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <!-- /Yandex.Metrika counter -->
+
+  <div >
+  <div id="nn_mobile_lb1_sticky"></div>
+</div>
+    </div>
+</body>
+</html>
