@@ -47,7 +47,7 @@ public class ProfileController {
             return "../view/Menu.fxml";
         }
         else if(event.getSource() == gameHistory){
-            return "../view/gameHistory.fxml";
+            return "../view/BattleHistory.fxml";
         }
         else if(event.getSource() == battleDeck){
             return "../view/Deck.fxml";
