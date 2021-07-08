@@ -24,7 +24,7 @@
                 <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
             </padding>
             <children>
-                <ImageView fx:id="gameHistory" fitHeight="47.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="gameHistory" fitHeight="47.0" fitWidth="51.0" onMouseClicked="#actionHandler" pickOnBounds="true" preserveRatio="true">
                     <HBox.margin>
                         <Insets left="30.0" right="50.0" />
                     </HBox.margin>
@@ -32,7 +32,7 @@
                         <Image url="@photos/Livro.png" />
                     </image>
                 </ImageView>
-                <ImageView fx:id="battleDeck" fitHeight="43.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="battleDeck" fitHeight="43.0" fitWidth="36.0" onMouseClicked="#actionHandler" pickOnBounds="true" preserveRatio="true">
                     <HBox.margin>
                         <Insets right="50.0" />
                     </HBox.margin>
@@ -40,7 +40,7 @@
                         <Image url="@photos/Cartas.png" />
                     </image>
                 </ImageView>
-                <ImageView fx:id="mainPage" fitHeight="49.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="mainPage" fitHeight="49.0" fitWidth="46.0" onMouseClicked="#actionHandler" pickOnBounds="true" preserveRatio="true">
                     <HBox.margin>
                         <Insets right="50.0" />
                     </HBox.margin>
@@ -48,7 +48,7 @@
                   <Image url="@photos/twoswords.png" />
                </image>
                 </ImageView>
-                <ImageView fitHeight="49.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="49.0" fitWidth="37.0" onMouseClicked="#actionHandler" pickOnBounds="true" preserveRatio="true">
                     <HBox.margin>
                         <Insets right="50.0" />
                     </HBox.margin>
@@ -56,7 +56,7 @@
                   <Image url="@photos/Book_Icon.png" />
                </image>
                 </ImageView>
-                <ImageView fitHeight="42.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="42.0" fitWidth="39.0" onMouseClicked="#actionHandler" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@photos/Novidades.png" />
                     </image>
