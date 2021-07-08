@@ -11,22 +11,23 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane id="borderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane id="borderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProfileController">
 
    <stylesheets>
       <URL value="@ProfileSytle.css" />
    </stylesheets>
 
    <bottom>
-      <HBox blendMode="SRC_ATOP" prefHeight="77.0" prefWidth="590.0" style="-fx-background-color: #8eacbb;" BorderPane.alignment="CENTER">
+      <HBox blendMode="SRC_ATOP" prefHeight="66.0" prefWidth="600.0" spacing="30.0" style="-fx-background-color: #8eacbb;" BorderPane.alignment="CENTER">
          <padding>
             <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
          </padding>
          <children>
-            <ImageView fitHeight="61.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="gameHistory" fitHeight="47.0" fitWidth="51.0" onMouseClicked="#actionHandler" pickOnBounds="true" preserveRatio="true">
                <HBox.margin>
                   <Insets left="30.0" right="50.0" />
                </HBox.margin>
@@ -34,7 +35,7 @@
                   <Image url="@photos/Livro.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="61.0" fitWidth="117.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="battleDeck" fitHeight="43.0" fitWidth="36.0" onMouseClicked="#actionHandler" pickOnBounds="true" preserveRatio="true">
                <HBox.margin>
                   <Insets right="50.0" />
                </HBox.margin>
@@ -42,23 +43,23 @@
                   <Image url="@photos/Cartas.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="61.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="mainPage" fitHeight="49.0" fitWidth="46.0" onMouseClicked="#actionHandler" pickOnBounds="true" preserveRatio="true">
                <HBox.margin>
                   <Insets right="50.0" />
                </HBox.margin>
                <image>
-                  <Image url="@photos/Battle_menu.png" />
+                  <Image url="@photos/twoswords.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="61.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="49.0" fitWidth="37.0" onMouseClicked="#actionHandler" pickOnBounds="true" preserveRatio="true">
                <HBox.margin>
                   <Insets right="50.0" />
                </HBox.margin>
                <image>
-                  <Image url="@photos/Profile.png" />
+                  <Image url="@photos/Book_Icon.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="61.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="42.0" fitWidth="39.0" onMouseClicked="#actionHandler" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@photos/Novidades.png" />
                </image>
@@ -80,74 +81,89 @@
          <children>
             <HBox prefHeight="42.0" prefWidth="590.0" spacing="3.0" style="-fx-background-color: #8eacbb;">
                <children>
-                  <ImageView fitHeight="38.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@photos/XP.png" />
-                     </image>
-                  </ImageView>
-                  <ProgressBar prefHeight="36.0" prefWidth="321.0" progress="0.6" />
-                  <ImageView fitHeight="36.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                  <StackPane prefHeight="35.0" prefWidth="71.0">
+                     <children>
+                        <ImageView fitHeight="45.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@photos/XP.png" />
+                           </image>
+                        </ImageView>
+                        <Label alignment="CENTER" prefHeight="13.0" prefWidth="30.0" text="60" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </StackPane>
+                  <ProgressBar fx:id="XPprogressSlider" prefHeight="43.0" prefWidth="318.0" progress="0.6" />
+                  <ImageView fitHeight="37.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="43.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@photos/Trofeu2.png" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="38.0" prefWidth="74.0" text="2500" textFill="WHITE">
+                  <Label fx:id="TroopyCounter" alignment="CENTER" contentDisplay="CENTER" prefHeight="38.0" prefWidth="74.0" text="2500" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
                </children>
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
             </HBox>
-            <GridPane hgap="8.0" prefHeight="278.0" prefWidth="584.0" vgap="8.0">
+            <GridPane hgap="8.0" prefHeight="261.0" prefWidth="584.0" vgap="8.0">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="574.0" minWidth="10.0" prefWidth="136.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="417.0" minWidth="10.0" prefWidth="132.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="417.0" minWidth="10.0" prefWidth="135.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="417.0" minWidth="10.0" prefWidth="141.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="281.0" minWidth="10.0" prefWidth="162.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="281.0" minWidth="10.0" prefWidth="123.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="304.0" minWidth="10.0" prefWidth="286.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints maxHeight="148.0" minHeight="10.0" prefHeight="143.0" valignment="CENTER" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="102.0" minHeight="10.0" prefHeight="72.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="181.0" minHeight="10.0" prefHeight="154.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="132.0" minHeight="10.0" prefHeight="120.0" vgrow="SOMETIMES" />
               </rowConstraints>
-               <padding>
-                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-               </padding>
-               <VBox.margin>
-                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-               </VBox.margin>
                <children>
-                  <ImageView fitHeight="94.0" fitWidth="133.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <ImageView fitHeight="84.0" fitWidth="151.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                      <image>
                         <Image url="@photos/Button_Battle.png" />
                      </image>
                   </ImageView>
-                  <Label prefHeight="55.0" prefWidth="123.0" text="BATTLE" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <padding>
-                        <Insets bottom="10.0" left="22.0" right="10.0" top="10.0" />
-                     </padding>
+                  <Label text="BATTLE" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets right="38.0" />
+                     </GridPane.margin>
                      <font>
-                        <Font name="System Bold" size="24.0" />
+                        <Font size="24.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="94.0" fitWidth="131.0" layoutX="146.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <ImageView fitHeight="84.0" fitWidth="151.0" layoutX="147.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <image>
                         <Image url="@photos/Button_Battle_2v2.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="146.0" layoutY="127.0" prefHeight="55.0" prefWidth="123.0" text="2V2" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                     <padding>
-                        <Insets bottom="10.0" left="40.0" right="10.0" top="10.0" />
-                     </padding>
+                  <Label layoutX="182.0" layoutY="197.0" text="2V2" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <font>
-                        <Font name="System Bold" size="24.0" />
+                        <Font size="24.0" />
                      </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                     <padding>
+                        <Insets left="55.0" />
+                     </padding>
                   </Label>
-                  <ImageView fitHeight="150.0" fitWidth="278.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                  <ImageView fitHeight="150.0" fitWidth="231.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                     <GridPane.margin>
+                        <Insets left="30.0" right="10.0" top="10.0" />
+                     </GridPane.margin>
                      <image>
-                        <Image url="@photos/images.jpg" />
+                        <Image url="@photos/King.png" />
                      </image>
                   </ImageView>
                </children>
+               <VBox.margin>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </VBox.margin>
             </GridPane>
          </children>
          <padding>
