@@ -11,7 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import model.cards.Army;
-import model.cards.troops.Troop;
+
 
 public class DeckController {
 
@@ -36,21 +36,21 @@ public class DeckController {
     @FXML
     private ListView<Army> allTroop;
 
-    private final ObservableList<Army> troops =
+    private final ObservableList<Army> armies =
             FXCollections.observableArrayList();
 
     public void initialize()
     {
-        troops.add(new Army("/view/photos/archers.png","archer"));
-        troops.add(new Army("/view/photos/barbarians.png","barbarians"));
-        troops.add(new Army("/view/photos/baby_dragon.png","baby_dragon"));
-        troops.add(new Army("/view/photos/giant.png","giant"));
-        troops.add(new Army("/view/photos/mini_pekka.png","mini_pekka"));
-        troops.add(new Army("/view/photos/arrows.png","arrows"));
-        troops.add(new Army("/view/photos/rage.png","rage"));
-        troops.add(new Army("/view/photos/wizard.png","wizard"));
+        armies.add(new Army("/view/photos/archers.png","archer"));
+        armies.add(new Army("/view/photos/barbarians.png","barbarians"));
+        armies.add(new Army("/view/photos/baby_dragon.png","baby_dragon"));
+        armies.add(new Army("/view/photos/giant.png","giant"));
+        armies.add(new Army("/view/photos/mini_pekka.png","mini_pekka"));
+        armies.add(new Army("/view/photos/arrows.png","arrows"));
+        armies.add(new Army("/view/photos/rage.png","rage"));
+        armies.add(new Army("/view/photos/wizard.png","wizard"));
 
-        mainTroop.setItems(troops);
+        mainTroop.setItems(armies);
 
 
         mainTroop.setCellFactory(
