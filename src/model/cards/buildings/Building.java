@@ -1,5 +1,7 @@
-package com.company.model.cards.buildings;
+package model.cards.buildings;
 
-public abstract class Building {
+import model.cards.Card;
+
+public abstract class Building extends Card {
     
 }

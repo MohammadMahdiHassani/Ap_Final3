@@ -1,4 +1,6 @@
-package com.company.model.cards.spells;
+package model.cards.spells;
 
-public abstract class Spell {
+import model.cards.Card;
+
+public abstract class Spell extends Card {
 }
