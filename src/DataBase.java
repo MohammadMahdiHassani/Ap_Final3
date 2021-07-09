@@ -30,6 +30,5 @@ public class DataBase {
         st.execute(insertion);
 
 
-
     }
 }

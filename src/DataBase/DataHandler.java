@@ -1,7 +1,5 @@
 package DataBase;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -61,8 +59,7 @@ public class DataHandler {
     }
 
 
-    private static @NotNull
-    Boolean searchForFile(String str){
+    private static Boolean searchForFile(String str){
         if(file.list()!=null){
         for (String i : file.list()) {
             String arr[] = i.split("\\.");

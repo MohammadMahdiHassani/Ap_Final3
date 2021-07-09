@@ -1,5 +1,8 @@
 package controller;
 
+import DataBase.UserData;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -38,6 +41,15 @@ public class MenuController {
     @FXML
     private ImageView button2v2;
 
+    private UserData userData ;
+
+    @FXML
+    void initialize(){
+
+
+
+    }
+
     @FXML
     void actionHandler(MouseEvent event) throws IOException {
         String fxmlAddress = getFxml(event);
@@ -63,5 +75,7 @@ public class MenuController {
             return "";
     }
 
-
+    public void setUserData(UserData userData) {
+        this.userData = userData;
+    }
 }
