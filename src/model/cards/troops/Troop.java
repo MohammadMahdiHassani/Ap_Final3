@@ -1,19 +1,28 @@
 package model.cards.troops;
+import model.cards.troops.enums.Speed;
+import model.cards.troops.enums.Target;
+import javafx.scene.image.Image;
+import model.cards.Card;
 
-import com.company.model.cards.troops.enums.Level;
-import com.company.model.cards.troops.enums.Speed;
-import com.company.model.cards.troops.enums.Target;
+
+public abstract class Troop extends Card {
 
 
-public abstract class Troop {
-
-    private Level level ;
     private int hitPoint ;
     private int damage ;
     private Speed speed ;
-    private int hitSpeed ;
+    private float hitSpeed ;
     private Target target ;
-    private int cost ;
     private int count ;
 
+
+    public Troop(Image image, int hitPoint, int damage, Speed speed, float hitSpeed, Target target, int cost, int count) {
+        super(image , cost);
+        this.hitPoint = hitPoint;
+        this.damage = damage;
+        this.speed = speed;
+        this.hitSpeed = hitSpeed;
+        this.target = target;
+        this.count = count;
+    }
 }
