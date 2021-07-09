@@ -13,7 +13,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ProfileController {
-
+    @FXML
+    private ImageView profilePage;
     @FXML
     private ImageView gameHistory;
 
