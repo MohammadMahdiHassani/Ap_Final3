@@ -67,7 +67,7 @@
                   <Image url="@photos/ClashRoyal_Login.png" />
                </image>
             </ImageView>
-            <Button fx:id="SignUpButton" layoutX="103.0" layoutY="262.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="153.0" style="-fx-background-color: #4682b4; -fx-background-radius: 20;" text="Sign up" textFill="WHITE">
+            <Button fx:id="SignUpButton" layoutX="103.0" layoutY="262.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="153.0" style="-fx-background-color: #4682b4; -fx-background-radius: 20;" onAction="#actionHandler" text="Sign up" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
