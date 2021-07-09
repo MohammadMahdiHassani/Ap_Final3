@@ -39,9 +39,8 @@ public class LoginController {
                 errorMessage.setVisible(true);
             }
             else{
-                FXMLLoader loader = new FXMLLoader() ;
-                loader.load(getClass().getResource("../view/Menu.fxml"));
-                Parent root = loader.getRoot();
+
+                Parent root = FXMLLoader.load(getClass().getResource("../view/Menu.fxml"));
                 Stage stage = (Stage) SignUpLink.getScene().getWindow();
                 stage.setScene(new Scene(root));
                 stage.setResizable(false);

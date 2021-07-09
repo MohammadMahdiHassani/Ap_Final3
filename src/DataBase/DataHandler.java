@@ -12,10 +12,13 @@ public class DataHandler {
 
 
     public static UserData signUp(String userName , String password_1 , String password_2){
-
-        if(password_1.equals(password_2)){
+        if(searchForFile(userName)){
+           return null ;
+        }
+        else if(password_1.equals(password_2)){
             return makeUser(userName , password_1);
         }
+
         else
             return null;
     }
@@ -23,7 +26,8 @@ public class DataHandler {
         UserData userData = new UserData(userName , password) ;
         try {
             File userFile = new File(file + "/" + userName + ".ser") ;
-            userFile.createNewFile();
+            if(userFile.createNewFile() == false)
+                return null ;
             FileOutputStream out = new FileOutputStream(userFile);
             ObjectOutputStream obj = new ObjectOutputStream(out) ;
             obj.writeObject(userData);
