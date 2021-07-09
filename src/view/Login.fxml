@@ -60,7 +60,7 @@
             </GridPane>
             <Label layoutX="129.0" layoutY="110.0" prefHeight="17.0" prefWidth="40.0" />
             <Hyperlink fx:id="SignUpLink" layoutX="147.0" layoutY="247.0" onAction="#actionHandler" text="Sign up" />
-            <Button fx:id="LoginButton" layoutX="99.0" layoutY="223.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="153.0" style="-fx-background-color: #6495ed; -fx-background-radius: 20;" text="Log in" textFill="WHITE" onAction="#actionHandler">
+            <Button fx:id="LoginButton" layoutX="99.0" layoutY="223.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#actionHandler" prefWidth="153.0" style="-fx-background-color: #6495ed; -fx-background-radius: 20;" text="Log in" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -70,6 +70,7 @@
                   <Image url="@photos/Lock.png" />
                </image>
             </ImageView>
+            <Label fx:id="errorMessage" layoutX="98.0" layoutY="87.0" prefHeight="16.0" prefWidth="156.0" text="Invalid Input, Try again" textFill="#f50a0a" visible="false" />
          </children>
       </AnchorPane>
    </center>
