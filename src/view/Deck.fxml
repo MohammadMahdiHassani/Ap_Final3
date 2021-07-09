@@ -52,7 +52,7 @@
                         <Image url="@photos/twoswords.png" />
                     </image>
                 </ImageView>
-                <ImageView fitHeight="49.0" fitWidth="37.0" onMouseClicked="#actionHandler" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="profilePage" fitHeight="49.0" fitWidth="37.0" onMouseClicked="#actionHandler" pickOnBounds="true" preserveRatio="true">
                     <HBox.margin>
                         <Insets right="50.0" />
                     </HBox.margin>
@@ -96,8 +96,17 @@
                                 </Label>
                             </children>
                         </StackPane>
-                        <ProgressBar fx:id="XPprogressSlider" prefHeight="43.0" prefWidth="318.0" progress="0.6" />
-                        <ImageView fitHeight="37.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" />
+                        <ProgressBar fx:id="XPprogressSlider" prefHeight="43.0" prefWidth="318.0" progress="0.6">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin></ProgressBar>
+                        <ImageView fx:id="doneIcon" fitHeight="37.0" fitWidth="116.0" onMouseClicked="#endClick" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@photos/2x/baseline_done_black_24dp.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets right="45.0" />
+                     </HBox.margin></ImageView>
                         <ImageView fitHeight="43.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@photos/Trofeu2.png" />
@@ -113,7 +122,7 @@
                         <Insets top="5.0" />
                     </VBox.margin>
                 </HBox>
-            <GridPane prefHeight="282.0" prefWidth="600.0" vgap="20.0">
+            <GridPane prefHeight="279.0" prefWidth="600.0" vgap="20.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>

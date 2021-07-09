@@ -51,7 +51,7 @@
                   <Image url="@photos/twoswords.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="49.0" fitWidth="37.0" onMouseClicked="#actionHandler" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="profilePage" fitHeight="49.0" fitWidth="37.0" onMouseClicked="#actionHandler" pickOnBounds="true" preserveRatio="true">
                <HBox.margin>
                   <Insets right="50.0" />
                </HBox.margin>
@@ -123,7 +123,7 @@
                 <RowConstraints maxHeight="132.0" minHeight="10.0" prefHeight="120.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ImageView fitHeight="84.0" fitWidth="151.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                  <ImageView fx:id="battleButton" fitHeight="84.0" fitWidth="151.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                      <image>
                         <Image url="@photos/Button_Battle.png" />
                      </image>
@@ -136,7 +136,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="84.0" fitWidth="151.0" layoutX="147.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <ImageView fx:id="button2v2" fitHeight="84.0" fitWidth="151.0" layoutX="147.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <image>
                         <Image url="@photos/Button_Battle_2v2.png" />
                      </image>
