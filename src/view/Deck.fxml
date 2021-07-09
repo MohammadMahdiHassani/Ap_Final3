@@ -102,7 +102,7 @@
                      </HBox.margin></ProgressBar>
                         <ImageView fx:id="doneIcon" fitHeight="37.0" fitWidth="116.0" onMouseClicked="#endClick" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@photos/2x/baseline_done_black_24dp.png" />
+                        <Image url="@photos/done.png" />
                      </image>
                      <HBox.margin>
                         <Insets right="45.0" />
