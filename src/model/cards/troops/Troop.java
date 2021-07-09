@@ -1,16 +1,18 @@
 package model.cards.troops;
 
-
+import com.company.model.cards.troops.enums.Level;
+import com.company.model.cards.troops.enums.Speed;
+import com.company.model.cards.troops.enums.Target;
 
 
 public abstract class Troop {
 
-
+    private Level level ;
     private int hitPoint ;
     private int damage ;
-    private com.company.model.cards.troops.enums.Speed speed ;
+    private Speed speed ;
     private int hitSpeed ;
-    private com.company.model.cards.troops.enums.Target target ;
+    private Target target ;
     private int cost ;
     private int count ;
 

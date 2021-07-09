@@ -1,14 +1,118 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controller.BattleHistoryController"
-            prefHeight="400.0" prefWidth="600.0">
+<BorderPane id="borderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.BattleHistoryController">
 
-</AnchorPane>
+    <stylesheets>
+        <URL value="@ProfileSytle.css" />
+    </stylesheets>
+
+    <bottom>
+        <HBox blendMode="SRC_ATOP" prefHeight="66.0" prefWidth="600.0" spacing="30.0" style="-fx-background-color: #8eacbb;" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+            </padding>
+            <children>
+                <ImageView fx:id="gameHistory" fitHeight="47.0" fitWidth="51.0" onMouseClicked="#actionHandler" pickOnBounds="true" preserveRatio="true">
+                    <HBox.margin>
+                        <Insets left="30.0" right="50.0" />
+                    </HBox.margin>
+                    <image>
+                        <Image url="@photos/Livro.png" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="battleDeck" fitHeight="43.0" fitWidth="36.0" onMouseClicked="#actionHandler" pickOnBounds="true" preserveRatio="true">
+                    <HBox.margin>
+                        <Insets right="50.0" />
+                    </HBox.margin>
+                    <image>
+                        <Image url="@photos/Cartas.png" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="mainPage" fitHeight="49.0" fitWidth="46.0" onMouseClicked="#actionHandler" pickOnBounds="true" preserveRatio="true">
+                    <HBox.margin>
+                        <Insets right="50.0" />
+                    </HBox.margin>
+                    <image>
+                        <Image url="@photos/twoswords.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="49.0" fitWidth="37.0" onMouseClicked="#actionHandler" pickOnBounds="true" preserveRatio="true">
+                    <HBox.margin>
+                        <Insets right="50.0" />
+                    </HBox.margin>
+                    <image>
+                        <Image url="@photos/Book_Icon.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="42.0" fitWidth="39.0" onMouseClicked="#actionHandler" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@photos/Novidades.png" />
+                    </image>
+                    <HBox.margin>
+                        <Insets right="20.0" />
+                    </HBox.margin>
+                </ImageView>
+            </children>
+            <BorderPane.margin>
+                <Insets />
+            </BorderPane.margin>
+        </HBox>
+    </bottom>
+    <center>
+        <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+                <Insets />
+            </BorderPane.margin>
+            <children>
+                <HBox prefHeight="42.0" prefWidth="590.0" spacing="3.0" style="-fx-background-color: #8eacbb;">
+                    <children>
+                        <StackPane prefHeight="35.0" prefWidth="71.0">
+                            <children>
+                                <ImageView fitHeight="45.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@photos/XP.png" />
+                                    </image>
+                                </ImageView>
+                                <Label alignment="CENTER" prefHeight="13.0" prefWidth="30.0" text="60" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="13.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </StackPane>
+                        <ProgressBar fx:id="XPprogressSlider" prefHeight="43.0" prefWidth="318.0" progress="0.6" />
+                        <ImageView fitHeight="37.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="43.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@photos/Trofeu2.png" />
+                            </image>
+                        </ImageView>
+                        <Label fx:id="TroopyCounter" alignment="CENTER" contentDisplay="CENTER" prefHeight="38.0" prefWidth="74.0" text="2500" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="13.0" />
+                            </font>
+                        </Label>
+                    </children>
+                    <VBox.margin>
+                        <Insets top="5.0" />
+                    </VBox.margin>
+                </HBox>
+            </children>
+            <padding>
+                <Insets bottom="5.0" />
+            </padding></VBox>
+    </center>
+
+</BorderPane>
