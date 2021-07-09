@@ -1,9 +1,10 @@
 package DataBase;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import com.company.model.cards.Card ;
 
-public class UserData {
+public class UserData implements Serializable {
     private final String userName ;
     private final String password ;
     private int XP ;
