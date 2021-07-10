@@ -9,8 +9,6 @@ public class ArenaModel {
         GRASS, KING, ARCHER, STONE, RIVER, ROAD, FENCE, SHRUB, TREE,HOME, EMPTY
     }
     private static ArenaModel arenaModel = null ;
-    private GameData gameData ;
-    private GameLogic logic ;
     private int rowCount;
     private int columnCount;
     private CellValue[][] cellValues;
@@ -20,8 +18,7 @@ public class ArenaModel {
         rowCount = 21;
         columnCount = 19;
         cellValues = new CellValue[rowCount][columnCount];
-        gameData = new GameData();
-        logic = new GameLogic() ;
+
     }
     public static ArenaModel getModel(){
         if(arenaModel == null){
