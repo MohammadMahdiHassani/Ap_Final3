@@ -2,7 +2,11 @@ package DataBase;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import com.company.model.cards.Card ;
+import java.util.HashMap;
+
+import model.cards.CardNum;
+import model.cards.Card;
+import model.cards.Level;
 
 public class UserData implements Serializable {
     private final String userName ;
@@ -10,7 +14,8 @@ public class UserData implements Serializable {
     private int XP ;
     private int troopy ;
     private final ArrayList<GameHistory> histories ;
-    private final ArrayList<Card> playerDeck;
+    private  ArrayList<Card> playerDeck;
+    private final HashMap<CardNum, Level> levelMap ;
 
     UserData(String userName , String password){
         this.userName = userName ;
@@ -19,6 +24,7 @@ public class UserData implements Serializable {
         XP = 0 ;
         histories = new ArrayList<>() ;
         playerDeck = new ArrayList<>() ;
+        levelMap = new HashMap<>() ;
 
     }
 
