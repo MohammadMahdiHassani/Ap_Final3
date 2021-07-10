@@ -1,3 +1,4 @@
+import controller.ArenaController;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,8 +14,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root  = FXMLLoader.load(getClass().getResource("view/Login.fxml"));
-        stage.setScene(new Scene(root));
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("view/Arena.fxml"));
+        loader.load();
+        Parent root = loader.getRoot();
+        ArenaController arenaController = loader.getController();
+        //Parent root  = FXMLLoader.load(getClass().getResource("view/Arena.fxml"));
+        stage.setScene(new Scene(root,arenaController.getBoardWidth(),arenaController.getBoardHeight()));
         stage.setResizable(false);//test comment
         stage.setTitle("Clash Royal");
         stage.show();
