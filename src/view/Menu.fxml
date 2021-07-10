@@ -123,7 +123,7 @@
                 <RowConstraints maxHeight="132.0" minHeight="10.0" prefHeight="120.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ImageView fx:id="battleButton" fitHeight="84.0" fitWidth="151.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                  <ImageView fx:id="battleButton" fitHeight="84.0" fitWidth="151.0" onMouseClicked="#battleClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                      <image>
                         <Image url="@photos/Button_Battle.png" />
                      </image>

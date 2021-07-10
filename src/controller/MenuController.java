@@ -73,7 +73,10 @@ public class MenuController {
         else
             return "";
     }
+    @FXML
+    void battleClick(MouseEvent event) {
 
+    }
     public void setUserData(UserData userData) {
         this.userData = userData;
     }

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane id="borderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="272.0" prefWidth="475.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProfileController">
+
+    <stylesheets>
+        <URL value="@ProfileSytle.css" />
+    </stylesheets>
+   <center>
+      <BorderPane prefHeight="235.0" prefWidth="479.0" BorderPane.alignment="CENTER">
+         <top>
+            <HBox alignment="BOTTOM_LEFT" prefHeight="54.0" prefWidth="459.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="56.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets left="410.0" />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@photos/back.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+               <padding>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </padding>
+            </HBox>
+         </top>
+         <center>
+            <HBox prefHeight="155.0" prefWidth="434.0" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </BorderPane.margin>
+               <padding>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </padding>
+               <children>
+                  <ImageView fitHeight="75.0" fitWidth="116.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@photos/red button.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="35.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <ImageView fitHeight="75.0" fitWidth="116.0" layoutX="18.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@photos/Button_Battle.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <ImageView fitHeight="75.0" fitWidth="116.0" layoutX="134.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@photos/green button.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+               </children>
+            </HBox>
+         </center>
+      </BorderPane>
+   </center>
+
+</BorderPane>
