@@ -8,5 +8,9 @@ public enum CardNum {
     MINI_PEKA,
     RAGE ,
     ARROWS,
-    FIREBALL  ,
+    FIREBALL ,
+    BABY_DRAGON ,
+    VALKYRIE,
+    CANNON,
+    INFERNO,
 }

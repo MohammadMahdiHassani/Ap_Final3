@@ -2,8 +2,8 @@ package model.cards.levelEnums;
 
 public enum BarbarianLevel {
 
-        LEVEL_1(75, 300),
-        LEVEL_2(82, 330),
+        LEVEL_1(33, 300),
+        LEVEL_2(44, 330),
         LEVEL_3(90, 363),
         LEVEL_4(99, 438),
         LEVEL_5(109, 480);

@@ -17,6 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.cards.Army;
+import model.cards.CardNum;
 
 import java.io.IOException;
 
@@ -57,19 +58,19 @@ public class DeckController {
     private Army allLastValue;
 
     public void initialize() {
-        mainArmies.add(new Army("/view/photos/archers.png", "archer"));
-        mainArmies.add(new Army("/view/photos/barbarians.png", "barbarians"));
-        mainArmies.add(new Army("/view/photos/baby_dragon.png", "baby_dragon"));
-        mainArmies.add(new Army("/view/photos/giant.png", "giant"));
-        mainArmies.add(new Army("/view/photos/mini_pekka.png", "mini_pekka"));
-        mainArmies.add(new Army("/view/photos/arrows.png", "arrows"));
-        mainArmies.add(new Army("/view/photos/rage.png", "rage"));
-        mainArmies.add(new Army("/view/photos/wizard.png", "wizard"));
+        mainArmies.add(new Army("/view/photos/archers.png", CardNum.ARCHER));
+        mainArmies.add(new Army("/view/photos/barbarians.png", CardNum.BARBERIAN));
+        mainArmies.add(new Army("/view/photos/baby_dragon.png", CardNum.BABY_DRAGON));
+        mainArmies.add(new Army("/view/photos/giant.png",  CardNum.GIANT));
+        mainArmies.add(new Army("/view/photos/mini_pekka.png", CardNum.MINI_PEKA));
+        mainArmies.add(new Army("/view/photos/arrows.png", CardNum.ARROWS));
+        mainArmies.add(new Army("/view/photos/rage.png", CardNum.RAGE));
+        mainArmies.add(new Army("/view/photos/wizard.png", CardNum.WIZARD));
 
-        allArmies.add(new Army("view/photos/valkyrie.png", "valkyrie"));
-        allArmies.add(new Army("view/photos/fire_fireball.png", "fire_fireball"));
-        allArmies.add(new Army("view/photos/chaos_cannon.png", "chaos_cannon"));
-        allArmies.add(new Army("view/photos/inferno_tower.png", "inferno_tower"));
+        allArmies.add(new Army("view/photos/valkyrie.png", CardNum.VALKYRIE));
+        allArmies.add(new Army("view/photos/fire_fireball.png", CardNum.FIREBALL));
+        allArmies.add(new Army("view/photos/chaos_cannon.png", CardNum.CANNON));
+        allArmies.add(new Army("view/photos/inferno_tower.png", CardNum.INFERNO));
 
         allArmy.setItems(allArmies);
         mainArmy.setItems(mainArmies);

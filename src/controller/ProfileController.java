@@ -30,6 +30,9 @@ public class ProfileController {
     @FXML
     private Label TroopyCounter;
 
+    @FXML
+    void initialize(){
+    }
 
     @FXML
     void actionHandler(MouseEvent event) throws IOException {
