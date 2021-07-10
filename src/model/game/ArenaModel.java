@@ -1,4 +1,4 @@
-package model;
+package model.game;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,17 +8,28 @@ public class ArenaModel {
     public enum CellValue {
         GRASS, KING, ARCHER, STONE, RIVER, ROAD, FENCE, SHRUB, TREE,HOME, EMPTY
     }
-
-    ;
+    private static ArenaModel arenaModel = null ;
+    private GameData gameData ;
+    private GameLogic logic ;
     private int rowCount;
     private int columnCount;
     private CellValue[][] cellValues;
 
-    public ArenaModel()
+    private ArenaModel()
     {
         rowCount = 21;
         columnCount = 19;
         cellValues = new CellValue[rowCount][columnCount];
+        gameData = new GameData();
+        logic = new GameLogic() ;
+    }
+    public static ArenaModel getModel(){
+        if(arenaModel == null){
+            arenaModel = new ArenaModel();
+            return arenaModel ;
+        }
+        else
+            return arenaModel ;
     }
     public CellValue[][] getCellValues(String address) throws FileNotFoundException {
 

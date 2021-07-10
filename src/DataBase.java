@@ -1,3 +1,7 @@
+import model.cards.CardFactory;
+import model.cards.CardNum;
+import model.cards.Level;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -24,11 +28,11 @@ public class DataBase {
     }
 
     public static void main(String [] args) throws SQLException {
-        new DataBase();
-        String ste= "hevf";
-        String insertion = "INSERT INTO tb1(col1, col2) VALUES (32, '"+ste+"');";
-        st.execute(insertion);
+//        new DataBase();
+//        String ste= "hevf";
+//        String insertion = "INSERT INTO tb1(col1, col2) VALUES (32, '"+ste+"');";
+//        st.execute(insertion);
 
-
+        CardFactory.makeCard(CardNum.GIANT , Level.LEVEL_1);
     }
 }

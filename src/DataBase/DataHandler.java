@@ -6,10 +6,11 @@ import java.nio.file.Paths;
 
 public class DataHandler {
 
-    public static final Path path = Paths.get(System.getProperty("user.dir"));
-    public static final File file = new File(path.toString() +"/src/DataBase/Files");
 
+    private static final Path path = Paths.get(System.getProperty("user.dir"));
+    private static final File file = new File(path.toString() +"/src/DataBase/Files");
 
+    private static UserData userData ;
 
     public static UserData signUp(String userName , String password_1 , String password_2){
         if(searchForFile(userName)){
@@ -36,6 +37,7 @@ public class DataHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        DataHandler.userData = userData ;
         return userData ;
 
     }
@@ -52,8 +54,10 @@ public class DataHandler {
                 System.out.println("unable to find .ser file");
                 return null ;
             }
-            if(userData.getPassword().equals(password))
+            if(userData.getPassword().equals(password)){
+                DataHandler.userData = userData ;
                 return userData ;
+            }
             else
                 return null ;
         }
@@ -72,6 +76,9 @@ public class DataHandler {
             }
         }
         return false;
+    }
+    public static UserData getUserData(){
+        return userData ;
     }
 
 }

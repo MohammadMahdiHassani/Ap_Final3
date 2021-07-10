@@ -24,5 +24,7 @@ public class Main extends Application {
         //stage.setResizable(false);//test comment
         stage.setTitle("Clash Royal");
         stage.show();
+
+
     }
 }

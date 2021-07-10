@@ -3,7 +3,7 @@ package view;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import model.ArenaModel;
+import model.game.ArenaModel;
 
 import java.io.FileNotFoundException;
 
@@ -26,7 +26,7 @@ public class ArenaView extends Group {
 
 
     public ArenaView() {
-        arenaModel = new ArenaModel();
+        arenaModel = ArenaModel.getModel();
         grass = new Image(getClass().getResourceAsStream("/view/photos/BackGround_Arena/grass.png"));
         river = new Image(getClass().getResourceAsStream("/view/photos/BackGround_Arena/river.png"));
         stone = new Image(getClass().getResourceAsStream("/view/photos/BackGround_Arena/stone.png"));
