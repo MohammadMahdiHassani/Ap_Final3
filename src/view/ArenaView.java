@@ -15,11 +15,8 @@ public class ArenaView extends Group {
     private int rowCount;
     private int columnCount;
     private ImageView[][] cellView;
-    private ArenaModel arenaModel;
-
 
     public ArenaView() {
-        arenaModel = ArenaModel.getModel();
     }
 
     private void initializeGrid() {
@@ -38,11 +35,11 @@ public class ArenaView extends Group {
         }
     }
 
-    public void update() {
+    public void update(ArenaModel model ) {
         CellValue[][] cellValues = null;
         try {
             System.out.println("salam");
-            cellValues = arenaModel.getCellValues("map.txt");
+            cellValues = model.getCellValues("map.txt");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
