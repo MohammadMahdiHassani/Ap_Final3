@@ -73,7 +73,6 @@ public class DeckController {
 
         allArmy.setItems(allArmies);
         mainArmy.setItems(mainArmies);
-        mainArmy.edit(0);
         mainArmy.getSelectionModel().selectedItemProperty().addListener(
                 new ChangeListener<Army>() {
                     @Override
@@ -81,8 +80,6 @@ public class DeckController {
                         allArmy.getItems().add(newValue);
                         mainArmy.getItems().remove(oldValue);
                         mainLastValue = newValue;
-                        //System.out.println(newValue.getName());
-                        //System.out.println(mainArmies.size());
                     }
                 }
         );
