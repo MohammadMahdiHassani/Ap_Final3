@@ -12,7 +12,7 @@ public class Archer extends Troop {
     private static final Image image = new Image("/view/photos/giant.png");
 
     public Archer(ArcherLevel level) {
-        super(image, level.getHitPoint(), level.getDamage(), Speed.SLOW, 1.5f, Target.GROUND, 5, 1);
+        super(image, level.getHitPoint(), level.getDamage(), Speed.MEDIUM, 1.2f, Target.ANY, 5, 1);
     }
 
 }
