@@ -1,5 +1,5 @@
 import model.cards.CardFactory;
-import model.cards.CardNum;
+import model.cards.CellValue;
 import model.cards.Level;
 
 import java.sql.Connection;
@@ -33,6 +33,6 @@ public class DataBase {
 //        String insertion = "INSERT INTO tb1(col1, col2) VALUES (32, '"+ste+"');";
 //        st.execute(insertion);
 
-        CardFactory.makeCard(CardNum.GIANT , Level.LEVEL_1);
+        CardFactory.makeCard(CellValue.GIANT , Level.LEVEL_1);
     }
 }

@@ -4,15 +4,15 @@ import javafx.scene.image.Image;
 
 public class Army {
     private Image image;
-    private CardNum name;
+    private CellValue name;
 
-    public Army(String image, CardNum name)
+    public Army(String image, CellValue name)
     {
         this.image = new Image(image);
         this.name = name;
     }
 
-    public CardNum getName() {
+    public CellValue getName() {
         return name;
     }
 

@@ -1,11 +1,11 @@
 package model.cards.levelEnums;
 
-import model.cards.CardNum;
+import model.cards.CellValue;
 import model.cards.Level;
 
 
 public class LevelAdaptor {
-    public static Object adoptLevel(CardNum card , Level level){
+    public static Object adoptLevel(CellValue card , Level level){
 
         switch (card){
             case ARCHER:

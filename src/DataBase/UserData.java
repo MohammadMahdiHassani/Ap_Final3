@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import model.cards.CardNum;
+import model.cards.CellValue;
 import model.cards.Card;
 import model.cards.Level;
 
@@ -15,7 +15,7 @@ public class UserData implements Serializable {
     private int troopy ;
     private final ArrayList<GameHistory> histories ;
     private  ArrayList<Card> playerDeck;
-    private final HashMap<CardNum, Level> levelMap ;
+    private final HashMap<CellValue, Level> levelMap ;
 
     UserData(String userName , String password){
         this.userName = userName ;

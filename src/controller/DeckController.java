@@ -17,7 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.cards.Army;
-import model.cards.CardNum;
+import model.cards.CellValue;
 
 import java.io.IOException;
 
@@ -58,19 +58,19 @@ public class DeckController {
     private Army allLastValue;
 
     public void initialize() {
-        mainArmies.add(new Army("/view/photos/archers.png", CardNum.ARCHER));
-        mainArmies.add(new Army("/view/photos/barbarians.png", CardNum.BARBERIAN));
-        mainArmies.add(new Army("/view/photos/baby_dragon.png", CardNum.BABY_DRAGON));
-        mainArmies.add(new Army("/view/photos/giant.png",  CardNum.GIANT));
-        mainArmies.add(new Army("/view/photos/mini_pekka.png", CardNum.MINI_PEKA));
-        mainArmies.add(new Army("/view/photos/arrows.png", CardNum.ARROWS));
-        mainArmies.add(new Army("/view/photos/rage.png", CardNum.RAGE));
-        mainArmies.add(new Army("/view/photos/wizard.png", CardNum.WIZARD));
+        mainArmies.add(new Army("/view/photos/archers.png", CellValue.ARCHERTOWER));
+        mainArmies.add(new Army("/view/photos/barbarians.png", CellValue.BARBERIAN));
+        mainArmies.add(new Army("/view/photos/baby_dragon.png", CellValue.BABY_DRAGON));
+        mainArmies.add(new Army("/view/photos/giant.png",  CellValue.GIANT));
+        mainArmies.add(new Army("/view/photos/mini_pekka.png", CellValue.MINI_PEKA));
+        mainArmies.add(new Army("/view/photos/arrows.png", CellValue.ARROWS));
+        mainArmies.add(new Army("/view/photos/rage.png", CellValue.RAGE));
+        mainArmies.add(new Army("/view/photos/wizard.png", CellValue.WIZARD));
 
-        allArmies.add(new Army("view/photos/valkyrie.png", CardNum.VALKYRIE));
-        allArmies.add(new Army("view/photos/fire_fireball.png", CardNum.FIREBALL));
-        allArmies.add(new Army("view/photos/chaos_cannon.png", CardNum.CANNON));
-        allArmies.add(new Army("view/photos/inferno_tower.png", CardNum.INFERNO));
+        allArmies.add(new Army("view/photos/valkyrie.png", CellValue.VALKYRIE));
+        allArmies.add(new Army("view/photos/fire_fireball.png", CellValue.FIREBALL));
+        allArmies.add(new Army("view/photos/chaos_cannon.png", CellValue.CANNON));
+        allArmies.add(new Army("view/photos/inferno_tower.png", CellValue.INFERNO));
 
         allArmy.setItems(allArmies);
         mainArmy.setItems(mainArmies);

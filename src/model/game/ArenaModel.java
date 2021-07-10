@@ -1,13 +1,13 @@
 package model.game;
 
+import model.cards.CellValue;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class ArenaModel {
-    public enum CellValue {
-        GRASS, KING, ARCHER, STONE, RIVER, ROAD, FENCE, SHRUB, TREE,HOME, EMPTY
-    }
+
     private static ArenaModel arenaModel = null ;
     private int rowCount;
     private int columnCount;
@@ -63,10 +63,10 @@ public class ArenaModel {
                         cellValues[row][column] = CellValue.FENCE;
                         break;
                     case "k":
-                        cellValues[row][column] = CellValue.KING;
+                        cellValues[row][column] = CellValue.KINGTOWER;
                         break;
                     case "a":
-                        cellValues[row][column] = CellValue.ARCHER;
+                        cellValues[row][column] = CellValue.ARCHERTOWER;
                         break;
                     case "t":
                         cellValues[row][column] = CellValue.TREE;
