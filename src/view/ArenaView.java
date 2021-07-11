@@ -15,22 +15,31 @@ public class ArenaView extends Group {
     private int rowCount;
     private int columnCount;
     private ImageView[][] cellView;
-
+    private ImageView[][] componentView;
+    private ImageView cannon;
     public ArenaView() {
     }
 
     private void initializeGrid() {
+        cannon = new ImageView("/view/photos/cannon.png");
         cellView = new ImageView[rowCount][columnCount];
+        componentView = new ImageView[rowCount][columnCount];
         for (int row = 0; row < rowCount; row++) {
             for (int column = 0; column < columnCount; column++) {
                 ImageView imageView = new ImageView();
+                ImageView imageView1 = new ImageView();
                 imageView.setX(column * CELL_WIDTH);
                 imageView.setY(row * CELL_WIDTH);
                 imageView.setFitWidth(CELL_WIDTH);
                 imageView.setFitHeight(CELL_WIDTH);
+                imageView1.setX(column * CELL_WIDTH);
+                imageView1.setY(row * CELL_WIDTH);
+                imageView1.setFitWidth(CELL_WIDTH);
+                imageView1.setFitHeight(CELL_WIDTH);
                 cellView[row][column] = imageView;
+                componentView[row][column] = imageView1;
                 this.getChildren().add(imageView);
-
+                this.getChildren().add(imageView1);
             }
         }
     }
@@ -83,6 +92,21 @@ public class ArenaView extends Group {
 
             }
         }
+//        ImageView imageView = new ImageView("view/photos/cannon.png");
+//        imageView.maxHeight(30);
+//        imageView.setFitHeight(30);
+//        imageView.setFitWidth(30);
+//        imageView.maxWidth(30);
+//        imageView.setX(100);
+//        imageView.setY(200);
+//        this.getChildren().add(imageView);
+        componentView[5][10].setImage(cannon.getImage());
+        //componentView[5][10].setImage(new Image("/view/photos/cannon.png"));
+//        cannon.setX(200);
+//        cannon.setY(200);
+//        cannon.setFitWidth(30);
+//        cannon.setFitHeight(30);
+//        this.getChildren().add(cannon);
     }
 
     public int getRowCount() {
