@@ -37,11 +37,8 @@ public class ArenaView extends Group {
 
     public void update(ArenaModel model ) {
         CellValue[][] cellValues = null;
-        try {
-            cellValues = model.getCellValues("map.txt");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+            cellValues = model.getCellValues();
+
         for (int i = 0; i < rowCount; i++) {
             for (int j = 0; j < columnCount; j++) {
                 if (cellValues[i][j] == GRASS) {
@@ -71,8 +68,17 @@ public class ArenaView extends Group {
                 else if (cellValues[i][j] == CellValue.ARCHERTOWER) {
                     cellView[i][j].setImage(ARROWS.getThumbnailImage());
                 }
-                else if (cellValues[i][j] == CellValue.TREE) {
-                    cellView[i][j].setImage(TREE.getThumbnailImage());
+                else if (cellValues[i][j] == GIANT) {
+                    cellView[i][j].setImage(GIANT.getThumbnailImage());
+                }
+                else if (cellValues[i][j] == ARCHER) {
+                    cellView[i][j].setImage(ARCHER.getThumbnailImage());
+                }
+                else if (cellValues[i][j] == CANNON) {
+                    cellView[i][j].setImage(CANNON.getThumbnailImage());
+                }
+                else if (cellValues[i][j] == BARBERIAN) {
+                    cellView[i][j].setImage(BARBERIAN.getThumbnailImage());
                 }
 
             }
