@@ -79,8 +79,12 @@ public class ArenaController implements EventHandler<MouseEvent> {
     @Override
     public void handle(MouseEvent mouseEvent) {
         Point2D point = new Point2D(mouseEvent.getX(), mouseEvent.getY());
+        System.out.println("inside MouseEven handle method");
         if(mouseEvent.getY() < getBoardHeight() - listArmy.getHeight()) {
-            model.setCurrPoint(new Point2D(Math.floor(point.getX() / arenaView.CELL_WIDTH), Math.floor(point.getY() / arenaView.CELL_WIDTH)));
+            int x = (int) (Math.floor(point.getX()) /  arenaView.CELL_WIDTH);
+            int y = (int) (Math.floor(point.getY()) /  arenaView.CELL_WIDTH);
+                    model.setCurrPoint(new Point2D(x, y));
+            System.out.println("MouseEvent setting currPoint to (" + x + "," + y + ")");
         }
         else{
             mouseEvent.consume();
@@ -101,6 +105,7 @@ public class ArenaController implements EventHandler<MouseEvent> {
                         new ChangeListener<Card>() {
                             @Override
                             public void changed(ObservableValue<? extends Card> observable, Card oldValue, Card newValue) {
+                                System.out.println("currCard was set to " + newValue.getValue() );
                                 model.setCurrCard(newValue);
                             }
                         }
