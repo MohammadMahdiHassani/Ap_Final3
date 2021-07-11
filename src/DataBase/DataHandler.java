@@ -66,7 +66,18 @@ public class DataHandler {
         }
     }
 
-
+    public void saveToFile(UserData userData)
+    {
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(file +"/"+ userData.getUserName()+".ser");
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(userData);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     private static Boolean searchForFile(String str){
         if(file.list()!=null){
         for (String i : file.list()) {

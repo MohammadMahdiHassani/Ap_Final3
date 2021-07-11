@@ -26,7 +26,8 @@ import java.util.ArrayList;
 
 
 public class DeckController {
-
+    @FXML
+    private Label xp;
     @FXML
     private ImageView profilePage;
     @FXML
@@ -61,6 +62,9 @@ public class DeckController {
     private Card allLastValue;
 
     public void initialize() {
+        TroopyCounter.setText(String.valueOf(DataHandler.getUserData().getTroopy()));
+        XPprogressSlider.setProgress(DataHandler.getUserData().getXP()/1000);
+        xp.setText(DataHandler.getUserData().getXP()+"");
         mainArmies.add(CardFactory.makeCard(CellValue.ARCHERTOWER , Level.LEVEL_1));
         mainArmies.add(CardFactory.makeCard(CellValue.BARBERIAN , Level.LEVEL_1));
 //        mainArmies.add(CardFactory.makeCard(CellValue.BABY_DRAGON , Level.LEVEL_1));

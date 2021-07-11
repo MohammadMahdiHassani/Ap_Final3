@@ -18,7 +18,7 @@ public class Main extends Application {
         loader.setLocation(getClass().getResource("view/Login.fxml"));
 
         loader.load();
-
+//test
         Parent root = loader.getRoot();
 //        ArenaController arenaController = loader.getController();
 //        System.out.println(arenaController.getPrefHeightList());
