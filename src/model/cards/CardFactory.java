@@ -18,6 +18,7 @@ public class CardFactory {
                 GiantLevel giantLevel = (GiantLevel) LevelAdaptor.adoptLevel(card, level);
                 return new Giant(giantLevel);
             case WIZARD:
+
             case BARBERIAN:
                 BarbarianLevel barbarianLevel = (BarbarianLevel) LevelAdaptor.adoptLevel(card, level);
                 return new Barbarian(barbarianLevel);

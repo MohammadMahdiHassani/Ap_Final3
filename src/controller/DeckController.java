@@ -63,20 +63,41 @@ public class DeckController {
 
     public void initialize() {
         TroopyCounter.setText(String.valueOf(DataHandler.getUserData().getTroopy()));
-        XPprogressSlider.setProgress(DataHandler.getUserData().getXP()/1000);
+        XPprogressSlider.setProgress(DataHandler.getUserData().getXP()/2500);
         xp.setText(DataHandler.getUserData().getXP()+"");
-        mainArmies.add(CardFactory.makeCard(CellValue.ARCHERTOWER , Level.LEVEL_1));
-        mainArmies.add(CardFactory.makeCard(CellValue.BARBERIAN , Level.LEVEL_1));
+        Level level = null;
+        if (Integer.valueOf(xp.getText()) <= 300)
+        {
+            level = Level.LEVEL_1;
+        }
+        else if (Integer.valueOf(xp.getText()) <= 500)
+        {
+            level = Level.LEVEL_2;
+        }
+        else if (Integer.valueOf(xp.getText()) <= 900)
+        {
+            level = Level.LEVEL_3;
+        }
+        else if (Integer.valueOf(xp.getText()) <= 1700)
+        {
+            level = Level.LEVEL_4;
+        }else if (Integer.valueOf(xp.getText()) > 1700)
+        {
+            level = Level.LEVEL_5;
+        }
+
+        mainArmies.add(CardFactory.makeCard(CellValue.ARCHERTOWER , level));
+        mainArmies.add(CardFactory.makeCard(CellValue.BARBERIAN , level));
 //        mainArmies.add(CardFactory.makeCard(CellValue.BABY_DRAGON , Level.LEVEL_1));
-        mainArmies.add(CardFactory.makeCard(CellValue.GIANT , Level.LEVEL_1));
+        mainArmies.add(CardFactory.makeCard(CellValue.GIANT , level));
 //        mainArmies.add(CardFactory.makeCard(CellValue.MINI_PEKA , Level.LEVEL_1));
 //        mainArmies.add(CardFactory.makeCard(CellValue.ARROWS , Level.LEVEL_1));
-        mainArmies.add(CardFactory.makeCard(CellValue.RAGE , Level.LEVEL_1));
+        mainArmies.add(CardFactory.makeCard(CellValue.RAGE , level));
 //        mainArmies.add(CardFactory.makeCard(CellValue.WIZARD , Level.LEVEL_1));
 
 //        allArmies.add(CardFactory.makeCard(CellValue.VALKYRIE , Level.LEVEL_1));
 //        allArmies.add(CardFactory.makeCard(CellValue.FIREBALL , Level.LEVEL_1));
-        allArmies.add(CardFactory.makeCard(CellValue.CANNON , Level.LEVEL_1));
+        allArmies.add(CardFactory.makeCard(CellValue.CANNON , level));
 //        allArmies.add(CardFactory.makeCard(CellValue.INFERNO , Level.LEVEL_1));
 
         allArmy.setItems(allArmies);

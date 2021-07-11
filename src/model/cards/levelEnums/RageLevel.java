@@ -10,8 +10,8 @@ public enum RageLevel {
 
     private float duration;
 
-    private RageLevel(float damage) {
-        this.duration = damage;
+    private RageLevel(float duration) {
+        this.duration = duration;
 
     }
 
