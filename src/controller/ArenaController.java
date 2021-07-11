@@ -73,7 +73,7 @@ public class ArenaController implements EventHandler<MouseEvent> {
     }
 
     public double getBoardHeight() {
-        return arenaView.CELL_WIDTH * this.arenaView.getRowCount() + listArmy.getHeight();
+        return arenaView.CELL_WIDTH * this.arenaView.getRowCount();
     }
 
     @Override
@@ -111,6 +111,10 @@ public class ArenaController implements EventHandler<MouseEvent> {
                         }
                 );
 
+    }
+    public double getPrefHeightList()
+    {
+        return listArmy.getPrefHeight();
     }
 
 }

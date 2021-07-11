@@ -11,7 +11,7 @@ import java.io.FileNotFoundException;
 import static model.cards.CellValue.*;
 
 public class ArenaView extends Group {
-    public final static double CELL_WIDTH = 30.0;
+    public final static double CELL_WIDTH = 26.0;
     private int rowCount;
     private int columnCount;
     private ImageView[][] cellView;
