@@ -49,7 +49,7 @@ public class SignUpController {
             }
         }
         else if(event.getSource() == LoginLink) {
-            Parent root = FXMLLoader.load(getClass().getResource("../view/Login.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("../view/Login1.fxml"));
             Stage stage = (Stage) LoginLink.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setResizable(false);

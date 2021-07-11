@@ -51,12 +51,24 @@ public class MenuController {
 
     @FXML
     void actionHandler(MouseEvent event) throws IOException {
-        String fxmlAddress = getFxml(event);
-        Parent root = FXMLLoader.load(getClass().getResource(fxmlAddress));
-        Stage stage = (Stage) mainPage.getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.setResizable(false);
-        stage.show();
+        if (event.getSource() == battleButton)
+        {
+            System.out.println("ali");
+            Parent root = FXMLLoader.load(getClass().getResource("../view/ChooseBot.fxml"));
+            Stage stage = (Stage) mainPage.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Clash Royal");
+            stage.setResizable(false);
+            stage.show();
+        }
+        else {
+            String fxmlAddress = getFxml(event);
+            Parent root = FXMLLoader.load(getClass().getResource(fxmlAddress));
+            Stage stage = (Stage) mainPage.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.show();
+        }
 
 
     }
