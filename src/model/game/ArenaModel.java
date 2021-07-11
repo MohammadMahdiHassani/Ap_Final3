@@ -29,7 +29,7 @@ public class ArenaModel {
 
     private ArenaModel()
     {
-        rowCount = 21;
+        rowCount = 20;
         columnCount = 19;
         BackGroundCellValues = new CellValue[rowCount][columnCount];
         initCellValue("map.txt");
@@ -51,7 +51,7 @@ public class ArenaModel {
     }
     private void initializeBackgroundCellValues(String address) {
 
-        rowCount = 21;
+        rowCount = 20;
         columnCount = 19;
         BackGroundCellValues = new CellValue[rowCount][columnCount];
         File file = new File(address);
