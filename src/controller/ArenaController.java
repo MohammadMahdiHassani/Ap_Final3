@@ -12,8 +12,11 @@ import javafx.geometry.Point2D;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.util.Callback;
+import model.GameElement;
 import model.cards.Card;
+import model.cards.levelEnums.KingTowerLevel;
 import model.game.ArenaModel;
+import model.towers.KingTower;
 import view.ArenaView;
 
 import javafx.scene.input.MouseEvent;
@@ -22,7 +25,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class ArenaController implements EventHandler<MouseEvent> {
-    final private static double FRAMES_PER_SECOND = 50.0;
+    final private static double FRAMES_PER_SECOND = 10.0;
 
     @FXML
     private ListView<Card> listArmy;
@@ -39,6 +42,7 @@ public class ArenaController implements EventHandler<MouseEvent> {
     public void initialize()
     {
         initializeListArmy();
+        arenaView.setBackgroundCell(model);
         startTimer();
     }
 
@@ -80,15 +84,12 @@ public class ArenaController implements EventHandler<MouseEvent> {
     public void handle(MouseEvent mouseEvent) {
         Point2D point = new Point2D(mouseEvent.getX(), mouseEvent.getY());
         System.out.println("inside MouseEven handle method");
-        if(mouseEvent.getY() < getBoardHeight() - listArmy.getHeight()) {
             int x = (int) (Math.floor(point.getX()) /  arenaView.CELL_WIDTH);
             int y = (int) (Math.floor(point.getY()) /  arenaView.CELL_WIDTH);
                     model.setCurrPoint(new Point2D(x, y));
             System.out.println("MouseEvent setting currPoint to (" + x + "," + y + ")");
-        }
-        else{
             mouseEvent.consume();
-        }
+
     }
     private void initializeListArmy(){
         listArmy.setItems(model.getDeck());
@@ -115,6 +116,9 @@ public class ArenaController implements EventHandler<MouseEvent> {
     public double getPrefHeightList()
     {
         return listArmy.getPrefHeight();
+    }
+    void cellViewInit(){
+
     }
 
 

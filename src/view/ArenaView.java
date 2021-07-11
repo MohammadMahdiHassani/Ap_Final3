@@ -3,6 +3,7 @@ package view;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import model.GameElement;
 import model.cards.CellValue;
 import model.game.ArenaModel;
 
@@ -16,12 +17,10 @@ public class ArenaView extends Group {
     private int columnCount;
     private ImageView[][] cellView;
     private ImageView[][] componentView;
-    private ImageView cannon;
     public ArenaView() {
     }
 
     private void initializeGrid() {
-        cannon = new ImageView("/view/photos/cannon.png");
         cellView = new ImageView[rowCount][columnCount];
         componentView = new ImageView[rowCount][columnCount];
         for (int row = 0; row < rowCount; row++) {
@@ -43,74 +42,64 @@ public class ArenaView extends Group {
             }
         }
     }
-
-    public void update(ArenaModel model ) {
+    public void setBackgroundCell(ArenaModel model) {
         CellValue[][] cellValues = null;
-            cellValues = model.getCellValues();
+        cellValues = model.getBackGroundCellValues();
 
         for (int i = 0; i < rowCount; i++) {
             for (int j = 0; j < columnCount; j++) {
                 if (cellValues[i][j] == GRASS) {
-                        cellView[i][j].setImage(GRASS.getThumbnailImage());
-                }
-                else if (cellValues[i][j] == CellValue.ROAD) {
+                    cellView[i][j].setImage(GRASS.getThumbnailImage());
+                } else if (cellValues[i][j] == CellValue.ROAD) {
                     cellView[i][j].setImage(ROAD.getThumbnailImage());
-                }
-                else if (cellValues[i][j] == CellValue.RIVER) {
+                } else if (cellValues[i][j] == CellValue.RIVER) {
                     cellView[i][j].setImage(RIVER.getThumbnailImage());
-                }
-                else if (cellValues[i][j] == CellValue.STONE) {
+                } else if (cellValues[i][j] == CellValue.STONE) {
                     cellView[i][j].setImage(STONE.getThumbnailImage());
-                }
-                else if (cellValues[i][j] == CellValue.SHRUB) {
+                } else if (cellValues[i][j] == CellValue.SHRUB) {
                     cellView[i][j].setImage(SHRUB.getThumbnailImage());
                 }
                 else if (cellValues[i][j] == TREE)
                 {
                     cellView[i][j].setImage(TREE.getThumbnailImage());
-                }
-                else if (cellValues[i][j] == CellValue.FENCE) {
+                } else if (cellValues[i][j] == CellValue.FENCE) {
                     cellView[i][j].setImage(FENCE.getThumbnailImage());
-                }
-                else if (cellValues[i][j] == CellValue.HOME) {
+                } else if (cellValues[i][j] == CellValue.HOME) {
                     cellView[i][j].setImage(HOME.getThumbnailImage());
                 }
-                else if (cellValues[i][j] == CellValue.KINGTOWER) {
-                    cellView[i][j].setImage(KINGTOWER.getThumbnailImage());
+            }
+        }
+    }
+    public void update(ArenaModel model) {
+        GameElement[][] cellValues = null;
+            cellValues = model.getCellValues();
+
+        for (int i = 0; i < rowCount; i++) {
+            for (int j = 0; j < columnCount; j++) {
+                if(cellValues[i][j] == null){
+                    componentView[i][j].setImage(null);
                 }
-                else if (cellValues[i][j] == CellValue.ARCHERTOWER) {
-                    cellView[i][j].setImage(ARROWS.getThumbnailImage());
+                else if (cellValues[i][j].getValue() == CellValue.KINGTOWER) {
+                    componentView[i][j].setImage(KINGTOWER.getThumbnailImage());
                 }
-                else if (cellValues[i][j] == GIANT) {
-                    cellView[i][j].setImage(GIANT.getThumbnailImage());
+                else if (cellValues[i][j].getValue() == CellValue.ARCHERTOWER) {
+                    componentView[i][j].setImage(ARROWS.getThumbnailImage());
                 }
-                else if (cellValues[i][j] == ARCHER) {
-                    cellView[i][j].setImage(ARCHER.getThumbnailImage());
+                else if (cellValues[i][j].getValue() == GIANT) {
+                    componentView[i][j].setImage(GIANT.getThumbnailImage());
                 }
-                else if (cellValues[i][j] == CANNON) {
-                    cellView[i][j].setImage(CANNON.getThumbnailImage());
+                else if (cellValues[i][j].getValue() == ARCHER) {
+                    componentView[i][j].setImage(ARCHER.getThumbnailImage());
                 }
-                else if (cellValues[i][j] == BARBERIAN) {
-                    cellView[i][j].setImage(BARBERIAN.getThumbnailImage());
+                else if (cellValues[i][j].getValue() == CANNON) {
+                    componentView[i][j].setImage(CANNON.getThumbnailImage());
+                }
+                else if (cellValues[i][j].getValue() == BARBERIAN) {
+                    componentView[i][j].setImage(BARBERIAN.getThumbnailImage());
                 }
 
             }
         }
-//        ImageView imageView = new ImageView("view/photos/cannon.png");
-//        imageView.maxHeight(30);
-//        imageView.setFitHeight(30);
-//        imageView.setFitWidth(30);
-//        imageView.maxWidth(30);
-//        imageView.setX(100);
-//        imageView.setY(200);
-//        this.getChildren().add(imageView);
-        componentView[5][10].setImage(cannon.getImage());
-        //componentView[5][10].setImage(new Image("/view/photos/cannon.png"));
-//        cannon.setX(200);
-//        cannon.setY(200);
-//        cannon.setFitWidth(30);
-//        cannon.setFitHeight(30);
-//        this.getChildren().add(cannon);
     }
 
     public int getRowCount() {

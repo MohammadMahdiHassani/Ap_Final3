@@ -1,6 +1,9 @@
+import model.GameElement;
 import model.cards.CardFactory;
 import model.cards.CellValue;
 import model.cards.Level;
+import model.cards.levelEnums.KingTowerLevel;
+import model.towers.KingTower;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -33,6 +36,5 @@ public class DataBase {
 //        String insertion = "INSERT INTO tb1(col1, col2) VALUES (32, '"+ste+"');";
 //        st.execute(insertion);
 
-        CardFactory.makeCard(CellValue.GIANT , Level.LEVEL_1);
     }
 }

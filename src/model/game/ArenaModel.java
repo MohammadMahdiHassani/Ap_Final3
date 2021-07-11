@@ -1,18 +1,18 @@
 package model.game;
 
-import DataBase.DataHandler;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
+import model.GameElement;
 import model.cards.Card;
-import model.cards.CardFactory;
 import model.cards.CellValue;
-import model.cards.Level;
+import model.cards.levelEnums.ArcherTowerLevel;
+import model.cards.levelEnums.KingTowerLevel;
+import model.towers.ArcherTower;
+import model.towers.KingTower;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ArenaModel {
@@ -20,25 +20,20 @@ public class ArenaModel {
     private static ArenaModel arenaModel = null ;
     private int rowCount;
     private int columnCount;
-    private CellValue[][] cellValues;
+    private CellValue[][] BackGroundCellValues;
+    private GameElement[][] cellValues ;
     private Point2D currPoint ;
     private Card currCard ;
-    private Card previousCard ;
-    private ArrayList<Card> playedCards ;
+    private GameData gameData ;
+
 
     private ArenaModel()
     {
-        rowCount = 20;
+        rowCount = 21;
         columnCount = 19;
-        cellValues = new CellValue[rowCount][columnCount];
-        playedCards = new ArrayList<>() ;
-        playedCards.add(CardFactory.makeCard(CellValue.GIANT , Level.LEVEL_1) );
-        playedCards.add(CardFactory.makeCard(CellValue.BARBERIAN , Level.LEVEL_1) );
-        playedCards.add(CardFactory.makeCard(CellValue.ARCHER , Level.LEVEL_1) );
-        playedCards.add(CardFactory.makeCard(CellValue.CANNON , Level.LEVEL_1) );
-
-
-        initializeCellValues("map.txt");
+        BackGroundCellValues = new CellValue[rowCount][columnCount];
+        initCellValue("map.txt");
+        gameData = new GameData();
 
 
     }
@@ -50,14 +45,15 @@ public class ArenaModel {
         else
             return arenaModel ;
     }
-    public CellValue[][] getCellValues(){
-        return cellValues ;
+    public CellValue[][] getBackGroundCellValues(){
+        initializeBackgroundCellValues("map.txt");
+        return BackGroundCellValues ;
     }
-    private void initializeCellValues(String address) {
+    private void initializeBackgroundCellValues(String address) {
 
-        rowCount = 20;
+        rowCount = 21;
         columnCount = 19;
-        cellValues = new CellValue[rowCount][columnCount];
+        BackGroundCellValues = new CellValue[rowCount][columnCount];
         File file = new File(address);
         Scanner scanner = null;
         try {
@@ -75,38 +71,39 @@ public class ArenaModel {
 
                 switch (value) {
                     case "g":
-                        cellValues[row][column] = CellValue.GRASS;
+                        BackGroundCellValues[row][column] = CellValue.GRASS;
                         break;
                     case "r":
-                        cellValues[row][column] = CellValue.ROAD;
+                        BackGroundCellValues[row][column] = CellValue.ROAD;
                         break;
                     case "s":
-                        cellValues[row][column] = CellValue.STONE;
+                        BackGroundCellValues[row][column] = CellValue.STONE;
                         break;
                     case "h":
-                        cellValues[row][column] = CellValue.SHRUB;
+                        BackGroundCellValues[row][column] = CellValue.SHRUB;
                         break;
                     case "v":
-                        cellValues[row][column] = CellValue.RIVER;
+                        BackGroundCellValues[row][column] = CellValue.RIVER;
                         break;
                     case "f":
-                        cellValues[row][column] = CellValue.FENCE;
+                        BackGroundCellValues[row][column] = CellValue.FENCE;
                         break;
                     case "k":
-                        cellValues[row][column] = CellValue.KINGTOWER;
+                        BackGroundCellValues[row][column] = CellValue.EMPTY;
+//                        cellValues[row][column] = (GameElement) new KingTower(KingTowerLevel.LEVEL_1) ;
                         break;
                     case "a":
-                        cellValues[row][column] = CellValue.ARCHERTOWER;
+                        BackGroundCellValues[row][column] = CellValue.EMPTY;
+//                        cellValues[row][column] = new ArcherTower(ArcherTowerLevel.LEVEL_1) ;
                         break;
                     case "t":
-                        cellValues[row][column] = CellValue.TREE;
+                        BackGroundCellValues[row][column] = CellValue.TREE;
                         break;
                     case "m":
-                        cellValues[row][column] = CellValue.HOME;
+                        BackGroundCellValues[row][column] = CellValue.HOME;
                         break;
                     default:
-                        cellValues[row][column] = CellValue.EMPTY;
-                        break;
+                        BackGroundCellValues[row][column] = CellValue.EMPTY;
                 }
                 column++;
 
@@ -115,14 +112,79 @@ public class ArenaModel {
         }
 
     }
+    private void initCellValue(String address){
+
+        rowCount = 21;
+        columnCount = 19;
+        cellValues = new GameElement[rowCount][columnCount];
+        File file = new File(address);
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        int row = 0;
+        int column = 0;
+        while (scanner.hasNextLine()) {
+            Scanner scannerLine = new Scanner(scanner.nextLine());
+            column = 0;
+            while (scannerLine.hasNext()) {
+                String value = scannerLine.next();
+
+                switch (value) {
+
+                    case "k":
+//                        BackGroundCellValues[row][column] = CellValue.EMPTY;
+                        cellValues[row][column] = (GameElement) new KingTower(KingTowerLevel.LEVEL_1) ;
+                        break;
+                    case "a":
+//                        BackGroundCellValues[row][column] = CellValue.EMPTY;
+                        cellValues[row][column] = new ArcherTower(ArcherTowerLevel.LEVEL_1) ;
+                        break;
+
+                }
+                column++;
+
+            }
+            row++;
+        }
+
+    }
+
+    public GameElement[][] getCellValues(){
+        return cellValues ;
+    }
     public void move(){
-//        if(currPoint != null &&  currCard != null && currCard != previousCard  ) {
-////            System.out.println("changing the cell value -> move model");
-////                cellValues[(int) currPoint.getY()][(int) currPoint.getX()] = currCard.getValue();
-////                currPoint = null ;
-////        }
 
+        for(int i=0 ; i<rowCount ; i++){
+            for(int j=0 ; j<columnCount ; j++){
+                if(cellValues[i][j] != null && cellValues[i][j] instanceof Card){
+                    if(j>3){
+                        Card m = (Card) cellValues[i][j];
+                        cellValues[i][j] = null ;
+                        cellValues[i][j-1] = m ;
+                    }
 
+                }
+            }
+
+        }
+        if(!checkForPlayerMove()) {
+            return ;
+        }
+        setCurrPointComponentValue(currPoint , currCard);
+    }
+    private boolean checkForPlayerMove(){
+        if(currPoint == null)
+            return false;
+        if(gameData.playedCards.contains(currCard))
+            return false;
+        if(!(currPoint.getY()>=11 && currPoint.getY()<=17))
+            return false ;
+        if(getCurrPointComponentValue() != null)
+            return false ;
+        return true ;
     }
 
 
@@ -130,13 +192,26 @@ public class ArenaModel {
     public void setCurrPoint(Point2D point2D){
         currPoint = point2D ;
     }
+    private CellValue getCurrPointBackgroundValue(){
+        return  BackGroundCellValues[(int) currPoint.getY()][(int) currPoint.getX()];
+    }
+    private GameElement getCurrPointComponentValue(){
+        return  cellValues[(int) currPoint.getY()][(int) currPoint.getX()];
+    }
+    private void setCurrPointComponentValue(Point2D point , GameElement element){
+          cellValues[(int) currPoint.getY()][(int) currPoint.getX()] = element;
+          gameData.playedCards.add(currCard) ;
+          currPoint = null ;
+          currCard = null ;
+    }
+    private void setCurrPointValue(CellValue value){
 
+    }
     public void setCurrCard(Card currCard) {
-        previousCard = currCard ;
         this.currCard = currCard;
     }
     public ObservableList<Card> getDeck(){
-        return FXCollections.observableArrayList(playedCards) ;
+        return FXCollections.observableArrayList(gameData.playerDeck) ;
     }
 
 
