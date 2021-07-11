@@ -34,7 +34,8 @@ public class ArenaModel {
         playedCards = new ArrayList<>() ;
         playedCards.add(CardFactory.makeCard(CellValue.GIANT , Level.LEVEL_1) );
         playedCards.add(CardFactory.makeCard(CellValue.BARBERIAN , Level.LEVEL_1) );
-//        playedCards.add(CardFactory.makeCard(CellValue.ARCHER , Level.LEVEL_1) );
+        playedCards.add(CardFactory.makeCard(CellValue.ARCHER , Level.LEVEL_1) );
+        playedCards.add(CardFactory.makeCard(CellValue.CANNON , Level.LEVEL_1) );
     }
     public static ArenaModel getModel(){
         if(arenaModel == null){

@@ -88,7 +88,6 @@ public class ArenaController implements EventHandler<MouseEvent> {
     }
     private void initializeListArmy(){
         listArmy.setItems(model.getDeck());
-        listArmy.setOrientation(Orientation.HORIZONTAL);
         listArmy.setCellFactory(
                 new Callback<ListView<Card>, ListCell<Card>>() {
                     @Override

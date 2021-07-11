@@ -12,7 +12,7 @@ public class CardFactory {
     public static Card makeCard(CellValue card, model.cards.Level level) {
         switch (card) {
             case ARCHER:
-                ArcherLevel archerLevel = (ArcherLevel) LevelAdaptor.adoptLevel(CellValue.ARCHERTOWER, level) ;
+                ArcherLevel archerLevel = (ArcherLevel) LevelAdaptor.adoptLevel(CellValue.ARCHER, level) ;
                 return new Archer(archerLevel);
             case GIANT:
                 GiantLevel giantLevel = (GiantLevel) LevelAdaptor.adoptLevel(card, level);

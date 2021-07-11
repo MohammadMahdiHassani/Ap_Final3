@@ -1,15 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
 
-<?import controller.ArenaController?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
 <?import view.ArenaView?>
-<?import javafx.scene.control.ListView?>
-<BorderPane fx:controller="controller.ArenaController" style="-fx-background-color: green;" xmlns:fx="http://javafx.com/fxml">
+<BorderPane style="-fx-background-color: #adff2f;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="controller.ArenaController">
 
 
     <center>
         <ArenaView fx:id="arenaView" rowCount="21" columnCount="19" />
     </center>
     <bottom>
-        <ListView fx:id="listArmy" style="-fx-background-color: brown;" prefHeight="300"></ListView>
+        <ListView fx:id="listArmy" fixedCellSize="100" orientation="HORIZONTAL" style="-fx-background-color: #deb887;" />
     </bottom>
 </BorderPane>
