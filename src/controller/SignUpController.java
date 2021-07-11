@@ -46,7 +46,7 @@ public class SignUpController {
             }
             else{
                 UserNameErrorMessage.setVisible(true);
-                System.out.println("error");
+                System.out.println("Error in sign up");
             }
         }
         else if(event.getSource() == LoginLink) {
