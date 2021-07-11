@@ -7,8 +7,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Orientation;
 import javafx.geometry.Point2D;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.util.Callback;
 import model.cards.Card;
 import model.game.ArenaModel;
 import view.ArenaView;
@@ -35,9 +38,8 @@ public class ArenaController implements EventHandler<MouseEvent> {
     }
     public void initialize()
     {
-        listArmy.setItems(model.getDeck());
-
-                startTimer();
+        initializeListArmy();
+        startTimer();
     }
 
     private void startTimer(){
@@ -83,6 +85,28 @@ public class ArenaController implements EventHandler<MouseEvent> {
         else{
             mouseEvent.consume();
         }
+    }
+    private void initializeListArmy(){
+        listArmy.setItems(model.getDeck());
+        listArmy.setOrientation(Orientation.HORIZONTAL);
+        listArmy.setCellFactory(
+                new Callback<ListView<Card>, ListCell<Card>>() {
+                    @Override
+                    public ListCell<Card> call(ListView<Card> param) {
+                        return new ArmyCellFactory();
+                    }
+                }
+        );
+        listArmy.getSelectionModel().selectedItemProperty()
+                .addListener(
+                        new ChangeListener<Card>() {
+                            @Override
+                            public void changed(ObservableValue<? extends Card> observable, Card oldValue, Card newValue) {
+                                model.setCurrCard(newValue);
+                            }
+                        }
+                );
+
     }
 
 }
