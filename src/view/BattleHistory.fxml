@@ -85,7 +85,7 @@
                                         <Image url="@photos/XP.png" />
                                     </image>
                                 </ImageView>
-                                <Label alignment="CENTER" prefHeight="13.0" prefWidth="30.0" text="60" textFill="WHITE">
+                                <Label alignment="CENTER" prefHeight="13.0" prefWidth="30.0" text="60" textFill="WHITE" fx:id="xp">
                                     <font>
                                         <Font name="System Bold" size="13.0" />
                                     </font>

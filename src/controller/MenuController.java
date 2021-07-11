@@ -1,5 +1,6 @@
 package controller;
 
+import DataBase.DataHandler;
 import DataBase.UserData;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +15,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class MenuController {
-
+    @FXML
+    private Label xp;
     @FXML
     private ImageView gameHistory;
 
@@ -39,49 +41,46 @@ public class MenuController {
     @FXML
     private ImageView button2v2;
 
-    private UserData userData ;
-
-    @FXML
-    void initialize(){
+    private UserData userData;
 
 
-
-
+    public void initialize() {
+        TroopyCounter.setText(String.valueOf(DataHandler.getUserData().getTroopy()));
+        XPprogressSlider.setProgress(DataHandler.getUserData().getXP() / 1000);
+        xp.setText(DataHandler.getUserData().getXP() + "");
     }
 
     @FXML
     void actionHandler(MouseEvent event) throws IOException {
 
-            String fxmlAddress = getFxml(event);
-            Parent root = FXMLLoader.load(getClass().getResource(fxmlAddress));
-            Stage stage = (Stage) mainPage.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setResizable(false);
-            stage.show();
+        String fxmlAddress = getFxml(event);
+        Parent root = FXMLLoader.load(getClass().getResource(fxmlAddress));
+        Stage stage = (Stage) mainPage.getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.setResizable(false);
+        stage.show();
 
     }
-    private String getFxml(MouseEvent event){
-        if(event.getSource() == profilePage){
+
+    private String getFxml(MouseEvent event) {
+        if (event.getSource() == profilePage) {
             return "../view/Profile.fxml";
-        }
-        else if(event.getSource() == gameHistory){
+        } else if (event.getSource() == gameHistory) {
             return "../view/BattleHistory.fxml";
-        }
-        else if(event.getSource() == battleDeck){
+        } else if (event.getSource() == battleDeck) {
             return "../view/Deck.fxml";
-        }
-        else if (event.getSource() == battleButton)
-        {
+        } else if (event.getSource() == battleButton) {
             return "../view/ChooseBot.fxml";
-        }
-        else {
+        } else {
             return "";
         }
     }
+
     @FXML
     void battleClick(MouseEvent event) {
 
     }
+
     public void setUserData(UserData userData) {
         this.userData = userData;
     }

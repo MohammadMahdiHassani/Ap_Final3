@@ -1,5 +1,6 @@
 package controller;
 
+import DataBase.DataHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,6 +14,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ProfileController {
+    @FXML
+    private Label xp;
     @FXML
     private ImageView profilePage;
     @FXML
@@ -32,6 +35,9 @@ public class ProfileController {
 
     @FXML
     void initialize(){
+        TroopyCounter.setText(String.valueOf(DataHandler.getUserData().getTroopy()));
+        XPprogressSlider.setProgress(DataHandler.getUserData().getXP()/1000);
+        xp.setText(DataHandler.getUserData().getXP()+"");
     }
 
     @FXML

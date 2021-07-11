@@ -45,6 +45,7 @@ public class SignUpController {
                 stage.show();
             }
             else{
+                UserNameErrorMessage.setVisible(true);
                 System.out.println("error");
             }
         }
