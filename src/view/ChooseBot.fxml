@@ -45,7 +45,7 @@
                <children>
                   <ImageView fitHeight="75.0" fitWidth="116.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@photos/red button.png" />
+                        <Image url="@photos/red_button.png" />
                      </image>
                      <HBox.margin>
                         <Insets bottom="10.0" left="35.0" right="10.0" top="10.0" />
@@ -61,7 +61,7 @@
                   </ImageView>
                   <ImageView fitHeight="75.0" fitWidth="116.0" layoutX="134.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@photos/green button.png" />
+                        <Image url="@photos/green_button.png" />
                      </image>
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
