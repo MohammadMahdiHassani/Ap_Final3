@@ -27,7 +27,7 @@ public class CardFactory {
                 return new Rage(rageLevel);
 
             case CANNON:
-                CannonLevels cannonLevel = (CannonLevels) LevelAdaptor.adoptLevel(card, level);
+                CannonLevel cannonLevel = (CannonLevel) LevelAdaptor.adoptLevel(card, level);
                 return new Cannon(cannonLevel);
 
             case MINI_PEKA:

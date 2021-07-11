@@ -1,6 +1,6 @@
 package model.cards.levelEnums;
 
-public enum CannonLevels {
+public enum CannonLevel {
 
     LEVEL_1(60, 380),
     LEVEL_2(66, 418),
@@ -11,7 +11,7 @@ public enum CannonLevels {
     private int damage;
     private int hitPoint;
 
-    private CannonLevels(int damage, int hitPoint) {
+    private CannonLevel(int damage, int hitPoint) {
         this.damage = damage;
         this.hitPoint = hitPoint;
     }

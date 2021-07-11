@@ -2,7 +2,6 @@ package model.cards.levelEnums;
 
 import model.cards.CellValue;
 import model.cards.Level;
-import model.cards.spells.Rage;
 
 
 public class LevelAdaptor {
@@ -52,9 +51,9 @@ public class LevelAdaptor {
                         return (ArcherLevel) i ;
                 }
             case CANNON :
-                for(CannonLevels i : CannonLevels.values()){
+                for(CannonLevel i : CannonLevel.values()){
                     if(i.toString().equals(level.toString()))
-                        return (CannonLevels) i ;
+                        return (CannonLevel) i ;
                 }
         }
     return null ;

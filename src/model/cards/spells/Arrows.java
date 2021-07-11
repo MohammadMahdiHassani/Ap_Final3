@@ -1,9 +1,16 @@
 package model.cards.spells;
 
-import javafx.scene.image.Image;
-//
-//public class Arrows extends Spell {
-//    public Arrows(Image image, int cost, int radius) {
-//        super(image, cost, radius);
-//    }
-//}
+import model.cards.CellValue;
+import model.cards.levelEnums.ArrowsLevel;
+
+public class Arrows extends Spell{
+    private int damage;
+    public Arrows(ArrowsLevel arrowsLevel) {
+        super(CellValue.ARROWS,3,4);
+        damage = arrowsLevel.getDamage();
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+}

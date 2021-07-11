@@ -7,9 +7,10 @@ import model.cards.CellValue;
 
 public abstract class Spell extends Card {
     private int radius ;
-    private float duration ;
-    public Spell(CellValue value, int cost , int radius , float duration ) {
+
+    public Spell(CellValue value, int cost , int radius ) {
         super(value, cost);
         this.radius = radius ;
+
     }
 }

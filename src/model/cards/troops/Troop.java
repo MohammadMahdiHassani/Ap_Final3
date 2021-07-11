@@ -16,9 +16,10 @@ public abstract class Troop extends Card {
     private float hitSpeed ;
     private Target target ;
     private int count ;
+    private int range;
 
 
-    public Troop(CellValue value , int hitPoint, int damage, Speed speed, float hitSpeed, Target target, int cost, int count ) {
+    public Troop(CellValue value , int hitPoint, int damage, Speed speed, float hitSpeed, Target target, int cost, int count,int range ) {
         super(value , cost);
         this.hitPoint = hitPoint;
         this.damage = damage;
@@ -26,5 +27,6 @@ public abstract class Troop extends Card {
         this.hitSpeed = hitSpeed;
         this.target = target;
         this.count = count;
+        this.range = range;
     }
 }

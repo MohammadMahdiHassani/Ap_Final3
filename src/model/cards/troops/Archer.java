@@ -11,7 +11,7 @@ public class Archer extends Troop {
 
     private ArcherLevel level;
     public Archer(ArcherLevel level) {
-        super(CellValue.ARCHER, level.getHitPoint(), level.getDamage(), Speed.MEDIUM, 1.2f, Target.ANY, 5, 1);
+        super(CellValue.ARCHER, level.getHitPoint(), level.getDamage(), Speed.MEDIUM, 1.2f, Target.ANY, 3, 2,5);
     }
 
 }
