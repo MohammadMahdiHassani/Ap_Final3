@@ -1,9 +1,16 @@
 package model.game;
 
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Point2D;
+import model.cards.Army;
+import model.cards.Card;
 import model.cards.CellValue;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ArenaModel {
@@ -12,13 +19,17 @@ public class ArenaModel {
     private int rowCount;
     private int columnCount;
     private CellValue[][] cellValues;
+    private Point2D currPoint ;
+    private Card currCard ;
+    private Card previousCard ;
+    private ArrayList<Card> playedCards ;
 
     private ArenaModel()
     {
         rowCount = 21;
         columnCount = 19;
         cellValues = new CellValue[rowCount][columnCount];
-
+        playedCards = new ArrayList<>() ;
     }
     public static ArenaModel getModel(){
         if(arenaModel == null){
@@ -84,5 +95,26 @@ public class ArenaModel {
         }
         return cellValues;
     }
+    public void move(){
+        if(previousCard == null)
+            return ;
 
+
+    }
+
+
+
+
+
+    public void setCurrPoint(Point2D point2D){
+        currPoint = point2D ;
+    }
+
+    public void setCurrCard(Card currCard) {
+        previousCard = currCard ;
+        this.currCard = currCard;
+    }
+    public ObservableList<Card> getDeck(){
+        return FXCollections.observableArrayList(playedCards) ;
+    }
 }

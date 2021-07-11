@@ -38,7 +38,7 @@ public class ArenaView extends Group {
     public void update(ArenaModel model ) {
         CellValue[][] cellValues = null;
         try {
-            System.out.println("salam");
+//            System.out.println("salam");
             cellValues = model.getCellValues("map.txt");
         } catch (FileNotFoundException e) {
             e.printStackTrace();

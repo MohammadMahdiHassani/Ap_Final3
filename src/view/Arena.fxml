@@ -7,7 +7,7 @@
 
 
     <center>
-        <ArenaView fx:id="arenaView" rowCount="21" columnCount="19" />
+<!--        <ArenaView fx:id="arenaView" rowCount="21" columnCount="19" />-->
     </center>
     <bottom>
         <ListView fx:id="listArmy" style="-fx-background-color: brown;"></ListView>
