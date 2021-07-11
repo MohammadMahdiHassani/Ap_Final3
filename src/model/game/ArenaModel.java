@@ -102,12 +102,11 @@ public class ArenaModel {
         return cellValues;
     }
     public void move(){
-        if(previousCard == null)
-            return ;
-        if(currCard.getValue() == CellValue.GIANT){
-
+        if(currPoint != null &&  currCard !=null ) {
+            System.out.println("changing the cell value -> move model");
+                cellValues[(int) currPoint.getX()][(int) currPoint.getY()] = currCard.getValue();
+                currPoint = null ;
         }
-
 
     }
 
