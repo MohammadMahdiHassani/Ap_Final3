@@ -41,7 +41,7 @@ public class ChooseBotController {
             root.setOnMouseClicked(arenaController);
             Stage stage = (Stage) hardButton.getScene().getWindow();
             root.setOnMouseClicked(arenaController);
-            stage.setScene(new Scene(root, arenaController.getBoardWidth(), arenaController.getBoardHeight() + arenaController.getPrefHeightList() + 300));
+            stage.setScene(new Scene(root, arenaController.getBoardWidth(), arenaController.getBoardHeight() + arenaController.getPrefHeightList()));
             stage.show();
         }
     }
