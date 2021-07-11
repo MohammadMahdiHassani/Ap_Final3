@@ -19,9 +19,9 @@ public class Main extends Application {
         loader.load();
         Parent root = loader.getRoot();
         ArenaController arenaController = loader.getController();
-        //Parent root  = FXMLLoader.load(getClass().getResource("view/Arena.fxml"));
+//        Parent root  = FXMLLoader.load(getClass().getResource("view/Arena.fxml"));
         stage.setScene(new Scene(root,arenaController.getBoardWidth(),arenaController.getBoardHeight()));
-        //stage.setResizable(false);//test comment
+//        stage.setResizable(false);//test comment
         stage.setTitle("Clash Royal");
         stage.show();
 

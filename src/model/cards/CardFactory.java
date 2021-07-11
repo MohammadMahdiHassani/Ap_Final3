@@ -1,10 +1,11 @@
 package model.cards;
 
 
-import model.cards.levelEnums.ArcherLevel;
-import model.cards.levelEnums.GiantLevel;
-import model.cards.levelEnums.LevelAdaptor;
+import model.cards.buildings.Cannon;
+import model.cards.levelEnums.*;
+import model.cards.spells.Rage;
 import model.cards.troops.Archer;
+import model.cards.troops.Barbarian;
 import model.cards.troops.Giant;
 
 public class CardFactory {
@@ -18,9 +19,18 @@ public class CardFactory {
                 return new Giant(giantLevel);
             case WIZARD:
             case BARBERIAN:
+                BarbarianLevel barbarianLevel = (BarbarianLevel) LevelAdaptor.adoptLevel(card, level);
+                return new Barbarian(barbarianLevel);
+            case RAGE:
+                RageLevel rageLevel = (RageLevel) LevelAdaptor.adoptLevel(card, level);
+                return new Rage(rageLevel);
+
+            case CANNON:
+                CannonLevels cannonLevel = (CannonLevels) LevelAdaptor.adoptLevel(card, level);
+                return new Cannon(cannonLevel);
+
             case MINI_PEKA:
             case ARROWS:
-            case RAGE:
             case FIREBALL:
         }
         return null;

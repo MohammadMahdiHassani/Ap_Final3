@@ -1,12 +1,14 @@
 package model.game;
 
+import DataBase.DataHandler;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
-import model.cards.Army;
 import model.cards.Card;
+import model.cards.CardFactory;
 import model.cards.CellValue;
+import model.cards.Level;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -30,6 +32,9 @@ public class ArenaModel {
         columnCount = 19;
         cellValues = new CellValue[rowCount][columnCount];
         playedCards = new ArrayList<>() ;
+        playedCards.add(CardFactory.makeCard(CellValue.GIANT , Level.LEVEL_1) );
+        playedCards.add(CardFactory.makeCard(CellValue.BARBERIAN , Level.LEVEL_1) );
+//        playedCards.add(CardFactory.makeCard(CellValue.ARCHER , Level.LEVEL_1) );
     }
     public static ArenaModel getModel(){
         if(arenaModel == null){
@@ -120,4 +125,5 @@ public class ArenaModel {
     public ObservableList<Card> getDeck(){
         return FXCollections.observableArrayList(playedCards) ;
     }
+
 }

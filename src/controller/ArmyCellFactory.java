@@ -9,10 +9,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import model.cards.Army;
+import model.cards.Card;
 import model.cards.troops.Troop;
 
-public class ArmyCellFactory extends ListCell<Army> {
+public class ArmyCellFactory extends ListCell<Card> {
     private HBox hBox = new HBox(8.0);
     private ImageView imageView = new ImageView();
 
@@ -30,7 +30,7 @@ public class ArmyCellFactory extends ListCell<Army> {
     }
 
     @Override
-    protected void updateItem(Army item, boolean empty) {
+    protected void updateItem(Card item, boolean empty) {
         super.updateItem(item, empty);
 
         if (empty || item == null)
@@ -38,7 +38,7 @@ public class ArmyCellFactory extends ListCell<Army> {
             setGraphic(null);
         }
         else{
-            imageView.setImage((item.getImage()));
+            imageView.setImage((item.getValue().getThumbnailImage()));
             setGraphic(hBox);
         }
 

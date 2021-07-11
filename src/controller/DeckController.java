@@ -1,5 +1,6 @@
 package controller;
 
+import DataBase.DataHandler;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -16,10 +17,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import model.cards.Army;
-import model.cards.CellValue;
+import model.cards.*;
+import model.cards.Level;
+import model.game.ArenaModel;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class DeckController {
@@ -44,40 +47,40 @@ public class DeckController {
     private Label TroopyCounter;
 
     @FXML
-    private ListView<Army> mainArmy;
+    private ListView<Card> mainArmy;
 
     @FXML
-    private ListView<Army> allArmy;
+    private ListView<Card> allArmy;
 
-    private ObservableList<Army> mainArmies =
+    private ObservableList<Card> mainArmies =
             FXCollections.observableArrayList();
 
-    private ObservableList<Army> allArmies =
+    private ObservableList<Card> allArmies =
             FXCollections.observableArrayList();
-    private Army mainLastValue;
-    private Army allLastValue;
+    private Card mainLastValue;
+    private Card allLastValue;
 
     public void initialize() {
-        mainArmies.add(new Army("/view/photos/archers.png", CellValue.ARCHERTOWER));
-        mainArmies.add(new Army("/view/photos/barbarians.png", CellValue.BARBERIAN));
-        mainArmies.add(new Army("/view/photos/baby_dragon.png", CellValue.BABY_DRAGON));
-        mainArmies.add(new Army("/view/photos/giant.png",  CellValue.GIANT));
-        mainArmies.add(new Army("/view/photos/mini_pekka.png", CellValue.MINI_PEKA));
-        mainArmies.add(new Army("/view/photos/arrows.png", CellValue.ARROWS));
-        mainArmies.add(new Army("/view/photos/rage.png", CellValue.RAGE));
-        mainArmies.add(new Army("/view/photos/wizard.png", CellValue.WIZARD));
+        mainArmies.add(CardFactory.makeCard(CellValue.ARCHERTOWER , Level.LEVEL_1));
+        mainArmies.add(CardFactory.makeCard(CellValue.BARBERIAN , Level.LEVEL_1));
+//        mainArmies.add(CardFactory.makeCard(CellValue.BABY_DRAGON , Level.LEVEL_1));
+        mainArmies.add(CardFactory.makeCard(CellValue.GIANT , Level.LEVEL_1));
+//        mainArmies.add(CardFactory.makeCard(CellValue.MINI_PEKA , Level.LEVEL_1));
+//        mainArmies.add(CardFactory.makeCard(CellValue.ARROWS , Level.LEVEL_1));
+        mainArmies.add(CardFactory.makeCard(CellValue.RAGE , Level.LEVEL_1));
+//        mainArmies.add(CardFactory.makeCard(CellValue.WIZARD , Level.LEVEL_1));
 
-        allArmies.add(new Army("view/photos/valkyrie.png", CellValue.VALKYRIE));
-        allArmies.add(new Army("view/photos/fire_fireball.png", CellValue.FIREBALL));
-        allArmies.add(new Army("view/photos/chaos_cannon.png", CellValue.CANNON));
-        allArmies.add(new Army("view/photos/inferno_tower.png", CellValue.INFERNO));
+//        allArmies.add(CardFactory.makeCard(CellValue.VALKYRIE , Level.LEVEL_1));
+//        allArmies.add(CardFactory.makeCard(CellValue.FIREBALL , Level.LEVEL_1));
+        allArmies.add(CardFactory.makeCard(CellValue.CANNON , Level.LEVEL_1));
+//        allArmies.add(CardFactory.makeCard(CellValue.INFERNO , Level.LEVEL_1));
 
         allArmy.setItems(allArmies);
         mainArmy.setItems(mainArmies);
         mainArmy.getSelectionModel().selectedItemProperty().addListener(
-                new ChangeListener<Army>() {
+                new ChangeListener<Card>() {
                     @Override
-                    public void changed(ObservableValue<? extends Army> observable, Army oldValue, Army newValue) {
+                    public void changed(ObservableValue<? extends Card> observable, Card oldValue, Card newValue) {
                         allArmy.getItems().add(newValue);
                         mainArmy.getItems().remove(oldValue);
                         mainLastValue = newValue;
@@ -88,9 +91,9 @@ public class DeckController {
 
         allArmy.getSelectionModel().selectedItemProperty()
                 .addListener(
-                        new ChangeListener<Army>() {
+                        new ChangeListener<Card>() {
                             @Override
-                            public void changed(ObservableValue<? extends Army> observable, Army oldValue, Army newValue) {
+                            public void changed(ObservableValue<? extends Card> observable, Card oldValue, Card newValue) {
                                 mainArmy.getItems().add(newValue);
                                 allArmy.getItems().remove(oldValue);
                                 allLastValue = newValue;
@@ -98,18 +101,18 @@ public class DeckController {
                         }
                 );
         mainArmy.setCellFactory(
-                new Callback<ListView<Army>, ListCell<Army>>() {
+                new Callback<ListView<Card>, ListCell<Card>>() {
                     @Override
-                    public ListCell<Army> call(ListView<Army> param) {
+                    public ListCell<Card> call(ListView<Card> param) {
                         return new ArmyCellFactory();
                     }
                 }
         );
 
         allArmy.setCellFactory(
-                new Callback<ListView<Army>, ListCell<Army>>() {
+                new Callback<ListView<Card>, ListCell<Card>>() {
                     @Override
-                    public ListCell<Army> call(ListView<Army> param) {
+                    public ListCell<Card> call(ListView<Card> param) {
                         return new ArmyCellFactory();
                     }
                 }
@@ -122,7 +125,7 @@ public class DeckController {
         int allLastIndex = -1;
         if (mainLastValue != null) {
             for (int i = 0; i < mainArmy.getItems().size(); i++) {
-                if (mainArmy.getItems().get(i).getName().equals(mainLastValue.getName())) {
+                if (mainArmy.getItems().get(i).getValue() == mainLastValue.getValue()) {
                     mainLastIndex = i;
                     break;
                 }
@@ -130,7 +133,7 @@ public class DeckController {
         }
         if (allLastValue != null) {
             for (int i = 0; i < allArmy.getItems().size(); i++) {
-                if (allArmy.getItems().get(i).getName().equals(allLastValue.getName())) {
+                if (allArmy.getItems().get(i).getValue() == allLastValue.getValue()) {
                     allLastIndex = i;
                     break;
                 }
@@ -144,6 +147,7 @@ public class DeckController {
             mainArmy.getItems().remove(mainLastIndex);
             allArmy.getItems().remove(allArmy.getItems().size() - 1);
         }
+        DataHandler.getUserData().setPlayerDeck(new ArrayList(allArmy.getItems()));
     }
 
     @FXML
@@ -170,6 +174,7 @@ public class DeckController {
         else
             return "";
     }
+
 
 
 }

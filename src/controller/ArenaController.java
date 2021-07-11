@@ -9,7 +9,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
 import javafx.scene.control.ListView;
-import model.cards.Army;
 import model.cards.Card;
 import model.game.ArenaModel;
 import view.ArenaView;
@@ -32,16 +31,11 @@ public class ArenaController implements EventHandler<MouseEvent> {
 
     public ArenaController(){
         model = ArenaModel.getModel();
+        arenaView = new ArenaView() ;
     }
     public void initialize()
     {
         listArmy.setItems(model.getDeck());
-        listArmy.itemsProperty().addListener(new ChangeListener<ObservableList<Card>>() {
-                                                 @Override
-                                                 public void changed(ObservableValue<? extends ObservableList<Card>> observableValue, ObservableList<Card> cards, ObservableList<Card> t1) {
-
-                                                 }
-                                             });
 
                 startTimer();
     }

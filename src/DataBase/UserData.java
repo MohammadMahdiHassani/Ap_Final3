@@ -59,4 +59,8 @@ public class UserData implements Serializable {
     public void setTroopy(int troopy) {
         this.troopy = troopy;
     }
+
+    public void setPlayerDeck(ArrayList<Card> playerDeck) {
+        this.playerDeck = playerDeck;
+    }
 }
