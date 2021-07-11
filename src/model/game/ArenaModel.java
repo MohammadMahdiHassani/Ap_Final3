@@ -36,6 +36,11 @@ public class ArenaModel {
         playedCards.add(CardFactory.makeCard(CellValue.BARBERIAN , Level.LEVEL_1) );
         playedCards.add(CardFactory.makeCard(CellValue.ARCHER , Level.LEVEL_1) );
         playedCards.add(CardFactory.makeCard(CellValue.CANNON , Level.LEVEL_1) );
+
+
+        initializeCellValues("map.txt");
+
+
     }
     public static ArenaModel getModel(){
         if(arenaModel == null){
@@ -45,13 +50,21 @@ public class ArenaModel {
         else
             return arenaModel ;
     }
-    public CellValue[][] getCellValues(String address) throws FileNotFoundException {
+    public CellValue[][] getCellValues(){
+        return cellValues ;
+    }
+    private void initializeCellValues(String address) {
 
         rowCount = 21;
         columnCount = 19;
         cellValues = new CellValue[rowCount][columnCount];
         File file = new File(address);
-        Scanner scanner = new Scanner(file);
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         int row = 0;
         int column = 0;
         while (scanner.hasNextLine()) {
@@ -99,18 +112,17 @@ public class ArenaModel {
             }
             row++;
         }
-        return cellValues;
+
     }
     public void move(){
-        if(currPoint != null &&  currCard !=null ) {
-            System.out.println("changing the cell value -> move model");
-                cellValues[(int) currPoint.getX()][(int) currPoint.getY()] = currCard.getValue();
-                currPoint = null ;
-        }
+//        if(currPoint != null &&  currCard != null && currCard != previousCard  ) {
+////            System.out.println("changing the cell value -> move model");
+////                cellValues[(int) currPoint.getY()][(int) currPoint.getX()] = currCard.getValue();
+////                currPoint = null ;
+////        }
+
 
     }
-
-
 
 
 
@@ -125,5 +137,6 @@ public class ArenaModel {
     public ObservableList<Card> getDeck(){
         return FXCollections.observableArrayList(playedCards) ;
     }
+
 
 }
