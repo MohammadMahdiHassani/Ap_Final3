@@ -1,9 +1,10 @@
 package model.cards.spells;
 
 import javafx.scene.image.Image;
+import model.cards.CellValue;
 
 public class FireBall extends Spell {
-    public FireBall(Image image, int cost, int radius) {
-        super(image, cost, radius);
+    public FireBall(int cost, int radius) {
+        super(CellValue.FIREBALL  ,  cost, radius);
     }
 }

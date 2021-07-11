@@ -1,4 +1,6 @@
 package model.cards.troops;
+import javafx.scene.control.Cell;
+import model.cards.CellValue;
 import model.cards.troops.enums.Speed;
 import model.cards.troops.enums.Target;
 import javafx.scene.image.Image;
@@ -16,8 +18,8 @@ public abstract class Troop extends Card {
     private int count ;
 
 
-    public Troop(Image image, int hitPoint, int damage, Speed speed, float hitSpeed, Target target, int cost, int count) {
-        super(image , cost);
+    public Troop( CellValue value , int hitPoint, int damage, Speed speed, float hitSpeed, Target target, int cost, int count ) {
+        super(value , cost);
         this.hitPoint = hitPoint;
         this.damage = damage;
         this.speed = speed;

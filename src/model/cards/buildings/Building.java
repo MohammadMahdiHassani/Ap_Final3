@@ -2,6 +2,7 @@ package model.cards.buildings;
 
 import javafx.scene.image.Image;
 import model.cards.Card;
+import model.cards.CellValue;
 import model.cards.troops.enums.Target;
 
 public abstract class Building extends Card {
@@ -9,8 +10,8 @@ public abstract class Building extends Card {
     private Target target ;
     private int rang ;
     private int lifeTime ;
-    public Building(Image image, int cost, int rang , Target target , float hitSpeed , int lifeTime) {
-        super(image, cost);
+    public Building(CellValue value , int cost, int rang , Target target , float hitSpeed , int lifeTime) {
+        super(value, cost);
         this.hitSpeed = hitSpeed ;
         this.lifeTime = lifeTime ;
         this.target = target ;

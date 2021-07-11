@@ -1,4 +1,4 @@
-package com.company.model.cards.troops;
+package model.cards.troops;
 
 public class MiniPeka {
 }

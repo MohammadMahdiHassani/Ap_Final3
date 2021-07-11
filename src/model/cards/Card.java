@@ -6,8 +6,8 @@ import model.GameElement;
 public abstract class Card extends GameElement {
     private int cost ;
 
-    public Card(Image image, int cost) {
-        super(image) ;
+    public Card(CellValue value ,int cost) {
+        super(value) ;
         this.cost = cost;
     }
 

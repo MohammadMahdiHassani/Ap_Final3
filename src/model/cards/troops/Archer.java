@@ -1,6 +1,7 @@
 package model.cards.troops;
 
 import javafx.scene.image.Image;
+import model.cards.CellValue;
 import model.cards.Level;
 import model.cards.levelEnums.ArcherLevel;
 import model.cards.troops.enums.Speed;
@@ -12,7 +13,7 @@ public class Archer extends Troop {
     private static final Image image = new Image("/view/photos/giant.png");
 
     public Archer(ArcherLevel level) {
-        super(image, level.getHitPoint(), level.getDamage(), Speed.MEDIUM, 1.2f, Target.ANY, 5, 1);
+        super(CellValue.ARCHER, level.getHitPoint(), level.getDamage(), Speed.MEDIUM, 1.2f, Target.ANY, 5, 1);
     }
 
 }

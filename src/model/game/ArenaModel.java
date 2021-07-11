@@ -98,6 +98,9 @@ public class ArenaModel {
     public void move(){
         if(previousCard == null)
             return ;
+        if(currCard.getValue() == CellValue.GIANT){
+
+        }
 
 
     }
