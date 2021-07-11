@@ -20,7 +20,7 @@
          <top>
             <HBox alignment="BOTTOM_LEFT" prefHeight="54.0" prefWidth="459.0" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fx:id="backButton" fitHeight="56.0" fitWidth="60.0" onMouseClicked="#back" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="backButton" fitHeight="56.0" fitWidth="60.0" onMouseClicked="#actionHandler" pickOnBounds="true" preserveRatio="true">
                      <HBox.margin>
                         <Insets left="410.0" />
                      </HBox.margin>
@@ -46,7 +46,7 @@
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </padding>
                <children>
-                  <ImageView fx:id="hardButton" fitHeight="67.0" fitWidth="123.0" layoutX="32.0" layoutY="46.0" onMouseClicked="#hard" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="hardButton" fitHeight="67.0" fitWidth="123.0" layoutX="32.0" layoutY="46.0" onMouseClicked="#actionHandler" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@photos/red_button.png" />
                      </image>
@@ -56,17 +56,17 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <ImageView fx:id="lowButton" fitHeight="67.0" fitWidth="123.0" layoutX="308.0" layoutY="46.0" onMouseClicked="#low" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="lowButton" fitHeight="67.0" fitWidth="123.0" layoutX="308.0" layoutY="46.0" onMouseClicked="#actionHandler" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@photos/green_button.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="mediumButton" fitHeight="67.0" fitWidth="123.0" layoutX="170.0" layoutY="46.0" onMouseClicked="#medium" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="mediumButton" fitHeight="67.0" fitWidth="123.0" layoutX="170.0" layoutY="46.0" onMouseClicked="#actionHandler" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@photos/Button_Battle.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="184.0" layoutY="59.0" text="MEDIUM">
+                  <Label layoutX="184.0" layoutY="59.0" onMouseClicked="#actionHandler" text="MEDIUM">
                      <font>
                         <Font size="24.0" />
                      </font>

@@ -65,6 +65,10 @@ public class ArenaView extends Group {
                 else if (cellValues[i][j] == CellValue.SHRUB) {
                     cellView[i][j].setImage(SHRUB.getThumbnailImage());
                 }
+                else if (cellValues[i][j] == TREE)
+                {
+                    cellView[i][j].setImage(TREE.getThumbnailImage());
+                }
                 else if (cellValues[i][j] == CellValue.FENCE) {
                     cellView[i][j].setImage(FENCE.getThumbnailImage());
                 }

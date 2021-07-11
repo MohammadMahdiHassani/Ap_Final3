@@ -28,7 +28,7 @@ public class ArenaModel {
 
     private ArenaModel()
     {
-        rowCount = 21;
+        rowCount = 20;
         columnCount = 19;
         cellValues = new CellValue[rowCount][columnCount];
         playedCards = new ArrayList<>() ;
@@ -55,7 +55,7 @@ public class ArenaModel {
     }
     private void initializeCellValues(String address) {
 
-        rowCount = 21;
+        rowCount = 20;
         columnCount = 19;
         cellValues = new CellValue[rowCount][columnCount];
         File file = new File(address);
@@ -106,6 +106,7 @@ public class ArenaModel {
                         break;
                     default:
                         cellValues[row][column] = CellValue.EMPTY;
+                        break;
                 }
                 column++;
 
