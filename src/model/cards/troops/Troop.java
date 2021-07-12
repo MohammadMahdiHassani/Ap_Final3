@@ -29,4 +29,32 @@ public abstract class Troop extends Card {
         this.count = count;
         this.range = range;
     }
+
+    public int getHitPoint() {
+        return hitPoint;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public Speed getSpeed() {
+        return speed;
+    }
+
+    public float getHitSpeed() {
+        return hitSpeed;
+    }
+
+    public Target getTarget() {
+        return target;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public int getRange() {
+        return range;
+    }
 }
