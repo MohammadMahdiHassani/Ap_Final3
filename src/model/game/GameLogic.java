@@ -97,7 +97,7 @@ public class GameLogic {
         }
 
     }
-    private boolean moveToBridge(Card card) {
+    private boolean moveToBridge(Card card){
         if (isBotElement(card) && card.getPoint().getY() >= 10)
             return true;
         else if (isPlayerElement(card) && card.getPoint().getY() <= 10)
@@ -136,6 +136,8 @@ public class GameLogic {
         if(!isOccupied(targetPoint))
             movingCard.setPoint(targetPoint);
         else{
+            if(isInNeighbourhood(cardPoint , point))
+                return ;
             if(a3 != 0) {
                 targetPoint = targetPoint.add(0, -a4);
                 if (!isOccupied(targetPoint))
@@ -154,7 +156,10 @@ public class GameLogic {
 
             }
             else{
-
+                if(!isOccupied(targetPoint.add(-1 , 0)))
+                    movingCard.setPoint(targetPoint.add(-1 , 0));
+                else if(!isOccupied(targetPoint.add(1 , 0)))
+                    movingCard.setPoint(targetPoint.add(1 , 0));
             }
 
         }
@@ -174,12 +179,15 @@ public class GameLogic {
     }
     private void giantLogic(Card card){
         if(moveToBridge(card))
-         moveToTower(card);
+            if(moveToTower(card))
+                System.out.println("Giant reached the Tower");
     }
+
     private void archerLogic(Card card){
 
         if(moveToBridge(card))
-          moveToTower(card);
+          if(moveToTower(card))
+              System.out.println("Archer reached the Tower");
 
     }
     private boolean isOccupied(Point2D point){
@@ -189,7 +197,7 @@ public class GameLogic {
         }
         return false ;
     }
-    private void moveToTower(Card card){
+    private boolean moveToTower(Card card){
         double closestDistance = 100 ;
         Point2D towerPoint = new Point2D(0,0);
         for(GameElement i : data.boardElements){
@@ -201,20 +209,25 @@ public class GameLogic {
                     towerPoint = i.getPoint();
                 }
             }
-            moveCard(card , towerPoint);
-
         }
+        Point2D point  = card.getPoint() ;
+
+        if(isInNeighbourhood(point , towerPoint))
+            return true ;
+
+        moveCard(card , towerPoint);
+        return false ;
     }
-
-
-
+    private boolean isInNeighbourhood(Point2D point_1 , Point2D point_2){
+        return ( Math.abs(point_1.getX() - point_2.getX()) <= 1 && Math.abs(point_1.getY() - point_2.getY()) <= 1 );
+    }
     public void setBotlevel(Botlevel botlevel) {
         this.botlevel = botlevel;
     }
     public void setCurrPoint(Point2D currPoint) {
-        if(!(currPoint.getY()>=11 && currPoint.getY()<=17))
-            return ;
-        else if(currCard == null)
+//        if(!(currPoint.getY()>=11 && currPoint.getY()<=17))
+//            return ;
+         if(currCard == null)
             return ;
         else
             this.currPoint = currPoint;

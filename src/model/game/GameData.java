@@ -12,6 +12,7 @@ import model.cards.levelEnums.KingTowerLevel;
 import model.cards.levelEnums.Level;
 import model.towers.ArcherTower;
 import model.towers.KingTower;
+import model.towers.Tower;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,9 +28,10 @@ public class GameData {
     Level level;
 
     public GameData() {
-        initBotDeck();
-        initPlayerDeck();
         initboardElements();
+        initPlayerDeck();
+        initBotDeck();
+        addingTowersTodecks();
     }
 
     private void initboardElements() {
@@ -86,6 +88,16 @@ public class GameData {
 
     }
 
+    private void addingTowersTodecks(){
+        for(GameElement i : boardElements){
+            if(i instanceof Tower){
+                if(i.getPoint().getY() < 11)
+                    botDeck.add(i) ;
+                else
+                    playerDeck.add(i) ;
+            }
+        }
+    }
     public void setLeftBridge(Point2D leftBridge) {
         this.leftBridge = leftBridge;
     }
