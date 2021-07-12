@@ -77,6 +77,7 @@ public class GameLogic {
                         archerLogic((Card) m);
                         break;
                     case BARBERIAN:
+
                     case MINI_PEKA:
                     case WIZARD:
                     case VALKYRIE:
@@ -96,18 +97,30 @@ public class GameLogic {
         }
 
     }
-    private boolean moveToBridge(Card card){
-        if(isBotElement(card) && card.getPoint().getY()>=10)
+    private boolean moveToBridge(Card card) {
+        if (isBotElement(card) && card.getPoint().getY() >= 10)
             return true;
-        else if(isPlayerElement(card) && card.getPoint().getY()<=10)
+        else if (isPlayerElement(card) && card.getPoint().getY() <= 10)
             return true;
+
         else {
+
             Point2D point = card.getPoint();
-            if (point.distance(data.leftBridge) >= point.distance(data.rightBridge))
-                moveCard(card, data.rightBridge);
-            else
-                moveCard(card, data.leftBridge);
-            return false ;
+            if (point.distance(data.leftBridge) >= point.distance(data.rightBridge)) {
+                Point2D vector = data.rightBridge.subtract(card.getPoint());
+                if(Math.abs(vector.getX()) <= Math.abs(vector.getY()))
+                    moveCard(card, data.rightBridge);
+                else
+                    moveCard(card , card.getPoint().add(1.0, 0));
+            }
+                else {
+                Point2D vector = data.leftBridge.subtract(card.getPoint());
+                if(Math.abs(vector.getX()) <= Math.abs(vector.getY()))
+                    moveCard(card, data.leftBridge);
+                else
+                    moveCard(card , card.getPoint().add(-1 , 0));
+            }
+            return false;
         }
     }
     private void moveCard(Card movingCard , Point2D point){
@@ -133,8 +146,7 @@ public class GameLogic {
                         movingCard.setPoint(targetPoint.add(-a3,0) );
                     }
                     else{
-                        if(!isOccupied(targetPoint.add(0,-2*a4) ))
-                            movingCard.setPoint(targetPoint.add(0,-2*a4) );
+
                     }
                 }
 
