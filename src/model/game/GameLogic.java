@@ -52,6 +52,7 @@ public class GameLogic {
 
     private void executeBot(){
         switch(botlevel){
+
             case RANDOME:
 
             case MEDIUM:
@@ -69,8 +70,9 @@ public class GameLogic {
 
                 switch(m.getValue()){
                     case GIANT:
-
+                        giantLogic((Card) m);
                     case ARCHER:
+                        archerLogic((Card) m);
                     case BARBERIAN:
                     case MINI_PEKA:
                     case WIZARD:
@@ -91,6 +93,28 @@ public class GameLogic {
         }
 
     }
+    private void moveToBridge(Card card){
+        if(isBotCard(card) && card.getPoint().getY()>=10)
+            return ;
+        else if(isPlayerCard(card) && card.getPoint().getY()<=10)
+            return ;
+        else {
+            Point2D point = card.getPoint();
+            if (point.distance(data.leftBridge) >= point.distance(data.rightBridge))
+                moveCard(card, data.rightBridge);
+            else
+                moveCard(card, data.leftBridge);
+        }
+    }
+    private void moveCard(Card movingCard , Point2D point){
+        Point2D cardPoint = movingCard.getPoint() ;
+        int a1 =(int)(point.getX() - cardPoint.getX()) ;
+        int a2 =(int) (point.getY() - cardPoint.getY()) ;
+        int a3 = (a1 == 0) ? 0 : Math.abs(a1)/a1 ;
+        int a4 = (a2 == 0) ? 0 : Math.abs(a2)/a2 ;
+
+        movingCard.setPoint(new Point2D(cardPoint.getX()+ a3, cardPoint.getY() + a4));
+    }
     private void updateBoard() {
         model.cellValues = new GameElement[model.rowCount][model.columnCount];
         for (GameElement i : data.boardElements) {
@@ -98,6 +122,23 @@ public class GameLogic {
         }
 
     }
+    private boolean isBotCard(Card card){
+        return data.botDeck.contains(card);
+    }
+    private boolean isPlayerCard(Card card){
+        return data.playerDeck.contains(card) ;
+    }
+    private void giantLogic(Card card){
+        moveToBridge(card);
+    }
+    private void archerLogic(Card card){
+
+        moveToBridge(card);
+
+    }
+
+
+
 
     public void setBotlevel(Botlevel botlevel) {
         this.botlevel = botlevel;

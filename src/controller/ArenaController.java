@@ -25,7 +25,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class ArenaController implements EventHandler<MouseEvent> {
-    final private static double FRAMES_PER_SECOND = 10.0;
+    final private static double FRAMES_PER_SECOND = 2.0;
 
     @FXML
     private ListView<Card> listArmy;

@@ -21,8 +21,8 @@ public class GameData {
      ArrayList<Card> playerDeck ;
      ArrayList<Card> botDeck ;
      ArrayList<GameElement> boardElements;
-     private Point2D leftBridge ;
-     private Point2D rightBridge ;
+     Point2D leftBridge ;
+     Point2D rightBridge ;
 
     public GameData() {
         initBotDeck();

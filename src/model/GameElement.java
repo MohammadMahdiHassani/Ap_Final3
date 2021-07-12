@@ -20,7 +20,7 @@ public abstract class GameElement {
         this.point = point;
     }
     public void addPoint(Point2D point){
-        this.point.add(point) ;
+        this.point = this.point.add(point) ;
     }
 
     public Point2D getPoint() {
