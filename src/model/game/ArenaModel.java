@@ -6,11 +6,8 @@ import javafx.geometry.Point2D;
 import model.GameElement;
 import model.cards.Card;
 import model.cards.CellValue;
-import model.cards.levelEnums.ArcherTowerLevel;
 import model.cards.levelEnums.Botlevel;
-import model.cards.levelEnums.KingTowerLevel;
-import model.towers.ArcherTower;
-import model.towers.KingTower;
+
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,7 +15,7 @@ import java.util.Scanner;
 
 public class ArenaModel {
 
-     private static ArenaModel arenaModel = null ;
+     static ArenaModel arenaModel = null ;
      int rowCount;
      int columnCount;
      CellValue[][] BackGroundCellValues;
@@ -31,10 +28,8 @@ public class ArenaModel {
         rowCount = 20;
         columnCount = 19;
         BackGroundCellValues = new CellValue[rowCount][columnCount];
-        initCellValue("map.txt");
         gameData = new GameData();
-        logic = new GameLogic() ;
-
+        logic = new GameLogic();
     }
     public static ArenaModel getModel(){
         if(arenaModel == null){
@@ -45,11 +40,10 @@ public class ArenaModel {
             return arenaModel ;
     }
     public CellValue[][] getBackGroundCellValues(){
-        initializeBackgroundCellValues("map.txt");
+        readMap("map.txt");
         return BackGroundCellValues ;
     }
-    private void initializeBackgroundCellValues(String address) {
-
+    private void readMap(String address) {
         rowCount = 20;
         columnCount = 19;
         BackGroundCellValues = new CellValue[rowCount][columnCount];
@@ -74,6 +68,10 @@ public class ArenaModel {
                         break;
                     case "r":
                         BackGroundCellValues[row][column] = CellValue.ROAD;
+                        if(column < 10)
+                            gameData.setLeftBridge(new Point2D(column , row)) ;
+                        else
+                            gameData.setRightBridge(new Point2D(column , row));
                         break;
                     case "s":
                         BackGroundCellValues[row][column] = CellValue.STONE;
@@ -89,11 +87,9 @@ public class ArenaModel {
                         break;
                     case "k":
                         BackGroundCellValues[row][column] = CellValue.EMPTY;
-//                        cellValues[row][column] = (GameElement) new KingTower(KingTowerLevel.LEVEL_1) ;
                         break;
                     case "a":
                         BackGroundCellValues[row][column] = CellValue.EMPTY;
-//                        cellValues[row][column] = new ArcherTower(ArcherTowerLevel.LEVEL_1) ;
                         break;
                     case "t":
                         BackGroundCellValues[row][column] = CellValue.TREE;
@@ -111,50 +107,12 @@ public class ArenaModel {
         }
 
     }
-    private void initCellValue(String address){
-
-        rowCount = 21;
-        columnCount = 19;
-        cellValues = new GameElement[rowCount][columnCount];
-        File file = new File(address);
-        Scanner scanner = null;
-        try {
-            scanner = new Scanner(file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        int row = 0;
-        int column = 0;
-        while (scanner.hasNextLine()) {
-            Scanner scannerLine = new Scanner(scanner.nextLine());
-            column = 0;
-            while (scannerLine.hasNext()) {
-                String value = scannerLine.next();
-
-                switch (value) {
-
-                    case "k":
-//                        BackGroundCellValues[row][column] = CellValue.EMPTY;
-                        cellValues[row][column] = (GameElement) new KingTower(KingTowerLevel.LEVEL_1) ;
-                        break;
-                    case "a":
-//                        BackGroundCellValues[row][column] = CellValue.EMPTY;
-                        cellValues[row][column] = new ArcherTower(ArcherTowerLevel.LEVEL_1) ;
-                        break;
-
-                }
-                column++;
-
-            }
-            row++;
-        }
-
-    }
 
     public GameElement[][] getCellValues(){
         return cellValues ;
     }
     public void move(){
+        logic.preprocessLogic();
         logic.executeLogic() ;
     }
 
