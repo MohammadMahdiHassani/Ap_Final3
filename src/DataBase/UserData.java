@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 import model.cards.CellValue;
 import model.cards.Card;
-import model.cards.Level;
+import model.cards.levelEnums.Level;
 
 public class UserData implements Serializable {
     private final String userName ;

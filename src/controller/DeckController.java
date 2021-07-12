@@ -18,7 +18,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.cards.*;
-import model.cards.Level;
+import model.cards.levelEnums.Level;
 import model.game.ArenaModel;
 
 import java.io.IOException;
@@ -62,43 +62,57 @@ public class DeckController {
     private Card allLastValue;
 
     public void initialize() {
+
         TroopyCounter.setText(String.valueOf(DataHandler.getUserData().getTroopy()));
-        XPprogressSlider.setProgress(DataHandler.getUserData().getXP()/2500);
-        xp.setText(DataHandler.getUserData().getXP()+"");
+        XPprogressSlider.setProgress(DataHandler.getUserData().getXP() / 2500);
+        xp.setText(DataHandler.getUserData().getXP() + "");
         Level level = null;
-        if (Integer.valueOf(xp.getText()) <= 300)
-        {
+        if (Integer.valueOf(xp.getText()) <= 300) {
             level = Level.LEVEL_1;
-        }
-        else if (Integer.valueOf(xp.getText()) <= 500)
-        {
+        } else if (Integer.valueOf(xp.getText()) <= 500) {
             level = Level.LEVEL_2;
-        }
-        else if (Integer.valueOf(xp.getText()) <= 900)
-        {
+        } else if (Integer.valueOf(xp.getText()) <= 900) {
             level = Level.LEVEL_3;
-        }
-        else if (Integer.valueOf(xp.getText()) <= 1700)
-        {
+        } else if (Integer.valueOf(xp.getText()) <= 1700) {
             level = Level.LEVEL_4;
-        }else if (Integer.valueOf(xp.getText()) > 1700)
-        {
+        } else if (Integer.valueOf(xp.getText()) > 1700) {
             level = Level.LEVEL_5;
         }
 
-        mainArmies.add(CardFactory.makeCard(CellValue.ARCHERTOWER , level));
-        mainArmies.add(CardFactory.makeCard(CellValue.BARBERIAN , level));
-//        mainArmies.add(CardFactory.makeCard(CellValue.BABY_DRAGON , Level.LEVEL_1));
-        mainArmies.add(CardFactory.makeCard(CellValue.GIANT , level));
-//        mainArmies.add(CardFactory.makeCard(CellValue.MINI_PEKA , Level.LEVEL_1));
-//        mainArmies.add(CardFactory.makeCard(CellValue.ARROWS , Level.LEVEL_1));
-        mainArmies.add(CardFactory.makeCard(CellValue.RAGE , level));
-//        mainArmies.add(CardFactory.makeCard(CellValue.WIZARD , Level.LEVEL_1));
+        ArrayList<CellValue> cellValues = new ArrayList<>();
+        cellValues.add(CellValue.ARCHER);
+        cellValues.add(CellValue.BARBERIAN);
+        cellValues.add(CellValue.GIANT);
+        cellValues.add(CellValue.VALKYRIE);
+        cellValues.add(CellValue.MINI_PEKA);
+        cellValues.add(CellValue.WIZARD);
+        cellValues.add(CellValue.BABY_DRAGON);
+        cellValues.add(CellValue.RAGE);
+        cellValues.add(CellValue.ARROWS);
+        cellValues.add(CellValue.FIREBALL);
+        cellValues.add(CellValue.CANNON);
+        cellValues.add(CellValue.INFERNO);
 
-//        allArmies.add(CardFactory.makeCard(CellValue.VALKYRIE , Level.LEVEL_1));
-//        allArmies.add(CardFactory.makeCard(CellValue.FIREBALL , Level.LEVEL_1));
-        allArmies.add(CardFactory.makeCard(CellValue.CANNON , level));
-//        allArmies.add(CardFactory.makeCard(CellValue.INFERNO , Level.LEVEL_1));
+
+        ArrayList<Card> playerDeck = DataHandler.getUserData().getPlayerDeck();
+        if (playerDeck != null)
+        {
+            for (int i = 0 ; i < playerDeck.size(); i++)
+            {
+                mainArmies.add(CardFactory.makeCard(playerDeck.get(i).getValue(),level));
+                cellValues.remove(playerDeck.get(i).getValue());
+            }
+        }
+
+        for (int i = 0 ; i < cellValues.size(); i++)
+        {
+            allArmies.add(CardFactory.makeCard(cellValues.get(i),level));
+
+        }
+
+
+
+
 
         allArmy.setItems(allArmies);
         mainArmy.setItems(mainArmies);
@@ -172,7 +186,7 @@ public class DeckController {
             mainArmy.getItems().remove(mainLastIndex);
             allArmy.getItems().remove(allArmy.getItems().size() - 1);
         }
-        DataHandler.getUserData().setPlayerDeck(new ArrayList(allArmy.getItems()));
+        DataHandler.getUserData().setPlayerDeck(new ArrayList(mainArmy.getItems()));
     }
 
     @FXML
@@ -186,20 +200,17 @@ public class DeckController {
 
 
     }
-    private String getFxml(MouseEvent event){
-        if(event.getSource() == mainPage){
+
+    private String getFxml(MouseEvent event) {
+        if (event.getSource() == mainPage) {
             return "../view/Menu.fxml";
-        }
-        else if(event.getSource() == gameHistory){
+        } else if (event.getSource() == gameHistory) {
             return "../view/BattleHistory.fxml";
-        }
-        else if(event.getSource() == profilePage){
+        } else if (event.getSource() == profilePage) {
             return "../view/Profile.fxml";
-        }
-        else
+        } else
             return "";
     }
-
 
 
 }

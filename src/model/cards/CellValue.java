@@ -11,7 +11,7 @@ public enum CellValue {
     MINI_PEKA(new Image("/view/photos/mini_pekka.png") , new Image("/view/photos/mini_pekka.png")),
     RAGE (new Image("/view/photos/rage.png") , new Image("/view/photos/rage.png")),
     ARROWS (new Image("/view/photos/arrows.png") , new Image("/view/photos/arrows.png")),
-    FIREBALL (new Image("view/photos/fire_fireball.png") , new Image("view/photos/fire_fireball.png")),
+    FIREBALL (new Image("/view/photos/fire_fireball.png") , new Image("/view/photos/fire_fireball.png")),
     BABY_DRAGON (new Image("/view/photos/baby_dragon.png") , new Image("/view/photos/baby_dragon.png") ),
     VALKYRIE (new Image("view/photos/valkyrie.png") , new Image("view/photos/valkyrie.png") ),
     CANNON(new Image("view/photos/chaos_cannon.png") , new Image("view/photos/chaos_cannon.png")),
@@ -30,7 +30,7 @@ public enum CellValue {
     private Image thumbnailImage ;
     private Image actionImage ;
 
-    private CellValue(Image image_1 , Image image_2){
+    CellValue(Image image_1, Image image_2){
         thumbnailImage = image_1 ;
         actionImage = image_2 ;
     }

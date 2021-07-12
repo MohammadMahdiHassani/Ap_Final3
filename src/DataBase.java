@@ -1,7 +1,7 @@
 import model.GameElement;
 import model.cards.CardFactory;
 import model.cards.CellValue;
-import model.cards.Level;
+import model.cards.levelEnums.Level;
 import model.cards.levelEnums.KingTowerLevel;
 import model.towers.KingTower;
 

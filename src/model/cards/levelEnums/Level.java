@@ -1,4 +1,4 @@
-package model.cards;
+package model.cards.levelEnums;
 
 public enum Level {
     LEVEL_1,

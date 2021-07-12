@@ -1,7 +1,8 @@
 package model.cards.levelEnums;
 
 import model.cards.CellValue;
-import model.cards.Level;
+import model.cards.levelEnums.Level;
+import model.cards.troops.BabyDragon;
 
 
 public class LevelAdaptor {
@@ -26,19 +27,19 @@ public class LevelAdaptor {
                         return (BarbarianLevel) i ;
                 }
             case WIZARD:
-                for(ArcherLevel i : ArcherLevel.values()){
+                for(WizardLevel i : WizardLevel.values()){
                     if(i.toString().equals(level.toString()))
-                        return (ArcherLevel) i ;
+                        return (WizardLevel) i ;
                 }
             case MINI_PEKA:
-                for(ArcherLevel i : ArcherLevel.values()){
+                for(PekkaLevel i : PekkaLevel.values()){
                     if(i.toString().equals(level.toString()))
-                        return (ArcherLevel) i ;
+                        return (PekkaLevel) i ;
                 }
             case ARROWS:
-                for(ArcherLevel i : ArcherLevel.values()){
+                for(ArrowsLevel i : ArrowsLevel.values()){
                     if(i.toString().equals(level.toString()))
-                        return (ArcherLevel) i ;
+                        return (ArrowsLevel) i ;
                 }
             case RAGE:
                 for(RageLevel i : RageLevel.values()){
@@ -46,15 +47,40 @@ public class LevelAdaptor {
                         return (RageLevel) i ;
                 }
             case FIREBALL:
-                for(ArcherLevel i : ArcherLevel.values()){
+                for(FireBallLevel i : FireBallLevel.values()){
                     if(i.toString().equals(level.toString()))
-                        return (ArcherLevel) i ;
+                        return (FireBallLevel) i ;
                 }
             case CANNON :
                 for(CannonLevel i : CannonLevel.values()){
                     if(i.toString().equals(level.toString()))
                         return (CannonLevel) i ;
                 }
+            case BABY_DRAGON:
+                for (BabyDragonLevel i : BabyDragonLevel.values())
+                {
+                    if (i.toString().equals(level.toString()))
+                    {
+                        return (BabyDragonLevel) i;
+                    }
+                }
+            case INFERNO:
+                for (InfernoLevel i : InfernoLevel.values())
+                {
+                    if (i.toString().equals(level.toString()))
+                    {
+                        return (InfernoLevel) i;
+                    }
+                }
+            case VALKYRIE:
+                for (ValkyrieLevel i : ValkyrieLevel.values())
+                {
+                    if (i.toString().equals(level.toString()))
+                    {
+                        return (ValkyrieLevel) i;
+                    }
+                }
+
         }
     return null ;
     }

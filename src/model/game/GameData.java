@@ -3,7 +3,7 @@ package model.game;
 import model.cards.Card;
 import model.cards.CardFactory;
 import model.cards.CellValue;
-import model.cards.Level;
+import model.cards.levelEnums.Level;
 
 import java.util.ArrayList;
 
