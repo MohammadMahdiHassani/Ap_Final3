@@ -99,19 +99,22 @@ public class DataHandler {
 
     public static Level getLevel()
     {
-        Level level = null;
-        if (userData.getXP() <= 300) {
-            level = Level.LEVEL_1;
-        } else if (userData.getXP() <= 500) {
-            level = Level.LEVEL_2;
-        } else if (userData.getXP() <= 900) {
-            level = Level.LEVEL_3;
-        } else if (userData.getXP() <= 1700) {
-            level = Level.LEVEL_4;
-        } else if (userData.getXP() > 1700) {
-            level = Level.LEVEL_5;
+        if (userData != null) {
+            Level level = null;
+            if (userData.getXP() <= 300) {
+                level = Level.LEVEL_1;
+            } else if (userData.getXP() <= 500) {
+                level = Level.LEVEL_2;
+            } else if (userData.getXP() <= 900) {
+                level = Level.LEVEL_3;
+            } else if (userData.getXP() <= 1700) {
+                level = Level.LEVEL_4;
+            } else if (userData.getXP() > 1700) {
+                level = Level.LEVEL_5;
+            }
+            return level;
         }
-        return level;
+        return Level.LEVEL_1;
     }
 
 }
