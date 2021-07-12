@@ -1,5 +1,7 @@
 package DataBase;
 
+import model.cards.levelEnums.Level;
+
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -48,11 +50,14 @@ public class DataHandler {
             try {
                 FileInputStream userFile = new FileInputStream(file + "/" + userName + ".ser");
                 ObjectInputStream obj = new ObjectInputStream(userFile) ;
-                userData = (UserData) obj.readObject() ;
+                Object object = obj.readObject();
+                userData = (UserData) object ;
 
-            } catch (IOException | ClassNotFoundException e) {
+            } catch (IOException e) {
                 System.out.println("unable to find .ser file");
                 return null ;
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
             }
             if(userData.getPassword().equals(password)){
                 DataHandler.userData = userData ;
@@ -90,6 +95,23 @@ public class DataHandler {
     }
     public static UserData getUserData(){
         return userData ;
+    }
+
+    public static Level getLevel()
+    {
+        Level level = null;
+        if (userData.getXP() <= 300) {
+            level = Level.LEVEL_1;
+        } else if (userData.getXP() <= 500) {
+            level = Level.LEVEL_2;
+        } else if (userData.getXP() <= 900) {
+            level = Level.LEVEL_3;
+        } else if (userData.getXP() <= 1700) {
+            level = Level.LEVEL_4;
+        } else if (userData.getXP() > 1700) {
+            level = Level.LEVEL_5;
+        }
+        return level;
     }
 
 }
