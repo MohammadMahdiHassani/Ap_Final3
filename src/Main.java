@@ -15,14 +15,15 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         //LoginController loginController = new LoginController();
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("view/Login.fxml"));
+        loader.setLocation(getClass().getResource("view/Arena.fxml"));
 
         loader.load();
 //test
         Parent root = loader.getRoot();
-
+        ArenaController arenaController = loader.getController();
+        root.setOnMouseClicked(arenaController);
 //        System.out.println(arenaController.getPrefHeightList());
-        stage.setScene(new Scene(root));
+        stage.setScene(new Scene(root , arenaController.getBoardWidth() , arenaController.getBoardHeight() + arenaController.getPrefHeightList()));
         //test comment
         stage.setTitle("Clash Royal");
         stage.show();

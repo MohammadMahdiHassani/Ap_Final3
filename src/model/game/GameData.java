@@ -21,7 +21,6 @@ public class GameData {
 
     private void initBotDeck(){
         botDeck = new ArrayList<>() ;
-
     }
     private void initPlayerDeck(){
         playerDeck = new ArrayList<>() ;

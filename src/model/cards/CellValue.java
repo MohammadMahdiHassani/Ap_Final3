@@ -6,7 +6,7 @@ public enum CellValue {
 
     GIANT( new Image("/view/photos/giant.png"),  new Image("/view/photos/giant.png")),
     ARCHER(new Image("/view/photos/archers.png") , new Image ("/view/photos/archers.png")) ,
-    BARBERIAN(new Image("/view/photos/barbarians.png") , new Image ("/view/photos/barbarians.png")),
+    BARBERIAN(new Image("/view/photos/barbarians.png") , new Image ("/view/photos/Barbarian_Attack_mode.gif")),
     WIZARD(new Image("/view/photos/wizard.png") , new Image("/view/photos/wizard.png")),
     MINI_PEKA(new Image("/view/photos/mini_pekka.png") , new Image("/view/photos/mini_pekka.png")),
     RAGE (new Image("/view/photos/rage.png") , new Image("/view/photos/rage.png")),

@@ -7,6 +7,7 @@ import model.GameElement;
 import model.cards.Card;
 import model.cards.CellValue;
 import model.cards.levelEnums.ArcherTowerLevel;
+import model.cards.levelEnums.Botlevel;
 import model.cards.levelEnums.KingTowerLevel;
 import model.towers.ArcherTower;
 import model.towers.KingTower;
@@ -17,24 +18,22 @@ import java.util.Scanner;
 
 public class ArenaModel {
 
-    private static ArenaModel arenaModel = null ;
-    private int rowCount;
-    private int columnCount;
-    private CellValue[][] BackGroundCellValues;
-    private GameElement[][] cellValues ;
-    private Point2D currPoint ;
-    private Card currCard ;
-    private GameData gameData ;
+     private static ArenaModel arenaModel = null ;
+     int rowCount;
+     int columnCount;
+     CellValue[][] BackGroundCellValues;
+     GameElement[][] cellValues ;
+     GameData gameData ;
+     GameLogic logic ;
 
 
-    private ArenaModel()
-    {
+    private ArenaModel() {
         rowCount = 20;
         columnCount = 19;
         BackGroundCellValues = new CellValue[rowCount][columnCount];
         initCellValue("map.txt");
         gameData = new GameData();
-
+        logic = new GameLogic() ;
 
     }
     public static ArenaModel getModel(){
@@ -156,63 +155,20 @@ public class ArenaModel {
         return cellValues ;
     }
     public void move(){
-
-        for(int i=0 ; i<rowCount ; i++){
-            for(int j=0 ; j<columnCount ; j++){
-                if(cellValues[i][j] != null && cellValues[i][j] instanceof Card){
-                    if(j>3){
-                        Card m = (Card) cellValues[i][j];
-                        cellValues[i][j] = null ;
-                        cellValues[i][j-1] = m ;
-                    }
-
-                }
-            }
-
-        }
-        if(!checkForPlayerMove()) {
-            return ;
-        }
-        setCurrPointComponentValue(currPoint , currCard);
+        logic.executeLogic() ;
     }
-    private boolean checkForPlayerMove(){
-        if(currPoint == null)
-            return false;
-        if(gameData.playedCards.contains(currCard))
-            return false;
-        if(!(currPoint.getY()>=11 && currPoint.getY()<=17))
-            return false ;
-        if(getCurrPointComponentValue() != null)
-            return false ;
-        return true ;
-    }
-
 
 
     public void setCurrPoint(Point2D point2D){
-        currPoint = point2D ;
-    }
-    private CellValue getCurrPointBackgroundValue(){
-        return  BackGroundCellValues[(int) currPoint.getY()][(int) currPoint.getX()];
-    }
-    private GameElement getCurrPointComponentValue(){
-        return  cellValues[(int) currPoint.getY()][(int) currPoint.getX()];
-    }
-    private void setCurrPointComponentValue(Point2D point , GameElement element){
-          cellValues[(int) currPoint.getY()][(int) currPoint.getX()] = element;
-          gameData.playedCards.add(currCard) ;
-          currPoint = null ;
-          currCard = null ;
-    }
-    private void setCurrPointValue(CellValue value){
-
-    }
-    public void setCurrCard(Card currCard) {
-        this.currCard = currCard;
+        logic.setCurrPoint(point2D);
     }
     public ObservableList<Card> getDeck(){
         return FXCollections.observableArrayList(gameData.playerDeck) ;
     }
-
-
+    public void setCurrCard(Card currCard) {
+        logic.setCurrCard(currCard);
+    }
+    public void setBotlevel(Botlevel botlevel) {
+        logic.setBotlevel(botlevel);
+    }
 }

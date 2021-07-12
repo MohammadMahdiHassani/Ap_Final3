@@ -95,7 +95,7 @@ public class ArenaView extends Group {
                     componentView[i][j].setImage(CANNON.getThumbnailImage());
                 }
                 else if (cellValues[i][j].getValue() == BARBERIAN) {
-                    componentView[i][j].setImage(BARBERIAN.getThumbnailImage());
+                    componentView[i][j].setImage(BARBERIAN.getActionImage());
                 }
 
             }
