@@ -30,8 +30,7 @@
             <VBox>
                 <ListView fx:id="listArmy" fixedCellSize="100" prefHeight="100" prefWidth="400" orientation="HORIZONTAL"
                           style="-fx-background-color: #deb887;"/>
-                <ProgressBar fx:id="elixirProgress" prefWidth="400" prefHeight="20" progress="0.6"  />
-
+                <ProgressBar fx:id="elixirProgress" prefWidth="400" prefHeight="20" progress="0.6" style="-fx-accent: #c60055;" />
 
             </VBox>
 

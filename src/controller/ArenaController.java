@@ -57,7 +57,6 @@ public class ArenaController implements EventHandler<MouseEvent> {
     }
     public void initialize()
     {
-        elixirProgress.setStyle("-fx-accent: #c60055;");
         initializeListArmy();
         arenaView.setBackgroundCell(model);
 

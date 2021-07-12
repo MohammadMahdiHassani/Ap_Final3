@@ -66,7 +66,7 @@ public class DataHandler {
         }
     }
 
-    public void saveToFile(UserData userData)
+    public static void saveToFile(UserData userData)
     {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(file +"/"+ userData.getUserName()+".ser");

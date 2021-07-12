@@ -11,6 +11,7 @@ import model.cards.levelEnums.Botlevel;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ArenaModel {
@@ -133,7 +134,12 @@ public class ArenaModel {
         logic.setCurrPoint(point2D);
     }
     public ObservableList<Card> getDeck(){
-        return FXCollections.observableArrayList(gameData.playerDeck) ;
+        ArrayList<Card> arr = new ArrayList<>() ;
+        for(GameElement i : gameData.playerDeck){
+            if(i instanceof Card)
+                arr.add((Card) i);
+        }
+        return FXCollections.observableArrayList(arr) ;
     }
     public void setCurrCard(Card currCard) {
         logic.setCurrCard(currCard);
