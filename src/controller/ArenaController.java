@@ -73,6 +73,7 @@ public class ArenaController implements EventHandler<MouseEvent> {
                     @Override
                     public void run() {
                         update() ;
+
                     }
                 });
             }
