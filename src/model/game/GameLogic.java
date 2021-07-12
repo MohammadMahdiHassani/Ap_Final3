@@ -72,8 +72,10 @@ public class GameLogic {
                 switch(m.getValue()){
                     case GIANT:
                         giantLogic((Card) m);
+                        break;
                     case ARCHER:
                         archerLogic((Card) m);
+                        break;
                     case BARBERIAN:
                     case MINI_PEKA:
                     case WIZARD:
@@ -161,12 +163,12 @@ public class GameLogic {
     }
     private void giantLogic(Card card){
         if(moveToBridge(card))
-        moveToTower(card);
+         moveToTower(card);
     }
     private void archerLogic(Card card){
 
         if(moveToBridge(card))
-        moveToTower(card);
+          moveToTower(card);
 
     }
     private boolean isOccupied(Point2D point){
