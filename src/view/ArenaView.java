@@ -18,6 +18,8 @@ import static model.cards.CellValue.*;
 public class ArenaView extends Group {
     public final static double CELL_WIDTH = 26.0;
     private Label timeLabel;
+    private Label crown1;
+    private Label crown2;
     private int rowCount;
     private int columnCount;
     private ImageView[][] cellView;
@@ -27,6 +29,8 @@ public class ArenaView extends Group {
     }
 
     private void initializeGrid() {
+        crown1 = new Label("0");
+        crown2 = new Label("0");
         timeLabel = new Label("3:45");
         cellView = new ImageView[rowCount][columnCount];
         componentView = new ImageView[rowCount][columnCount];
@@ -48,11 +52,22 @@ public class ArenaView extends Group {
                 this.getChildren().add(imageView1);
             }
         }
-        timeLabel.setLayoutX((CELL_WIDTH * 17) + 6 );
+        timeLabel.setLayoutX((CELL_WIDTH * 17) + 6);
         timeLabel.setLayoutY(CELL_WIDTH * 0);
         timeLabel.setTextFill(Color.ANTIQUEWHITE);
-        timeLabel.setFont(Font.font("adobe heiti std R",18));
+        timeLabel.setFont(Font.font("adobe heiti std R", 18));
+
+        crown2.setLayoutX(((CELL_WIDTH) * 18) + 10);
+        crown2.setLayoutY(((CELL_WIDTH) * 8) + 5);
+        crown1.setLayoutX(((CELL_WIDTH) * 18) + 10);
+        crown1.setLayoutY(((CELL_WIDTH) * 12) + 5);
+        crown2.setFont(Font.font("adobe heiti std R", 18));
+        crown1.setFont(Font.font("adobe heiti std R", 18));
+        crown1.setTextFill(Color.BLUE);
+        crown2.setTextFill(Color.RED);
         this.getChildren().add(timeLabel);
+        this.getChildren().add(crown1);
+        this.getChildren().add(crown2);
 
 
     }
@@ -81,6 +96,12 @@ public class ArenaView extends Group {
                     cellView[i][j].setImage(HOME.getThumbnailImage());
                 } else if (cellValues[i][j] == CellValue.TIME) {
                     cellView[i][j].setImage(TIME.getThumbnailImage());
+                } else if (cellValues[i][j] == B_CROWN) {
+                    cellView[i][j].setImage(B_CROWN.getThumbnailImage());
+                } else if (cellValues[i][j] == R_CROWN) {
+                    cellView[i][j].setImage(R_CROWN.getThumbnailImage());
+                } else if (cellValues[i][j] == POINT) {
+                    cellView[i][j].setImage(POINT.getThumbnailImage());
                 }
             }
         }

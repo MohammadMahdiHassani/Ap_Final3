@@ -27,6 +27,9 @@ public enum CellValue {
     TREE(new Image("/view/photos/BackGround_Arena/tree.png") , new Image("/view/photos/BackGround_Arena/tree.png")),
     HOME(new Image("/view/photos/BackGround_Arena/home.png") , new Image("/view/photos/BackGround_Arena/home.png")),
     TIME(new Image("/view/photos/BackGround_Arena/timeBackground1.jpg"),new Image("/view/photos/BackGround_Arena/timeBackground.jpg")),
+    B_CROWN(new Image("/view/photos/BackGround_Arena/blueCrown.png"),new Image("/view/photos/BackGround_Arena/blueCrown.png")),
+    R_CROWN(new Image("/view/photos/BackGround_Arena/redCrown.png"),new Image("/view/photos/BackGround_Arena/redCrown.png")),
+    POINT(new Image("/view/photos/BackGround_Arena/timeBackground1.jpg"),new Image("/view/photos/BackGround_Arena/timeBackground1.jpg")),
     EMPTY(null , null) ;
     private Image thumbnailImage ;
     private Image actionImage ;

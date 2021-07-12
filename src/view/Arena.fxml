@@ -11,7 +11,7 @@
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ArenaController">
 
     <center>
-        <ArenaView fx:id="arenaView" rowCount="20" columnCount="19"/>
+        <ArenaView fx:id="arenaView" rowCount="21" columnCount="19"/>
     </center>
     <bottom>
 
