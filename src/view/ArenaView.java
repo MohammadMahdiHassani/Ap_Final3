@@ -151,4 +151,7 @@ public class ArenaView extends Group {
         this.initializeGrid();
     }
 
+    public void setTimeLabelText(String text) {
+        this.timeLabel.setText(text);
+    }
 }

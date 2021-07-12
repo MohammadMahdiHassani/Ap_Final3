@@ -134,6 +134,7 @@ public class ArenaModel {
         logic.setCurrPoint(point2D);
     }
     public ObservableList<Card> getDeck(){
+
         ArrayList<Card> arr = new ArrayList<>() ;
         for(GameElement i : gameData.playerDeck){
             if(i instanceof Card)
