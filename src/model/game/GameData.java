@@ -72,12 +72,17 @@ public class GameData {
     }
 
     private void initPlayerDeck() {
-        level = DataHandler.getLevel();
+//        level = DataHandler.getLevel();
         playerDeck = new ArrayList<>();
-        playerDeck.add(CardFactory.makeCard(CellValue.GIANT, level));
-        playerDeck.add(CardFactory.makeCard(CellValue.BARBERIAN, level));
-        playerDeck.add(CardFactory.makeCard(CellValue.ARCHER, level));
-        playerDeck.add(CardFactory.makeCard(CellValue.CANNON, level));
+//        playerDeck.add(CardFactory.makeCard(CellValue.GIANT, level));
+//        playerDeck.add(CardFactory.makeCard(CellValue.BARBERIAN, level));
+//        playerDeck.add(CardFactory.makeCard(CellValue.ARCHER, level));
+//        playerDeck.add(CardFactory.makeCard(CellValue.CANNON, level));
+
+        playerDeck.add(CardFactory.makeCard(CellValue.GIANT, Level.LEVEL_1));
+        playerDeck.add(CardFactory.makeCard(CellValue.BARBERIAN, Level.LEVEL_1));
+        playerDeck.add(CardFactory.makeCard(CellValue.ARCHER, Level.LEVEL_1));
+        playerDeck.add(CardFactory.makeCard(CellValue.CANNON, Level.LEVEL_1));
 
     }
 
