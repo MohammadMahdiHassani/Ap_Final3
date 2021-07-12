@@ -18,8 +18,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GameData {
-     ArrayList<Card> playerDeck ;
-     ArrayList<Card> botDeck ;
+     ArrayList<GameElement> playerDeck ;
+     ArrayList<GameElement> botDeck ;
      ArrayList<GameElement> boardElements;
      Point2D leftBridge ;
      Point2D rightBridge ;
@@ -67,7 +67,8 @@ public class GameData {
         botDeck = new ArrayList<>() ;
     }
     private void initPlayerDeck(){
-        playerDeck = new ArrayList<>() ;
+
+        playerDeck = new ArrayList<>();
         playerDeck.add(CardFactory.makeCard(CellValue.GIANT , Level.LEVEL_1) );
         playerDeck.add(CardFactory.makeCard(CellValue.BARBERIAN , Level.LEVEL_1) );
         playerDeck.add(CardFactory.makeCard(CellValue.ARCHER , Level.LEVEL_1) );

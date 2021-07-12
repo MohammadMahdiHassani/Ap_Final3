@@ -4,6 +4,7 @@ import javafx.geometry.Point2D;
 import model.GameElement;
 import model.cards.Card;
 import model.cards.levelEnums.Botlevel;
+import model.towers.Tower;
 
 public class GameLogic {
     private ArenaModel model ;
@@ -93,27 +94,55 @@ public class GameLogic {
         }
 
     }
-    private void moveToBridge(Card card){
-        if(isBotCard(card) && card.getPoint().getY()>=10)
-            return ;
-        else if(isPlayerCard(card) && card.getPoint().getY()<=10)
-            return ;
+    private boolean moveToBridge(Card card){
+        if(isBotElement(card) && card.getPoint().getY()>=10)
+            return true;
+        else if(isPlayerElement(card) && card.getPoint().getY()<=10)
+            return true;
         else {
             Point2D point = card.getPoint();
             if (point.distance(data.leftBridge) >= point.distance(data.rightBridge))
                 moveCard(card, data.rightBridge);
             else
                 moveCard(card, data.leftBridge);
+            return false ;
         }
     }
     private void moveCard(Card movingCard , Point2D point){
         Point2D cardPoint = movingCard.getPoint() ;
         int a1 =(int)(point.getX() - cardPoint.getX()) ;
         int a2 =(int) (point.getY() - cardPoint.getY()) ;
+
         int a3 = (a1 == 0) ? 0 : Math.abs(a1)/a1 ;
         int a4 = (a2 == 0) ? 0 : Math.abs(a2)/a2 ;
 
-        movingCard.setPoint(new Point2D(cardPoint.getX()+ a3, cardPoint.getY() + a4));
+        Point2D targetPoint = new Point2D(cardPoint.getX() + a3, cardPoint.getY() + a4) ;
+
+        if(!isOccupied(targetPoint))
+            movingCard.setPoint(targetPoint);
+        else{
+            if(a3 != 0) {
+                targetPoint = targetPoint.add(0, -a4);
+                if (!isOccupied(targetPoint))
+                    movingCard.setPoint(targetPoint);
+                else
+                {
+                    if(a4 != 0){
+                    targetPoint = targetPoint.add(-a3,a4) ;
+                    if(!isOccupied(targetPoint))
+                        movingCard.setPoint(targetPoint);
+                    }
+                    else{
+
+                    }
+                }
+
+            }
+            else{
+
+            }
+
+        }
     }
     private void updateBoard() {
         model.cellValues = new GameElement[model.rowCount][model.columnCount];
@@ -122,21 +151,45 @@ public class GameLogic {
         }
 
     }
-    private boolean isBotCard(Card card){
+    private boolean isBotElement(GameElement card){
         return data.botDeck.contains(card);
     }
-    private boolean isPlayerCard(Card card){
+    private boolean isPlayerElement(GameElement card){
         return data.playerDeck.contains(card) ;
     }
     private void giantLogic(Card card){
-        moveToBridge(card);
+        if(moveToBridge(card))
+        moveToTower(card);
     }
     private void archerLogic(Card card){
 
-        moveToBridge(card);
+        if(moveToBridge(card))
+        moveToTower(card);
 
     }
+    private boolean isOccupied(Point2D point){
+        for(GameElement i : data.boardElements){
+            if(point.equals(i.getPoint()))
+                return true ;
+        }
+        return false ;
+    }
+    private void moveToTower(Card card){
+        double closestDistance = 100 ;
+        Point2D towerPoint = new Point2D(0,0);
+        for(GameElement i : data.boardElements){
+            if(!(i instanceof Tower))
+                continue ;
+            if(i.getPoint().distance(card.getPoint()) < closestDistance){
+                if(isPlayerElement(card) && isBotElement(i) || isPlayerElement(i) && isBotElement(card)) {
+                    closestDistance = i.getPoint().distance(card.getPoint()) ;
+                    towerPoint = i.getPoint();
+                }
+            }
+            moveCard(card , towerPoint);
 
+        }
+    }
 
 
 
