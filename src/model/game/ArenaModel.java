@@ -25,7 +25,7 @@ public class ArenaModel {
 
 
     private ArenaModel() {
-        rowCount = 20;
+        rowCount = 21;
         columnCount = 19;
         BackGroundCellValues = new CellValue[rowCount][columnCount];
         gameData = new GameData();
@@ -44,7 +44,7 @@ public class ArenaModel {
         return BackGroundCellValues ;
     }
     private void readMap(String address) {
-        rowCount = 20;
+        rowCount = 21;
         columnCount = 19;
         BackGroundCellValues = new CellValue[rowCount][columnCount];
         File file = new File(address);
@@ -96,6 +96,18 @@ public class ArenaModel {
                         break;
                     case "m":
                         BackGroundCellValues[row][column] = CellValue.HOME;
+                        break;
+                    case "l":
+                        BackGroundCellValues[row][column] = CellValue.TIME;
+                        break;
+                    case "b":
+                        BackGroundCellValues[row][column] = CellValue.B_CROWN;
+                        break;
+                    case "d" :
+                        BackGroundCellValues[row][column] = CellValue.R_CROWN;
+                        break;
+                    case "p":
+                        BackGroundCellValues[row][column] = CellValue.POINT;
                         break;
                     default:
                         BackGroundCellValues[row][column] = CellValue.EMPTY;

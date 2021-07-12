@@ -11,6 +11,8 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Point2D;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 import model.GameElement;
 import model.cards.Card;
@@ -31,7 +33,21 @@ public class ArenaController implements EventHandler<MouseEvent> {
     private ListView<Card> listArmy;
     @FXML
     private ArenaView arenaView;
+
+    public ImageView getNextCard() {
+        return nextCard;
+    }
+
+    @FXML
+    private ImageView nextCard;
+
+    @FXML
+    private ProgressBar elixirProgress;
     private ArenaModel model ;
+
+    public ProgressBar getElixirProgress() {
+        return elixirProgress;
+    }
 
     private Timer timer;
 
@@ -41,8 +57,10 @@ public class ArenaController implements EventHandler<MouseEvent> {
     }
     public void initialize()
     {
+        elixirProgress.setStyle("-fx-accent: #c60055;");
         initializeListArmy();
         arenaView.setBackgroundCell(model);
+
         startTimer();
     }
 

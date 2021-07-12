@@ -6,7 +6,7 @@ public enum CellValue {
 
     GIANT( new Image("/view/photos/giant.png"),  new Image("/view/photos/giant.png")),
     ARCHER(new Image("/view/photos/archers.png") , new Image ("/view/photos/archers.png")) ,
-    BARBERIAN(new Image("/view/photos/barbarians.png") , new Image ("/view/photos/Barbarian_Attack_mode.gif")),
+    BARBERIAN(new Image("/view/photos/barbarians.png") , new Image ("/view/photos/barbarians.png")),
     WIZARD(new Image("/view/photos/wizard.png") , new Image("/view/photos/wizard.png")),
     MINI_PEKA(new Image("/view/photos/mini_pekka.png") , new Image("/view/photos/mini_pekka.png")),
     RAGE (new Image("/view/photos/rage.png") , new Image("/view/photos/rage.png")),
@@ -26,6 +26,10 @@ public enum CellValue {
     SHRUB(new Image("/view/photos/BackGround_Arena/shrub.png") , new Image("/view/photos/BackGround_Arena/shrub.png")),
     TREE(new Image("/view/photos/BackGround_Arena/tree.png") , new Image("/view/photos/BackGround_Arena/tree.png")),
     HOME(new Image("/view/photos/BackGround_Arena/home.png") , new Image("/view/photos/BackGround_Arena/home.png")),
+    TIME(new Image("/view/photos/BackGround_Arena/timeBackground1.jpg"),new Image("/view/photos/BackGround_Arena/timeBackground.jpg")),
+    B_CROWN(new Image("/view/photos/BackGround_Arena/blueCrown.png"),new Image("/view/photos/BackGround_Arena/blueCrown.png")),
+    R_CROWN(new Image("/view/photos/BackGround_Arena/redCrown.png"),new Image("/view/photos/BackGround_Arena/redCrown.png")),
+    POINT(new Image("/view/photos/BackGround_Arena/timeBackground1.jpg"),new Image("/view/photos/BackGround_Arena/timeBackground1.jpg")),
     EMPTY(null , null) ;
     private Image thumbnailImage ;
     private Image actionImage ;
