@@ -122,24 +122,26 @@ public class GameLogic {
             movingCard.setPoint(targetPoint);
         else{
             if(a3 != 0) {
-                targetPoint = targetPoint.add(0, -a4);
-                if (!isOccupied(targetPoint))
-                    movingCard.setPoint(targetPoint);
+                if (!isOccupied(targetPoint.add(0, -a4)))
+                    movingCard.setPoint(targetPoint.add(0, -a4));
                 else
                 {
                     if(a4 != 0){
-                    targetPoint = targetPoint.add(-a3,a4) ;
-                    if(!isOccupied(targetPoint))
-                        movingCard.setPoint(targetPoint);
+                    if(!isOccupied(targetPoint.add(-a3,0) ))
+                        movingCard.setPoint(targetPoint.add(-a3,0) );
                     }
                     else{
-
+                        if(!isOccupied(targetPoint.add(0,-2*a4) ))
+                            movingCard.setPoint(targetPoint.add(0,-2*a4) );
                     }
                 }
 
             }
             else{
-
+                if(!isOccupied(targetPoint.add(-1 , 0)))
+                    movingCard.setPoint(targetPoint.add(-1 , 0));
+                else if(!isOccupied(targetPoint.add(1 , 0)))
+                    movingCard.setPoint(targetPoint.add(1 , 0));
             }
 
         }
