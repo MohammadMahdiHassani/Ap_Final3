@@ -17,11 +17,12 @@ import static model.cards.CellValue.*;
 
 public class ArenaView extends Group {
     public final static double CELL_WIDTH = 26.0;
-    private Label timeLabel;
+    private static Label timeLabel;
     private Label crown1;
     private Label crown2;
     private int rowCount;
     private int columnCount;
+    private int countTime;
     private ImageView[][] cellView;
     private ImageView[][] componentView;
 
@@ -31,7 +32,7 @@ public class ArenaView extends Group {
     private void initializeGrid() {
         crown1 = new Label("0");
         crown2 = new Label("0");
-        timeLabel = new Label("3:45");
+        timeLabel = new Label("0:00");
         cellView = new ImageView[rowCount][columnCount];
         componentView = new ImageView[rowCount][columnCount];
         for (int row = 0; row < rowCount; row++) {
@@ -107,7 +108,36 @@ public class ArenaView extends Group {
         }
     }
 
+    public void increaseTime() {
+
+        String[] time = timeLabel.getText().split(":");
+        int second = Integer.parseInt(time[1]);
+        int min = Integer.parseInt(time[0]);
+        if (min < 3) {
+            second++;
+            if (second == 60) {
+                min++;
+                second = 0;
+            }
+
+            String newTime = min + ":" + second;
+            if (second < 10) {
+                newTime = min + ":0" + second;
+            }
+            if (min == 3) {
+                //final condition
+            }
+            timeLabel.setText(newTime);
+        }
+    }
+
     public void update(ArenaModel model) {
+        countTime++;
+
+        if (countTime / 2 == 1) {
+            increaseTime();
+            countTime = 0;
+        }
         GameElement[][] cellValues = null;
         cellValues = model.getCellValues();
 
@@ -153,5 +183,9 @@ public class ArenaView extends Group {
 
     public void setTimeLabelText(String text) {
         this.timeLabel.setText(text);
+    }
+
+    public static Label getTimeLabel() {
+        return timeLabel;
     }
 }
