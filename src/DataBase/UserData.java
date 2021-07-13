@@ -16,7 +16,6 @@ public class UserData implements Serializable {
     private int troopy ;
     private final ArrayList<GameHistory> histories ;
     private  ArrayList<Card> playerDeck;
-    private final HashMap<CellValue, Level> levelMap ;
     private Botlevel botlevel ;
 
     UserData(String userName , String password){
@@ -26,8 +25,6 @@ public class UserData implements Serializable {
         XP = 0 ;
         histories = new ArrayList<>() ;
         playerDeck = new ArrayList<>() ;
-        levelMap = new HashMap<>() ;
-
     }
 
     public String getUserName() {
