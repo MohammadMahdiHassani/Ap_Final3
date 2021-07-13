@@ -24,7 +24,7 @@ public class Main extends Application {
         root.setOnMouseClicked(arenaController);
 //        System.out.println(arenaController.getPrefHeightList());
         stage.setScene(new Scene(root , arenaController.getBoardWidth() , arenaController.getBoardHeight() +
-                arenaController.getPrefHeightList() + arenaController.getElixirProgress().getPrefHeight()+5));
+                arenaController.getPrefHeightList() +arenaController.getElixirProgress().getPrefHeight() + 5));
         //test comment
         stage.setTitle("Clash Royal");
         stage.show();

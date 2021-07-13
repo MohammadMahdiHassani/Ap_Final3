@@ -1,7 +1,9 @@
 package view;
 
+import controller.ArenaController;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.effect.Shadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -23,13 +25,16 @@ public class ArenaView extends Group {
     private int rowCount;
     private int columnCount;
     private int countTime;
+    private ProgressBar elixirProgress;
     private ImageView[][] cellView;
     private ImageView[][] componentView;
 
     public ArenaView() {
+
     }
 
     private void initializeGrid() {
+        elixirProgress = new ArenaController().getElixirProgress();
         crown1 = new Label("0");
         crown2 = new Label("0");
         timeLabel = new Label("3:00");
@@ -133,10 +138,10 @@ public class ArenaView extends Group {
         }
     }
 
+
     public void update(ArenaModel model) {
         countTime++;
-
-        if (countTime / 2 == 1) {
+        if (countTime % 2 == 0 ) {
             decreaseTime();
             countTime = 0;
         }
