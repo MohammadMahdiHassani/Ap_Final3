@@ -13,11 +13,11 @@ import model.cards.levelEnums.Botlevel;
 import model.towers.Tower;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class GameLogic {
     private ArenaModel model;
     private GameData data;
-    private Botlevel botlevel;
     private Point2D currPoint;
     private Card currCard;
     private boolean playerMoved;
@@ -33,7 +33,6 @@ public class GameLogic {
     }
 
     public void preprocessLogic() {
-
         model = ArenaModel.arenaModel;
         data = ArenaModel.arenaModel.gameData;
     }
@@ -44,7 +43,7 @@ public class GameLogic {
         updateCards();
         updateBoard();
         if (playerMoved) {
-            //executeBot();
+            executeBot();
             playerMoved = false;
         }
     }
@@ -68,14 +67,49 @@ public class GameLogic {
     }
 
     private void executeBot() {
-        switch (botlevel) {
+        switch (data.botlevel) {
 
             case RANDOME:
+
+                Card card = getRandomCard() ;
+
+                Point2D randomPoint = getRandomPoint();
+                while(isOccupied(randomPoint))
+                    randomPoint = getRandomPoint();
+
+                card.setPoint(randomPoint);
+                data.boardElements.add(card);
+
+                break;
 
             case MEDIUM:
 
             case HARD:
         }
+    }
+
+    private Card getRandomCard() {
+        ArrayList<GameElement> elements = data.botDeck;
+        Random rnd = new Random();
+        int x = rnd.nextInt(elements.size());
+        while(data.boardElements.contains(elements.get(x)))
+            x = rnd.nextInt(elements.size());
+
+        return (Card) elements.get(x);
+    }
+
+    private Point2D getRandomPoint() {
+        Random rnd = new Random() ;
+        int x = rnd.nextInt(18);
+        while(x < 2){
+            x = rnd.nextInt(18);
+        }
+        int y = rnd.nextInt(10);
+        while(y < 2){
+            y = rnd.nextInt(10);
+        }
+
+        return new Point2D(x , y) ;
     }
 
 
@@ -202,47 +236,41 @@ public class GameLogic {
 
     private void giantLogic(Card card) {
         if (moveToBridge(card))
-            if (moveToTower(card))
-                System.out.println("Giant reached the Tower");
+            if (moveToTower(card));
     }
 
     private void wizardLogic(Card card) {
 
         if (moveToBridge(card))
-            if (moveToTower(card))
-                System.out.println("wizard reached the Tower");
+            if (moveToTower(card));
 
     }
 
     private void barbariansLogic(Card card) {
 
         if (moveToBridge(card))
-            if (moveToTower(card))
-                System.out.println("barbarians reached the Tower");
+            if (moveToTower(card));
 
     }
 
     private void miniPekkaLogic(Card card) {
 
         if (moveToBridge(card))
-            if (moveToTower(card))
-                System.out.println("mini pekka reached the Tower");
+            if (moveToTower(card));
 
     }
 
     private void babyDragonLogic(Card card) {
 
         if (moveToBridge(card))
-            if (moveToTower(card))
-                System.out.println("baby dragon reached the Tower");
+            if (moveToTower(card));
 
     }
 
     private void archerLogic(Card card) {
 
         if (moveToBridge(card))
-            if (moveToTower(card))
-                System.out.println("Archer reached the Tower");
+            if (moveToTower(card));
 
     }
 
@@ -278,10 +306,6 @@ public class GameLogic {
 
     private boolean isInNeighbourhood(Point2D point_1, Point2D point_2) {
         return (Math.abs(point_1.getX() - point_2.getX()) <= 1 && Math.abs(point_1.getY() - point_2.getY()) <= 1);
-    }
-
-    public void setBotlevel(Botlevel botlevel) {
-        this.botlevel = botlevel;
     }
 
     public void setCurrPoint(Point2D currPoint) {

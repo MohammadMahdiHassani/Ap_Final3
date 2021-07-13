@@ -1,12 +1,10 @@
 package model.game;
 
 import DataBase.DataHandler;
-import DataBase.UserData;
 import javafx.geometry.Point2D;
 import model.GameElement;
 import model.cards.Card;
 import model.cards.CardFactory;
-import model.cards.CellValue;
 import model.cards.levelEnums.*;
 import model.towers.ArcherTower;
 import model.towers.KingTower;
@@ -15,19 +13,18 @@ import model.towers.Tower;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
 
 public class GameData {
     ArrayList<GameElement> playerDeck;
     ArrayList<GameElement> botDeck;
     ArrayList<GameElement> boardElements;
-    Botlevel level ;
+    Botlevel botlevel;
     Point2D leftBridge;
     Point2D rightBridge;
 
     public GameData() {
-        level = DataHandler.getUserData().getBotlevel() ;
+        botlevel = DataHandler.getUserData().getBotlevel() ;
         initboardElements();
         initPlayerDeck();
         initBotDeck();
@@ -72,7 +69,7 @@ public class GameData {
     private void initBotDeck() {
         botDeck = new ArrayList<>();
 
-        switch(level){
+        switch(botlevel){
             case RANDOME:
                 initRandomBotDeck() ; 
             case MEDIUM:
@@ -89,21 +86,19 @@ public class GameData {
     }
 
     private void initRandomBotDeck() {
-        botDeck.addAll(playerDeck);
+
+        ArrayList<Card> deck = DataHandler.getUserData().getPlayerDeck();
+        for (int i = 0; i < deck.size(); i++) {
+
+            botDeck.add(CardFactory.makeCard(deck.get(i).getValue(), DataHandler.getLevel()));
+
+        }
     }
 
     private void initPlayerDeck() {
-
         playerDeck = new ArrayList<>();
-
-
         ArrayList<Card> deck = DataHandler.getUserData().getPlayerDeck();
-        for (int i = 0; i < DataHandler.getUserData().getPlayerDeck().size(); i++) {
-
-            playerDeck.add(CardFactory.makeCard(deck.get(i).getValue(), DataHandler.getLevel()));
-
-        }
-
+        playerDeck.addAll (deck);
     }
 
     private void addingTowersTodecks() {
@@ -125,7 +120,7 @@ public class GameData {
         this.rightBridge = rightBridge;
     }
 
-    public void setLevel(Botlevel level) {
-        this.level = level;
+    public void setBotlevel(Botlevel botlevel) {
+        this.botlevel = botlevel;
     }
 }

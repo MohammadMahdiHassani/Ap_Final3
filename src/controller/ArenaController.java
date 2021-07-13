@@ -190,8 +190,7 @@ public class ArenaController implements EventHandler<MouseEvent> {
                             public void changed(ObservableValue<? extends Card> observable, Card oldValue, Card newValue) {
 
                                 if (count == 1) {
-                                    Card newCard = CardFactory.makeCard(newValue.getValue(), DataHandler.getLevel());
-                                    model.setCurrCard(newCard);
+                                    model.setCurrCard(newValue);
                                 }
 
 
