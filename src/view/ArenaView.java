@@ -32,7 +32,7 @@ public class ArenaView extends Group {
     private void initializeGrid() {
         crown1 = new Label("0");
         crown2 = new Label("0");
-        timeLabel = new Label("0:00");
+        timeLabel = new Label("3:00");
         cellView = new ImageView[rowCount][columnCount];
         componentView = new ImageView[rowCount][columnCount];
         for (int row = 0; row < rowCount; row++) {
@@ -108,24 +108,26 @@ public class ArenaView extends Group {
         }
     }
 
-    public void increaseTime() {
+    public void decreaseTime() {
 
         String[] time = timeLabel.getText().split(":");
         int second = Integer.parseInt(time[1]);
         int min = Integer.parseInt(time[0]);
-        if (min < 3) {
-            second++;
-            if (second == 60) {
-                min++;
-                second = 0;
+        if (min != 0 || second != 0) {
+            if (second == 0) {
+                min--;
+                second = 59;
             }
-
+            second--;
             String newTime = min + ":" + second;
             if (second < 10) {
                 newTime = min + ":0" + second;
             }
-            if (min == 3) {
+            if (min == 0 && second == 0) {
                 //final condition
+            }
+            if (min == 0) {
+                timeLabel.setTextFill(Color.RED);
             }
             timeLabel.setText(newTime);
         }
@@ -135,7 +137,7 @@ public class ArenaView extends Group {
         countTime++;
 
         if (countTime / 2 == 1) {
-            increaseTime();
+            decreaseTime();
             countTime = 0;
         }
         GameElement[][] cellValues = null;
