@@ -44,7 +44,7 @@ public class GameLogic {
         updateCards();
         updateBoard();
         if (playerMoved) {
-            executeBot();
+            //executeBot();
             playerMoved = false;
         }
     }

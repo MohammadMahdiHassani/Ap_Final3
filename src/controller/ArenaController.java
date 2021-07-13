@@ -141,7 +141,7 @@ public class ArenaController implements EventHandler<MouseEvent> {
         listArmy.getItems().add(nextCard);
 
         int indexRandom = random.nextInt(reminderCard.size());
-        nextCard = reminderCard.get(random.nextInt(indexRandom));
+        nextCard = reminderCard.get(indexRandom);
         reminderCard.remove(indexRandom);
         reminderCard.add(listArmy.getItems().get(index));
         nextCardImage.setImage(nextCard.getValue().getThumbnailImage());
@@ -154,6 +154,7 @@ public class ArenaController implements EventHandler<MouseEvent> {
     private void initializeListArmy() {
         count = 1;
         reminderCard = DataHandler.getUserData().getPlayerDeck();
+        System.out.println("size:" + reminderCard.size());
         ArrayList<Card> initFourCard = new ArrayList<>();
         Random random = new Random();
         for (int i = 0; i < 4; i++) {
@@ -163,7 +164,8 @@ public class ArenaController implements EventHandler<MouseEvent> {
         }
         listArmy.setItems(FXCollections.observableArrayList(initFourCard));
         int index = random.nextInt(reminderCard.size());
-        nextCard = reminderCard.get(random.nextInt(index));
+        nextCard = reminderCard.get(index);
+        reminderCard.remove(index);
         nextCardImage.setImage(nextCard.getValue().getThumbnailImage());
 
 
