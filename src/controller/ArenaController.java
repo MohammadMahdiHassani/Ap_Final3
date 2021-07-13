@@ -125,10 +125,11 @@ public class ArenaController implements EventHandler<MouseEvent> {
         model.setCurrPoint(new Point2D(x, y));
         System.out.println("MouseEvent setting currPoint to (" + x + "," + y + ")");
         mouseEvent.consume();
-        if (listArmy.getSelectionModel().getSelectedItem() != null)
-        {
-            listArmy.getItems().remove(listArmy.getSelectionModel().getSelectedItem());
-            listArmy.getSelectionModel().select(null);
+        if (listArmy.getSelectionModel().getSelectedItem() != null) {
+            if (elixirProgress.getProgress() * 10 >= listArmy.getSelectionModel().getSelectedItem().getCost()) {
+                listArmy.getItems().remove(listArmy.getSelectionModel().getSelectedItem());
+                listArmy.getSelectionModel().select(null);
+            }
         }
     }
 
@@ -165,8 +166,8 @@ public class ArenaController implements EventHandler<MouseEvent> {
                             @Override
                             public void changed(ObservableValue<? extends Card> observable, Card oldValue, Card newValue) {
 //                                System.out.println("currCard was set to " + newValue.getValue());
-                                Card newCard = CardFactory.makeCard(newValue.getValue(),DataHandler.getLevel());
-                                model.setCurrCard(newCard);
+                                Card newCard = CardFactory.makeCard(newValue.getValue(), DataHandler.getLevel());
+                                model.setCurrCard(newCard) ;
 //                                ArrayList<Card> newCards = new ArrayList<>();
 //                                for (int i = 0; i < listArmy.getItems().size(); i++)
 //                                {
@@ -196,8 +197,6 @@ public class ArenaController implements EventHandler<MouseEvent> {
     public ProgressBar getElixirProgress() {
         return elixirProgress;
     }
-
-
 
 
 }
