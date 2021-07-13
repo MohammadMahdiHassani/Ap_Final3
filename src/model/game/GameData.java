@@ -93,25 +93,16 @@ public class GameData {
     }
 
     private void initPlayerDeck() {
-//        level = DataHandler.getLevel();
+
         playerDeck = new ArrayList<>();
-        Random random = new Random();
-//        playerDeck.add(CardFactory.makeCard(CellValue.GIANT, level));
-//        playerDeck.add(CardFactory.makeCard(CellValue.BARBERIAN, level));
-//        playerDeck.add(CardFactory.makeCard(CellValue.ARCHER, level));
-//        playerDeck.add(CardFactory.makeCard(CellValue.CANNON, level));
+
+
         ArrayList<Card> deck = DataHandler.getUserData().getPlayerDeck();
-        for (int i = 0; i < 4; i++) {
-            int index = random.nextInt(deck.size());
-            playerDeck.add(CardFactory.makeCard(deck.get(index).getValue(), DataHandler.getLevel()));
-            deck.remove(index);
+        for (int i = 0; i < DataHandler.getUserData().getPlayerDeck().size(); i++) {
+
+            playerDeck.add(CardFactory.makeCard(deck.get(i).getValue(), DataHandler.getLevel()));
+
         }
-
-
-//        playerDeck.add(CardFactory.makeCard(CellValue.GIANT, Level.LEVEL_1));
-//        playerDeck.add(CardFactory.makeCard(CellValue.BARBERIAN, Level.LEVEL_1));
-//        playerDeck.add(CardFactory.makeCard(CellValue.ARCHER, Level.LEVEL_1));
-//        playerDeck.add(CardFactory.makeCard(CellValue.CANNON, Level.LEVEL_1));
 
     }
 

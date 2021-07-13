@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import model.GameElement;
 import model.cards.CellValue;
+import model.cards.troops.BabyDragon;
 import model.game.ArenaModel;
 
 import java.io.FileNotFoundException;
@@ -174,6 +175,24 @@ public class ArenaView extends Group {
                     componentView[i][j].setImage(VALKYRIE.getActionImage());
                 }else if (cellValues[i][j].getValue() == RAGE) {
                     componentView[i][j].setImage(RAGE.getActionImage());
+                }
+                else if (cellValues[i][j].getValue() == BABY_DRAGON) {
+                    componentView[i][j].setImage(BABY_DRAGON.getActionImage());
+                }else if (cellValues[i][j].getValue() == WIZARD) {
+                    componentView[i][j].setImage(WIZARD.getActionImage());
+                }else if (cellValues[i][j].getValue() == MINI_PEKA) {
+                    componentView[i][j].setImage(MINI_PEKA.getActionImage());
+                }else if (cellValues[i][j].getValue() == VALKYRIE) {
+                    componentView[i][j].setImage(VALKYRIE.getActionImage());
+                }
+                else if (cellValues[i][j].getValue() == INFERNO) {
+                    componentView[i][j].setImage(INFERNO.getActionImage());
+                }
+                else if (cellValues[i][j].getValue() == RAGE) {
+                    componentView[i][j].setImage(RAGE.getActionImage());
+                }
+                else if (cellValues[i][j].getValue() == ARROWS){
+                    componentView[i][j].setImage(ARROWS.getActionImage());
                 }
 
             }

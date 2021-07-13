@@ -40,6 +40,10 @@ public class ArenaController implements EventHandler<MouseEvent> {
     @FXML
     private ArenaView arenaView;
 
+    private int count;
+
+    private ArrayList<Card> reminderCard;
+
     public ImageView getNextCard() {
         return nextCardImage;
     }
@@ -126,32 +130,43 @@ public class ArenaController implements EventHandler<MouseEvent> {
         System.out.println("MouseEvent setting currPoint to (" + x + "," + y + ")");
         mouseEvent.consume();
         if (listArmy.getSelectionModel().getSelectedItem() != null) {
-            if (elixirProgress.getProgress() * 10 >= listArmy.getSelectionModel().getSelectedItem().getCost()) {
-                listArmy.getItems().remove(listArmy.getSelectionModel().getSelectedItem());
-                listArmy.getSelectionModel().select(null);
-            }
+            removeFromListArmy(listArmy.getSelectionModel().getSelectedIndex());
+
         }
     }
 
-    private void initializeListArmy() {
-        listArmy.setItems(model.getDeck());
-        ArrayList<Card> playerDeck = DataHandler.getUserData().getPlayerDeck();
-        ArrayList<Card> savedCard = new ArrayList<>();
-        int flag = 0;
-        for (int i = 0; i < playerDeck.size(); i++) {
-            flag = 0;
-            for (int j = 0; j < model.getDeck().size(); j++) {
-                if (playerDeck.get(i).getValue().toString().equals(model.getDeck().get(j).getValue())) {
-                    flag = 1;
-                }
-            }
-            if (flag == 0) {
-                savedCard.add(playerDeck.get(i));
-            }
-        }
+    public void removeFromListArmy(int index) {
         Random random = new Random();
-        nextCard = savedCard.get(random.nextInt(savedCard.size()));
+        count = 0;
+        listArmy.getItems().add(nextCard);
+
+        int indexRandom = random.nextInt(reminderCard.size());
+        nextCard = reminderCard.get(random.nextInt(indexRandom));
+        reminderCard.remove(indexRandom);
+        reminderCard.add(listArmy.getItems().get(index));
         nextCardImage.setImage(nextCard.getValue().getThumbnailImage());
+        listArmy.getItems().remove(index);
+        listArmy.getSelectionModel().select(null);
+
+        count = 1;
+    }
+
+    private void initializeListArmy() {
+        count = 1;
+        reminderCard = DataHandler.getUserData().getPlayerDeck();
+        ArrayList<Card> initFourCard = new ArrayList<>();
+        Random random = new Random();
+        for (int i = 0; i < 4; i++) {
+            int index = random.nextInt(reminderCard.size());
+            initFourCard.add(reminderCard.get(index));
+            reminderCard.remove(index);
+        }
+        listArmy.setItems(FXCollections.observableArrayList(initFourCard));
+        int index = random.nextInt(reminderCard.size());
+        nextCard = reminderCard.get(random.nextInt(index));
+        nextCardImage.setImage(nextCard.getValue().getThumbnailImage());
+
+
         listArmy.setCellFactory(
                 new Callback<ListView<Card>, ListCell<Card>>() {
                     @Override
@@ -160,24 +175,17 @@ public class ArenaController implements EventHandler<MouseEvent> {
                     }
                 }
         );
+        listArmy.getSelectionModel().select(null);
         listArmy.getSelectionModel().selectedItemProperty()
                 .addListener(
                         new ChangeListener<Card>() {
                             @Override
                             public void changed(ObservableValue<? extends Card> observable, Card oldValue, Card newValue) {
-//                                System.out.println("currCard was set to " + newValue.getValue());
-                                Card newCard = CardFactory.makeCard(newValue.getValue(), DataHandler.getLevel());
-                                model.setCurrCard(newCard) ;
-//                                ArrayList<Card> newCards = new ArrayList<>();
-//                                for (int i = 0; i < listArmy.getItems().size(); i++)
-//                                {
-//                                    if (!listArmy.getItems().get(i).getValue().toString().equals(newValue.getValue()))
-//                                    {
-//                                        newCards.add(listArmy.getItems().get(i));
-//                                    }
-//                                }
-//                                newCards.add(CardFactory.makeCard(nextCard.getValue(),DataHandler.getLevel()));
-//                                listArmy.setItems(FXCollections.observableArrayList(newCards));
+
+                                if (count == 1) {
+                                    Card newCard = CardFactory.makeCard(newValue.getValue(), DataHandler.getLevel());
+                                    model.setCurrCard(newCard);
+                                }
 
 
                             }
