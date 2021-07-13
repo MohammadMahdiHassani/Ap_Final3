@@ -293,7 +293,7 @@ public class GameLogic {
 //        if(!(currPoint.getY()>=11 && currPoint.getY()<=17))
 //            return ;
         if (currCard == null) {
-            System.out.println("null");
+            System.out.println("can't set current point -> current card is null");
             //return;
         }
         else {
