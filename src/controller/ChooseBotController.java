@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import model.cards.levelEnums.Botlevel;
 
 import java.io.IOException;
 
@@ -38,6 +39,8 @@ public class ChooseBotController {
             fxmlLoader.load();
             Parent root = fxmlLoader.getRoot();
             ArenaController arenaController = fxmlLoader.getController();
+            Botlevel level = processBotButtons(event);
+            arenaController.getModel().setBotlevel(level);
             root.setOnMouseClicked(arenaController);
             Stage stage = (Stage) hardButton.getScene().getWindow();
             root.setOnMouseClicked(arenaController);
@@ -46,5 +49,13 @@ public class ChooseBotController {
         }
     }
 
+    private Botlevel processBotButtons(MouseEvent event){
+        if(event.getSource() == hardButton)
+            return Botlevel.HARD ;
+        else if (event.getSource() == mediumButton)
+            return Botlevel.MEDIUM;
+        else
+            return Botlevel.RANDOME;
+    }
 
 }
