@@ -1,5 +1,6 @@
 package controller;
 
+import DataBase.DataHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.cards.levelEnums.Botlevel;
 
+import javax.xml.crypto.Data;
 import java.io.IOException;
 
 public class ChooseBotController {
@@ -35,12 +37,12 @@ public class ChooseBotController {
             stage.setScene(new Scene(root));
             stage.show();
         } else {
+            Botlevel level = processBotButtons(event);
+            DataHandler.getUserData().setBotlevel(level);
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Arena.fxml"));
             fxmlLoader.load();
             Parent root = fxmlLoader.getRoot();
             ArenaController arenaController = fxmlLoader.getController();
-            Botlevel level = processBotButtons(event);
-            arenaController.getModel().setBotlevel(level);
             root.setOnMouseClicked(arenaController);
             Stage stage = (Stage) hardButton.getScene().getWindow();
             root.setOnMouseClicked(arenaController);

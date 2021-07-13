@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import model.cards.CellValue;
 import model.cards.Card;
+import model.cards.levelEnums.Botlevel;
 import model.cards.levelEnums.Level;
 
 public class UserData implements Serializable {
@@ -16,6 +17,7 @@ public class UserData implements Serializable {
     private final ArrayList<GameHistory> histories ;
     private  ArrayList<Card> playerDeck;
     private final HashMap<CellValue, Level> levelMap ;
+    private Botlevel botlevel ;
 
     UserData(String userName , String password){
         this.userName = userName ;
@@ -62,5 +64,13 @@ public class UserData implements Serializable {
 
     public void setPlayerDeck(ArrayList<Card> playerDeck) {
         this.playerDeck = playerDeck;
+    }
+
+    public void setBotlevel(Botlevel botlevel) {
+        this.botlevel = botlevel;
+    }
+
+    public Botlevel getBotlevel() {
+        return botlevel;
     }
 }

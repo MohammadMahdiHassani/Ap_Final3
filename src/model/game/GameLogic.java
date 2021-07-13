@@ -30,7 +30,6 @@ public class GameLogic {
 
     public GameLogic() {
         playerMoved = false;
-        botlevel = Botlevel.RANDOME;
     }
 
     public void preprocessLogic() {
@@ -48,10 +47,6 @@ public class GameLogic {
             executeBot();
             playerMoved = false;
         }
-//        if (listArmy != null && currCard != null) {
-//            listArmy.getItems().remove(currCard);
-//        }
-//        listArmy = null;
     }
 
 

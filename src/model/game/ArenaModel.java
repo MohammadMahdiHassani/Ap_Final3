@@ -148,7 +148,4 @@ public class ArenaModel {
     public void setCurrCard(Card currCard) {
         logic.setCurrCard(currCard);
     }
-    public void setBotlevel(Botlevel botlevel) {
-        logic.setBotlevel(botlevel);
-    }
 }
