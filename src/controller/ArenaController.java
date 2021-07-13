@@ -126,11 +126,16 @@ public class ArenaController implements EventHandler<MouseEvent> {
         int x = (int) (Math.floor(point.getX()) / arenaView.CELL_WIDTH);
         int y = (int) (Math.floor(point.getY()) / arenaView.CELL_WIDTH);
 
-        model.setCurrPoint(new Point2D(x, y));
+
         System.out.println("MouseEvent setting currPoint to (" + x + "," + y + ")");
         mouseEvent.consume();
         if (listArmy.getSelectionModel().getSelectedItem() != null) {
-            removeFromListArmy(listArmy.getSelectionModel().getSelectedIndex());
+            if (listArmy.getSelectionModel().getSelectedItem().getCost() <= (elixirProgress.getProgress() * 10)) {
+                model.setCurrPoint(new Point2D(x, y));
+                elixirProgress.setProgress(elixirProgress.getProgress() - ((double) listArmy.getSelectionModel().getSelectedItem().getCost() / 10));
+                removeFromListArmy(listArmy.getSelectionModel().getSelectedIndex());
+
+            }
 
         }
     }
