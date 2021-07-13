@@ -1,6 +1,7 @@
 package model.game;
 
 import DataBase.DataHandler;
+import DataBase.UserData;
 import javafx.geometry.Point2D;
 import model.GameElement;
 import model.cards.Card;
@@ -17,6 +18,7 @@ import model.towers.Tower;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class GameData {
@@ -76,28 +78,37 @@ public class GameData {
     private void initPlayerDeck() {
 //        level = DataHandler.getLevel();
         playerDeck = new ArrayList<>();
+        Random random = new Random();
 //        playerDeck.add(CardFactory.makeCard(CellValue.GIANT, level));
 //        playerDeck.add(CardFactory.makeCard(CellValue.BARBERIAN, level));
 //        playerDeck.add(CardFactory.makeCard(CellValue.ARCHER, level));
 //        playerDeck.add(CardFactory.makeCard(CellValue.CANNON, level));
+        ArrayList<Card> deck = DataHandler.getUserData().getPlayerDeck();
+        for (int i = 0; i < 4; i++) {
+            int index = random.nextInt(deck.size());
+            playerDeck.add(CardFactory.makeCard(deck.get(index).getValue(), DataHandler.getLevel()));
+            deck.remove(index);
+        }
 
-        playerDeck.add(CardFactory.makeCard(CellValue.GIANT, Level.LEVEL_1));
-        playerDeck.add(CardFactory.makeCard(CellValue.BARBERIAN, Level.LEVEL_1));
-        playerDeck.add(CardFactory.makeCard(CellValue.ARCHER, Level.LEVEL_1));
-        playerDeck.add(CardFactory.makeCard(CellValue.CANNON, Level.LEVEL_1));
+
+//        playerDeck.add(CardFactory.makeCard(CellValue.GIANT, Level.LEVEL_1));
+//        playerDeck.add(CardFactory.makeCard(CellValue.BARBERIAN, Level.LEVEL_1));
+//        playerDeck.add(CardFactory.makeCard(CellValue.ARCHER, Level.LEVEL_1));
+//        playerDeck.add(CardFactory.makeCard(CellValue.CANNON, Level.LEVEL_1));
 
     }
 
-    private void addingTowersTodecks(){
-        for(GameElement i : boardElements){
-            if(i instanceof Tower){
-                if(i.getPoint().getY() < 11)
-                    botDeck.add(i) ;
+    private void addingTowersTodecks() {
+        for (GameElement i : boardElements) {
+            if (i instanceof Tower) {
+                if (i.getPoint().getY() < 11)
+                    botDeck.add(i);
                 else
-                    playerDeck.add(i) ;
+                    playerDeck.add(i);
             }
         }
     }
+
     public void setLeftBridge(Point2D leftBridge) {
         this.leftBridge = leftBridge;
     }

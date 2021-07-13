@@ -187,7 +187,7 @@ public class DeckController {
             allArmy.getItems().remove(allArmy.getItems().size() - 1);
         }
         DataHandler.getUserData().setPlayerDeck(new ArrayList(mainArmy.getItems()));
-        DataHandler.saveToFile(DataHandler.getUserData());
+        //DataHandler.saveToFile(DataHandler.getUserData());
     }
 
     @FXML

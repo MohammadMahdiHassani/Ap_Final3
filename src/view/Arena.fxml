@@ -19,7 +19,7 @@
             <padding>
                 <Insets top="5" right="5" bottom="5" left="5"/>
             </padding>
-            <ImageView fx:id="nextCard" fitWidth="80" fitHeight="80">
+            <ImageView fx:id="nextCardImage" fitWidth="80" fitHeight="80">
                 <image>
                     <Image url="@photos/valkyrie.png"/>
                 </image>
