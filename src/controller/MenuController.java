@@ -19,7 +19,8 @@ public class MenuController {
     private Label xp;
     @FXML
     private ImageView gameHistory;
-
+    @FXML
+    private ImageView button1v1;
     @FXML
     private ImageView battleDeck;
 
@@ -38,8 +39,6 @@ public class MenuController {
     @FXML
     private ImageView battleButton;
 
-    @FXML
-    private ImageView button2v2;
 
     private UserData userData;
 
@@ -61,7 +60,6 @@ public class MenuController {
         stage.show();
 
     }
-
     private String getFxml(MouseEvent event) {
         if (event.getSource() == profilePage) {
             return "../view/Profile.fxml";
@@ -71,7 +69,10 @@ public class MenuController {
             return "../view/Deck.fxml";
         } else if (event.getSource() == battleButton) {
             return "../view/ChooseBot.fxml";
-        } else {
+        } else if (event.getSource() == button1v1){
+            return "../view/Loading.fxml";
+        }
+        else {
             return "";
         }
     }
