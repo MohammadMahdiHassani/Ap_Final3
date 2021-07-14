@@ -2,7 +2,9 @@ package model.cards;
 
 import javafx.scene.image.Image;
 
-public enum CellValue {
+import java.io.Serializable;
+
+public enum CellValue implements Serializable {
 
     GIANT( new Image("/view/photos/giant.png"),  new Image("/view/photos/giant.png")),
     ARCHER(new Image("/view/photos/archers.png") , new Image ("/view/photos/archers.png")) ,

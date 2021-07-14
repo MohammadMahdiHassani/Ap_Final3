@@ -1,6 +1,8 @@
 package model.cards.levelEnums;
 
-public enum FireBallLevel {
+import java.io.Serializable;
+
+public enum FireBallLevel implements Serializable {
 
     LEVEL_1(325),
     LEVEL_2(357),

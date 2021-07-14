@@ -1,6 +1,8 @@
 package model.cards.levelEnums;
 
-public enum ArcherTowerLevel {
+import java.io.Serializable;
+
+public enum ArcherTowerLevel implements Serializable {
 
     LEVEL_1(33, 300),
     LEVEL_2(44, 330),

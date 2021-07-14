@@ -1,6 +1,8 @@
 package model.cards.levelEnums;
 
-public enum Botlevel {
+import java.io.Serializable;
+
+public enum Botlevel implements Serializable {
     RANDOME ,
     MEDIUM ,
     HARD ;

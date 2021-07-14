@@ -6,8 +6,10 @@ import model.cards.troops.enums.Speed;
 import model.cards.troops.enums.Target;
 import javafx.scene.image.Image;
 
+import java.io.Serializable;
 
-public class Giant extends Troop {
+
+public class Giant extends Troop implements Serializable {
 
     private GiantLevel level ;
 

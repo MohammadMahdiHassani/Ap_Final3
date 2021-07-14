@@ -1,6 +1,8 @@
 package model.cards.levelEnums;
 
-public enum GiantLevel {
+import java.io.Serializable;
+
+public enum GiantLevel implements Serializable {
         LEVEL_1(126,2000) ,
         LEVEL_2(138,2200) ,
         LEVEL_3(152,2420) ,

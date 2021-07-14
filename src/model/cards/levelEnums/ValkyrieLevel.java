@@ -1,6 +1,8 @@
 package model.cards.levelEnums;
 
-public enum ValkyrieLevel {
+import java.io.Serializable;
+
+public enum ValkyrieLevel implements Serializable {
     LEVEL_1(120, 880),
     LEVEL_2(132, 968),
     LEVEL_3(145, 1064),

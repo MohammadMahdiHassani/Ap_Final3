@@ -4,7 +4,9 @@ import model.cards.CellValue;
 import model.cards.levelEnums.ArrowsLevel;
 import model.cards.levelEnums.FireBallLevel;
 
-public class FireBall extends Spell{
+import java.io.Serializable;
+
+public class FireBall extends Spell implements Serializable {
     private int damage;
     public FireBall(FireBallLevel fireBallLevel) {
         super(CellValue.FIREBALL,3,4);

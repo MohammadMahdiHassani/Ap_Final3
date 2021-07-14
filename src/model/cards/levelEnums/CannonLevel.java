@@ -1,6 +1,8 @@
 package model.cards.levelEnums;
 
-public enum CannonLevel {
+import java.io.Serializable;
+
+public enum CannonLevel implements Serializable {
 
     LEVEL_1(60, 380),
     LEVEL_2(66, 418),

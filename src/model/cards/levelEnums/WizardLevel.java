@@ -1,6 +1,8 @@
 package model.cards.levelEnums;
 
-public enum WizardLevel {
+import java.io.Serializable;
+
+public enum WizardLevel implements Serializable {
     LEVEL_1(130, 340),
     LEVEL_2(143, 374),
     LEVEL_3(157, 411),

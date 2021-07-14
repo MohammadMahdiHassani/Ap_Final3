@@ -158,7 +158,7 @@ public class ArenaView extends Group {
                 } else if (cellValues[i][j].getValue() == CellValue.ARCHERTOWER) {
                     componentView[i][j].setImage(ARROWS.getThumbnailImage());
                 } else if (cellValues[i][j].getValue() == GIANT) {
-                    componentView[i][j].setImage(GIANT.getThumbnailImage());
+                    componentView[i][j].setImage(GIANT.getActionImage());
                 } else if (cellValues[i][j].getValue() == ARCHER) {
                     componentView[i][j].setImage(ARCHER.getThumbnailImage());
                 } else if (cellValues[i][j].getValue() == CANNON) {
