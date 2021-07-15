@@ -1,20 +1,29 @@
 package view;
 
 import controller.ArenaController;
+import javafx.animation.FadeTransition;
+import javafx.animation.TranslateTransition;
+import javafx.geometry.Point2D;
 import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.effect.Shadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
+import javafx.util.Duration;
 import model.GameElement;
 import model.cards.CellValue;
 import model.cards.troops.BabyDragon;
+import model.cards.troops.Troop;
 import model.game.ArenaModel;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import static model.cards.CellValue.*;
 
@@ -86,7 +95,7 @@ public class ArenaView extends Group {
         for (int i = 0; i < rowCount; i++) {
             for (int j = 0; j < columnCount; j++) {
                 if (cellValues[i][j] == GRASS) {
-                    cellView[i][j].setImage(GRASS.getThumbnailImage());
+//                    cellView[i][j].setImage(GRASS.getThumbnailImage());
                 } else if (cellValues[i][j] == CellValue.ROAD) {
                     cellView[i][j].setImage(ROAD.getThumbnailImage());
                 } else if (cellValues[i][j] == CellValue.RIVER) {
@@ -94,11 +103,11 @@ public class ArenaView extends Group {
                 } else if (cellValues[i][j] == CellValue.STONE) {
                     cellView[i][j].setImage(STONE.getThumbnailImage());
                 } else if (cellValues[i][j] == CellValue.SHRUB) {
-                    cellView[i][j].setImage(SHRUB.getThumbnailImage());
+//                    cellView[i][j].setImage(SHRUB.getThumbnailImage());
                 } else if (cellValues[i][j] == TREE) {
-                    cellView[i][j].setImage(TREE.getThumbnailImage());
+//                    cellView[i][j].setImage(TREE.getThumbnailImage());
                 } else if (cellValues[i][j] == CellValue.FENCE) {
-                    cellView[i][j].setImage(FENCE.getThumbnailImage());
+//                    cellView[i][j].setImage(FENCE.getThumbnailImage());
                 } else if (cellValues[i][j] == CellValue.HOME) {
                     cellView[i][j].setImage(HOME.getThumbnailImage());
                 } else if (cellValues[i][j] == CellValue.TIME) {
@@ -223,5 +232,21 @@ public class ArenaView extends Group {
 
     public static Label getTimeLabel() {
         return timeLabel;
+    }
+
+    public void drawCircle(Point2D starting_point, Point2D ending_point, int i, Color color) {
+
+        Circle circle = new Circle(starting_point.getX()*CELL_WIDTH + CELL_WIDTH/2 , starting_point.getY()*CELL_WIDTH + CELL_WIDTH/2, 3);
+        circle.setFill(color);
+        this.getChildren().add(circle);
+        Duration duration =  Duration.millis(2000);
+        TranslateTransition transition = new TranslateTransition(duration , circle);
+        transition.setToX(ending_point.subtract(starting_point).getX()*CELL_WIDTH);
+        transition.setToY(ending_point.subtract(starting_point).getY()*CELL_WIDTH);
+        transition.play();
+        FadeTransition fade = new FadeTransition(Duration.millis(3000) , circle);
+        fade.setFromValue(1.0);
+        fade.setToValue(0.0);
+        fade.play() ;
     }
 }
