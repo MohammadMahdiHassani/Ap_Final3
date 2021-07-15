@@ -18,6 +18,7 @@ import java.util.Scanner;
 public class GameData {
     ArrayList<GameElement> playerDeck;
     ArrayList<GameElement> botDeck;
+    ArrayList<GameElement> botGenesis;
     public ArrayList<GameElement> boardElements;
     Botlevel botlevel;
     Point2D leftBridge;
@@ -77,6 +78,9 @@ public class GameData {
             case HARD:
                 initHardBotDeck() ; 
         }
+        botGenesis = new ArrayList<>(botDeck);
+        botDeck = new ArrayList<>() ;
+
     }
 
     private void initHardBotDeck() {
@@ -97,8 +101,8 @@ public class GameData {
 
     private void initPlayerDeck() {
         playerDeck = new ArrayList<>();
-        ArrayList<Card> deck = DataHandler.getUserData().getPlayerDeck();
-        playerDeck.addAll (deck);
+//        ArrayList<Card> deck = DataHandler.getUserData().getPlayerDeck();
+//        playerDeck.addAll (deck);
     }
 
     private void addingTowersTodecks() {
