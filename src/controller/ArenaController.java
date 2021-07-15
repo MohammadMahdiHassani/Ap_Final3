@@ -28,6 +28,7 @@ import model.cards.spells.Spell;
 import model.cards.troops.Troop;
 import model.game.ArenaModel;
 import model.towers.KingTower;
+import model.towers.Tower;
 import network.Request;
 import network.TransferDataReceive;
 import network.TransferDataSend;
@@ -273,13 +274,26 @@ public class ArenaController implements EventHandler<MouseEvent> {
 
                 Point2D starting_point = i.getPoint();
                 Color color ;
-                if(model.isBot(i))
+                if(i instanceof Tower)
+                    color = Color.ORANGE;
+                else if(model.isBot(i))
                     color = Color.RED ;
                 else
                     color = Color.BLUE ;
 
+                int radius = 0;
+                if(i instanceof Tower){
+                    if(i instanceof KingTower)
+                        radius = 5 ;
+                    else
+                        radius = 4 ;
+                }
+                else
+                    radius = 3 ;
+
+
                 for(Point2D ending_point : animationMap.get(i)){
-                    arenaView.drawCircle(starting_point , ending_point , 3 ,  color );
+                    arenaView.drawCircle(starting_point , ending_point , radius ,  color );
                 }
 
             }
