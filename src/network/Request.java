@@ -2,6 +2,7 @@ package network;
 
 import DataBase.UserData;
 import model.cards.Card;
+import model.cards.levelEnums.Level;
 
 import java.io.Serializable;
 
@@ -10,9 +11,11 @@ public class Request implements Serializable {
     private String card;
     private double x;
     private double y;
-    public Request(String card, double x, double y)
+    private Level level;
+    public Request(String card,Level level, double x, double y)
     {
         this.card = card;
+        this.level = level;
         this.x = x;
         this.y = y;
     }
@@ -27,5 +30,9 @@ public class Request implements Serializable {
 
     public double getY() {
         return y;
+    }
+
+    public Level getLevel() {
+        return level;
     }
 }

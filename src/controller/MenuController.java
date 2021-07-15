@@ -66,16 +66,36 @@ public class MenuController {
             client.Connect(button1v1);
             transferDataSend = new TransferDataSend(client.getObjectOutputStream());
             transferDataReceive = new TransferDataReceive(client.getObjectInputStream());
-            try {
-                Thread.sleep(800);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            Parent root = FXMLLoader.load(getClass().getResource("../view/ChooseBot.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("../view/Loading.fxml"));
             Stage stage = (Stage) mainPage.getScene().getWindow();
+            Stage stage1 = (Stage) mainPage.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setResizable(false);
             stage.show();
+            new Thread(transferDataReceive).start();
+            while (true)
+            {
+                if (transferDataReceive.isReceive())
+                {
+                    break;
+                }
+                Thread.sleep(100);
+            }
+//            try {
+//                Thread.sleep(800);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+            transferDataReceive.setReceive(false);
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Arena.fxml"));
+            fxmlLoader.load();
+            root = fxmlLoader.getRoot();
+            ArenaController arenaController = fxmlLoader.getController();
+            root.setOnMouseClicked(arenaController);
+            stage1.setScene(new Scene(root, arenaController.getBoardWidth(), arenaController.getBoardHeight() + arenaController.getPrefHeightList() + arenaController.getElixirProgress().getPrefHeight() + 5));
+            stage1.show();
+            root.setOnMouseClicked(arenaController);
+            stage1.show();
 
         } else if ((event.getSource() == profilePage || event.getSource() == battleDeck) || (event.getSource() == battleButton)) {
             String fxmlAddress = getFxml(event);

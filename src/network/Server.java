@@ -79,21 +79,35 @@ public class Server {
             }
         }
 
-        for (int i = 0 ; i < 2; i ++)
-        {
-            Thread thread = new Thread(new ClientHandler(clientDetails.get(i),this));
+        for (int i = 0; i < 2; i++) {
+            try {
+                clientDetails.get(i).getObjectOutputStream().writeObject(new Request(clientDetails.get(i).getUserDataServer().getLevel().toString(),clientDetails.get(i).getUserDataServer().getLevel(),0,0));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        try {
+            Thread.sleep(300);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        for (int i = 0; i < 2; i++) {
+            Thread thread = new Thread(new ClientHandler(clientDetails.get(i), this));
             thread.start();
         }
         //System.out.println("finish connection");
     }
-    public void sendRequest(int id,Request request)
-    {
+
+    public void sendRequest(int id, Request request) {
         try {
             clientDetails.get(id).getObjectOutputStream().writeObject(request);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(request.getCard() + " was sent to "+ clientDetails.get(id).getUserDataServer().getUserName());
+        System.out.println(request.getCard() + " was sent to " + clientDetails.get(id).getUserDataServer().getUserName());
     }
 
 }

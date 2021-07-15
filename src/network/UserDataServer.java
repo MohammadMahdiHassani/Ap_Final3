@@ -37,6 +37,7 @@ public class UserDataServer implements Serializable {
         this.level = level;
     }
 
+
     public String getUserName() {
         return userName;
     }

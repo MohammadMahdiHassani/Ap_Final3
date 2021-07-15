@@ -27,6 +27,7 @@ import model.cards.levelEnums.Level;
 import model.cards.spells.Spell;
 import model.cards.troops.Troop;
 import model.game.ArenaModel;
+import model.game.GameData;
 import model.towers.KingTower;
 import model.towers.Tower;
 import network.Request;
@@ -116,36 +117,38 @@ public class ArenaController implements EventHandler<MouseEvent> {
         String card = MenuController.transferDataReceive.getCard();
         double x = MenuController.transferDataReceive.getX();
         double y = MenuController.transferDataReceive.getY();
+        Level level = MenuController.transferDataReceive.getLevel();
         System.out.println(card + " was received");
         Point2D point2D = new Point2D(x, y);
         Card card1 = null;
         if (card.equals("GIANT")) {
-            card1 = CardFactory.makeCard(CellValue.GIANT, Level.LEVEL_1);
+            card1 = CardFactory.makeCard(CellValue.GIANT, level);
         } else if (card.equals("ARCHER")) {
-            card1 = CardFactory.makeCard(CellValue.ARCHER, Level.LEVEL_1);
-        }else if (card.equals("BARBERAIN")) {
-            card1 = CardFactory.makeCard(CellValue.BARBERIAN, Level.LEVEL_1);
+            card1 = CardFactory.makeCard(CellValue.ARCHER, level);
+        }else if (card.equals("BARBERIAN")) {
+            card1 = CardFactory.makeCard(CellValue.BARBERIAN, level);
         }else if (card.equals("BABY_DRAGON")) {
-            card1 = CardFactory.makeCard(CellValue.BABY_DRAGON, Level.LEVEL_1);
+            card1 = CardFactory.makeCard(CellValue.BABY_DRAGON, level);
         }else if (card.equals("WIZARD")) {
-            card1 = CardFactory.makeCard(CellValue.WIZARD, Level.LEVEL_1);
+            card1 = CardFactory.makeCard(CellValue.WIZARD, level);
         }else if (card.equals("VALKYRIE")) {
-            card1 = CardFactory.makeCard(CellValue.VALKYRIE, Level.LEVEL_1);
+            card1 = CardFactory.makeCard(CellValue.VALKYRIE, level);
         }else if (card.equals("CANNON")) {
-            card1 = CardFactory.makeCard(CellValue.CANNON, Level.LEVEL_1);
+            card1 = CardFactory.makeCard(CellValue.CANNON, level);
         }else if (card.equals("INFERNO")) {
-            card1 = CardFactory.makeCard(CellValue.INFERNO, Level.LEVEL_1);
+            card1 = CardFactory.makeCard(CellValue.INFERNO, level);
         }else if (card.equals("MINI_PEKA")) {
-            card1 = CardFactory.makeCard(CellValue.MINI_PEKA, Level.LEVEL_1);
+            card1 = CardFactory.makeCard(CellValue.MINI_PEKA, level);
         }else if (card.equals("RAGE")) {
-            card1 = CardFactory.makeCard(CellValue.RAGE, Level.LEVEL_1);
+            card1 = CardFactory.makeCard(CellValue.RAGE, level);
         }else if (card.equals("ARROWS")) {
-            card1 = CardFactory.makeCard(CellValue.ARROWS, Level.LEVEL_1);
+            card1 = CardFactory.makeCard(CellValue.ARROWS, level);
         }else if (card.equals("FIREBALL")) {
-            card1 = CardFactory.makeCard(CellValue.FIREBALL, Level.LEVEL_1);
+            card1 = CardFactory.makeCard(CellValue.FIREBALL, level);
         }
 
         card1.setPoint(point2D);
+        model.getLogic().data.botDeck.add(card1);
         model.getLogic().data.boardElements.add(card1);
         model.getLogic().data.getBotDeck().add(card1);
 }
@@ -185,7 +188,7 @@ public class ArenaController implements EventHandler<MouseEvent> {
         if (listArmy.getSelectionModel().getSelectedItem() != null) {
             if (listArmy.getSelectionModel().getSelectedItem().getCost() <= (elixirProgress.getProgress() * 10)) {
                 if (MenuController.isOnServer) {
-                    MenuController.transferDataSend.setRequest(new Request(listArmy.getSelectionModel().getSelectedItem().getValue().toString(), x, y));
+                    MenuController.transferDataSend.setRequest(new Request(listArmy.getSelectionModel().getSelectedItem().getValue().toString(),DataHandler.getLevel(), x, y));
                     new Thread(MenuController.transferDataSend).start();
                 }
                 model.setCurrPoint(new Point2D(x, y));

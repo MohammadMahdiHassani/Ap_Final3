@@ -51,7 +51,7 @@ public class Client {
             }else if (DataHandler.getUserData().getPlayerDeck().get(i).getValue().toString().equals("BABY_DRAGON"))
             {
                 cards.add("BABY_DRAGON");
-            }else if (DataHandler.getUserData().getPlayerDeck().get(i).getValue().toString().equals("ARCHER"))
+            }else if (DataHandler.getUserData().getPlayerDeck().get(i).getValue().toString().equals("MINI_PEKA"))
             {
                 cards.add("MINI_PEKA");
             }else if (DataHandler.getUserData().getPlayerDeck().get(i).getValue().toString().equals("FIREBALL"))
