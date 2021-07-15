@@ -1,6 +1,8 @@
 package model.cards.levelEnums;
 
-public enum PekkaLevel {
+import java.io.Serializable;
+
+public enum PekkaLevel implements Serializable {
     LEVEL_1(325, 600),
     LEVEL_2(357, 660),
     LEVEL_3(393, 726),

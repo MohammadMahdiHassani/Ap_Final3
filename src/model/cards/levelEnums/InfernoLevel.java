@@ -1,6 +1,8 @@
 package model.cards.levelEnums;
 
-public enum InfernoLevel {
+import java.io.Serializable;
+
+public enum InfernoLevel implements Serializable {
     LEVEL_1(20, 800),
     LEVEL_2(22, 880),
     LEVEL_3(24, 968),

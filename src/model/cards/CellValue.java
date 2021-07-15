@@ -2,6 +2,8 @@ package model.cards;
 
 import javafx.scene.image.Image;
 
+import java.io.Serializable;
+
 public enum CellValue {
 
     GIANT( new Image("/view/photos/giant.png"),  new Image("/view/photos/giant.png")),

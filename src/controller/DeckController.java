@@ -21,7 +21,9 @@ import model.cards.*;
 import model.cards.levelEnums.Level;
 import model.game.ArenaModel;
 
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 
@@ -95,23 +97,17 @@ public class DeckController {
 
 
         ArrayList<Card> playerDeck = DataHandler.getUserData().getPlayerDeck();
-        if (playerDeck != null)
-        {
-            for (int i = 0 ; i < playerDeck.size(); i++)
-            {
-                mainArmies.add(CardFactory.makeCard(playerDeck.get(i).getValue(),level));
+        if (playerDeck != null) {
+            for (int i = 0; i < playerDeck.size(); i++) {
+                mainArmies.add(CardFactory.makeCard(playerDeck.get(i).getValue(), level));
                 cellValues.remove(playerDeck.get(i).getValue());
             }
         }
 
-        for (int i = 0 ; i < cellValues.size(); i++)
-        {
-            allArmies.add(CardFactory.makeCard(cellValues.get(i),level));
+        for (int i = 0; i < cellValues.size(); i++) {
+            allArmies.add(CardFactory.makeCard(cellValues.get(i), level));
 
         }
-
-
-
 
 
         allArmy.setItems(allArmies);
@@ -187,6 +183,20 @@ public class DeckController {
             allArmy.getItems().remove(allArmy.getItems().size() - 1);
         }
         DataHandler.getUserData().setPlayerDeck(new ArrayList(mainArmy.getItems()));
+//        Path path = Paths.get(System.getProperty("user.dir"));
+//        File file = new File(path.toString() + "/src/DataBase/Files");
+//        File userFile = new File(file + "/" + DataHandler.getUserData().getUserName() + ".ser") ;
+//        try {
+//            FileOutputStream fileOutputStream = new FileOutputStream(userFile);
+//            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+//            objectOutputStream.writeObject(DataHandler.getUserData());
+//            objectOutputStream.close();
+//            fileOutputStream.close();
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         //DataHandler.saveToFile(DataHandler.getUserData());
     }
 

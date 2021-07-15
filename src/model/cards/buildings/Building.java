@@ -4,7 +4,9 @@ import model.cards.Card;
 import model.cards.CellValue;
 import model.cards.troops.attributes.Target;
 
-public abstract class Building extends Card {
+import java.io.Serializable;
+
+public abstract class Building extends Card implements Serializable {
     private float hitSpeed ;
     private Target target ;
     private int lifeTime ;

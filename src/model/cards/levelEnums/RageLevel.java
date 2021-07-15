@@ -1,6 +1,8 @@
 package model.cards.levelEnums;
 
-public enum RageLevel {
+import java.io.Serializable;
+
+public enum RageLevel implements Serializable {
 
     LEVEL_1(6),
     LEVEL_2(6.5f),

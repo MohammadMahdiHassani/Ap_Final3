@@ -5,7 +5,10 @@ import model.cards.levelEnums.ArcherLevel;
 import model.cards.troops.attributes.Speed;
 import model.cards.troops.attributes.Target;
 
-public class Archer extends Troop {
+import java.io.Serializable;
+import java.security.SecureRandom;
+
+public class Archer extends Troop implements Serializable{
 
     private ArcherLevel level;
     public Archer(ArcherLevel level) {

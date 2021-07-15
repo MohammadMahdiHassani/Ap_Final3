@@ -5,7 +5,9 @@ import model.cards.levelEnums.BarbarianLevel;
 import model.cards.troops.attributes.Speed;
 import model.cards.troops.attributes.Target;
 
-public class Barbarian extends Troop{
+import java.io.Serializable;
+
+public class Barbarian extends Troop implements Serializable {
     private BarbarianLevel level;
 
 

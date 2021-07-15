@@ -18,13 +18,13 @@ import java.util.Scanner;
 public class GameData {
     ArrayList<GameElement> playerDeck;
     ArrayList<GameElement> botDeck;
-    ArrayList<GameElement> boardElements;
+    public ArrayList<GameElement> boardElements;
     Botlevel botlevel;
     Point2D leftBridge;
     Point2D rightBridge;
 
     public GameData() {
-        botlevel = DataHandler.getUserData().getBotlevel() ;
+        botlevel = DataHandler.getUserData().getBotlevel();
         initboardElements();
         initPlayerDeck();
         initBotDeck();

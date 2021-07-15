@@ -5,7 +5,9 @@ import model.cards.levelEnums.ValkyrieLevel;
 import model.cards.troops.attributes.Speed;
 import model.cards.troops.attributes.Target;
 
-public class Valkyrie extends Troop {
+import java.io.Serializable;
+
+public class Valkyrie extends Troop implements Serializable {
     private ValkyrieLevel valkyrieLevel;
 
     public Valkyrie(ValkyrieLevel valkyrieLevel) {

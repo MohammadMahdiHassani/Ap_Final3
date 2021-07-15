@@ -1,6 +1,8 @@
 package model.cards.levelEnums;
 
-public enum ArrowsLevel {
+import java.io.Serializable;
+
+public enum ArrowsLevel implements Serializable {
     LEVEL_1(144),
     LEVEL_2(156),
     LEVEL_3(174),

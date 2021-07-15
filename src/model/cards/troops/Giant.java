@@ -5,8 +5,10 @@ import model.cards.levelEnums.GiantLevel;
 import model.cards.troops.attributes.Speed;
 import model.cards.troops.attributes.Target;
 
+import java.io.Serializable;
 
-public class Giant extends Troop {
+
+public class Giant extends Troop implements Serializable {
 
     private GiantLevel level ;
 

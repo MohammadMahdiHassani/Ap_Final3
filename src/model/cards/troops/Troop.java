@@ -4,8 +4,10 @@ import model.cards.troops.attributes.Speed;
 import model.cards.troops.attributes.Target;
 import model.cards.Card;
 
+import java.io.Serializable;
 
-public abstract class Troop extends Card {
+
+public abstract class Troop extends Card implements Serializable {
 
 
     private int hitPoint ;

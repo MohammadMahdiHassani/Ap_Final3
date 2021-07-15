@@ -1,6 +1,8 @@
 package model.cards.levelEnums;
 
-public enum BarbarianLevel {
+import java.io.Serializable;
+
+public enum BarbarianLevel implements Serializable {
 
         LEVEL_1(33, 300),
         LEVEL_2(44, 330),

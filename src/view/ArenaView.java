@@ -151,7 +151,7 @@ public class ArenaView extends Group {
 
     public void update(ArenaModel model) {
         countTime++;
-        if (countTime % 2 == 0 ) {
+        if (countTime % 2 == 0) {
             decreaseTime();
             countTime = 0;
         }
@@ -167,40 +167,36 @@ public class ArenaView extends Group {
                 } else if (cellValues[i][j].getValue() == CellValue.ARCHERTOWER) {
                     componentView[i][j].setImage(ARROWS.getThumbnailImage());
                 } else if (cellValues[i][j].getValue() == GIANT) {
-                    componentView[i][j].setImage(GIANT.getThumbnailImage());
+                    componentView[i][j].setImage(GIANT.getActionImage());
                 } else if (cellValues[i][j].getValue() == ARCHER) {
                     componentView[i][j].setImage(ARCHER.getThumbnailImage());
                 } else if (cellValues[i][j].getValue() == CANNON) {
                     componentView[i][j].setImage(CANNON.getThumbnailImage());
                 } else if (cellValues[i][j].getValue() == BARBERIAN) {
                     componentView[i][j].setImage(BARBERIAN.getActionImage());
-                }else if (cellValues[i][j].getValue() == BABY_DRAGON) {
+                } else if (cellValues[i][j].getValue() == BABY_DRAGON) {
                     componentView[i][j].setImage(BABY_DRAGON.getActionImage());
-                }else if (cellValues[i][j].getValue() == WIZARD) {
+                } else if (cellValues[i][j].getValue() == WIZARD) {
                     componentView[i][j].setImage(WIZARD.getActionImage());
-                }else if (cellValues[i][j].getValue() == MINI_PEKA) {
+                } else if (cellValues[i][j].getValue() == MINI_PEKA) {
                     componentView[i][j].setImage(MINI_PEKA.getActionImage());
-                }else if (cellValues[i][j].getValue() == VALKYRIE) {
+                } else if (cellValues[i][j].getValue() == VALKYRIE) {
                     componentView[i][j].setImage(VALKYRIE.getActionImage());
-                }else if (cellValues[i][j].getValue() == RAGE) {
+                } else if (cellValues[i][j].getValue() == RAGE) {
                     componentView[i][j].setImage(RAGE.getActionImage());
-                }
-                else if (cellValues[i][j].getValue() == BABY_DRAGON) {
+                } else if (cellValues[i][j].getValue() == BABY_DRAGON) {
                     componentView[i][j].setImage(BABY_DRAGON.getActionImage());
-                }else if (cellValues[i][j].getValue() == WIZARD) {
+                } else if (cellValues[i][j].getValue() == WIZARD) {
                     componentView[i][j].setImage(WIZARD.getActionImage());
-                }else if (cellValues[i][j].getValue() == MINI_PEKA) {
+                } else if (cellValues[i][j].getValue() == MINI_PEKA) {
                     componentView[i][j].setImage(MINI_PEKA.getActionImage());
-                }else if (cellValues[i][j].getValue() == VALKYRIE) {
+                } else if (cellValues[i][j].getValue() == VALKYRIE) {
                     componentView[i][j].setImage(VALKYRIE.getActionImage());
-                }
-                else if (cellValues[i][j].getValue() == INFERNO) {
+                } else if (cellValues[i][j].getValue() == INFERNO) {
                     componentView[i][j].setImage(INFERNO.getActionImage());
-                }
-                else if (cellValues[i][j].getValue() == RAGE) {
+                } else if (cellValues[i][j].getValue() == RAGE) {
                     componentView[i][j].setImage(RAGE.getActionImage());
-                }
-                else if (cellValues[i][j].getValue() == ARROWS){
+                } else if (cellValues[i][j].getValue() == ARROWS) {
                     componentView[i][j].setImage(ARROWS.getActionImage());
                 }
 

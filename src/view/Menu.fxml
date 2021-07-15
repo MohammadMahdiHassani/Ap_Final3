@@ -136,12 +136,12 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <ImageView fx:id="button2v2" fitHeight="84.0" fitWidth="151.0" layoutX="147.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <ImageView fx:id="button1v1" fitHeight="84.0" fitWidth="151.0" layoutX="147.0" layoutY="176.0" onMouseClicked="#actionHandler" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <image>
                         <Image url="@photos/Button_Battle_2v2.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="182.0" layoutY="197.0" text="2V2" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <Label layoutX="182.0" layoutY="197.0" text="1V1" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <font>
                         <Font size="24.0" />
                      </font>

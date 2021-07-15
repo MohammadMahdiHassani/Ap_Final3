@@ -1,6 +1,8 @@
 package model.cards.levelEnums;
 
-public enum KingTowerLevel {
+import java.io.Serializable;
+
+public enum KingTowerLevel implements Serializable {
 
     LEVEL_1(126,2000) ,
     LEVEL_2(138,2200) ,

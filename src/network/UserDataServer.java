@@ -1,30 +1,40 @@
-package DataBase;
+package network;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import DataBase.GameHistory;
 import model.cards.CellValue;
 import model.cards.Card;
 import model.cards.levelEnums.Botlevel;
 import model.cards.levelEnums.Level;
 
-public class UserData implements Serializable {
+public class UserDataServer implements Serializable {
     private final String userName ;
     private final String password ;
     private int XP ;
     private int troopy ;
     private final ArrayList<GameHistory> histories ;
-    private  ArrayList<Card> playerDeck;
+    private  ArrayList<String> playerDeck;
     private Botlevel botlevel ;
+    private Level level;
 
-    public UserData(String userName, String password){
+    UserDataServer(String userName , String password){
         this.userName = userName ;
         this.password = password ;
         troopy = 0 ;
         XP = 0 ;
         histories = new ArrayList<>() ;
         playerDeck = new ArrayList<>() ;
+    }
+
+    public Level getLevel() {
+        return level;
+    }
+
+    public void setLevel(Level level) {
+        this.level = level;
     }
 
     public String getUserName() {
@@ -47,7 +57,7 @@ public class UserData implements Serializable {
         return histories;
     }
 
-    public ArrayList<Card> getPlayerDeck() {
+    public ArrayList<String> getPlayerDeck() {
         return playerDeck;
     }
 
@@ -59,7 +69,7 @@ public class UserData implements Serializable {
         this.troopy = troopy;
     }
 
-    public void setPlayerDeck(ArrayList<Card> playerDeck) {
+    public void setPlayerDeck(ArrayList<String> playerDeck) {
         this.playerDeck = playerDeck;
     }
 

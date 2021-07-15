@@ -11,6 +11,9 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import network.Client;
+import network.TransferDataReceive;
+import network.TransferDataSend;
 
 import java.io.IOException;
 
@@ -19,7 +22,8 @@ public class MenuController {
     private Label xp;
     @FXML
     private ImageView gameHistory;
-
+    @FXML
+    private ImageView button1v1;
     @FXML
     private ImageView battleDeck;
 
@@ -38,28 +42,49 @@ public class MenuController {
     @FXML
     private ImageView battleButton;
 
-    @FXML
-    private ImageView button2v2;
+    public static TransferDataReceive transferDataReceive;
+    public static TransferDataSend transferDataSend;
+
+    public static boolean isOnServer;
 
     private UserData userData;
 
 
     public void initialize() {
+        isOnServer = false;
         TroopyCounter.setText(String.valueOf(DataHandler.getUserData().getTroopy()));
         XPprogressSlider.setProgress(DataHandler.getUserData().getXP() / 2500);
         xp.setText(DataHandler.getUserData().getXP() + "");
     }
 
     @FXML
-    void actionHandler(MouseEvent event) throws IOException {
+    void actionHandler(MouseEvent event) throws IOException, InterruptedException {
+        if (event.getSource() == button1v1) {
+            isOnServer = true;
+            Client client = new Client();
 
-        String fxmlAddress = getFxml(event);
-        Parent root = FXMLLoader.load(getClass().getResource(fxmlAddress));
-        Stage stage = (Stage) mainPage.getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.setResizable(false);
-        stage.show();
+            client.Connect(button1v1);
+            transferDataSend = new TransferDataSend(client.getObjectOutputStream());
+            transferDataReceive = new TransferDataReceive(client.getObjectInputStream());
+            try {
+                Thread.sleep(800);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Parent root = FXMLLoader.load(getClass().getResource("../view/ChooseBot.fxml"));
+            Stage stage = (Stage) mainPage.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.show();
 
+        } else if ((event.getSource() == profilePage || event.getSource() == battleDeck) || (event.getSource() == battleButton)) {
+            String fxmlAddress = getFxml(event);
+            Parent root = FXMLLoader.load(getClass().getResource(fxmlAddress));
+            Stage stage = (Stage) mainPage.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.show();
+        }
     }
 
     private String getFxml(MouseEvent event) {
@@ -71,6 +96,8 @@ public class MenuController {
             return "../view/Deck.fxml";
         } else if (event.getSource() == battleButton) {
             return "../view/ChooseBot.fxml";
+        } else if (event.getSource() == button1v1) {
+            return "../view/Loading.fxml";
         } else {
             return "";
         }

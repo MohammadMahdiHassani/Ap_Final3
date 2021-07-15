@@ -21,9 +21,9 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class GameLogic {
-    private int speedCounter ; 
+    private int speedCounter ;
     private ArenaModel model;
-    private GameData data;
+    public GameData data;
     private Point2D currPoint;
     private Card currCard;
     private boolean playerMoved;
@@ -36,7 +36,7 @@ public class GameLogic {
 
     public GameLogic() {
         playerMoved = false;
-        speedCounter = 0 ; 
+        speedCounter = 0 ;
     }
 
     public void preprocessLogic() {
@@ -44,12 +44,16 @@ public class GameLogic {
         data = ArenaModel.arenaModel.gameData;
     }
 
+    public GameData getData() {
+        return data;
+    }
+
     public void executeLogic() {
         model.vectorMap = new HashMap<>();
         checkForPlayerMove();
         updateCards();
         updateBoard();
-        if (playerMoved) {
+        if (playerMoved && !MenuController.isOnServer) {
             executeBot();
             playerMoved = false;
         }
@@ -122,7 +126,7 @@ public class GameLogic {
         speedCounter++ ;
         for (GameElement m : data.boardElements) {
             if (m instanceof Card) {
-                
+
                 if(m instanceof Troop) {
                     troopLogic((Troop) m) ;
                     }
@@ -139,7 +143,7 @@ public class GameLogic {
                         case INFERNO:
                     }
                 }
-                
+
             } else {
 
             }
@@ -307,14 +311,14 @@ public class GameLogic {
     }
 
     private GameElement findCardInRang(GameElement card){
-        int minimumRang = 100; 
-        GameElement result = null; 
+        int minimumRang = 100;
+        GameElement result = null;
         for(GameElement i : data.boardElements){
             if(!isOpposing(i , card))
-                continue ; 
+                continue ;
                 if(i.getPoint().distance(card.getPoint()) < card.getRange() && isTargetApproved(i , card)) {
                     if(card.getRange() < minimumRang)
-                    {minimumRang = card.getRange(); 
+                    {minimumRang = card.getRange();
                     result = i;
                     if(card instanceof Giant)
                         System.out.println("Giant target selected -> " + i.getPoint() + i.getValue());}
@@ -398,8 +402,8 @@ public class GameLogic {
     }
     private boolean isOpposing(GameElement element_1 , GameElement element_2) {
         if(isPlayerElement(element_1) && isBotElement(element_2))
-            return true ; 
-        else return isBotElement(element_1) && isPlayerElement(element_2); 
+            return true ;
+        else return isBotElement(element_1) && isPlayerElement(element_2);
     }
 
     private void addToBoard(GameElement card , Point2D point) {
