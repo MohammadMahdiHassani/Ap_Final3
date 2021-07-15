@@ -1,39 +1,39 @@
 package controller;
 
 import DataBase.DataHandler;
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.geometry.Orientation;
 import javafx.geometry.Point2D;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.transform.Translate;
 import javafx.util.Callback;
+import javafx.util.Duration;
 import model.GameElement;
 import model.cards.Card;
 import model.cards.CardFactory;
 import model.cards.levelEnums.KingTowerLevel;
+import model.cards.spells.Spell;
+import model.cards.troops.Troop;
 import model.game.ArenaModel;
 import model.towers.KingTower;
 import view.ArenaView;
 
 import javafx.scene.input.MouseEvent;
 
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 public class ArenaController implements EventHandler<MouseEvent> {
-    final private static double FRAMES_PER_SECOND = 2.0;
+    final private static double FRAMES_PER_SECOND = 2;
 
     @FXML
     private ListView<Card> listArmy;
@@ -103,12 +103,10 @@ public class ArenaController implements EventHandler<MouseEvent> {
     }
 
     private void update() {
-
         increaseElixir();
         model.move();
         arenaView.update(model);
-
-
+        processAnimations(model.getVectorMap());
     }
 
     public double getBoardWidth() {
@@ -204,12 +202,29 @@ public class ArenaController implements EventHandler<MouseEvent> {
         return listArmy.getPrefHeight();
     }
 
-    void cellViewInit() {
-
-    }
-
     public ProgressBar getElixirProgress() {
         return elixirProgress;
+    }
+
+    private void processAnimations(HashMap<GameElement , ArrayList<Point2D>> animationMap){
+        if(animationMap.size() == 0)
+            return ;
+        for(GameElement i : animationMap.keySet()){
+            if(!(i instanceof Spell)){
+
+                Point2D starting_point = i.getPoint();
+                Color color ;
+                if(model.isBot(i))
+                    color = Color.RED ;
+                else
+                    color = Color.BLUE ;
+
+                for(Point2D ending_point : animationMap.get(i)){
+                    arenaView.drawCircle(starting_point , ending_point , 3 ,  color );
+                }
+
+            }
+        }
     }
 
 
