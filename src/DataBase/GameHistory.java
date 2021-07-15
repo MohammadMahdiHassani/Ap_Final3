@@ -1,8 +1,9 @@
 package DataBase;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class GameHistory {
+public class GameHistory implements Serializable {
     private String userName_1 ;
     private String userName_2 ;
     private String date ;

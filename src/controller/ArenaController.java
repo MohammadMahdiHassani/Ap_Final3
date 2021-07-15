@@ -20,9 +20,14 @@ import javafx.util.Callback;
 import model.GameElement;
 import model.cards.Card;
 import model.cards.CardFactory;
+import model.cards.CellValue;
 import model.cards.levelEnums.KingTowerLevel;
+import model.cards.levelEnums.Level;
 import model.game.ArenaModel;
 import model.towers.KingTower;
+import network.Request;
+import network.TransferDataReceive;
+import network.TransferDataSend;
 import view.ArenaView;
 
 import javafx.scene.input.MouseEvent;
@@ -50,6 +55,9 @@ public class ArenaController implements EventHandler<MouseEvent> {
 
     public Card nextCard;
 
+    private TransferDataSend transferDataSend;
+    private TransferDataReceive transferDataReceive;
+
     @FXML
     private ImageView nextCardImage;
 
@@ -67,9 +75,9 @@ public class ArenaController implements EventHandler<MouseEvent> {
     }
 
     public void initialize() {
+        new Thread(MenuController.transferDataReceive).start();
         initializeListArmy();
         arenaView.setBackgroundCell(model);
-
         startTimer();
     }
 
@@ -102,13 +110,54 @@ public class ArenaController implements EventHandler<MouseEvent> {
         }
     }
 
-    private void update() {
+    public void updateByOther() {
+        String card = MenuController.transferDataReceive.getCard();
+        double x = MenuController.transferDataReceive.getX();
+        double y = MenuController.transferDataReceive.getY();
+        System.out.println(card + " was received");
+        Point2D point2D = new Point2D(x, y);
+        Card card1 = null;
+        if (card.equals("GIANT")) {
+            card1 = CardFactory.makeCard(CellValue.GIANT, Level.LEVEL_1);
+        } else if (card.equals("ARCHER")) {
+            card1 = CardFactory.makeCard(CellValue.ARCHER, Level.LEVEL_1);
+        }else if (card.equals("BARBERAIN")) {
+            card1 = CardFactory.makeCard(CellValue.BARBERIAN, Level.LEVEL_1);
+        }else if (card.equals("BABY_DRAGON")) {
+            card1 = CardFactory.makeCard(CellValue.BABY_DRAGON, Level.LEVEL_1);
+        }else if (card.equals("WIZARD")) {
+            card1 = CardFactory.makeCard(CellValue.WIZARD, Level.LEVEL_1);
+        }else if (card.equals("VALKYRIE")) {
+            card1 = CardFactory.makeCard(CellValue.VALKYRIE, Level.LEVEL_1);
+        }else if (card.equals("CANNON")) {
+            card1 = CardFactory.makeCard(CellValue.CANNON, Level.LEVEL_1);
+        }else if (card.equals("INFERNO")) {
+            card1 = CardFactory.makeCard(CellValue.INFERNO, Level.LEVEL_1);
+        }else if (card.equals("MINI_PEKA")) {
+            card1 = CardFactory.makeCard(CellValue.MINI_PEKA, Level.LEVEL_1);
+        }else if (card.equals("RAGE")) {
+            card1 = CardFactory.makeCard(CellValue.RAGE, Level.LEVEL_1);
+        }else if (card.equals("ARROWS")) {
+            card1 = CardFactory.makeCard(CellValue.ARROWS, Level.LEVEL_1);
+        }else if (card.equals("FIREBALL")) {
+            card1 = CardFactory.makeCard(CellValue.FIREBALL, Level.LEVEL_1);
+        }
 
+        card1.setPoint(point2D);
+        model.getLogic().data.boardElements.add(card1);
+}
+
+    private void update() {
         increaseElixir();
+        if (MenuController.isOnServer) {
+            if (MenuController.transferDataReceive.isReceive()) {
+                MenuController.transferDataReceive.setReceive(false);
+                updateByOther();
+                new Thread(MenuController.transferDataReceive).start();
+            }
+        }
         model.move();
         arenaView.update(model);
-
-
     }
 
     public double getBoardWidth() {
@@ -131,9 +180,15 @@ public class ArenaController implements EventHandler<MouseEvent> {
         mouseEvent.consume();
         if (listArmy.getSelectionModel().getSelectedItem() != null) {
             if (listArmy.getSelectionModel().getSelectedItem().getCost() <= (elixirProgress.getProgress() * 10)) {
+                if (MenuController.isOnServer) {
+                    MenuController.transferDataSend.setRequest(new Request(listArmy.getSelectionModel().getSelectedItem().getValue().toString(), x, y));
+                    new Thread(MenuController.transferDataSend).start();
+                }
                 model.setCurrPoint(new Point2D(x, y));
                 elixirProgress.setProgress(elixirProgress.getProgress() - ((double) listArmy.getSelectionModel().getSelectedItem().getCost() / 10));
+
                 removeFromListArmy(listArmy.getSelectionModel().getSelectedIndex());
+
 
             }
 

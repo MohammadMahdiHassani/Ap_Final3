@@ -10,7 +10,7 @@ import model.cards.troops.enums.Target;
 import java.io.Serializable;
 import java.security.SecureRandom;
 
-public class Archer extends Troop implements Serializable {
+public class Archer extends Troop implements Serializable{
 
     private ArcherLevel level;
     public Archer(ArcherLevel level) {

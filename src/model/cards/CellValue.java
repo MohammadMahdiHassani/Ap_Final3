@@ -4,7 +4,7 @@ import javafx.scene.image.Image;
 
 import java.io.Serializable;
 
-public enum CellValue implements Serializable {
+public enum CellValue {
 
     GIANT( new Image("/view/photos/giant.png"),  new Image("/view/photos/giant.png")),
     ARCHER(new Image("/view/photos/archers.png") , new Image ("/view/photos/archers.png")) ,

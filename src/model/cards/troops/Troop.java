@@ -6,8 +6,10 @@ import model.cards.troops.enums.Target;
 import javafx.scene.image.Image;
 import model.cards.Card;
 
+import java.io.Serializable;
 
-public abstract class Troop extends Card {
+
+public abstract class Troop extends Card implements Serializable {
 
 
     private int hitPoint ;

@@ -132,6 +132,9 @@ public class ArenaModel {
         logic.executeLogic() ;
     }
 
+    public GameLogic getLogic() {
+        return logic;
+    }
 
     public void setCurrPoint(Point2D point2D){
         logic.setCurrPoint(point2D);

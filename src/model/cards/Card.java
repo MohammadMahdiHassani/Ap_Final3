@@ -5,7 +5,7 @@ import model.GameElement;
 
 import java.io.Serializable;
 
-public abstract class Card extends GameElement implements Serializable {
+public abstract class Card extends GameElement {
     private int cost ;
 
     public Card(CellValue value ,int cost) {

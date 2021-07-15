@@ -1,6 +1,7 @@
 package model.game;
 
 import controller.ArenaController;
+import controller.MenuController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
@@ -17,7 +18,7 @@ import java.util.Random;
 
 public class GameLogic {
     private ArenaModel model;
-    private GameData data;
+    public GameData data;
     private Point2D currPoint;
     private Card currCard;
     private boolean playerMoved;
@@ -37,15 +38,23 @@ public class GameLogic {
         data = ArenaModel.arenaModel.gameData;
     }
 
+    public GameData getData() {
+        return data;
+    }
+
     public void executeLogic() {
 
         checkForPlayerMove();
         updateCards();
         updateBoard();
-        if (playerMoved) {
+        if (playerMoved && !MenuController.isOnServer) {
             executeBot();
             playerMoved = false;
         }
+//        if (playerMoved && MenuController.isOnServer)
+//        {
+//
+//        }
     }
 
 

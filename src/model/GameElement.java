@@ -4,7 +4,9 @@ import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import model.cards.CellValue;
 
-public abstract class GameElement {
+import java.io.Serializable;
+
+public abstract class GameElement implements Serializable {
     private CellValue value ;
     private Point2D point ;
 

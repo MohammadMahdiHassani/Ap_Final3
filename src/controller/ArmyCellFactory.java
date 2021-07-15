@@ -38,8 +38,10 @@ public class ArmyCellFactory extends ListCell<Card> {
             setGraphic(null);
         }
         else{
-            imageView.setImage((item.getValue().getThumbnailImage()));
-            setGraphic(hBox);
+            if (item.getValue() != null) {
+                imageView.setImage((item.getValue().getThumbnailImage()));
+                setGraphic(hBox);
+            }
         }
 
 
