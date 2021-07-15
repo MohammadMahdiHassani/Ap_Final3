@@ -2,6 +2,7 @@ package network;
 
 import javafx.geometry.Point2D;
 import model.cards.Card;
+import model.cards.levelEnums.Level;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -12,6 +13,7 @@ public class TransferDataReceive implements Runnable{
     private boolean isReceive;
     private double x;
     private double y;
+    private Level level;
 
     public TransferDataReceive(ObjectInputStream objectInputStream)
     {
@@ -35,6 +37,7 @@ public class TransferDataReceive implements Runnable{
                 x = request.getX();
                 y = request.getY();
                 card = request.getCard();
+                level = request.getLevel();
                 isReceive = true;
                 break;
             } catch (IOException e) {
@@ -53,6 +56,9 @@ public class TransferDataReceive implements Runnable{
         return x;
     }
 
+    public Level getLevel() {
+        return level;
+    }
 
     public String getCard() {
         return card;

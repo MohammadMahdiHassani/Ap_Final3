@@ -41,21 +41,29 @@ public class ClientHandler implements Runnable {
     public Request changeDirection(Request request) {
         double x = request.getX();
         double y = request.getY();
+        System.out.println("x: "+x);
+        System.out.println("y: " + y);
 
 
-        if (x > 10) {
-            x = x - 2 * Math.abs(x - 10);
+        if (x > 9) {
+            x = x - (2 * Math.abs(x - 9));
+        } else if (x == 9) {
+            x = 9;
         } else {
-            x = x + 2 * Math.abs(x - 10);
-        }
-        if (y > 11) {
-            y = y - 2 * Math.abs(x - 11);
-        } else {
-            y = y + 2 * Math.abs(y - 11);
+            x = x + (2 * Math.abs(x - 9));
         }
 
-        Request request1 = new Request(request.getCard(), x, y);
-        return  request1;
+        if (y > 10) {
+            y = y - (2 * Math.abs(y - 10));
+        } else if (y == 10) {
+            y = 10;
+        } else {
+            y = y + (2 * Math.abs(y - 10));
+        }
+        System.out.println("change x: "+x);
+        System.out.println("change y: " + y);
+        Request request1 = new Request(request.getCard(), clientDetail.getUserDataServer().getLevel(), x, y);
+        return request1;
 
     }
 }

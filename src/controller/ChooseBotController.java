@@ -45,7 +45,7 @@ public class ChooseBotController {
             ArenaController arenaController = fxmlLoader.getController();
             root.setOnMouseClicked(arenaController);
             Stage stage = (Stage) hardButton.getScene().getWindow();
-            root.setOnMouseClicked(arenaController);
+
             stage.setScene(new Scene(root, arenaController.getBoardWidth(), arenaController.getBoardHeight() + arenaController.getPrefHeightList() + arenaController.getElixirProgress().getPrefHeight() + 5));
             stage.show();
         }

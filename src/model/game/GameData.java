@@ -1,10 +1,12 @@
 package model.game;
 
 import DataBase.DataHandler;
+import controller.MenuController;
 import javafx.geometry.Point2D;
 import model.GameElement;
 import model.cards.Card;
 import model.cards.CardFactory;
+import model.cards.CellValue;
 import model.cards.levelEnums.*;
 import model.towers.ArcherTower;
 import model.towers.KingTower;
@@ -17,7 +19,7 @@ import java.util.Scanner;
 
 public class GameData {
     ArrayList<GameElement> playerDeck;
-    ArrayList<GameElement> botDeck;
+    public ArrayList<GameElement> botDeck;
     public ArrayList<GameElement> boardElements;
     Botlevel botlevel;
     Point2D leftBridge;
@@ -27,7 +29,9 @@ public class GameData {
         botlevel = DataHandler.getUserData().getBotlevel();
         initboardElements();
         initPlayerDeck();
+
         initBotDeck();
+
         addingTowersTodecks();
     }
 
@@ -68,14 +72,20 @@ public class GameData {
 
     private void initBotDeck() {
         botDeck = new ArrayList<>();
-
-        switch(botlevel){
+        if (botlevel == null)
+        {
+            botlevel = Botlevel.RANDOME;
+        }
+        switch (botlevel) {
             case RANDOME:
-                initRandomBotDeck() ; 
+                initRandomBotDeck();
             case MEDIUM:
-                initMediumBotDeck() ;
+                initMediumBotDeck();
             case HARD:
-                initHardBotDeck() ; 
+                initHardBotDeck();
+
+
+
         }
     }
 
@@ -98,7 +108,7 @@ public class GameData {
     private void initPlayerDeck() {
         playerDeck = new ArrayList<>();
         ArrayList<Card> deck = DataHandler.getUserData().getPlayerDeck();
-        playerDeck.addAll (deck);
+        playerDeck.addAll(deck);
     }
 
     private void addingTowersTodecks() {

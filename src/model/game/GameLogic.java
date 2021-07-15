@@ -287,8 +287,10 @@ public class GameLogic {
 
 
     private boolean moveToBridge(Troop card) {
-        if (isBotElement(card) && card.getPoint().getY() >= 10)
+        if (isBotElement(card) && card.getPoint().getY() >= 10) {
+            System.out.println("connect to bridge");
             return true;
+        }
         else if (isPlayerElement(card) && card.getPoint().getY() <= 10)
             return true;
 
