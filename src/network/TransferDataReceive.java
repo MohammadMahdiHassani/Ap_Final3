@@ -37,9 +37,7 @@ public class TransferDataReceive implements Runnable{
                 card = request.getCard();
                 isReceive = true;
                 break;
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
+            } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
         }

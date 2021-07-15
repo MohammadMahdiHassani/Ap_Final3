@@ -16,7 +16,6 @@ import java.util.ArrayList;
 
 public class Client {
     private Socket socket;
-    private UserData userData;
     private ImageView button1v1;
 
     private ObjectOutputStream objectOutputStream;
@@ -79,7 +78,7 @@ public class Client {
 
         createUserData();
         this.button1v1 = button1v1;
-        userData = DataHandler.getUserData();
+        DataBase.UserData userData = DataHandler.getUserData();
         try {
             socket = new Socket("localhost",9000);
             this.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());

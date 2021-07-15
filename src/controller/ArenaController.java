@@ -147,6 +147,7 @@ public class ArenaController implements EventHandler<MouseEvent> {
 
         card1.setPoint(point2D);
         model.getLogic().data.boardElements.add(card1);
+        model.getLogic().data.getBotDeck().add(card1);
 }
 
     private void update() {

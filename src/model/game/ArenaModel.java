@@ -142,15 +142,6 @@ public class ArenaModel {
     public void setCurrPoint(Point2D point2D){
         logic.setCurrPoint(point2D);
     }
-    public ObservableList<Card> getDeck(){
-
-        ArrayList<Card> arr = new ArrayList<>() ;
-        for(GameElement i : gameData.playerDeck){
-            if(i instanceof Card)
-                arr.add((Card) i);
-        }
-        return FXCollections.observableArrayList(arr) ;
-    }
     public void setCurrCard(Card currCard) {
         logic.setCurrCard(currCard);
     }

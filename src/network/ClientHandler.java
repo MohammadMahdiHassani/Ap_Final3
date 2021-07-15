@@ -30,9 +30,7 @@ public class ClientHandler implements Runnable {
                 } else if (clientDetail.getId() == 1) {
                     server.sendRequest(0, request1);
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
+            } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
         }

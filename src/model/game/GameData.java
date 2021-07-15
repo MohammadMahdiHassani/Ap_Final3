@@ -127,4 +127,8 @@ public class GameData {
     public void setBotlevel(Botlevel botlevel) {
         this.botlevel = botlevel;
     }
+
+    public ArrayList<GameElement> getBotDeck() {
+        return botDeck;
+    }
 }
