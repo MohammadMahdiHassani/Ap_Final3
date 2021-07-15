@@ -1,21 +1,27 @@
 package model.game;
 
-import controller.ArenaController;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import DataBase.DataHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import model.GameElement;
 import model.cards.Card;
-import model.cards.levelEnums.Botlevel;
+import model.cards.CardFactory;
+import model.cards.buildings.Building;
+import model.cards.spells.Spell;
+import model.cards.troops.Archer;
+import model.cards.troops.BabyDragon;
+import model.cards.troops.Giant;
+import model.cards.troops.Troop;
 import model.towers.Tower;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 public class GameLogic {
+    private int speedCounter ; 
     private ArenaModel model;
     private GameData data;
     private Point2D currPoint;
@@ -30,6 +36,7 @@ public class GameLogic {
 
     public GameLogic() {
         playerMoved = false;
+        speedCounter = 0 ; 
     }
 
     public void preprocessLogic() {
@@ -38,7 +45,7 @@ public class GameLogic {
     }
 
     public void executeLogic() {
-
+        model.vectorMap = new HashMap<>();
         checkForPlayerMove();
         updateCards();
         updateBoard();
@@ -52,8 +59,7 @@ public class GameLogic {
     private void checkForPlayerMove() {
         if (currPoint != null && currCard != null) {
             if (point2cellValue(currPoint) == null) {
-                currCard.setPoint(currPoint);
-                data.boardElements.add(currCard);
+                addToBoard(currCard , currPoint);
                 playerMoved = true;
                 currCard = null;
                 currPoint = null;
@@ -77,9 +83,7 @@ public class GameLogic {
                 while(isOccupied(randomPoint))
                     randomPoint = getRandomPoint();
 
-                card.setPoint(randomPoint);
-                data.boardElements.add(card);
-
+                addToBoard(card , randomPoint);
                 break;
 
             case MEDIUM:
@@ -92,9 +96,9 @@ public class GameLogic {
         ArrayList<GameElement> elements = data.botDeck;
         Random rnd = new Random();
         int x = rnd.nextInt(elements.size());
-        while(data.boardElements.contains(elements.get(x)))
+        while(elements.get(x) instanceof Tower) {
             x = rnd.nextInt(elements.size());
-
+        }
         return (Card) elements.get(x);
     }
 
@@ -115,37 +119,27 @@ public class GameLogic {
 
     private void updateCards() {
 
-
+        speedCounter++ ;
         for (GameElement m : data.boardElements) {
             if (m instanceof Card) {
+                
+                if(m instanceof Troop) {
+                    troopLogic((Troop) m) ;
+                    }
 
-                switch (m.getValue()) {
-                    case GIANT:
-                        giantLogic((Card) m);
-                        break;
-                    case ARCHER:
-                        archerLogic((Card) m);
-                        break;
-                    case BARBERIAN:
-                        barbariansLogic((Card) m);
-                        break;
-                    case MINI_PEKA:
-                        miniPekkaLogic((Card) m);
-                        break;
-                    case WIZARD:
-                        wizardLogic((Card) m);
-                        break;
-                    case BABY_DRAGON:
-                        babyDragonLogic((Card) m);
-                        break;
-                    case VALKYRIE:
-                    case CANNON:
-                    case INFERNO:
-                    case FIREBALL:
-                    case RAGE:
-                    case ARROWS:
+                else if(m instanceof Spell){
+                    switch (m.getValue()){
+                        case RAGE:
+                        case FIREBALL:
+                    }
                 }
-
+                else if(m instanceof Building){
+                    switch (m.getValue()){
+                        case CANNON:
+                        case INFERNO:
+                    }
+                }
+                
             } else {
 
             }
@@ -154,7 +148,57 @@ public class GameLogic {
 
     }
 
-    private boolean moveToBridge(Card card) {
+    private void troopLogic(Troop m) {
+        if(m instanceof Archer) {
+            GameElement target = findCardInRang(m);
+            if (target != null)
+                shootTarget(m, target);
+            else {
+                if (moveToBridge(m))
+                    moveToTower(m);
+            }
+        }
+        else if(m instanceof Giant) {
+            GameElement target = findCardInRang(m);
+            if (target != null)
+                shootTarget(m, target);
+            else
+                if (moveToBridge(m))
+                    moveToTower(m);
+
+        }
+        else{
+            if (moveToBridge(m))
+                moveToTower(m);
+
+        }
+
+    }
+
+    private void shootTarget(Troop m, GameElement target) {
+        if(m.isAllowedToHit()){
+            boolean flag = false ;
+            if(target instanceof Tower){
+                ((Tower) target).decreaseHitPoint(m.getDamage());
+                flag = true;
+            }
+            else if( target instanceof Troop) {
+                ((Troop) target).decreaseHitPoint(m.getDamage());
+                flag = true;
+            }
+
+            else if( target instanceof Building){
+                ((Building) target).decreaseHitPoint(m.getDamage());
+                flag = true ;
+            }
+            if(flag)
+               addToVectorMap(m , target);
+
+        }
+    }
+
+
+    private boolean moveToBridge(Troop card) {
         if (isBotElement(card) && card.getPoint().getY() >= 10)
             return true;
         else if (isPlayerElement(card) && card.getPoint().getY() <= 10)
@@ -180,7 +224,9 @@ public class GameLogic {
         }
     }
 
-    private void moveCard(Card movingCard, Point2D point) {
+    private void moveCard(Troop movingCard, Point2D point) {
+        if(!canMove(movingCard))
+            return ;
         Point2D cardPoint = movingCard.getPoint();
         int a1 = (int) (point.getX() - cardPoint.getX());
         int a2 = (int) (point.getY() - cardPoint.getY());
@@ -219,11 +265,29 @@ public class GameLogic {
         }
     }
 
+    private boolean canMove(Troop movingCard) {
+
+        switch(movingCard.getSpeed()){
+            case MEDIUM:
+                return speedCounter % 3 == 0;
+            case FAST:
+                return speedCounter % 2 == 0;
+            case SLOW:
+                return speedCounter % 5 == 0;
+        }
+        return false ;
+    }
+
     private void updateBoard() {
         model.cellValues = new GameElement[model.rowCount][model.columnCount];
-        for (GameElement i : data.boardElements) {
-            model.cellValues[(int) i.getPoint().getY()][(int) i.getPoint().getX()] = i;
+        ArrayList<GameElement> deadPlayers = new ArrayList<>() ;
+        for (GameElement ele : data.boardElements) {
+            if (ele.isDead())
+                deadPlayers.add(ele) ;
+            model.cellValues[(int) ele.getPoint().getY()][(int) ele.getPoint().getX()] = ele;
         }
+        for(GameElement i : deadPlayers)
+            deletFromBoard(i);
     }
 
     private boolean isBotElement(GameElement card) {
@@ -234,46 +298,6 @@ public class GameLogic {
         return data.playerDeck.contains(card);
     }
 
-    private void giantLogic(Card card) {
-        if (moveToBridge(card))
-            if (moveToTower(card));
-    }
-
-    private void wizardLogic(Card card) {
-
-        if (moveToBridge(card))
-            if (moveToTower(card));
-
-    }
-
-    private void barbariansLogic(Card card) {
-
-        if (moveToBridge(card))
-            if (moveToTower(card));
-
-    }
-
-    private void miniPekkaLogic(Card card) {
-
-        if (moveToBridge(card))
-            if (moveToTower(card));
-
-    }
-
-    private void babyDragonLogic(Card card) {
-
-        if (moveToBridge(card))
-            if (moveToTower(card));
-
-    }
-
-    private void archerLogic(Card card) {
-
-        if (moveToBridge(card))
-            if (moveToTower(card));
-
-    }
-
     private boolean isOccupied(Point2D point) {
         for (GameElement i : data.boardElements) {
             if (point.equals(i.getPoint()))
@@ -282,7 +306,49 @@ public class GameLogic {
         return false;
     }
 
-    private boolean moveToTower(Card card) {
+    private GameElement findCardInRang(GameElement card){
+        int minimumRang = 100; 
+        GameElement result = null; 
+        for(GameElement i : data.boardElements){
+            if(!isOpposing(i , card))
+                continue ; 
+                if(i.getPoint().distance(card.getPoint()) < card.getRange() && isTargetApproved(i , card)) {
+                    if(card.getRange() < minimumRang)
+                    {minimumRang = card.getRange(); 
+                    result = i;
+                    if(card instanceof Giant)
+                        System.out.println("Giant target selected -> " + i.getPoint() + i.getValue());}
+                }
+        }
+        return result ;
+    }
+
+    private boolean isTargetApproved(GameElement target, GameElement attacker) {
+        if(attacker instanceof Tower)
+            return true ;
+        else if(attacker instanceof Troop){
+            switch (((Troop) attacker).getTarget())
+            {
+                case ANY:
+                    return true ;
+                case GROUND:
+                    return ! (target instanceof BabyDragon) ;
+                case BUILDING:
+                    return (target instanceof Building || target instanceof Tower);
+            }
+        }
+        else if(attacker instanceof Building){
+            switch(((Building) attacker).getTarget()){
+                case GROUND :
+                    return ! (target instanceof BabyDragon) ;
+                case ANY:
+                    return true ;
+            }
+        }
+        return false ;
+    }
+
+    private boolean moveToTower(Troop card) {
         double closestDistance = 100;
         Point2D towerPoint = new Point2D(0, 0);
         for (GameElement i : data.boardElements) {
@@ -330,6 +396,45 @@ public class GameLogic {
         this.currCard = currCard;
 
     }
+    private boolean isOpposing(GameElement element_1 , GameElement element_2) {
+        if(isPlayerElement(element_1) && isBotElement(element_2))
+            return true ; 
+        else return isBotElement(element_1) && isPlayerElement(element_2); 
+    }
 
+    private void addToBoard(GameElement card , Point2D point) {
+        if (data.boardElements.contains(card)) {
+            Card newCard = CardFactory.makeCard(card.getValue(), DataHandler.getLevel());
+            newCard.setPoint(point);
+            data.boardElements.add(newCard);
+            if(isPlayerElement(card))
+                data.playerDeck.add(newCard);
+            else
+                data.botDeck.add(newCard);
+        } else {
+            data.boardElements.add(card);
+            card.setPoint(point);
+        }
+    }
+    private void deletFromBoard(GameElement card){
+        if(isPlayerElement(card))
+            data.playerDeck.remove(card);
+        else
+            data.botDeck.remove(card);
+
+        data.boardElements.remove(card);
+    }
+    private void addToVectorMap(GameElement element_1 , GameElement element_2){
+        ArrayList<GameElement> arr = new ArrayList<>();
+        arr.add(element_2);
+        addToVectorMap(element_1 , arr);
+    }
+    private void addToVectorMap(GameElement element , ArrayList<GameElement> elementsArr){
+        ArrayList<Point2D> pointsArr = new ArrayList<>() ;
+        for(GameElement ele : elementsArr)
+            pointsArr.add(ele.getPoint());
+
+        model.vectorMap.put(element , pointsArr);
+    }
 
 }
