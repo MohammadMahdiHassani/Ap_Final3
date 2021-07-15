@@ -1,6 +1,7 @@
 package model.game;
 
 import DataBase.DataHandler;
+import controller.MenuController;
 import javafx.geometry.Point2D;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
@@ -10,10 +11,7 @@ import model.cards.Card;
 import model.cards.CardFactory;
 import model.cards.buildings.Building;
 import model.cards.spells.Spell;
-import model.cards.troops.Archer;
-import model.cards.troops.BabyDragon;
-import model.cards.troops.Giant;
-import model.cards.troops.Troop;
+import model.cards.troops.*;
 import model.towers.Tower;
 
 import java.util.ArrayList;
@@ -21,7 +19,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class GameLogic {
-    private int speedCounter ;
+    private int speedCounter;
     private ArenaModel model;
     public GameData data;
     private Point2D currPoint;
@@ -36,7 +34,7 @@ public class GameLogic {
 
     public GameLogic() {
         playerMoved = false;
-        speedCounter = 0 ;
+        speedCounter = 0;
     }
 
     public void preprocessLogic() {
@@ -63,7 +61,7 @@ public class GameLogic {
     private void checkForPlayerMove() {
         if (currPoint != null && currCard != null) {
             if (point2cellValue(currPoint) == null) {
-                addToBoard(currCard , currPoint);
+                addToBoard(currCard, currPoint);
                 playerMoved = true;
                 currCard = null;
                 currPoint = null;
@@ -81,13 +79,13 @@ public class GameLogic {
 
             case RANDOME:
 
-                Card card = getRandomCard() ;
+                Card card = getRandomCard();
 
                 Point2D randomPoint = getRandomPoint();
-                while(isOccupied(randomPoint))
+                while (isOccupied(randomPoint))
                     randomPoint = getRandomPoint();
 
-                addToBoard(card , randomPoint);
+                addToBoard(card, randomPoint);
                 break;
 
             case MEDIUM:
@@ -100,105 +98,191 @@ public class GameLogic {
         ArrayList<GameElement> elements = data.botDeck;
         Random rnd = new Random();
         int x = rnd.nextInt(elements.size());
-        while(elements.get(x) instanceof Tower) {
+        while (elements.get(x) instanceof Tower) {
             x = rnd.nextInt(elements.size());
         }
         return (Card) elements.get(x);
     }
 
     private Point2D getRandomPoint() {
-        Random rnd = new Random() ;
+        Random rnd = new Random();
         int x = rnd.nextInt(18);
-        while(x < 2){
+        while (x < 2) {
             x = rnd.nextInt(18);
         }
         int y = rnd.nextInt(10);
-        while(y < 2){
+        while (y < 2) {
             y = rnd.nextInt(10);
         }
 
-        return new Point2D(x , y) ;
+        return new Point2D(x, y);
     }
 
 
     private void updateCards() {
 
-        speedCounter++ ;
+        speedCounter++;
         for (GameElement m : data.boardElements) {
             if (m instanceof Card) {
 
-                if(m instanceof Troop) {
-                    troopLogic((Troop) m) ;
-                    }
-
-                else if(m instanceof Spell){
-                    switch (m.getValue()){
+                if (m instanceof Troop) {
+                    troopLogic((Troop) m);
+                } else if (m instanceof Spell) {
+                    switch (m.getValue()) {
                         case RAGE:
                         case FIREBALL:
                     }
-                }
-                else if(m instanceof Building){
-                    switch (m.getValue()){
-                        case CANNON:
-                        case INFERNO:
-                    }
+                } else if (m instanceof Building) {
+                    buildingLogic((Building) m);
                 }
 
             } else {
 
+                towerLogic((Tower) m) ;
+
             }
 
         }
 
     }
 
-    private void troopLogic(Troop m) {
-        if(m instanceof Archer) {
-            GameElement target = findCardInRang(m);
-            if (target != null)
-                shootTarget(m, target);
-            else {
-                if (moveToBridge(m))
-                    moveToTower(m);
-            }
+    private void towerLogic(Tower m) {
+        ArrayList<GameElement> target = findCardInRang(m);
+        if (target.size() != 0)
+            shootTarget(m, target);
+    }
+
+    private void buildingLogic(Building m) {
+        if(!m.isTimerStarted())
+            m.startTimer();
+        switch (m.getValue()) {
+            case CANNON:
+                ArrayList<GameElement> target = findCardInRang(m);
+                if (target.size() != 0)
+                    shootTarget(m, target);
+            case INFERNO:
         }
-        else if(m instanceof Giant) {
-            GameElement target = findCardInRang(m);
-            if (target != null)
-                shootTarget(m, target);
-            else
+    }
+
+
+
+        private void troopLogic(Troop m) {
+            if (m instanceof Archer) {
+                ArrayList<GameElement> target = findCardInRang(m);
+                if (target.size() != 0)
+                    shootTarget(m, target);
+                else {
+                    if (moveToBridge(m))
+                        moveToTower(m);
+                }
+            }
+
+            else if(m instanceof Giant) {
+                ArrayList<GameElement> target = findCardInRang(m);
+                if (target.size() != 0)
+                    shootTarget(m, target);
+                else
                 if (moveToBridge(m))
                     moveToTower(m);
 
-        }
-        else{
+            }
+
+
+            else if (m instanceof Wizard) {
+                ArrayList<GameElement> target = findCardInRang(m);
+                if (target.size() != 0) {
+                    shootTarget(m, target);
+                }
+                else {
+                    if (moveToBridge(m))
+                        moveToTower(m);
+                }
+            }
+            else if(m instanceof BabyDragon)
+
+            {
+                ArrayList<GameElement> target = findCardInRang(m);
+                if (target.size() != 0)
+                    shootTarget(m, target);
+                else {
+                    if (moveToBridge(m))
+                        moveToTower(m);
+                }
+            }
+
+            else
             if (moveToBridge(m))
                 moveToTower(m);
 
+            }
+
+
+
+
+    private void shootTarget(GameElement m, ArrayList<GameElement> targets) {
+        if(m instanceof Spell){}
+        else if(m instanceof Building){
+
+            ArrayList<GameElement> targetList = new ArrayList<>() ;
+            for(GameElement target : targets) {
+                boolean flag = false ;
+                if (target instanceof Tower) {
+                    ((Tower) target).decreaseHitPoint(((Building) m).getDamage());
+                    flag = true;
+                } else if (target instanceof Troop) {
+                    ((Troop) target).decreaseHitPoint(((Building) m).getDamage());
+                    flag = true;
+                } else if (target instanceof Building) {
+                    ((Building) target).decreaseHitPoint(((Building) m).getDamage());
+                    flag = true;
+                }
+                if (flag)
+                    targetList.add(target) ;
+            }
+            addToVectorMap(m , targetList);
+        }
+        else if(m instanceof Troop){
+        if(((Troop) m).isAllowedToHit()){
+
+            ArrayList<GameElement> targetList = new ArrayList<>() ;
+            for(GameElement target : targets) {
+                boolean flag = false ;
+                if (target instanceof Tower) {
+                    ((Tower) target).decreaseHitPoint(((Troop) m).getDamage());
+                    flag = true;
+                } else if (target instanceof Troop) {
+                    ((Troop) target).decreaseHitPoint(((Troop) m).getDamage());
+                    flag = true;
+                } else if (target instanceof Building) {
+                    ((Building) target).decreaseHitPoint(((Troop) m).getDamage());
+                    flag = true;
+                }
+                if (flag)
+                    targetList.add(target) ;
+            }
+            addToVectorMap(m , targetList);
+            }
+        }
+        else if(m instanceof Tower){
+            ArrayList<GameElement> targetList = new ArrayList<>() ;
+            for(GameElement target : targets) {
+                boolean flag = false ;
+                if (target instanceof Tower) {
+                    ((Tower) target).decreaseHitPoint(((Tower) m).getDamage());
+                    flag = true;
+                } else if (target instanceof Troop) {
+                    ((Troop) target).decreaseHitPoint(((Tower) m).getDamage());
+                    flag = true;
+                } else if (target instanceof Building) {
+                    ((Building) target).decreaseHitPoint(((Tower) m).getDamage());
+                    flag = true;
+                }
+                if (flag)
+                    targetList.add(target) ;
+            }
+            addToVectorMap(m , targetList);
         }
 
-    }
-
-    private void shootTarget(Troop m, GameElement target) {
-        if(m.isAllowedToHit()){
-            boolean flag = false ;
-            if(target instanceof Tower){
-                ((Tower) target).decreaseHitPoint(m.getDamage());
-                flag = true;
-            }
-            else if( target instanceof Troop) {
-                ((Troop) target).decreaseHitPoint(m.getDamage());
-                flag = true;
-            }
-
-            else if( target instanceof Building){
-                ((Building) target).decreaseHitPoint(m.getDamage());
-                flag = true ;
-            }
-            if(flag)
-               addToVectorMap(m , target);
-
-        }
     }
 
 
@@ -310,25 +394,125 @@ public class GameLogic {
         return false;
     }
 
-    private GameElement findCardInRang(GameElement card){
-        int minimumRang = 100;
-        GameElement result = null;
-        for(GameElement i : data.boardElements){
-            if(!isOpposing(i , card))
-                continue ;
-                if(i.getPoint().distance(card.getPoint()) < card.getRange() && isTargetApproved(i , card)) {
-                    if(card.getRange() < minimumRang)
-                    {minimumRang = card.getRange();
-                    result = i;
-                    if(card instanceof Giant)
-                        System.out.println("Giant target selected -> " + i.getPoint() + i.getValue());}
+    private ArrayList<GameElement> findCardInRang(GameElement card){
+
+        ArrayList<GameElement> result = new ArrayList<>() ;
+        if(card instanceof Troop && ((Troop) card).isAreaSplash()) {
+
+                for (GameElement i : data.boardElements) {
+                    if (!isOpposing(i, card))
+                        continue;
+
+                    if (card.getRange() == 0) {
+                        if (isInNeighbourhood(i.getPoint(), card.getPoint()) && isTargetApproved(i, card)) {
+                            result.add(i);
+                        }
+                    } else {
+                        if (i.getPoint().distance(card.getPoint()) < card.getRange() && isTargetApproved(i, card)) {
+                            result.add(i);
+                        }
+
+                    }
+                }
+                if(card.getRange() != 0){
+                    result = deployAreaSplashLogic(result , (Card) card);
                 }
         }
+
+        else {
+
+                int minimumRang = 100;
+                for (GameElement i : data.boardElements) {
+                    if (!isOpposing(i, card))
+                        continue;
+                    if (card.getRange() != 0) {
+                        if (i.getPoint().distance(card.getPoint()) < card.getRange() && isTargetApproved(i, card)) {
+                            if (card.getRange() < minimumRang) {
+                                minimumRang = card.getRange();
+                                result.add(i);
+                            }
+                        }
+                    } else {
+                        if (isInNeighbourhood(i.getPoint(), card.getPoint()) && isTargetApproved(i, card)) {
+                            if (card.getRange() < minimumRang) {
+                                minimumRang = card.getRange();
+                                result.add(i);
+                            }
+                        }
+                    }
+                }
+            }
         return result ;
     }
 
+    private ArrayList<GameElement> deployAreaSplashLogic(ArrayList<GameElement> result , Card card) {
+
+        int right = 0 ;
+        int left = 0 ;
+        int up = 0 ;
+        int down = 0 ;
+        int x = (int) card.getPoint().getX() ;
+        int y = (int) card.getPoint().getY() ;
+
+        for(GameElement i : result){
+            if(i.getPoint().getX() > x)
+                right++ ;
+            if(i.getPoint().getX() < x)
+                left++;
+            if(i.getPoint().getY() > y)
+                down++ ;
+            if(i.getPoint().getY() < y)
+                up++ ;
+        }
+
+        int max = 0 ;
+        if(right >= max)
+            max = right ;
+        if(left >= max)
+            max = left ;
+        if(up >= max)
+            max = up ;
+        if(down >= max)
+            max = down ;
+
+        ArrayList<GameElement> newArr = new ArrayList<>() ;
+
+        if(max == down && max == up){
+            if(isPlayerElement(card))
+                up-- ;
+            else
+                down-- ;
+        }
+
+        for(GameElement i : result){
+            if(max == down)
+            {
+                if(i.getPoint().getY() > y)
+                    newArr.add(i) ;
+            }
+            else if(max == up)
+            {
+                if(i.getPoint().getY() < y)
+                    newArr.add(i) ;
+
+            }
+            else if(max == right){
+                 if(i.getPoint().getX() > x)
+                     newArr.add(i) ;
+            }
+            else if(max == left){
+                 if(i.getPoint().getX() < x)
+                     newArr.add(i) ;
+             }
+
+        }
+        return newArr;
+    }
+
     private boolean isTargetApproved(GameElement target, GameElement attacker) {
-        if(attacker instanceof Tower)
+        if(attacker instanceof Spell)
+            return false ;
+        else if(attacker instanceof Tower)
             return true ;
         else if(attacker instanceof Troop){
             switch (((Troop) attacker).getTarget())
