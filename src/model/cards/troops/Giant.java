@@ -13,7 +13,7 @@ public class Giant extends Troop implements Serializable {
     private GiantLevel level ;
 
     public Giant(GiantLevel level){
-        super(CellValue.GIANT ,level.getHitPoint(), level.getDamage() ,Speed.SLOW ,1.5f , Target.BUILDING , 5 , 1,0);
+        super(CellValue.GIANT ,level.getHitPoint(), level.getDamage() ,Speed.SLOW ,1.5f , Target.BUILDING , 5 , 1,0 , false);
         this.level = level ;
     }
 

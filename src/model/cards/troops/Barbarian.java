@@ -12,7 +12,7 @@ public class Barbarian extends Troop implements Serializable {
 
 
     public Barbarian(BarbarianLevel level) {
-        super(CellValue.BARBERIAN, level.getHitPoint(), level.getDamage(), Speed.MEDIUM, 1.5f, Target.GROUND, 5, 4,0);
+        super(CellValue.BARBERIAN, level.getHitPoint(), level.getDamage(), Speed.MEDIUM, 1.5f, Target.GROUND, 5, 4,0 , false);
         this.level = level ;
     }
 

@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class BabyDragon extends Troop implements Serializable {
     private BabyDragonLevel babyDragonLevel;
     public BabyDragon(BabyDragonLevel babyDragonLevel) {
-        super(CellValue.BABY_DRAGON,babyDragonLevel.getHitPoint(),babyDragonLevel.getDamage(),Speed.FAST,1.8f,Target.ANY,5,1,3);
+        super(CellValue.BABY_DRAGON,babyDragonLevel.getHitPoint(),babyDragonLevel.getDamage(),Speed.FAST,1.8f,Target.ANY,5,1,3 , true );
         this.babyDragonLevel = babyDragonLevel;
     }
 }
