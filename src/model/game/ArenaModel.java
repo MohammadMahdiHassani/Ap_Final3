@@ -3,18 +3,15 @@ package model.game;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.image.ImageView;
 import model.GameElement;
 import model.cards.Card;
 import model.cards.CellValue;
-import model.cards.levelEnums.Botlevel;
 
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class ArenaModel {
@@ -26,7 +23,7 @@ public class ArenaModel {
      GameElement[][] cellValues ;
      GameData gameData ;
      GameLogic logic ;
-
+     HashMap<GameElement , ArrayList<Point2D>> vectorMap ;
 
     private ArenaModel() {
         rowCount = 21;
@@ -34,6 +31,8 @@ public class ArenaModel {
         BackGroundCellValues = new CellValue[rowCount][columnCount];
         gameData = new GameData();
         logic = new GameLogic();
+        vectorMap = new HashMap<>() ;
+
     }
     public static ArenaModel getModel(){
         if(arenaModel == null){
@@ -148,4 +147,13 @@ public class ArenaModel {
     public void setCurrCard(Card currCard) {
         logic.setCurrCard(currCard);
     }
+
+    public HashMap<GameElement, ArrayList<Point2D>> getVectorMap() {
+        return vectorMap;
+    }
+
+    public boolean isBot(GameElement ele){
+        return gameData.botDeck.contains(ele);
+    }
+
 }
