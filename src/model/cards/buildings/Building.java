@@ -12,6 +12,7 @@ public abstract class Building extends Card implements Serializable {
     private int lifeTime ;
     private int hitPoint ;
     private int damage ;
+    private boolean isTimerStarted ;
     public Building(CellValue value , int cost, int range , Target target , float hitSpeed , int lifeTime , int hitPoint , int damage) {
         super(value,range , cost);
         this.hitSpeed = hitSpeed ;
@@ -19,12 +20,13 @@ public abstract class Building extends Card implements Serializable {
         this.target = target ;
         this.hitPoint = hitPoint ;
         this.damage = damage ;
+        isTimerStarted = false ;
 
     }
-    private int hitSpeedCounter = 0;
+    private float hitSpeedCounter = 0.8f;
     public boolean isAllowedToHit(){
         if(hitSpeedCounter < hitSpeed) {
-            hitSpeedCounter += 0.3;
+            hitSpeedCounter += 0.8f;
             return false;
         }
         hitSpeedCounter = 0 ;
@@ -36,9 +38,32 @@ public abstract class Building extends Card implements Serializable {
             this.killCard();
         }
     }
+    public void startTimer(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    isTimerStarted = true ;
+                    Thread.sleep(lifeTime* 1000L);
+                    System.out.println(getValue() + " is sleeping ");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                killCard();
+            }
+        }).start() ;
+    }
 
 
     public Target getTarget() {
         return target;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public boolean isTimerStarted() {
+        return isTimerStarted;
     }
 }

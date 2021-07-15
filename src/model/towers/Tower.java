@@ -18,13 +18,13 @@ public abstract class Tower extends GameElement {
         this.setPoint(point);
     }
 
-    private int hitSpeedCounter = 0;
+    private float hitSpeedCounter = 0.8f;
     public boolean isAllowedToHit(){
         if(hitSpeedCounter < hitSpeed) {
-            hitSpeedCounter += 0.3;
+            hitSpeedCounter += 0.1;
             return false;
         }
-        hitSpeedCounter = 0 ;
+        hitSpeedCounter = 0.8f ;
         return true ;
     }
     public void decreaseHitPoint(int hit){
@@ -32,5 +32,9 @@ public abstract class Tower extends GameElement {
         if(hitPoint < 0){
             this.killCard();
         }
+    }
+
+    public int getDamage() {
+        return damage;
     }
 }
