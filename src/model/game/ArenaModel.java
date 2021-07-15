@@ -66,15 +66,15 @@ public class ArenaModel {
                 String value = scannerLine.next();
 
                 switch (value) {
+                    case "-":
+                        BackGroundCellValues[row][column] = CellValue.HROAD;
+                        break;
                     case "g":
                         BackGroundCellValues[row][column] = CellValue.GRASS;
                         break;
                     case "r":
                         BackGroundCellValues[row][column] = CellValue.ROAD;
-                        if(column < 10)
-                            gameData.setLeftBridge(new Point2D(column , row)) ;
-                        else
-                            gameData.setRightBridge(new Point2D(column , row));
+
                         break;
                     case "s":
                         BackGroundCellValues[row][column] = CellValue.STONE;
@@ -104,7 +104,11 @@ public class ArenaModel {
                         BackGroundCellValues[row][column] = CellValue.TIME;
                         break;
                     case "b":
-                        BackGroundCellValues[row][column] = CellValue.B_CROWN;
+                        BackGroundCellValues[row][column] = CellValue.BRIDGE;
+                        if(column < 10)
+                            gameData.setLeftBridge(new Point2D(column , row)) ;
+                        else
+                            gameData.setRightBridge(new Point2D(column , row));
                         break;
                     case "d" :
                         BackGroundCellValues[row][column] = CellValue.R_CROWN;

@@ -6,6 +6,8 @@ import java.io.Serializable;
 
 public enum CellValue {
 
+    BRIDGE(new Image("/view/photos/BackGround_Arena/bridge.png") , new Image("/view/photos/BackGround_Arena/bridge.png")),
+    HROAD(new Image("/view/photos/BackGround_Arena/roadTexture_13.png") , new Image("/view/photos/BackGround_Arena/roadTexture_13.png")),
     GIANT( new Image("/view/photos/giant.png"),  new Image("/view/photos/giant.png")),
     ARCHER(new Image("/view/photos/archers.png") , new Image ("/view/photos/archers.png")) ,
     BARBERIAN(new Image("/view/photos/barbarians.png") , new Image ("/view/photos/barbarians.png")),
@@ -22,8 +24,8 @@ public enum CellValue {
     KINGTOWER(new Image("/view/photos/BackGround_Arena/king_tower.png") , new Image("/view/photos/BackGround_Arena/king_tower.png")),
     ARCHERTOWER(new Image("/view/photos/BackGround_Arena/archer_tower.png") , new Image("/view/photos/BackGround_Arena/archer_tower.png")),
     STONE(new Image("/view/photos/BackGround_Arena/stone.png") , new Image("/view/photos/BackGround_Arena/stone.png")),
-    RIVER(new Image("/view/photos/BackGround_Arena/river.png") , new Image("/view/photos/BackGround_Arena/river.png")),
-    ROAD(new Image("/view/photos/BackGround_Arena/road.png") , new Image("/view/photos/BackGround_Arena/road.png")),
+    RIVER(new Image("/view/photos/BackGround_Arena/river2.png") , new Image("/view/photos/BackGround_Arena/river2.png")),
+    ROAD(new Image("/view/photos/BackGround_Arena/roadTexture_01.png") , new Image("/view/photos/BackGround_Arena/roadTexture_01.png")),
     FENCE(new Image("/view/photos/BackGround_Arena/king_tower.png") , new Image("/view/photos/BackGround_Arena/king_tower.png")),
     SHRUB(new Image("/view/photos/BackGround_Arena/shrub.png") , new Image("/view/photos/BackGround_Arena/shrub.png")),
     TREE(new Image("/view/photos/BackGround_Arena/tree.png") , new Image("/view/photos/BackGround_Arena/tree.png")),

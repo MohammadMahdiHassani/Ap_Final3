@@ -95,9 +95,13 @@ public class ArenaView extends Group {
         for (int i = 0; i < rowCount; i++) {
             for (int j = 0; j < columnCount; j++) {
                 if (cellValues[i][j] == GRASS) {
-//                    cellView[i][j].setImage(GRASS.getThumbnailImage());
+                    cellView[i][j].setImage(GRASS.getThumbnailImage());
                 } else if (cellValues[i][j] == CellValue.ROAD) {
                     cellView[i][j].setImage(ROAD.getThumbnailImage());
+                }else if (cellValues[i][j] == CellValue.HROAD) {
+                    cellView[i][j].setImage(HROAD.getThumbnailImage());
+                } else if (cellValues[i][j] == BRIDGE) {
+                    cellView[i][j].setImage(BRIDGE.getThumbnailImage());
                 } else if (cellValues[i][j] == CellValue.RIVER) {
                     cellView[i][j].setImage(RIVER.getThumbnailImage());
                 } else if (cellValues[i][j] == CellValue.STONE) {
@@ -230,17 +234,18 @@ public class ArenaView extends Group {
         return timeLabel;
     }
 
-    public void drawCircle(Point2D starting_point, Point2D ending_point, int i, Color color) {
+    public void drawCircle(Point2D starting_point, Point2D ending_point, int radius, Color color) {
 
-        Circle circle = new Circle(starting_point.getX()*CELL_WIDTH + CELL_WIDTH/2 , starting_point.getY()*CELL_WIDTH + CELL_WIDTH/2, 3);
+        Circle circle = new Circle(starting_point.getX()*CELL_WIDTH + CELL_WIDTH/2 , starting_point.getY()*CELL_WIDTH + CELL_WIDTH/2, radius);
         circle.setFill(color);
         this.getChildren().add(circle);
-        Duration duration =  Duration.millis(2000);
+        Duration duration =  Duration.millis(1000);
         TranslateTransition transition = new TranslateTransition(duration , circle);
         transition.setToX(ending_point.subtract(starting_point).getX()*CELL_WIDTH);
         transition.setToY(ending_point.subtract(starting_point).getY()*CELL_WIDTH);
         transition.play();
-        FadeTransition fade = new FadeTransition(Duration.millis(3000) , circle);
+
+        FadeTransition fade = new FadeTransition(Duration.millis(1500) , circle);
         fade.setFromValue(1.0);
         fade.setToValue(0.0);
         fade.play() ;
