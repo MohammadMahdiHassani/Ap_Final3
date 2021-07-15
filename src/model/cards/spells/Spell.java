@@ -6,11 +6,8 @@ import model.cards.Card;
 import model.cards.CellValue;
 
 public abstract class Spell extends Card {
-    private int radius ;
 
     public Spell(CellValue value, int cost , int radius ) {
-        super(value, cost);
-        this.radius = radius ;
-
+        super(value,radius , cost);
     }
 }

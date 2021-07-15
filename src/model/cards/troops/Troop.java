@@ -1,9 +1,7 @@
 package model.cards.troops;
-import javafx.scene.control.Cell;
 import model.cards.CellValue;
-import model.cards.troops.enums.Speed;
-import model.cards.troops.enums.Target;
-import javafx.scene.image.Image;
+import model.cards.troops.attributes.Speed;
+import model.cards.troops.attributes.Target;
 import model.cards.Card;
 
 
@@ -16,19 +14,35 @@ public abstract class Troop extends Card {
     private float hitSpeed ;
     private Target target ;
     private int count ;
-    private int range;
 
 
     public Troop(CellValue value , int hitPoint, int damage, Speed speed, float hitSpeed, Target target, int cost, int count,int range ) {
-        super(value , cost);
+        super(value ,range, cost);
         this.hitPoint = hitPoint;
         this.damage = damage;
         this.speed = speed;
         this.hitSpeed = hitSpeed;
         this.target = target;
         this.count = count;
-        this.range = range;
     }
+
+    private float hitSpeedCounter = 0;
+    public boolean isAllowedToHit(){
+        if(hitSpeedCounter < hitSpeed) {
+            hitSpeedCounter += 0.3;
+            return false;
+        }
+        hitSpeedCounter = 0 ;
+        return true ;
+    }
+    public void decreaseHitPoint(int hit){
+        hitPoint -= hit;
+        if(hitPoint < 0){
+            this.killCard();
+        }
+    }
+
+
 
     public int getHitPoint() {
         return hitPoint;
@@ -54,7 +68,5 @@ public abstract class Troop extends Card {
         return count;
     }
 
-    public int getRange() {
-        return range;
-    }
+
 }

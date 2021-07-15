@@ -2,7 +2,7 @@ package model.cards.buildings;
 
 import model.cards.CellValue;
 import model.cards.levelEnums.InfernoLevel;
-import model.cards.troops.enums.Target;
+import model.cards.troops.attributes.Target;
 
 public class Inferno extends Building {
     public InfernoLevel infernoLevel;

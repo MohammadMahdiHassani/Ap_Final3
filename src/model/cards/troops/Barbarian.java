@@ -1,11 +1,9 @@
 package model.cards.troops;
 
-import javafx.scene.image.Image;
-
 import model.cards.CellValue;
 import model.cards.levelEnums.BarbarianLevel;
-import model.cards.troops.enums.Speed;
-import model.cards.troops.enums.Target;
+import model.cards.troops.attributes.Speed;
+import model.cards.troops.attributes.Target;
 
 public class Barbarian extends Troop{
     private BarbarianLevel level;

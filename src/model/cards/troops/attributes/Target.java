@@ -1,5 +1,5 @@
-package model.cards.troops.enums;
+package model.cards.troops.attributes;
 
 public enum Target {
-    AIR , GROUND , ANY ;
+    AIR , GROUND , ANY , BUILDING ,
 }

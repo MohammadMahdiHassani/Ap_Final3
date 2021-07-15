@@ -2,8 +2,8 @@ package model.cards.troops;
 
 import model.cards.CellValue;
 import model.cards.levelEnums.WizardLevel;
-import model.cards.troops.enums.Speed;
-import model.cards.troops.enums.Target;
+import model.cards.troops.attributes.Speed;
+import model.cards.troops.attributes.Target;
 
 public class Wizard extends Troop{
     private WizardLevel wizardLevel;
