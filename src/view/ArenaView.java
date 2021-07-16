@@ -3,6 +3,8 @@ package view;
 import controller.ArenaController;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -239,15 +241,21 @@ public class ArenaView extends Group {
         Circle circle = new Circle(starting_point.getX()*CELL_WIDTH + CELL_WIDTH/2 , starting_point.getY()*CELL_WIDTH + CELL_WIDTH/2, radius);
         circle.setFill(color);
         this.getChildren().add(circle);
-        Duration duration =  Duration.millis(1000);
+        Duration duration =  Duration.millis(500);
         TranslateTransition transition = new TranslateTransition(duration , circle);
         transition.setToX(ending_point.subtract(starting_point).getX()*CELL_WIDTH);
         transition.setToY(ending_point.subtract(starting_point).getY()*CELL_WIDTH);
         transition.play();
+        transition.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
 
-        FadeTransition fade = new FadeTransition(Duration.millis(1500) , circle);
-        fade.setFromValue(1.0);
-        fade.setToValue(0.0);
-        fade.play() ;
+                FadeTransition fade = new FadeTransition(Duration.millis(100) , circle);
+                fade.setFromValue(1.0);
+                fade.setToValue(0.0);
+                fade.play();
+            }
+        });
+
     }
 }
