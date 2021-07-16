@@ -75,4 +75,20 @@ public abstract class Troop extends Card implements Serializable {
     public boolean isAreaSplash() {
         return areaSplash;
     }
+
+    public void setHitPoint(int hitPoint) {
+        this.hitPoint = hitPoint;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+    public void setHitSpeed(float hitSpeed) {
+        this.hitSpeed = hitSpeed;
+    }
+
+    public void setSpeed(Speed speed) {
+        this.speed = speed;
+    }
 }

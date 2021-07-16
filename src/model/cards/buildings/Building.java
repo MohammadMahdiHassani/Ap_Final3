@@ -66,4 +66,24 @@ public abstract class Building extends Card implements Serializable {
     public boolean isTimerStarted() {
         return isTimerStarted;
     }
+
+    public void setHitSpeed(float hitSpeed) {
+        this.hitSpeed = hitSpeed;
+    }
+
+    public void setHitPoint(int hitPoint) {
+        this.hitPoint = hitPoint;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+    public float getHitSpeed() {
+        return hitSpeed;
+    }
+
+    public int getHitPoint() {
+        return hitPoint;
+    }
 }

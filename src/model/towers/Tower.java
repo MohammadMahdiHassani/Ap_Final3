@@ -41,4 +41,20 @@ public abstract class Tower extends GameElement {
     public int getHitPoint() {
         return hitPoint;
     }
+
+    public void setHitSpeed(float hitSpeed) {
+        this.hitSpeed = hitSpeed;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+    public void setHitPoint(int hitPoint) {
+        this.hitPoint = hitPoint;
+    }
+
+    public float getHitSpeed() {
+        return hitSpeed;
+    }
 }
