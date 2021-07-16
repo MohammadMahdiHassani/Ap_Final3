@@ -249,20 +249,23 @@ public class ArenaView extends Group {
 
     }
     public void scaleCircle(Point2D starting_point , int range, Color color){
-//        Circle circle = new Circle(starting_point.getX()*CELL_WIDTH + CELL_WIDTH/2 , starting_point.getY()*CELL_WIDTH + CELL_WIDTH/2, 1);
-//        circle.setStroke(color);
-//        this.getChildren().add(circle);
-//
-//        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(500) , circle);
-//        scaleTransition.setByX(range * CELL_WIDTH);
-//        scaleTransition.setByY(range * CELL_WIDTH);
-//
-//        FadeTransition fade = new FadeTransition(Duration.millis(100) , circle);
-//        fade.setFromValue(1.0);
-//        fade.setToValue(0.0);
-//
-//        SequentialTransition sequentialTransition = new SequentialTransition(scaleTransition , fade);
-//        sequentialTransition.play();
+
+        Circle circle = new Circle(starting_point.getX()*CELL_WIDTH + CELL_WIDTH/2 , starting_point.getY()*CELL_WIDTH + CELL_WIDTH/2, CELL_WIDTH/2);
+        circle.setStroke(color);
+        this.getChildren().add(circle);
+        circle.setStrokeWidth(0.5);
+        circle.setFill(Color.TRANSPARENT);
+
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(5000) , circle);
+        scaleTransition.setByX(range);
+        scaleTransition.setByY(range);
+
+        FadeTransition fade = new FadeTransition(Duration.millis(100) , circle);
+        fade.setFromValue(1.0);
+        fade.setToValue(0.0);
+
+        SequentialTransition sequentialTransition = new SequentialTransition(scaleTransition , fade);
+        sequentialTransition.play();
 
 
     }

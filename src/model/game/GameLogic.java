@@ -153,10 +153,14 @@ public class GameLogic {
     }
 
     private void spellLogic(GameElement m) {
-        if(m instanceof Rage)
-            if(!((Rage) m).isTimerStarted())
+        if(m instanceof Rage) {
+            if (!((Rage) m).isTimerStarted())
                 ((Rage) m).startTimer();
 
+            ArrayList<GameElement> targetList = new ArrayList<>() ;
+            targetList.add(m) ;
+            addToVectorMap(m , targetList);
+        }
         ArrayList<GameElement> target = findCardInRang(m) ;
         if (target.size() != 0)
             shootTarget(m, target);
@@ -220,9 +224,6 @@ public class GameLogic {
         if(m instanceof Spell){
             if(m instanceof Rage){
                 ((Rage) m).executeRage(targets);
-                ArrayList<GameElement> targetList = new ArrayList<>() ;
-                targetList.add(m) ;
-                addToVectorMap(m , targetList);
             }
             else if(m instanceof FireBall){
 
@@ -456,10 +457,17 @@ public class GameLogic {
         }
 
         else if (card instanceof Spell) {
-            for (GameElement i : data.boardElements) {
-                if (!isOpposing(i, card))
-                    continue;
 
+            for (GameElement i : data.boardElements) {
+                if(card instanceof Rage)
+                {
+                    if (isOpposing(i, card))
+                        continue;
+                }
+                else {
+                    if (!isOpposing(i, card))
+                        continue;
+                }
                 if (i.getPoint().distance(card.getPoint()) < card.getRange() && isTargetApproved(i, card)) {
                     result.add(i);
                 }
