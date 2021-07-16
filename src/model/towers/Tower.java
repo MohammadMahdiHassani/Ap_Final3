@@ -37,4 +37,8 @@ public abstract class Tower extends GameElement {
     public int getDamage() {
         return damage;
     }
+
+    public int getHitPoint() {
+        return hitPoint;
+    }
 }

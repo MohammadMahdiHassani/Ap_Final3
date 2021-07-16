@@ -12,6 +12,8 @@ import model.cards.CardFactory;
 import model.cards.buildings.Building;
 import model.cards.spells.Spell;
 import model.cards.troops.*;
+import model.towers.ArcherTower;
+import model.towers.KingTower;
 import model.towers.Tower;
 
 import java.util.ArrayList;
@@ -119,10 +121,7 @@ public class GameLogic {
                 if (m instanceof Troop) {
                     troopLogic((Troop) m);
                 } else if (m instanceof Spell) {
-                    switch (m.getValue()) {
-                        case RAGE:
-                        case FIREBALL:
-                    }
+                    spellLogic(m);
                 } else if (m instanceof Building) {
                     buildingLogic((Building) m);
                 }
@@ -135,6 +134,9 @@ public class GameLogic {
 
         }
 
+    }
+
+    private void spellLogic(GameElement m) {
     }
 
     private void updateBoard() {
@@ -150,9 +152,34 @@ public class GameLogic {
     }
 
     private void towerLogic(Tower m) {
+
+        if(m instanceof KingTower)
+            if(!isKingHit(m) && !isArcherTowerDestroyed(m))
+             return ;
+
         ArrayList<GameElement> target = findCardInRang(m);
         if (target.size() != 0)
             shootTarget(m, target);
+    }
+
+    private boolean isArcherTowerDestroyed(Tower m) {
+        ArrayList<GameElement> searchArr ;
+        if(isBotElement(m))
+            searchArr = data.botDeck ;
+        else
+            searchArr = data.playerDeck ;
+
+        int counter = 0 ;
+        for(GameElement i : searchArr){
+            if(i instanceof ArcherTower)
+                counter++ ;
+        }
+        return counter != 2 ;
+
+    }
+
+    private boolean isKingHit(Tower m) {
+        return m.getHitPoint() < ((KingTower) m).getLevelHitPoint();
     }
 
     private void buildingLogic(Building m) {
