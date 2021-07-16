@@ -10,6 +10,9 @@ import model.GameElement;
 import model.cards.Card;
 import model.cards.CardFactory;
 import model.cards.buildings.Building;
+import model.cards.spells.Arrows;
+import model.cards.spells.FireBall;
+import model.cards.spells.Rage;
 import model.cards.spells.Spell;
 import model.cards.troops.*;
 import model.towers.ArcherTower;
@@ -17,6 +20,7 @@ import model.towers.KingTower;
 import model.towers.Tower;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -136,9 +140,6 @@ public class GameLogic {
 
     }
 
-    private void spellLogic(GameElement m) {
-    }
-
     private void updateBoard() {
         model.cellValues = new GameElement[model.rowCount][model.columnCount];
         ArrayList<GameElement> deadPlayers = new ArrayList<>() ;
@@ -149,6 +150,19 @@ public class GameLogic {
         }
         for(GameElement i : deadPlayers)
             deletFromBoard(i);
+    }
+
+    private void spellLogic(GameElement m) {
+        if(m instanceof Rage)
+            if(!((Rage) m).isTimerStarted())
+                ((Rage) m).startTimer();
+
+        ArrayList<GameElement> target = findCardInRang(m) ;
+        if (target.size() != 0)
+            shootTarget(m, target);
+
+        if(!(m instanceof Rage))
+            m.killCard();
     }
 
     private void towerLogic(Tower m) {
@@ -203,9 +217,57 @@ public class GameLogic {
     }
 
     private void shootTarget(GameElement m, ArrayList<GameElement> targets) {
-        if(m instanceof Spell){}
-        else if(m instanceof Building){
+        if(m instanceof Spell){
+            if(m instanceof Rage){
+                ((Rage) m).executeRage(targets);
+                ArrayList<GameElement> targetList = new ArrayList<>() ;
+                targetList.add(m) ;
+                addToVectorMap(m , targetList);
+            }
+            else if(m instanceof FireBall){
 
+                ArrayList<GameElement> targetList = new ArrayList<>() ;
+                for(GameElement target : targets) {
+                    boolean flag = false ;
+                    if (target instanceof Tower) {
+                        ((Tower) target).decreaseHitPoint(((FireBall) m).getDamage());
+                        flag = true;
+                    } else if (target instanceof Troop) {
+                        ((Troop) target).decreaseHitPoint(((FireBall) m).getDamage());
+                        flag = true;
+                    } else if (target instanceof Building) {
+                        ((Building) target).decreaseHitPoint(((FireBall) m).getDamage());
+                        flag = true;
+                    }
+                    if (flag)
+                        targetList.add(target) ;
+                }
+                addToVectorMap(m , targetList);
+            }
+            else{
+                ArrayList<GameElement> targetList = new ArrayList<>() ;
+                for(GameElement target : targets) {
+                    boolean flag = false ;
+                    if (target instanceof Tower) {
+                        ((Tower) target).decreaseHitPoint(((Arrows) m).getDamage());
+                        flag = true;
+                    } else if (target instanceof Troop) {
+                        ((Troop) target).decreaseHitPoint(((Arrows) m).getDamage());
+                        flag = true;
+                    } else if (target instanceof Building) {
+                        ((Building) target).decreaseHitPoint(((Arrows) m).getDamage());
+                        flag = true;
+                    }
+                    if (flag)
+                        targetList.add(target) ;
+                }
+                addToVectorMap(m , targetList);
+
+            }
+        }
+        else if(m instanceof Building){
+            if(!((Building) m).isAllowedToHit())
+                return ;
             ArrayList<GameElement> targetList = new ArrayList<>() ;
             for(GameElement target : targets) {
                 boolean flag = false ;
@@ -247,6 +309,8 @@ public class GameLogic {
             }
         }
         else if(m instanceof Tower){
+            if(!((Tower) m).isAllowedToHit())
+                return ;
             ArrayList<GameElement> targetList = new ArrayList<>() ;
             for(GameElement target : targets) {
                 boolean flag = false ;
@@ -391,6 +455,18 @@ public class GameLogic {
                 }
         }
 
+        else if (card instanceof Spell) {
+            for (GameElement i : data.boardElements) {
+                if (!isOpposing(i, card))
+                    continue;
+
+                if (i.getPoint().distance(card.getPoint()) < card.getRange() && isTargetApproved(i, card)) {
+                    result.add(i);
+                }
+
+            }
+        }
+
         else {
 
                 int minimumRang = 100;
@@ -482,7 +558,7 @@ public class GameLogic {
     }
 
     private boolean isTargetApproved(GameElement target, GameElement attacker) {
-        if(attacker instanceof Spell)
+        if(target instanceof Spell)
             return false ;
         else if(attacker instanceof Tower)
             return true ;
@@ -505,6 +581,7 @@ public class GameLogic {
                     return true ;
             }
         }
+        else return attacker instanceof Spell;
         return false ;
     }
 
