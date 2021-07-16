@@ -59,7 +59,7 @@ public class ArenaController implements EventHandler<MouseEvent> {
     private ProgressBar elixirProgress;
     private final ArenaModel model;
     private int countTime;
-
+    private Timer timer ;
     private boolean isTimeUp ;
 
 
@@ -73,12 +73,13 @@ public class ArenaController implements EventHandler<MouseEvent> {
         new Thread(MenuController.transferDataReceive).start();
         initializeListArmy();
         arenaView.setBackgroundCell(model);
+        timer = new Timer() ;
         startTimer();
         isTimeUp = false;
     }
 
     private void startTimer() {
-        Timer timer = new Timer();
+
         TimerTask task = new TimerTask() {
 
             @Override
@@ -88,12 +89,20 @@ public class ArenaController implements EventHandler<MouseEvent> {
                     public void run() {
                         if(!checkEnd())
                             update();
+                        else{
+                            update();
+                            pause() ;
+                        }
                     }
                 });
             }
         };
         long frameTimeInMilliseconds = (long) (1000.0 / FRAMES_PER_SECOND);
         timer.schedule(task, 0, frameTimeInMilliseconds);
+    }
+
+    private void pause() {
+        this.timer.cancel() ;
     }
 
     private boolean checkEnd() {
