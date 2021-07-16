@@ -657,11 +657,30 @@ public class GameLogic {
 
     }
     private void deletFromBoard(GameElement card){
+        setScore(card);
         if(isPlayerElement(card))
             data.playerDeck.remove(card);
         else
             data.botDeck.remove(card);
         data.boardElements.remove(card);
+    }
+    private void setScore(GameElement element){
+        if(element instanceof Tower){
+            if(isPlayerElement(element))
+            {
+                if(element instanceof KingTower)
+                    data.playerScore += 2;
+                else
+                    data.playerScore += 1;
+            }
+            else
+            {
+                if(element instanceof KingTower)
+                    data.botScore += 2;
+                else
+                    data.botScore += 1;
+            }
+        }
     }
     private void addToVectorMap(GameElement element , ArrayList<GameElement> elementsArr){
         ArrayList<Point2D> pointsArr = new ArrayList<>() ;
@@ -669,5 +688,17 @@ public class GameLogic {
             pointsArr.add(ele.getPoint());
 
         model.vectorMap.put(element , pointsArr);
+    }
+
+    public boolean isKingDead(){
+        int counter = 0 ;
+        for(GameElement i : ArenaModel.getModel().gameData.playerDeck)
+            if(i instanceof KingTower)
+                counter++ ;
+        for(GameElement i : ArenaModel.getModel().gameData.botDeck)
+            if(i instanceof KingTower)
+                counter++ ;
+
+            return counter != 2 ;
     }
 }

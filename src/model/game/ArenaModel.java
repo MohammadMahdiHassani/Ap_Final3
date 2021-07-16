@@ -1,7 +1,5 @@
 package model.game;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
 import model.GameElement;
 import model.cards.Card;
@@ -135,8 +133,12 @@ public class ArenaModel {
         logic.executeLogic() ;
     }
 
-    public GameLogic getLogic() {
-        return logic;
+    public boolean isBot(GameElement ele){
+        return gameData.botDeck.contains(ele);
+    }
+
+    public boolean checkForEndCondition(){
+        return logic.isKingDead() ;
     }
 
     public void setCurrPoint(Point2D point2D){
@@ -145,13 +147,14 @@ public class ArenaModel {
     public void setCurrCard(Card currCard) {
         logic.setCurrCard(currCard);
     }
-
     public HashMap<GameElement, ArrayList<Point2D>> getVectorMap() {
         return vectorMap;
     }
-
-    public boolean isBot(GameElement ele){
-        return gameData.botDeck.contains(ele);
+    public GameLogic getLogic() {
+        return logic;
     }
 
+    public GameData getGameData() {
+        return gameData;
+    }
 }
