@@ -1,7 +1,6 @@
 package controller;
 
 import DataBase.DataHandler;
-import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -14,20 +13,14 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.transform.Translate;
 import javafx.util.Callback;
-import javafx.util.Duration;
 import model.GameElement;
 import model.cards.Card;
 import model.cards.CardFactory;
 import model.cards.CellValue;
-import model.cards.levelEnums.KingTowerLevel;
 import model.cards.levelEnums.Level;
-import model.cards.spells.Spell;
-import model.cards.troops.Troop;
+import model.cards.spells.Rage;
 import model.game.ArenaModel;
-import model.game.GameData;
 import model.towers.KingTower;
 import model.towers.Tower;
 import network.Request;
@@ -274,7 +267,6 @@ public class ArenaController implements EventHandler<MouseEvent> {
         if(animationMap.size() == 0)
             return ;
         for(GameElement i : animationMap.keySet()){
-            if(!(i instanceof Spell)){
 
                 Point2D starting_point = i.getPoint();
                 Color color ;
@@ -295,12 +287,15 @@ public class ArenaController implements EventHandler<MouseEvent> {
                 else
                     radius = 3 ;
 
-
+                if(i instanceof Rage) {
+                    arenaView.scaleCircle(animationMap.get(i).get(0), i.getRange(), Color.PURPLE);
+                    continue ;
+                }
                 for(Point2D ending_point : animationMap.get(i)){
-                    arenaView.drawCircle(starting_point , ending_point , radius ,  color );
+                    arenaView.shootCircles(starting_point , ending_point , radius ,  color );
                 }
 
-            }
+
         }
     }
 

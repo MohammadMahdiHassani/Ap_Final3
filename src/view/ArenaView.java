@@ -2,6 +2,8 @@ package view;
 
 import controller.ArenaController;
 import javafx.animation.FadeTransition;
+import javafx.animation.ScaleTransition;
+import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -180,8 +182,8 @@ public class ArenaView extends Group {
                     componentView[i][j].setImage(CANNON.getThumbnailImage());
                 } else if (cellValues[i][j].getValue() == BARBERIAN) {
                     componentView[i][j].setImage(BARBERIAN.getActionImage());
-                } else if (cellValues[i][j].getValue() == BABY_DRAGON) {
-                    componentView[i][j].setImage(BABY_DRAGON.getActionImage());
+                } else if (cellValues[i][j].getValue() == FIREBALL) {
+                    componentView[i][j].setImage(FIREBALL.getActionImage());
                 } else if (cellValues[i][j].getValue() == WIZARD) {
                     componentView[i][j].setImage(WIZARD.getActionImage());
                 } else if (cellValues[i][j].getValue() == MINI_PEKA) {
@@ -192,16 +194,8 @@ public class ArenaView extends Group {
                     componentView[i][j].setImage(RAGE.getActionImage());
                 } else if (cellValues[i][j].getValue() == BABY_DRAGON) {
                     componentView[i][j].setImage(BABY_DRAGON.getActionImage());
-                } else if (cellValues[i][j].getValue() == WIZARD) {
-                    componentView[i][j].setImage(WIZARD.getActionImage());
-                } else if (cellValues[i][j].getValue() == MINI_PEKA) {
-                    componentView[i][j].setImage(MINI_PEKA.getActionImage());
-                } else if (cellValues[i][j].getValue() == VALKYRIE) {
-                    componentView[i][j].setImage(VALKYRIE.getActionImage());
-                } else if (cellValues[i][j].getValue() == INFERNO) {
+                }  else if (cellValues[i][j].getValue() == INFERNO) {
                     componentView[i][j].setImage(INFERNO.getActionImage());
-                } else if (cellValues[i][j].getValue() == RAGE) {
-                    componentView[i][j].setImage(RAGE.getActionImage());
                 } else if (cellValues[i][j].getValue() == ARROWS) {
                     componentView[i][j].setImage(ARROWS.getActionImage());
                 }
@@ -236,7 +230,7 @@ public class ArenaView extends Group {
         return timeLabel;
     }
 
-    public void drawCircle(Point2D starting_point, Point2D ending_point, int radius, Color color) {
+    public void shootCircles(Point2D starting_point, Point2D ending_point, int radius, Color color) {
 
         Circle circle = new Circle(starting_point.getX()*CELL_WIDTH + CELL_WIDTH/2 , starting_point.getY()*CELL_WIDTH + CELL_WIDTH/2, radius);
         circle.setFill(color);
@@ -245,17 +239,31 @@ public class ArenaView extends Group {
         TranslateTransition transition = new TranslateTransition(duration , circle);
         transition.setToX(ending_point.subtract(starting_point).getX()*CELL_WIDTH);
         transition.setToY(ending_point.subtract(starting_point).getY()*CELL_WIDTH);
-        transition.play();
-        transition.setOnFinished(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
 
-                FadeTransition fade = new FadeTransition(Duration.millis(100) , circle);
-                fade.setFromValue(1.0);
-                fade.setToValue(0.0);
-                fade.play();
-            }
-        });
+        FadeTransition fade = new FadeTransition(Duration.millis(100) , circle);
+        fade.setFromValue(1.0);
+        fade.setToValue(0.0);
+
+        SequentialTransition sequentialTransition = new SequentialTransition(transition , fade);
+        sequentialTransition.play();
+
+    }
+    public void scaleCircle(Point2D starting_point , int range, Color color){
+//        Circle circle = new Circle(starting_point.getX()*CELL_WIDTH + CELL_WIDTH/2 , starting_point.getY()*CELL_WIDTH + CELL_WIDTH/2, 1);
+//        circle.setStroke(color);
+//        this.getChildren().add(circle);
+//
+//        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(500) , circle);
+//        scaleTransition.setByX(range * CELL_WIDTH);
+//        scaleTransition.setByY(range * CELL_WIDTH);
+//
+//        FadeTransition fade = new FadeTransition(Duration.millis(100) , circle);
+//        fade.setFromValue(1.0);
+//        fade.setToValue(0.0);
+//
+//        SequentialTransition sequentialTransition = new SequentialTransition(scaleTransition , fade);
+//        sequentialTransition.play();
+
 
     }
 }
