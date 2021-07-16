@@ -131,38 +131,8 @@ public class ArenaView extends Group {
         }
     }
 
-    public void decreaseTime() {
-
-        String[] time = timeLabel.getText().split(":");
-        int second = Integer.parseInt(time[1]);
-        int min = Integer.parseInt(time[0]);
-        if (min != 0 || second != 0) {
-            if (second == 0) {
-                min--;
-                second = 59;
-            }
-            second--;
-            String newTime = min + ":" + second;
-            if (second < 10) {
-                newTime = min + ":0" + second;
-            }
-            if (min == 0 && second == 0) {
-                //final condition
-            }
-            if (min == 0) {
-                timeLabel.setTextFill(Color.RED);
-            }
-            timeLabel.setText(newTime);
-        }
-    }
-
-
     public void update(ArenaModel model) {
-        countTime++;
-        if (countTime % 2 == 0) {
-            decreaseTime();
-            countTime = 0;
-        }
+
         GameElement[][] cellValues = null;
         cellValues = model.getCellValues();
 
@@ -204,32 +174,6 @@ public class ArenaView extends Group {
         }
     }
 
-    public int getRowCount() {
-        return this.rowCount;
-    }
-
-    public void setRowCount(int rowCount) {
-        this.rowCount = rowCount;
-        this.initializeGrid();
-    }
-
-    public int getColumnCount() {
-        return this.columnCount;
-    }
-
-    public void setColumnCount(int columnCount) {
-        this.columnCount = columnCount;
-        this.initializeGrid();
-    }
-
-    public void setTimeLabelText(String text) {
-        this.timeLabel.setText(text);
-    }
-
-    public static Label getTimeLabel() {
-        return timeLabel;
-    }
-
     public void shootCircles(Point2D starting_point, Point2D ending_point, int radius, Color color) {
 
         Circle circle = new Circle(starting_point.getX()*CELL_WIDTH + CELL_WIDTH/2 , starting_point.getY()*CELL_WIDTH + CELL_WIDTH/2, radius);
@@ -268,5 +212,40 @@ public class ArenaView extends Group {
         sequentialTransition.play();
 
 
+    }
+
+    public int getRowCount() {
+        return this.rowCount;
+    }
+
+    public void setRowCount(int rowCount) {
+        this.rowCount = rowCount;
+        this.initializeGrid();
+    }
+
+    public int getColumnCount() {
+        return this.columnCount;
+    }
+
+    public void setColumnCount(int columnCount) {
+        this.columnCount = columnCount;
+        this.initializeGrid();
+    }
+
+    public void setTimeLabel(String text  , Color color){
+        timeLabel.setTextFill(color);
+        timeLabel.setText(text);
+
+    }
+    public static Label getTimeLabel() {
+        return timeLabel;
+    }
+
+    public Label getCrown1() {
+        return crown1;
+    }
+
+    public Label getCrown2() {
+        return crown2;
     }
 }
