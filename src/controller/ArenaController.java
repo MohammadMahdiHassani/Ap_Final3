@@ -55,14 +55,13 @@ public class ArenaController implements EventHandler<MouseEvent> {
 
     @FXML
     private ImageView nextCardImage;
-
     @FXML
     private ProgressBar elixirProgress;
-    private ArenaModel model;
+    private final ArenaModel model;
     private int countTime;
 
+    private boolean isTimeUp ;
 
-    private Timer timer;
 
     public ArenaController() {
         model = ArenaModel.getModel();
@@ -70,15 +69,16 @@ public class ArenaController implements EventHandler<MouseEvent> {
     }
 
     public void initialize() {
+
         new Thread(MenuController.transferDataReceive).start();
         initializeListArmy();
         arenaView.setBackgroundCell(model);
-
         startTimer();
+        isTimeUp = false;
     }
 
     private void startTimer() {
-        this.timer = new Timer();
+        Timer timer = new Timer();
         TimerTask task = new TimerTask() {
 
             @Override
@@ -86,18 +86,57 @@ public class ArenaController implements EventHandler<MouseEvent> {
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
-                        update();
-
+                        if(!checkEnd())
+                            update();
                     }
                 });
             }
         };
         long frameTimeInMilliseconds = (long) (1000.0 / FRAMES_PER_SECOND);
-        this.timer.schedule(task, 0, frameTimeInMilliseconds);
+        timer.schedule(task, 0, frameTimeInMilliseconds);
+    }
+
+    private boolean checkEnd() {
+        if(isTimeUp || model.checkForEndCondition())
+            return true ;
+        return false;
+    }
+
+    private void updateTimer(){
+        countTime++;
+        if (countTime % 2 == 0) {
+            decreaseTime();
+            countTime = 0;
+        }
+
+    }
+    private void decreaseTime() {
+
+        String[] time = ArenaView.getTimeLabel().getText().split(":");
+        int second = Integer.parseInt(time[1]);
+        int min = Integer.parseInt(time[0]);
+        if (min != 0 || second != 0) {
+            if (second == 0) {
+                min--;
+                second = 59;
+            }
+            second--;
+            String newTime = min + ":" + second;
+            if (second < 10) {
+                newTime = min + ":0" + second;
+            }
+            if (min == 0) {
+                arenaView.setTimeLabel(newTime , Color.RED);
+                return ;
+            }
+            arenaView.setTimeLabel(newTime , Color.WHITE);
+        }
+        else{
+            isTimeUp = true ;
+        }
     }
 
     public void increaseElixir() {
-        countTime++;
 
         if (countTime % 2 == 0) {
             if (elixirProgress.getProgress() < 1) {
@@ -147,7 +186,21 @@ public class ArenaController implements EventHandler<MouseEvent> {
 }
 
     private void update() {
+        updateScore();
+        updateTimer();
         increaseElixir();
+        serverLogic();
+        model.move();
+        arenaView.update(model);
+        processAnimations(model.getVectorMap());
+    }
+
+    private void updateScore() {
+        arenaView.getCrown2().setText(String.valueOf(model.getGameData().getPlayerScore()));
+        arenaView.getCrown1().setText(String.valueOf(model.getGameData().getBotScore()));
+    }
+
+    private void serverLogic() {
         if (MenuController.isOnServer) {
             if (MenuController.transferDataReceive.isReceive()) {
                 MenuController.transferDataReceive.setReceive(false);
@@ -155,9 +208,6 @@ public class ArenaController implements EventHandler<MouseEvent> {
                 new Thread(MenuController.transferDataReceive).start();
             }
         }
-        model.move();
-        arenaView.update(model);
-        processAnimations(model.getVectorMap());
     }
 
     public double getBoardWidth() {
