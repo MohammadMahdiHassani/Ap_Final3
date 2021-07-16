@@ -25,6 +25,8 @@ public class GameData {
     Botlevel botlevel;
     Point2D leftBridge;
     Point2D rightBridge;
+    int botScore ;
+    int playerScore ;
 
     public GameData() {
         botlevel = DataHandler.getUserData().getBotlevel();
@@ -32,6 +34,8 @@ public class GameData {
         initPlayerDeck();
         initBotDeck();
         addingTowersTodecks();
+        botScore = 0 ;
+        playerScore = 0 ;
     }
 
     private void initboardElements() {
@@ -101,7 +105,6 @@ public class GameData {
 
         ArrayList<Card> deck = DataHandler.getUserData().getPlayerDeck();
         for (int i = 0; i < deck.size(); i++) {
-
             botDeck.add(CardFactory.makeCard(deck.get(i).getValue(), DataHandler.getLevel()));
 
         }
@@ -109,8 +112,7 @@ public class GameData {
 
     private void initPlayerDeck() {
         playerDeck = new ArrayList<>();
-//        ArrayList<Card> deck = DataHandler.getUserData().getPlayerDeck();
-//        playerDeck.addAll (deck);
+
     }
 
     private void addingTowersTodecks() {
@@ -138,5 +140,13 @@ public class GameData {
 
     public ArrayList<GameElement> getBotDeck() {
         return botDeck;
+    }
+
+    public int getBotScore() {
+        return botScore;
+    }
+
+    public int getPlayerScore() {
+        return playerScore;
     }
 }
