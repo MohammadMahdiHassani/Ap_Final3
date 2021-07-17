@@ -9,6 +9,7 @@ public class LoadingController {
     private ProgressBar loadingProgress;
 
     public void initialize() {
+        LoginController.sound.playMain("LOADING");
         //progress();
     }
 

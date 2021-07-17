@@ -27,9 +27,15 @@ public class ChooseBotController {
     @FXML
     private ImageView mediumButton;
 
+    public void initialize() {
+        LoginController.count = 1;
+        LoginController.sound.playMain("LOADING");
+    }
+
     @FXML
     void actionHandler(MouseEvent event) throws IOException {
         if (event.getSource() == backButton) {
+            LoginController.count = 1;
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Menu.fxml"));
             fxmlLoader.load();
             Parent root = fxmlLoader.getRoot();
@@ -39,6 +45,7 @@ public class ChooseBotController {
         } else {
             Botlevel level = processBotButtons(event);
             DataHandler.getUserData().setBotlevel(level);
+
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Arena.fxml"));
             fxmlLoader.load();
             Parent root = fxmlLoader.getRoot();
@@ -48,12 +55,13 @@ public class ChooseBotController {
 
             stage.setScene(new Scene(root, arenaController.getBoardWidth(), arenaController.getBoardHeight() + arenaController.getPrefHeightList() + arenaController.getElixirProgress().getPrefHeight() + 5));
             stage.show();
+            LoginController.sound.playMain("GOTOARENA");
         }
     }
 
-    private Botlevel processBotButtons(MouseEvent event){
-        if(event.getSource() == hardButton)
-            return Botlevel.HARD ;
+    private Botlevel processBotButtons(MouseEvent event) {
+        if (event.getSource() == hardButton)
+            return Botlevel.HARD;
         else if (event.getSource() == mediumButton)
             return Botlevel.MEDIUM;
         else

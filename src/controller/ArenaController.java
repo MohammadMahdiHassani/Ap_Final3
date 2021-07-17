@@ -100,9 +100,9 @@ public class ArenaController implements EventHandler<MouseEvent> {
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
-                        if(!checkEnd())
+                        if (!checkEnd())
                             update();
-                        else{
+                        else {
                             update();
                             pause();
                             deployEndGameLogic();
@@ -160,7 +160,7 @@ public class ArenaController implements EventHandler<MouseEvent> {
         });
 
 
-        stage.show() ;
+        stage.show();
 
 
     }
@@ -170,16 +170,16 @@ public class ArenaController implements EventHandler<MouseEvent> {
     }
 
     private void pause() {
-        this.timer.cancel() ;
+        this.timer.cancel();
     }
 
     private boolean checkEnd() {
-        if(isTimeUp || model.checkForEndCondition())
-            return true ;
+        if (isTimeUp || model.checkForEndCondition())
+            return true;
         return false;
     }
 
-    private void updateTimer(){
+    private void updateTimer() {
         countTime++;
         if (countTime % 2 == 0) {
             decreaseTime();
@@ -260,7 +260,8 @@ public class ArenaController implements EventHandler<MouseEvent> {
         model.getLogic().data.botDeck.add(card1);
         model.getLogic().data.boardElements.add(card1);
         model.getLogic().data.getBotDeck().add(card1);
-}
+        sound(card1);
+    }
 
     private void update() {
         updateScore();
@@ -268,6 +269,7 @@ public class ArenaController implements EventHandler<MouseEvent> {
         increaseElixir();
         serverLogic();
         model.move();
+        serverLogic();
         arenaView.update(model);
         processAnimations(model.getVectorMap());
     }
@@ -308,17 +310,45 @@ public class ArenaController implements EventHandler<MouseEvent> {
         if (listArmy.getSelectionModel().getSelectedItem() != null) {
             if (listArmy.getSelectionModel().getSelectedItem().getCost() <= (elixirProgress.getProgress() * 10)) {
                 if (MenuController.isOnServer) {
-                    MenuController.transferDataSend.setRequest(new Request(listArmy.getSelectionModel().getSelectedItem().getValue().toString(),DataHandler.getLevel(), x, y));
+                    MenuController.transferDataSend.setRequest(new Request(listArmy.getSelectionModel().getSelectedItem().getValue().toString(), DataHandler.getLevel(), x, y));
                     new Thread(MenuController.transferDataSend).start();
                 }
                 model.setCurrPoint(new Point2D(x, y));
                 elixirProgress.setProgress(elixirProgress.getProgress() - ((double) listArmy.getSelectionModel().getSelectedItem().getCost() / 10));
-
+                sound(listArmy.getSelectionModel().getSelectedItem());
                 removeFromListArmy(listArmy.getSelectionModel().getSelectedIndex());
 
 
             }
 
+        }
+    }
+
+    public void sound(GameElement card) {
+        if (card.getValue().toString().equals("ARCHER")) {
+            LoginController.sound.playMain("ARCHER_CHOOSE");
+        } else if (card.getValue().toString().equals("GIANT")) {
+            LoginController.sound.playMain("GIANT_CHOOSE");
+        } else if (card.getValue().toString().equals("BARBERIAN")) {
+            LoginController.sound.playMain("BARBARIAN_CHOOSE");
+        } else if (card.getValue().toString().equals("CANNON")) {
+            LoginController.sound.playMain("CANNON_CHOOSE");
+        } else if (card.getValue().toString().equals("INFERNO")) {
+            LoginController.sound.playMain("INFERNO_CHOOSE");
+        } else if (card.getValue().toString().equals("VALKYRIE")) {
+            LoginController.sound.playMain("VALKYRIE_CHOOSE");
+        } else if (card.getValue().toString().equals("MINI_PEKA")) {
+            LoginController.sound.playMain("MINIPEKKA_CHOOSE");
+        } else if (card.getValue().toString().equals("BABY_DRAGON")) {
+            LoginController.sound.playMain("BABYDRAGON_CHOOSE");
+        } else if (card.getValue().toString().equals("RAGE")) {
+            LoginController.sound.playMain("RAGE");
+        } else if (card.getValue().toString().equals("FIREBALL")) {
+            LoginController.sound.playMain("FIREBALL_ATTACK");
+        } else if (card.getValue().toString().equals("ARROWS")) {
+            LoginController.sound.playMain("ARROWS");
+        } else if (card.getValue().toString().equals("WIZARD")) {
+            LoginController.sound.playMain("WIZARD_CHOOSE");
         }
     }
 
@@ -390,37 +420,36 @@ public class ArenaController implements EventHandler<MouseEvent> {
         return elixirProgress;
     }
 
-    private void processAnimations(HashMap<GameElement , ArrayList<Point2D>> animationMap){
-        if(animationMap.size() == 0)
-            return ;
-        for(GameElement i : animationMap.keySet()){
+    private void processAnimations(HashMap<GameElement, ArrayList<Point2D>> animationMap) {
+        if (animationMap.size() == 0)
+            return;
+        for (GameElement i : animationMap.keySet()) {
 
-                Point2D starting_point = i.getPoint();
-                Color color ;
-                if(i instanceof Tower)
-                    color = Color.ORANGE;
-                else if(model.isBot(i))
-                    color = Color.RED ;
+            Point2D starting_point = i.getPoint();
+            Color color;
+            if (i instanceof Tower)
+                color = Color.ORANGE;
+            else if (model.isBot(i))
+                color = Color.RED;
+            else
+                color = Color.BLUE;
+
+            int radius = 0;
+            if (i instanceof Tower) {
+                if (i instanceof KingTower)
+                    radius = 5;
                 else
-                    color = Color.BLUE ;
+                    radius = 4;
+            } else
+                radius = 3;
 
-                int radius = 0;
-                if(i instanceof Tower){
-                    if(i instanceof KingTower)
-                        radius = 5 ;
-                    else
-                        radius = 4 ;
-                }
-                else
-                    radius = 3 ;
-
-                if(i instanceof Rage) {
-                    arenaView.scaleCircle(animationMap.get(i).get(0), i.getRange(), Color.PURPLE);
-                    continue ;
-                }
-                for(Point2D ending_point : animationMap.get(i)){
-                    arenaView.shootCircles(starting_point , ending_point , radius ,  color );
-                }
+            if (i instanceof Rage) {
+                arenaView.scaleCircle(animationMap.get(i).get(0), i.getRange(), Color.PURPLE);
+                continue;
+            }
+            for (Point2D ending_point : animationMap.get(i)) {
+                arenaView.shootCircles(starting_point, ending_point, radius, color);
+            }
 
 
         }

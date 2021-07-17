@@ -10,6 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import network.Client;
 import network.TransferDataReceive;
@@ -48,9 +50,19 @@ public class MenuController {
     public static boolean isOnServer;
 
     private UserData userData;
-
+    public static Media media;
+    public static MediaPlayer mediaPlayer;
 
     public void initialize() {
+
+        if (LoginController.count == 1) {
+
+            media = new Media(getClass().getResource("/sound/menu.wav").toExternalForm());
+            mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setCycleCount(20);
+            mediaPlayer.play();
+        }
+        LoginController.count++;
         isOnServer = false;
         TroopyCounter.setText(String.valueOf(DataHandler.getUserData().getTroopy()));
         XPprogressSlider.setProgress((1.0 * DataHandler.getUserData().getXP()) / 2500);
@@ -60,12 +72,15 @@ public class MenuController {
     @FXML
     void actionHandler(MouseEvent event) throws IOException, InterruptedException {
         if (event.getSource() == button1v1) {
+            mediaPlayer.stop();
+            LoginController.sound.playMain("ATTACK_BUTTON");
             isOnServer = true;
             Client client = new Client();
 
             client.Connect(button1v1);
             transferDataSend = new TransferDataSend(client.getObjectOutputStream());
             transferDataReceive = new TransferDataReceive(client.getObjectInputStream());
+
             Parent root = FXMLLoader.load(getClass().getResource("../view/Loading.fxml"));
             Stage stage = (Stage) mainPage.getScene().getWindow();
             Stage stage1 = (Stage) mainPage.getScene().getWindow();
@@ -81,12 +96,9 @@ public class MenuController {
                 }
                 Thread.sleep(100);
             }
-//            try {
-//                Thread.sleep(800);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
+
             transferDataReceive.setReceive(false);
+            LoginController.sound.playMain("GOTOARENA");
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Arena.fxml"));
             fxmlLoader.load();
             root = fxmlLoader.getRoot();
@@ -97,7 +109,19 @@ public class MenuController {
             root.setOnMouseClicked(arenaController);
             stage1.show();
 
-        } else if ((event.getSource() == profilePage || event.getSource() == battleDeck) || (event.getSource() == battleButton)) {
+        } else if ((event.getSource() == profilePage || (event.getSource() == battleDeck) || event.getSource() == gameHistory)) {
+            LoginController.sound.playMain("CLICK");
+            String fxmlAddress = getFxml(event);
+            Parent root = FXMLLoader.load(getClass().getResource(fxmlAddress));
+            Stage stage = (Stage) mainPage.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.show();
+        }
+        else if ((event.getSource() == battleButton))
+        {
+            mediaPlayer.stop();
+            LoginController.sound.playMain("ATTACK_BUTTON");
             String fxmlAddress = getFxml(event);
             Parent root = FXMLLoader.load(getClass().getResource(fxmlAddress));
             Stage stage = (Stage) mainPage.getScene().getWindow();

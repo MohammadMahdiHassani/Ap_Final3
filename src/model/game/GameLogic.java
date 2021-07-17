@@ -3,11 +3,13 @@ package model.game;
 import DataBase.DataHandler;
 import controller.MenuController;
 import javafx.geometry.Point2D;
+import javafx.scene.control.ListView;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.image.ImageView;
 import model.GameElement;
 import model.cards.Card;
 import model.cards.CardFactory;
 import model.cards.buildings.Building;
-import model.cards.levelEnums.Level;
 import model.cards.spells.Arrows;
 import model.cards.spells.FireBall;
 import model.cards.spells.Rage;
@@ -18,6 +20,7 @@ import model.towers.KingTower;
 import model.towers.Tower;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -82,6 +85,7 @@ public class GameLogic {
                 data.botDeck.add(addToBoard(card, randomPoint));
                 checkForSpawnedPlayers(card);
 
+                sound(card);
                 break;
 
             case MEDIUM:
@@ -199,6 +203,32 @@ public class GameLogic {
 
     }
 
+    public void sound(GameElement card) {
+        if (card.getValue().toString().equals("ARCHER")) {
+            LoginController.sound.playMain("ARCHER_ATTACK");
+        } else if (card.getValue().toString().equals("GIANT")) {
+            LoginController.sound.playMain("GIANT_ATTACK");
+        } else if (card.getValue().toString().equals("BARBERIAN")) {
+            LoginController.sound.playMain("BARBARIAN_ATTACK");
+        } else if (card.getValue().toString().equals("CANNON")) {
+            LoginController.sound.playMain("CANNON_ATTACK");
+        } else if (card.getValue().toString().equals("INFERNO")) {
+            LoginController.sound.playMain("INFERNO_ATTACK");
+        } else if (card.getValue().toString().equals("VALKYRIE")) {
+            LoginController.sound.playMain("VALKYRIE_ATTACK");
+        } else if (card.getValue().toString().equals("MINI_PEKA")) {
+            LoginController.sound.playMain("MINIPEKKA_ATTACK");
+        } else if (card.getValue().toString().equals("BABY_DRAGON")) {
+            LoginController.sound.playMain("BABYDRAGON_ATTACK");
+        } else if (card.getValue().toString().equals("WIZARD")) {
+            LoginController.sound.playMain("WIZARD_ATTACK");
+        } else if (card.getValue().toString().equals("KINGTOWER")) {
+            LoginController.sound.playMain("KING_ATTACK");
+        } else if (card.getValue().toString().equals("ARCHERTOWER")) {
+            LoginController.sound.playMain("ARCHERTOWER_ATTACK");
+        }
+    }
+
     private boolean isKingHit(Tower m) {
         return m.getHitPoint() < ((KingTower) m).getLevelHitPoint();
     }
@@ -216,7 +246,6 @@ public class GameLogic {
     }
 
     private void troopLogic(Troop m) {
-
         ArrayList<GameElement> target = findCardInRang(m);
         if (target.size() != 0)
             shootTarget(m, target);
@@ -329,28 +358,29 @@ public class GameLogic {
                 if (flag)
                     targetList.add(target) ;
             }
-            addToVectorMap(m , targetList);
-        }
-        else if(m instanceof Troop){
-        if(((Troop) m).isAllowedToHit()){
+            sound(m);
+            addToVectorMap(m, targetList);
+        } else if (m instanceof Troop) {
+            if (((Troop) m).isAllowedToHit()) {
 
-            ArrayList<GameElement> targetList = new ArrayList<>() ;
-            for(GameElement target : targets) {
-                boolean flag = false ;
-                if (target instanceof Tower) {
-                    ((Tower) target).decreaseHitPoint(((Troop) m).getDamage());
-                    flag = true;
-                } else if (target instanceof Troop) {
-                    ((Troop) target).decreaseHitPoint(((Troop) m).getDamage());
-                    flag = true;
-                } else if (target instanceof Building) {
-                    ((Building) target).decreaseHitPoint(((Troop) m).getDamage());
-                    flag = true;
+                ArrayList<GameElement> targetList = new ArrayList<>();
+                for (GameElement target : targets) {
+                    boolean flag = false;
+                    if (target instanceof Tower) {
+                        ((Tower) target).decreaseHitPoint(((Troop) m).getDamage());
+                        flag = true;
+                    } else if (target instanceof Troop) {
+                        ((Troop) target).decreaseHitPoint(((Troop) m).getDamage());
+                        flag = true;
+                    } else if (target instanceof Building) {
+                        ((Building) target).decreaseHitPoint(((Troop) m).getDamage());
+                        flag = true;
+                    }
+                    if (flag)
+                        targetList.add(target);
                 }
-                if (flag)
-                    targetList.add(target) ;
-            }
-            addToVectorMap(m , targetList);
+                sound(m);
+                addToVectorMap(m, targetList);
             }
         }
         else if(m instanceof Tower){
@@ -372,7 +402,8 @@ public class GameLogic {
                 if (flag)
                     targetList.add(target) ;
             }
-            addToVectorMap(m , targetList);
+            sound(m);
+            addToVectorMap(m, targetList);
         }
 
     }
@@ -685,7 +716,6 @@ public class GameLogic {
         this.currCard = currCard;
 
     }
-
     private boolean isOpposing(GameElement element_1 , GameElement element_2) {
         if(isPlayerElement(element_1) && isBotElement(element_2))
             return true ;
@@ -701,7 +731,6 @@ public class GameLogic {
             return newCard ;
 
     }
-
     private void deletFromBoard(GameElement card){
         setScore(card);
         if(isPlayerElement(card))
@@ -710,7 +739,6 @@ public class GameLogic {
             data.botDeck.remove(card);
         data.boardElements.remove(card);
     }
-
     private void setScore(GameElement element){
         if(element instanceof Tower){
             if(isPlayerElement(element))
@@ -729,7 +757,6 @@ public class GameLogic {
             }
         }
     }
-
     private void addToVectorMap(GameElement element , ArrayList<GameElement> elementsArr){
         ArrayList<Point2D> pointsArr = new ArrayList<>() ;
         for(GameElement ele : elementsArr)
@@ -749,7 +776,6 @@ public class GameLogic {
 
             return counter != 2 ;
     }
-
     public void endGameLogic(){
         boolean winner = false ;
         if(isKingDead()) {
@@ -785,7 +811,6 @@ public class GameLogic {
             data.saveToHistory();
             data.saveData() ;
     }
-
     private void setPlayerWon(boolean isPlayerTheWinner){
         if (isPlayerTheWinner)
         {
