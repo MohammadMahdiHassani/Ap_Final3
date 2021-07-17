@@ -753,8 +753,8 @@ public class GameLogic {
         EndGameController.score1 = data.playerScore;
         EndGameController.score2 = data.botScore;
         if (isPlayerTheWinner) {
-
             data.xpDealer(700);
+            data.cupDealer(30);
             data.playerWon = true;
             EndGameController.playerWon = true;
         } else {

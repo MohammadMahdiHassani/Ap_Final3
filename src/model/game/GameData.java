@@ -158,6 +158,11 @@ public class GameData {
         userData.addXP(x);
     }
 
+    public void cupDealer(int x)
+    {
+        userData.setTroopy(userData.getTroopy() + x);
+    }
+
     public boolean isPlayerWon() {
         return playerWon;
     }

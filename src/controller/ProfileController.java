@@ -1,17 +1,25 @@
 package controller;
 
 import DataBase.DataHandler;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Callback;
+import model.cards.Card;
+import model.cards.CardFactory;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ProfileController {
     @FXML
@@ -32,13 +40,34 @@ public class ProfileController {
 
     @FXML
     private Label TroopyCounter;
+    @FXML
+    private ListView<Card> mainArmyListView;
+
+    private ObservableList<Card> mainArmies =
+            FXCollections.observableArrayList();
 
     @FXML
-    void initialize(){
+    void initialize() {
         TroopyCounter.setText(String.valueOf(DataHandler.getUserData().getTroopy()));
-        XPprogressSlider.setProgress(DataHandler.getUserData().getXP()/2500);
-        xp.setText(DataHandler.getUserData().getXP()+"");
+        XPprogressSlider.setProgress(DataHandler.getUserData().getXP() / 2500);
+        xp.setText(DataHandler.getUserData().getXP() + "");
+        ArrayList<Card> playerDeck = DataHandler.getUserData().getPlayerDeck();
+        if (playerDeck != null) {
+            for (int i = 0; i < playerDeck.size(); i++) {
+                mainArmies.add(CardFactory.makeCard(playerDeck.get(i).getValue(), DataHandler.getLevel()));
+            }
+        }
+        mainArmyListView.setItems(mainArmies);
+        mainArmyListView.setCellFactory(
+                new Callback<ListView<Card>, ListCell<Card>>() {
+                    @Override
+                    public ListCell<Card> call(ListView<Card> param) {
+                        return new ArmyCellFactory();
+                    }
+                }
+        );
     }
+
 
     @FXML
     void actionHandler(MouseEvent event) throws IOException {
@@ -52,17 +81,15 @@ public class ProfileController {
 
 
     }
-    private String getFxml(MouseEvent event){
-        if(event.getSource() == mainPage){
+
+    private String getFxml(MouseEvent event) {
+        if (event.getSource() == mainPage) {
             return "../view/Menu.fxml";
-        }
-        else if(event.getSource() == gameHistory){
+        } else if (event.getSource() == gameHistory) {
             return "../view/BattleHistory.fxml";
-        }
-        else if(event.getSource() == battleDeck){
+        } else if (event.getSource() == battleDeck) {
             return "../view/Deck.fxml";
-        }
-        else
+        } else
             return "";
     }
 }

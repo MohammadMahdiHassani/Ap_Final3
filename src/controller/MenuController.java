@@ -54,7 +54,8 @@ public class MenuController {
     public static MediaPlayer mediaPlayer;
 
     public void initialize() {
-
+//        media = new Media(getClass().getResource("/sound/menu.wav").toExternalForm());
+//        mediaPlayer = new MediaPlayer(media);
         if (LoginController.count == 1) {
 
             media = new Media(getClass().getResource("/sound/menu.wav").toExternalForm());
