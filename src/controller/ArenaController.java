@@ -106,6 +106,12 @@ public class ArenaController implements EventHandler<MouseEvent> {
                             update();
                             pause();
                             deployEndGameLogic();
+                            LoginController.sound.playMain("END");
+                            try {
+                                Thread.sleep(3000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                             loadGameOverPage();
                         }
                     }
@@ -118,51 +124,15 @@ public class ArenaController implements EventHandler<MouseEvent> {
 
     private void loadGameOverPage() {
 
-        Group group = new Group();
-        Stage stage = (Stage) elixirProgress.getScene().getWindow();
-        stage.setScene(new Scene(group, 200, 200));
-        VBox vBox = new VBox();
-
-        group.getChildren().add(vBox);
-        Label label_1 = new Label();
-        Label label_2 = new Label();
-        vBox.getChildren().add(label_1);
-        vBox.getChildren().add(label_2);
-        vBox.setAlignment(Pos.BASELINE_CENTER);
-        if (model.getGameData().isPlayerWon()) {
-            label_1.setText("U Won");
-            label_2.setText("Gained Ex : 700");
-        } else {
-            label_1.setText("U Lost");
-            label_2.setText("Gained Ex : 200");
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/view/EndGame.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        Button button = new Button();
-        vBox.getChildren().add(button);
-
-        button.setText("Back to Menu");
-        button.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                stage.close();
-
-                Parent root = null;
-                try {
-                    root = FXMLLoader.load(getClass().getResource("../view/Menu.fxml"));
-                } catch (IOException e) {
-                    System.out.println("couldn't find fxml file");
-                }
-
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root));
-                stage.setResizable(false);
-                stage.show();
-            }
-        });
-
-
+        Stage stage = (Stage) elixirProgress.getScene().getWindow();
+        stage.setScene(new Scene(root));
         stage.show();
-
-
     }
 
     private void deployEndGameLogic() {
@@ -203,8 +173,10 @@ public class ArenaController implements EventHandler<MouseEvent> {
             if (second < 10) {
                 newTime = min + ":0" + second;
             }
+
             if (min == 0) {
                 arenaView.setTimeLabel(newTime, Color.RED);
+                checkSecond(second);
                 return;
             }
             arenaView.setTimeLabel(newTime, Color.WHITE);
@@ -213,11 +185,44 @@ public class ArenaController implements EventHandler<MouseEvent> {
         }
     }
 
+    public void checkSecond(int second) {
+        if (second == 10) {
+            LoginController.sound.playMain("TEN");
+        } else if (second == 9) {
+            LoginController.sound.playMain("NINE");
+        } else if (second == 8) {
+            LoginController.sound.playMain("EIGHT");
+        } else if (second == 7) {
+            LoginController.sound.playMain("SEVEN");
+        } else if (second == 6) {
+            LoginController.sound.playMain("SIX");
+        } else if (second == 5) {
+            LoginController.sound.playMain("FIVE");
+        } else if (second == 4) {
+            LoginController.sound.playMain("FOUR");
+        } else if (second == 3) {
+            LoginController.sound.playMain("THREE");
+        } else if (second == 2) {
+            LoginController.sound.playMain("TWO");
+        } else if (second == 1) {
+            LoginController.sound.playMain("ONE");
+        }
+    }
+
     public void increaseElixir() {
 
-        if (countTime % 2 == 0) {
-            if (elixirProgress.getProgress() < 1) {
-                elixirProgress.setProgress(elixirProgress.getProgress() + 0.1);
+        if (!ArenaView.getTimeLabel().getText().split(":")[0].equals(0)) {
+            if (countTime % 4 == 0) {
+                if (elixirProgress.getProgress() < 1) {
+                    elixirProgress.setProgress(elixirProgress.getProgress() + 0.1);
+                }
+            }
+        }
+        else {
+            if (countTime % 2 == 0) {
+                if (elixirProgress.getProgress() < 1) {
+                    elixirProgress.setProgress(elixirProgress.getProgress() + 0.1);
+                }
             }
         }
     }
@@ -277,6 +282,12 @@ public class ArenaController implements EventHandler<MouseEvent> {
     }
 
     private void updateScore() {
+        if (!arenaView.getCrown1().getText().equals(model.getGameData().getPlayerScore() + "")) {
+            LoginController.sound.playMain("CROWN");
+        }
+        if (!arenaView.getCrown2().getText().equals(model.getGameData().getBotScore() + "")) {
+            LoginController.sound.playMain("CROWN");
+        }
         arenaView.getCrown2().setText(String.valueOf(model.getGameData().getPlayerScore()));
         arenaView.getCrown1().setText(String.valueOf(model.getGameData().getBotScore()));
     }

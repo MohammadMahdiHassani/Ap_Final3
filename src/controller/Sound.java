@@ -228,6 +228,72 @@ public class Sound {
             mediaPlayer = new MediaPlayer(media);
             mediaPlayer.setCycleCount(1);
             mediaPlayer.play();
+        }else if (sound.equals("END"))
+        {
+            media = new Media(getClass().getResource("/sound/end.wav").toExternalForm());
+            mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setCycleCount(1);
+            mediaPlayer.play();
+        }else if (sound.equals("ONE"))
+        {
+            media = new Media(getClass().getResource("/sound/one.wav").toExternalForm());
+            mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setCycleCount(1);
+            mediaPlayer.play();
+        }else if (sound.equals("TWO"))
+        {
+            media = new Media(getClass().getResource("/sound/two.wav").toExternalForm());
+            mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setCycleCount(1);
+            mediaPlayer.play();
+        }else if (sound.equals("THREE"))
+        {
+            media = new Media(getClass().getResource("/sound/three.wav").toExternalForm());
+            mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setCycleCount(1);
+            mediaPlayer.play();
+        }else if (sound.equals("FOUR"))
+        {
+            media = new Media(getClass().getResource("/sound/four.wav").toExternalForm());
+            mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setCycleCount(1);
+            mediaPlayer.play();
+        }else if (sound.equals("FIVE"))
+        {
+            media = new Media(getClass().getResource("/sound/five.wav").toExternalForm());
+            mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setCycleCount(1);
+            mediaPlayer.play();
+        }else if (sound.equals("SIX"))
+        {
+            media = new Media(getClass().getResource("/sound/six.wav").toExternalForm());
+            mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setCycleCount(1);
+            mediaPlayer.play();
+        }else if (sound.equals("SEVEN"))
+        {
+            media = new Media(getClass().getResource("/sound/seven.wav").toExternalForm());
+            mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setCycleCount(1);
+            mediaPlayer.play();
+        }else if (sound.equals("EIGHT"))
+        {
+            media = new Media(getClass().getResource("/sound/eight.wav").toExternalForm());
+            mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setCycleCount(1);
+            mediaPlayer.play();
+        }else if (sound.equals("NINE"))
+        {
+            media = new Media(getClass().getResource("/sound/nine.wav").toExternalForm());
+            mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setCycleCount(1);
+            mediaPlayer.play();
+        }else if (sound.equals("TEN"))
+        {
+            media = new Media(getClass().getResource("/sound/ten.wav").toExternalForm());
+            mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setCycleCount(1);
+            mediaPlayer.play();
         }
 
 

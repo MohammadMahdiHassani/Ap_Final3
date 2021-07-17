@@ -1,6 +1,7 @@
 package model.game;
 
 import DataBase.DataHandler;
+import controller.EndGameController;
 import controller.LoginController;
 import controller.MenuController;
 import javafx.geometry.Point2D;
@@ -674,6 +675,7 @@ public class GameLogic {
     }
 
     private void setScore(GameElement element) {
+
         if (element instanceof Tower) {
             if (isPlayerElement(element)) {
                 if (element instanceof KingTower)
@@ -718,6 +720,7 @@ public class GameLogic {
                     flag = true;
 
             if (flag) winner = true;
+            else winner = false;
 
         } else {
             if (data.playerScore > data.botScore) winner = true;
@@ -727,6 +730,7 @@ public class GameLogic {
                     if (i instanceof Tower)
                         playerTowerHitPoint += ((Tower) i).getHitPoint();
 
+
                 int botTowerHitPoint = 0;
                 for (GameElement i : data.botDeck)
                     if (i instanceof Tower)
@@ -734,6 +738,9 @@ public class GameLogic {
 
                 if (playerTowerHitPoint >= botTowerHitPoint)
                     winner = true;
+                else {
+                    winner = false;
+                }
             }
 
         }
@@ -742,13 +749,17 @@ public class GameLogic {
     }
 
     private void setPlayerWon(boolean isPlayerTheWinner) {
+        EndGameController.score1 = data.playerScore;
+        EndGameController.score2 = data.botScore;
         if (isPlayerTheWinner) {
 
             data.xpDealer(700);
             data.playerWon = true;
+            EndGameController.playerWon = true;
         } else {
             data.xpDealer(200);
-            data.playerWon = true;
+            data.playerWon = false;
+            EndGameController.playerWon = false;
         }
     }
 }

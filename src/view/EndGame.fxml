@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane id="borderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EndGameController">
+
+    <stylesheets>
+        <URL value="@ProfileSytle.css" />
+    </stylesheets>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="31.0" fitWidth="115.0" layoutX="122.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@photos/balesh(2).png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="redCrown1" fitHeight="74.0" fitWidth="82.0" layoutX="123.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@photos/BackGround_Arena/redCrown.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="31.0" fitWidth="115.0" layoutX="384.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@photos/balesh(2).png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="31.0" fitWidth="115.0" layoutX="258.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@photos/balesh(2).png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="redCrown3" fitHeight="74.0" fitWidth="82.0" layoutX="385.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@photos/BackGround_Arena/redCrown.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="redCrown2" fitHeight="74.0" fitWidth="82.0" layoutX="259.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@photos/BackGround_Arena/redCrown.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="31.0" fitWidth="115.0" layoutX="384.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@photos/balesh(1).png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="31.0" fitWidth="115.0" layoutX="258.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@photos/balesh(1).png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="31.0" fitWidth="115.0" layoutX="122.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@photos/balesh(1).png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="blueCrown3" fitHeight="74.0" fitWidth="82.0" layoutX="385.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@photos/BackGround_Arena/blueCrown.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="blueCrown2" fitHeight="74.0" fitWidth="82.0" layoutX="259.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@photos/BackGround_Arena/blueCrown.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="blueCrown1" fitHeight="74.0" fitWidth="82.0" layoutX="123.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@photos/BackGround_Arena/blueCrown.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="49.0" fitWidth="55.0" layoutX="203.0" layoutY="254.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@photos/XP.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="49.0" fitWidth="55.0" layoutX="332.0" layoutY="254.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@photos/Trofeu2.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="217.0" layoutY="271.0" text="+700" fx:id="xpLabel">
+               <font>
+                  <Font name="AGaramondPro-Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="troopyLabel" layoutX="345.0" layoutY="264.0" prefHeight="0.0" prefWidth="25.0" text="+30" textFill="#111010">
+               <font>
+                  <Font name="AGaramondPro-Bold" size="12.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="83.0" fitWidth="64.0" layoutX="515.0" layoutY="14.0" onMouseClicked="#back" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@photos/back.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </center>
+
+</BorderPane>

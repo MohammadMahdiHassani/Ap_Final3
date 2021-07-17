@@ -103,6 +103,8 @@ public class ArenaModel {
                     case "d" :
                         BackGroundCellValues[row][column] = CellValue.R_CROWN;
                         break;
+                    case "*":
+                        BackGroundCellValues[row][column] = CellValue.B_CROWN;
                     case "p":
                         BackGroundCellValues[row][column] = CellValue.POINT;
                         break;
