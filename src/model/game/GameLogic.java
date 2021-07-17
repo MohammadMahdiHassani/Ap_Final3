@@ -10,6 +10,7 @@ import model.GameElement;
 import model.cards.Card;
 import model.cards.CardFactory;
 import model.cards.buildings.Building;
+import model.cards.levelEnums.Level;
 import model.cards.spells.Arrows;
 import model.cards.spells.FireBall;
 import model.cards.spells.Rage;
@@ -211,11 +212,50 @@ public class GameLogic {
     }
 
     private void troopLogic(Troop m) {
+        if(m.getCount() != 1)
+            troopSpan(m);
+
         ArrayList<GameElement> target = findCardInRang(m);
         if (target.size() != 0)
             shootTarget(m, target);
         else if (moveToBridge(m))
             moveToTower(m);
+    }
+
+    private void troopSpan(Troop troop){
+        int count = troop.getCount();
+
+        ArrayList<Troop> troops = new ArrayList<>() ;
+        for(int i = 0 ; i < count ; i++)
+            troops.add((Troop) CardFactory.makeCard(troop.getValue() , Level.LEVEL_1));
+
+        for(Troop t : troops)
+        {
+            Point2D point ;
+            if((point = findEmptyCell(troop.getPoint())) != null){
+                if(isPlayerElement(troop))
+                    data.playerDeck.add(t) ;
+                else
+                    data.botDeck.add(t) ;
+
+                addToBoard(t , point) ;
+            }
+
+        }
+
+    }
+
+    private Point2D findEmptyCell(Point2D point){
+
+        for(int x = (int) (point.getX() - 1) ; x < (int) point.getX() + 1 ; x ++){
+            for(int y = (int) (point.getY() - 1) ; y < (int) point.getY() + 1 ; y ++){
+                Point2D newPoint ;
+                if(!isOccupied(newPoint = new Point2D(x , y))) {
+                    return newPoint ;
+                }
+            }
+        }
+        return null ;
     }
 
     private void shootTarget(GameElement m, ArrayList<GameElement> targets) {
