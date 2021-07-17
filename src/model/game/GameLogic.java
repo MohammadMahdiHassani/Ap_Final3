@@ -3,9 +3,6 @@ package model.game;
 import DataBase.DataHandler;
 import controller.MenuController;
 import javafx.geometry.Point2D;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.image.ImageView;
 import model.GameElement;
 import model.cards.Card;
 import model.cards.CardFactory;
@@ -21,7 +18,6 @@ import model.towers.KingTower;
 import model.towers.Tower;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -59,10 +55,12 @@ public class GameLogic {
     private void checkForPlayerMove() {
         if (currPoint != null && currCard != null) {
             if (point2cellValue(currPoint) == null) {
-                data.playerDeck.add(addToBoard(currCard, currPoint)) ;
+                GameElement ele = addToBoard(currCard, currPoint);
+                data.playerDeck.add(ele) ;
                 playerMoved = true;
                 currCard = null;
                 currPoint = null;
+                checkForSpawnedPlayers(ele);
             }
         }
     }
@@ -82,6 +80,7 @@ public class GameLogic {
                 while (isOccupied(randomPoint))
                     randomPoint = getRandomPoint();
                 data.botDeck.add(addToBoard(card, randomPoint));
+                checkForSpawnedPlayers(card);
 
                 break;
 
@@ -137,6 +136,11 @@ public class GameLogic {
 
         }
 
+    }
+
+    private void checkForSpawnedPlayers(GameElement m) {
+        if(m instanceof Troop && ((Troop) m).getCount() != 1 && !((Troop) m).isSpawned())
+            troopSpawn((Troop) m);
     }
 
     private void updateBoard() {
@@ -212,8 +216,6 @@ public class GameLogic {
     }
 
     private void troopLogic(Troop m) {
-        if(m.getCount() != 1)
-            troopSpan(m);
 
         ArrayList<GameElement> target = findCardInRang(m);
         if (target.size() != 0)
@@ -222,9 +224,8 @@ public class GameLogic {
             moveToTower(m);
     }
 
-    private void troopSpan(Troop troop){
-        int count = troop.getCount();
-
+    private void troopSpawn(Troop troop){
+        int count = troop.getCount() - 1;
         ArrayList<Troop> troops = new ArrayList<>() ;
         for(int i = 0 ; i < count ; i++)
             troops.add((Troop) CardFactory.makeCard(troop.getValue() , Level.LEVEL_1));
@@ -237,8 +238,9 @@ public class GameLogic {
                     data.playerDeck.add(t) ;
                 else
                     data.botDeck.add(t) ;
-
-                addToBoard(t , point) ;
+                t.setPoint(point) ;
+                t.isSpawned() ;
+                data.boardElements.add(t) ;
             }
 
         }
@@ -247,10 +249,14 @@ public class GameLogic {
 
     private Point2D findEmptyCell(Point2D point){
 
-        for(int x = (int) (point.getX() - 1) ; x < (int) point.getX() + 1 ; x ++){
-            for(int y = (int) (point.getY() - 1) ; y < (int) point.getY() + 1 ; y ++){
+        for(int x = (int) (point.getX() - 1) ; x <= (int) point.getX() + 1 ; x ++){
+            if(x < 0)
+                continue ;
+            for(int y = (int) (point.getY() - 1) ; y <= (int) point.getY() + 1 ; y ++){
+                if(y < 0)
+                    continue ;
                 Point2D newPoint ;
-                if(!isOccupied(newPoint = new Point2D(x , y))) {
+                if(!isOccupied(newPoint = new Point2D(x , y)) && y != 10) {
                     return newPoint ;
                 }
             }
@@ -679,6 +685,7 @@ public class GameLogic {
         this.currCard = currCard;
 
     }
+
     private boolean isOpposing(GameElement element_1 , GameElement element_2) {
         if(isPlayerElement(element_1) && isBotElement(element_2))
             return true ;
@@ -694,6 +701,7 @@ public class GameLogic {
             return newCard ;
 
     }
+
     private void deletFromBoard(GameElement card){
         setScore(card);
         if(isPlayerElement(card))
@@ -702,6 +710,7 @@ public class GameLogic {
             data.botDeck.remove(card);
         data.boardElements.remove(card);
     }
+
     private void setScore(GameElement element){
         if(element instanceof Tower){
             if(isPlayerElement(element))
@@ -720,6 +729,7 @@ public class GameLogic {
             }
         }
     }
+
     private void addToVectorMap(GameElement element , ArrayList<GameElement> elementsArr){
         ArrayList<Point2D> pointsArr = new ArrayList<>() ;
         for(GameElement ele : elementsArr)
@@ -739,6 +749,7 @@ public class GameLogic {
 
             return counter != 2 ;
     }
+
     public void endGameLogic(){
         boolean winner = false ;
         if(isKingDead()) {
@@ -774,6 +785,7 @@ public class GameLogic {
             data.saveToHistory();
             data.saveData() ;
     }
+
     private void setPlayerWon(boolean isPlayerTheWinner){
         if (isPlayerTheWinner)
         {
