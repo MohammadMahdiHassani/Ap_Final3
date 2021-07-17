@@ -43,7 +43,7 @@ public class ProfileController {
     @FXML
     private ListView<Card> mainArmyListView;
 
-    private ObservableList<Card> mainArmies =
+    private final ObservableList<Card> mainArmies =
             FXCollections.observableArrayList();
 
     @FXML
