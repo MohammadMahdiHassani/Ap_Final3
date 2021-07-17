@@ -1,6 +1,7 @@
 package model.game;
 
 import DataBase.DataHandler;
+import controller.LoginController;
 import controller.MenuController;
 import javafx.geometry.Point2D;
 import javafx.scene.control.ListView;
@@ -10,6 +11,7 @@ import model.GameElement;
 import model.cards.Card;
 import model.cards.CardFactory;
 import model.cards.buildings.Building;
+import model.cards.levelEnums.Level;
 import model.cards.spells.Arrows;
 import model.cards.spells.FireBall;
 import model.cards.spells.Rage;
