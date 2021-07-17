@@ -45,7 +45,7 @@ public class ChooseBotController {
         } else {
             Botlevel level = processBotButtons(event);
             DataHandler.getUserData().setBotlevel(level);
-            LoginController.sound.playMain("GOTOTARENA");
+
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Arena.fxml"));
             fxmlLoader.load();
             Parent root = fxmlLoader.getRoot();
@@ -55,6 +55,7 @@ public class ChooseBotController {
 
             stage.setScene(new Scene(root, arenaController.getBoardWidth(), arenaController.getBoardHeight() + arenaController.getPrefHeightList() + arenaController.getElixirProgress().getPrefHeight() + 5));
             stage.show();
+            LoginController.sound.playMain("GOTOARENA");
         }
     }
 
