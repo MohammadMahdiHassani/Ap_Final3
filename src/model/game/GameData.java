@@ -161,4 +161,17 @@ public class GameData {
     public boolean isPlayerWon() {
         return playerWon;
     }
+
+    public void saveToHistory(){
+        String Winner ;
+        if(isPlayerWon())
+            Winner = userData.getUserName();
+        else
+            Winner = "bot" ;
+        userData.addToHistory(userData.getUserName(), "Bot" , Winner);
+    }
+
+    public void saveData() {
+        DataHandler.saveToFile(userData);
+    }
 }

@@ -71,14 +71,11 @@ public class DataHandler {
         }
     }
 
-    public static void saveToFile(UserData userData)
-    {
+    public static void saveToFile(UserData userData) {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(file +"/"+ userData.getUserName()+".ser");
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeObject(userData);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

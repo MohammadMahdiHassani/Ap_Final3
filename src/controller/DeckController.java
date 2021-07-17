@@ -66,20 +66,9 @@ public class DeckController {
     public void initialize() {
 
         TroopyCounter.setText(String.valueOf(DataHandler.getUserData().getTroopy()));
-        XPprogressSlider.setProgress(DataHandler.getUserData().getXP() / 2500);
+        XPprogressSlider.setProgress((1.0 * DataHandler.getUserData().getXP()) / 2500);
         xp.setText(DataHandler.getUserData().getXP() + "");
-        Level level = null;
-        if (Integer.valueOf(xp.getText()) <= 300) {
-            level = Level.LEVEL_1;
-        } else if (Integer.valueOf(xp.getText()) <= 500) {
-            level = Level.LEVEL_2;
-        } else if (Integer.valueOf(xp.getText()) <= 900) {
-            level = Level.LEVEL_3;
-        } else if (Integer.valueOf(xp.getText()) <= 1700) {
-            level = Level.LEVEL_4;
-        } else if (Integer.valueOf(xp.getText()) > 1700) {
-            level = Level.LEVEL_5;
-        }
+        Level level = DataHandler.getLevel();
 
         ArrayList<CellValue> cellValues = new ArrayList<>();
         cellValues.add(CellValue.ARCHER);

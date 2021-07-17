@@ -74,4 +74,8 @@ public class UserData implements Serializable {
     public void addXP(int x){
         XP += x ;
     }
+
+    public void addToHistory(String userName_1 , String userName_2 , String winner){
+        histories.add(new GameHistory(userName_1 , userName_2 , winner)) ;
+    }
 }

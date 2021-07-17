@@ -38,7 +38,7 @@ public class BattleHistoryController {
     public void initialize()
     {
         TroopyCounter.setText(String.valueOf(DataHandler.getUserData().getTroopy()));
-        XPprogressSlider.setProgress(DataHandler.getUserData().getXP()/2500);
+        XPprogressSlider.setProgress((1.0 * DataHandler.getUserData().getXP()) / 2500);
         xp.setText(DataHandler.getUserData().getXP()+"");
     }
     @FXML

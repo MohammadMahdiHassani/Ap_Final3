@@ -14,7 +14,6 @@ import java.util.Scanner;
 
 public class ArenaModel {
 
-     ArenaModel arenaModel = null ;
      int rowCount;
      int columnCount;
      CellValue[][] BackGroundCellValues;

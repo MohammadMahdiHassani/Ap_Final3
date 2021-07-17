@@ -26,7 +26,7 @@ import java.util.Random;
 
 public class GameLogic {
     private int speedCounter;
-    private ArenaModel model;
+    private final ArenaModel model;
     public GameData data;
     private Point2D currPoint;
     private Card currCard;
@@ -731,16 +731,18 @@ public class GameLogic {
         }
 
             setPlayerWon(winner);
+            data.saveToHistory();
+            data.saveData() ;
     }
     private void setPlayerWon(boolean isPlayerTheWinner){
         if (isPlayerTheWinner)
         {
 
-            data.xpDealer(700); data.playerWon = true ;
+            data.xpDealer(200); data.playerWon = true ;
         }
         else
         {
-            data.xpDealer(200); data.playerWon = true ;
+            data.xpDealer(70); data.playerWon = false ;
         }
     }
 }

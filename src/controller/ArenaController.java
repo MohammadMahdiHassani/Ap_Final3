@@ -131,10 +131,10 @@ public class ArenaController implements EventHandler<MouseEvent> {
         vBox.setAlignment(Pos.BASELINE_CENTER);
         if(model.getGameData().isPlayerWon()) {
             label_1.setText("U Won");
-            label_2.setText("Gained Ex : 700");
+            label_2.setText("Gained Ex : 200");
         }else {
             label_1.setText("U Lost");
-            label_2.setText("Gained Ex : 200");
+            label_2.setText("Gained Ex : 70");
         }
         Button button = new Button() ;
         vBox.getChildren().add(button) ;
