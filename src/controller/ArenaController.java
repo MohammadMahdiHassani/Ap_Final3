@@ -282,12 +282,6 @@ public class ArenaController implements EventHandler<MouseEvent> {
     }
 
     private void updateScore() {
-        if (!arenaView.getCrown1().getText().equals(model.getGameData().getPlayerScore() + "")) {
-            LoginController.sound.playMain("CROWN");
-        }
-        if (!arenaView.getCrown2().getText().equals(model.getGameData().getBotScore() + "")) {
-            LoginController.sound.playMain("CROWN");
-        }
         arenaView.getCrown2().setText(String.valueOf(model.getGameData().getPlayerScore()));
         arenaView.getCrown1().setText(String.valueOf(model.getGameData().getBotScore()));
     }

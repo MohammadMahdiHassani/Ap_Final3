@@ -45,7 +45,15 @@ public class EndGameController {
 
     public void initialize()
     {
-        if (score2 == 1)
+        System.out.println("score1: " + score1);
+        System.out.println("score2: " + score2);
+        if (score2 == 0)
+        {
+            redCrown3.setImage(null);
+            redCrown2.setImage(null);
+            redCrown1.setImage(null);
+        }
+        else if (score2 == 1)
         {
             redCrown3.setImage(null);
             redCrown2.setImage(null);
@@ -53,6 +61,12 @@ public class EndGameController {
         else if (score2 == 2)
         {
             redCrown3.setImage(null);
+        }
+        if (score1 == 0)
+        {
+            blueCrown3.setImage(null);
+            blueCrown2.setImage(null);
+            blueCrown1.setImage(null);
         }
         if (score1 == 1)
         {
@@ -77,6 +91,7 @@ public class EndGameController {
     }
     @FXML
     void back(MouseEvent event) throws IOException {
+        LoginController.sound.playMain("CLICK");
         LoginController.count = 1;
         Parent root = FXMLLoader.load(getClass().getResource("../view/Menu.fxml"));
         Stage stage = (Stage) blueCrown1.getScene().getWindow();
