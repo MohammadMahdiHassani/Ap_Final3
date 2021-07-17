@@ -1,6 +1,7 @@
 package model.game;
 
 import DataBase.DataHandler;
+import DataBase.UserData;
 import controller.MenuController;
 import javafx.geometry.Point2D;
 import model.GameElement;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GameData {
+    private UserData userData ;
     ArrayList<GameElement> playerDeck;
     public ArrayList<GameElement> botDeck;
     ArrayList<GameElement> botGenesis;
@@ -27,9 +29,11 @@ public class GameData {
     Point2D rightBridge;
     int botScore ;
     int playerScore ;
+    boolean playerWon ;
 
     public GameData() {
-        botlevel = DataHandler.getUserData().getBotlevel();
+        userData = DataHandler.getUserData() ;
+        botlevel = userData.getBotlevel();
         initboardElements();
         initPlayerDeck();
         initBotDeck();
@@ -103,7 +107,7 @@ public class GameData {
 
     private void initRandomBotDeck() {
 
-        ArrayList<Card> deck = DataHandler.getUserData().getPlayerDeck();
+        ArrayList<Card> deck = userData.getPlayerDeck();
         for (int i = 0; i < deck.size(); i++) {
             botDeck.add(CardFactory.makeCard(deck.get(i).getValue(), DataHandler.getLevel()));
 
@@ -148,5 +152,13 @@ public class GameData {
 
     public int getPlayerScore() {
         return playerScore;
+    }
+
+    public void xpDealer(int x){
+        userData.addXP(x);
+    }
+
+    public boolean isPlayerWon() {
+        return playerWon;
     }
 }

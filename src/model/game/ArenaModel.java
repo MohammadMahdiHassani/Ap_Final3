@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class ArenaModel {
 
-     static ArenaModel arenaModel = null ;
+     ArenaModel arenaModel = null ;
      int rowCount;
      int columnCount;
      CellValue[][] BackGroundCellValues;
@@ -23,22 +23,14 @@ public class ArenaModel {
      GameLogic logic ;
      HashMap<GameElement , ArrayList<Point2D>> vectorMap ;
 
-    private ArenaModel() {
+    public ArenaModel() {
         rowCount = 21;
         columnCount = 19;
         BackGroundCellValues = new CellValue[rowCount][columnCount];
         gameData = new GameData();
-        logic = new GameLogic();
+        logic = new GameLogic(this);
         vectorMap = new HashMap<>() ;
 
-    }
-    public static ArenaModel getModel(){
-        if(arenaModel == null){
-            arenaModel = new ArenaModel();
-            return arenaModel ;
-        }
-        else
-            return arenaModel ;
     }
     public CellValue[][] getBackGroundCellValues(){
         readMap("map.txt");
@@ -129,7 +121,6 @@ public class ArenaModel {
         return cellValues ;
     }
     public void move(){
-        logic.preprocessLogic();
         logic.executeLogic() ;
     }
 
@@ -155,6 +146,6 @@ public class ArenaModel {
     }
 
     public GameData getGameData() {
-        return gameData;
+        return gameData ;
     }
 }

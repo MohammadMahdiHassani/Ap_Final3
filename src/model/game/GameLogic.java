@@ -32,15 +32,13 @@ public class GameLogic {
     private Card currCard;
     private boolean playerMoved;
 
-    public GameLogic() {
+    public GameLogic(ArenaModel model) {
+        this.model = model ;
+        this.data = model.getGameData() ;
         playerMoved = false;
         speedCounter = 0;
     }
 
-    public void preprocessLogic() {
-        model = ArenaModel.arenaModel;
-        data = ArenaModel.arenaModel.gameData;
-    }
 
     public GameData getData() {
         return data;
@@ -669,14 +667,14 @@ public class GameLogic {
             if(isPlayerElement(element))
             {
                 if(element instanceof KingTower)
-                    data.playerScore += 2;
+                    data.playerScore += 3;
                 else
                     data.playerScore += 1;
             }
             else
             {
                 if(element instanceof KingTower)
-                    data.botScore += 2;
+                    data.botScore += 3;
                 else
                     data.botScore += 1;
             }
@@ -692,13 +690,57 @@ public class GameLogic {
 
     public boolean isKingDead(){
         int counter = 0 ;
-        for(GameElement i : ArenaModel.getModel().gameData.playerDeck)
+        for(GameElement i : data.playerDeck)
             if(i instanceof KingTower)
                 counter++ ;
-        for(GameElement i : ArenaModel.getModel().gameData.botDeck)
+        for(GameElement i : data.botDeck)
             if(i instanceof KingTower)
                 counter++ ;
 
             return counter != 2 ;
+    }
+    public void endGameLogic(){
+        boolean winner = false ;
+        if(isKingDead()) {
+            boolean flag = false;
+            for (GameElement i : data.playerDeck)
+                if (i instanceof KingTower)
+                    flag = true;
+
+            if (flag)winner = true ;
+
+        }
+        else
+        {
+            if(data.playerScore > data.botScore) winner = true ;
+            else if(data.playerScore == data.botScore){
+                int playerTowerHitPoint = 0 ;
+                for(GameElement i : data.playerDeck)
+                    if(i instanceof Tower)
+                        playerTowerHitPoint += ((Tower) i).getHitPoint() ;
+
+                    int botTowerHitPoint = 0 ;
+                for(GameElement i : data.botDeck)
+                    if(i instanceof Tower)
+                        botTowerHitPoint += ((Tower) i).getHitPoint() ;
+
+                if(playerTowerHitPoint >= botTowerHitPoint)
+                winner = true ;
+            }
+
+        }
+
+            setPlayerWon(winner);
+    }
+    private void setPlayerWon(boolean isPlayerTheWinner){
+        if (isPlayerTheWinner)
+        {
+
+            data.xpDealer(700); data.playerWon = true ;
+        }
+        else
+        {
+            data.xpDealer(200); data.playerWon = true ;
+        }
     }
 }

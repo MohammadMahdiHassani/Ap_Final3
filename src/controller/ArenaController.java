@@ -5,14 +5,24 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ProgressBar;
+import javafx.geometry.Pos;
+import javafx.scene.Group;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.GameElement;
 import model.cards.Card;
@@ -30,6 +40,8 @@ import view.ArenaView;
 
 import javafx.scene.input.MouseEvent;
 
+import java.awt.*;
+import java.io.IOException;
 import java.util.*;
 
 public class ArenaController implements EventHandler<MouseEvent> {
@@ -64,7 +76,8 @@ public class ArenaController implements EventHandler<MouseEvent> {
 
 
     public ArenaController() {
-        model = ArenaModel.getModel();
+//       ArenaModel.setModel();
+        model = new ArenaModel();
         arenaView = new ArenaView();
     }
 
@@ -91,7 +104,9 @@ public class ArenaController implements EventHandler<MouseEvent> {
                             update();
                         else{
                             update();
-                            pause() ;
+                            pause();
+                            deployEndGameLogic();
+                            loadGameOverPage();
                         }
                     }
                 });
@@ -99,6 +114,59 @@ public class ArenaController implements EventHandler<MouseEvent> {
         };
         long frameTimeInMilliseconds = (long) (1000.0 / FRAMES_PER_SECOND);
         timer.schedule(task, 0, frameTimeInMilliseconds);
+    }
+
+    private void loadGameOverPage() {
+
+        Group group = new Group() ;
+        Stage stage = (Stage) elixirProgress.getScene().getWindow();
+        stage.setScene(new Scene(group , 200 , 200));
+        VBox vBox = new VBox() ;
+
+        group.getChildren().add(vBox) ;
+        Label label_1 = new Label() ;
+        Label label_2 = new Label() ;
+        vBox.getChildren().add(label_1);
+        vBox.getChildren().add(label_2);
+        vBox.setAlignment(Pos.BASELINE_CENTER);
+        if(model.getGameData().isPlayerWon()) {
+            label_1.setText("U Won");
+            label_2.setText("Gained Ex : 700");
+        }else {
+            label_1.setText("U Lost");
+            label_2.setText("Gained Ex : 200");
+        }
+        Button button = new Button() ;
+        vBox.getChildren().add(button) ;
+
+        button.setText("Back to Menu");
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                stage.close() ;
+
+                Parent root = null;
+                try {
+                    root = FXMLLoader.load(getClass().getResource("../view/Menu.fxml"));
+                } catch (IOException e) {
+                    System.out.println("couldn't find fxml file");
+                }
+
+                Stage stage = new Stage() ;
+                stage.setScene(new Scene(root));
+                stage.setResizable(false);
+                stage.show();
+            }
+        });
+
+
+        stage.show() ;
+
+
+    }
+
+    private void deployEndGameLogic() {
+        model.getLogic().endGameLogic();
     }
 
     private void pause() {

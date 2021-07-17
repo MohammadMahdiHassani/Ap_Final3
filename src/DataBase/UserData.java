@@ -70,4 +70,8 @@ public class UserData implements Serializable {
     public Botlevel getBotlevel() {
         return botlevel;
     }
+
+    public void addXP(int x){
+        XP += x ;
+    }
 }
