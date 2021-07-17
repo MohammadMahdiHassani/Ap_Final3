@@ -32,13 +32,15 @@ public class GameLogic {
     public GameData data;
     private Point2D currPoint;
     private Card currCard;
-    private boolean playerMoved;
+    boolean playerMoved;
+    private BotLogic botLogic ;
 
     public GameLogic(ArenaModel model) {
         this.model = model ;
         this.data = model.getGameData() ;
         playerMoved = false;
         speedCounter = 0;
+        botLogic = new BotLogic(this);
     }
 
 
@@ -51,10 +53,11 @@ public class GameLogic {
         checkForPlayerMove();
         updateCards();
         updateBoard();
-        if (playerMoved && !MenuController.isOnServer) {
+        if (!MenuController.isOnServer)
             executeBot();
-            playerMoved = false;
-        }
+
+        botLogic.executeBot();
+
     }
 
     private void checkForPlayerMove() {
@@ -78,6 +81,9 @@ public class GameLogic {
         switch (data.botlevel) {
 
             case RANDOME:
+                if(!playerMoved)
+                    return ;
+                playerMoved = false ;
 
                 Card card = getRandomCard();
 
@@ -91,12 +97,12 @@ public class GameLogic {
                 break;
 
             case MEDIUM:
-
             case HARD:
+
         }
     }
 
-    private Card getRandomCard() {
+    Card getRandomCard() {
         ArrayList<GameElement> elements = data.botGenesis;
         Random rnd = new Random();
         int x = rnd.nextInt(elements.size());
@@ -106,7 +112,7 @@ public class GameLogic {
         return (Card) elements.get(x);
     }
 
-    private Point2D getRandomPoint() {
+    Point2D getRandomPoint() {
         Random rnd = new Random();
         int x = rnd.nextInt(18);
         while (x < 2) {
@@ -144,7 +150,7 @@ public class GameLogic {
 
     }
 
-    private void checkForSpawnedPlayers(GameElement m) {
+    public void checkForSpawnedPlayers(GameElement m) {
         if(m instanceof Troop && ((Troop) m).getCount() != 1 && !((Troop) m).isSpawned())
             troopSpawn((Troop) m);
     }
@@ -278,7 +284,7 @@ public class GameLogic {
 
     }
 
-    private Point2D findEmptyCell(Point2D point){
+    protected Point2D findEmptyCell(Point2D point){
 
         for(int x = (int) (point.getX() - 1) ; x <= (int) point.getX() + 1 ; x ++){
             if(x < 0)
@@ -492,15 +498,15 @@ public class GameLogic {
         return false ;
     }
 
-    private boolean isBotElement(GameElement card) {
+    public boolean isBotElement(GameElement card) {
         return data.botDeck.contains(card);
     }
 
-    private boolean isPlayerElement(GameElement card) {
+    public boolean isPlayerElement(GameElement card) {
         return data.playerDeck.contains(card);
     }
 
-    private boolean isOccupied(Point2D point) {
+    public boolean isOccupied(Point2D point) {
         for (GameElement i : data.boardElements) {
             if (point.equals(i.getPoint()))
                 return true;
@@ -692,7 +698,7 @@ public class GameLogic {
         return false;
     }
 
-    private boolean isInNeighbourhood(Point2D point_1, Point2D point_2) {
+    public boolean isInNeighbourhood(Point2D point_1, Point2D point_2) {
         return (Math.abs(point_1.getX() - point_2.getX()) <= 1 && Math.abs(point_1.getY() - point_2.getY()) <= 1);
     }
 
@@ -718,13 +724,14 @@ public class GameLogic {
         this.currCard = currCard;
 
     }
-    private boolean isOpposing(GameElement element_1 , GameElement element_2) {
+
+    public boolean isOpposing(GameElement element_1 , GameElement element_2) {
         if(isPlayerElement(element_1) && isBotElement(element_2))
             return true ;
         else return isBotElement(element_1) && isPlayerElement(element_2);
     }
 
-    private Card addToBoard(GameElement card , Point2D point) {
+    public Card addToBoard(GameElement card , Point2D point) {
 
             Card newCard = CardFactory.makeCard(card.getValue(), DataHandler.getLevel());
             newCard.setPoint(point);

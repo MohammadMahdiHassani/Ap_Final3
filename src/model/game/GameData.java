@@ -27,19 +27,24 @@ public class GameData {
     Botlevel botlevel;
     Point2D leftBridge;
     Point2D rightBridge;
+    Level gameLevel ;
     int botScore ;
     int playerScore ;
     boolean playerWon ;
 
     public GameData() {
+
         userData = DataHandler.getUserData() ;
         botlevel = userData.getBotlevel();
+        gameLevel = DataHandler.getLevel() ;
         initboardElements();
         initPlayerDeck();
         initBotDeck();
         addingTowersTodecks();
         botScore = 0 ;
         playerScore = 0 ;
+        botGenesis = new ArrayList<>() ;
+
     }
 
     private void initboardElements() {
@@ -90,16 +95,22 @@ public class GameData {
                 initMediumBotDeck();
             case HARD:
                 initHardBotDeck();
-
-
-
         }
-        botGenesis = new ArrayList<>(botDeck);
-        botDeck = new ArrayList<>() ;
+
 
     }
 
     private void initHardBotDeck() {
+
+        botGenesis.add(CardFactory.makeCard(CellValue.BABY_DRAGON , gameLevel));
+        botGenesis.add(CardFactory.makeCard(CellValue.GIANT , gameLevel));
+        botGenesis.add(CardFactory.makeCard(CellValue.RAGE , gameLevel));
+        botGenesis.add(CardFactory.makeCard(CellValue.CANNON , gameLevel));
+        botGenesis.add(CardFactory.makeCard(CellValue.INFERNO , gameLevel));
+        botGenesis.add(CardFactory.makeCard(CellValue.FIREBALL , gameLevel));
+        botGenesis.add(CardFactory.makeCard(CellValue.WIZARD , gameLevel));
+        botGenesis.add(CardFactory.makeCard(CellValue.ARCHER , gameLevel));
+
     }
 
     private void initMediumBotDeck() {
@@ -109,7 +120,7 @@ public class GameData {
 
         ArrayList<Card> deck = userData.getPlayerDeck();
         for (int i = 0; i < deck.size(); i++) {
-            botDeck.add(CardFactory.makeCard(deck.get(i).getValue(), DataHandler.getLevel()));
+            botGenesis.add(CardFactory.makeCard(deck.get(i).getValue(), DataHandler.getLevel()));
 
         }
     }
