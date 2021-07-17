@@ -75,6 +75,8 @@ public class ArenaController implements EventHandler<MouseEvent> {
     private Timer timer;
     private boolean isTimeUp;
 
+    private String user2;
+
 
     public ArenaController() {
 //       ArenaModel.setModel();
@@ -127,14 +129,20 @@ public class ArenaController implements EventHandler<MouseEvent> {
     public void addGameHistory()
     {
         String user1 = DataHandler.getUserData().getUserName();
-        String user2 = "";
+        String winner;
         if (!MenuController.isOnServer)
         {
             user2 = "BOT";
         }
-        else {
-
+        if (model.getLogic().data.isPlayerWon())
+        {
+            winner = user1;
         }
+        else {
+            winner = user2;
+        }
+        DataHandler.getUserData().getHistories().add(new GameHistory(user1,user2,winner));
+
     }
 
     private void loadGameOverPage() {
@@ -246,6 +254,7 @@ public class ArenaController implements EventHandler<MouseEvent> {
         String card = MenuController.transferDataReceive.getCard();
         double x = MenuController.transferDataReceive.getX();
         double y = MenuController.transferDataReceive.getY();
+        user2 = MenuController.transferDataReceive.getUserName();
         Level level = MenuController.transferDataReceive.getLevel();
         System.out.println(card + " was received");
         Point2D point2D = new Point2D(x, y);

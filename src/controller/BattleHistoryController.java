@@ -50,16 +50,16 @@ public class BattleHistoryController {
 
         ObservableList<GameHistory> gameHistories = FXCollections.observableArrayList();
         ArrayList<GameHistory> gameHistoryArrayList = new ArrayList<>();
-//        if (DataHandler.getUserData().getHistories() != null)
-//        {
-//            gameHistoryArrayList = DataHandler.getUserData().getHistories();
-//            for (int i = 0; i < gameHistoryArrayList.size(); i++)
-//            {
-//                gameHistories.add(gameHistoryArrayList.get(i));
-//            }
-//        }
+        if (DataHandler.getUserData().getHistories() != null)
+        {
+            gameHistoryArrayList = DataHandler.getUserData().getHistories();
+            for (int i = 0; i < gameHistoryArrayList.size(); i++)
+            {
+                gameHistories.add(gameHistoryArrayList.get(i));
+            }
+        }
         //else {
-            gameHistories.add(new GameHistory("ali","saman","ali"));
+            //gameHistories.add(new GameHistory("ali","saman","ali"));
         //}
         listGame.setItems(gameHistories);
     }

@@ -14,6 +14,7 @@ public class TransferDataReceive implements Runnable{
     private double x;
     private double y;
     private Level level;
+    private String userName;
 
     public TransferDataReceive(ObjectInputStream objectInputStream)
     {
@@ -28,6 +29,8 @@ public class TransferDataReceive implements Runnable{
         return isReceive;
     }
 
+
+
     @Override
     public void run() {
         while (true)
@@ -38,6 +41,7 @@ public class TransferDataReceive implements Runnable{
                 y = request.getY();
                 card = request.getCard();
                 level = request.getLevel();
+                userName = request.getUserName();
                 isReceive = true;
                 break;
             } catch (IOException | ClassNotFoundException e) {
@@ -56,6 +60,10 @@ public class TransferDataReceive implements Runnable{
 
     public Level getLevel() {
         return level;
+    }
+
+    public String getUserName() {
+        return userName;
     }
 
     public String getCard() {

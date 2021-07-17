@@ -21,6 +21,10 @@ public class Request implements Serializable {
         this.y = y;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
     public String getCard() {
         return card;
     }

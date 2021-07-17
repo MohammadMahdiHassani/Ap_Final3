@@ -81,7 +81,7 @@ public class Server {
 
         for (int i = 0; i < 2; i++) {
             try {
-                clientDetails.get(i).getObjectOutputStream().writeObject(new Request(clientDetails.get(i).getUserDataServer().getLevel().toString(),clientDetails.get(i).getUserDataServer().getLevel(),0,0));
+                clientDetails.get(i).getObjectOutputStream().writeObject(new Request(clientDetails.get(i).getUserDataServer().getLevel().toString(),clientDetails.get(i).getUserDataServer().getLevel(),clientDetails.get(i).getUserDataServer().getUserName(),0,0));
             } catch (IOException e) {
                 e.printStackTrace();
             }
