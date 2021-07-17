@@ -322,6 +322,48 @@ public class ArenaController implements EventHandler<MouseEvent> {
         }
     }
 
+    public void sound(GameElement card)
+    {
+        if (card.getValue().toString().equals("ARCHER"))
+        {
+            LoginController.sound.playMain("ARCHER_CHOOSE");
+        }
+        else if (card.getValue().toString().equals("GIANT"))
+        {
+            LoginController.sound.playMain("GIANT_CHOOSE");
+        }else if (card.getValue().toString().equals("BARBERIAN"))
+        {
+            LoginController.sound.playMain("BARBARIAN_CHOOSE");
+        }else if (card.getValue().toString().equals("CANNON"))
+        {
+            LoginController.sound.playMain("CANNON_CHOOSE");
+        }else if (card.getValue().toString().equals("INFERNO"))
+        {
+            LoginController.sound.playMain("INFERNO_CHOOSE");
+        }else if (card.getValue().toString().equals("VALKYRIE"))
+        {
+            LoginController.sound.playMain("GIANT_VALKYRIE");
+        }else if (card.getValue().toString().equals("MINI_PEKA"))
+        {
+            LoginController.sound.playMain("MINIPEKKA_CHOOSE");
+        }else if (card.getValue().toString().equals("BABY_DRAGON"))
+        {
+            LoginController.sound.playMain("BABYDRAGON_CHOOSE");
+        }else if (card.getValue().toString().equals("GIANT"))
+        {
+            LoginController.sound.playMain("GIANT_CHOOSE");
+        }else if (card.getValue().toString().equals("GIANT"))
+        {
+            LoginController.sound.playMain("GIANT_CHOOSE");
+        }else if (card.getValue().toString().equals("GIANT"))
+        {
+            LoginController.sound.playMain("GIANT_CHOOSE");
+        }else if (card.getValue().toString().equals("GIANT"))
+        {
+            LoginController.sound.playMain("GIANT_CHOOSE");
+        }
+    }
+
     public void removeFromListArmy(int index) {
         Random random = new Random();
         count = 0;

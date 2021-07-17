@@ -129,6 +129,7 @@ public class DeckController {
                         new ChangeListener<Card>() {
                             @Override
                             public void changed(ObservableValue<? extends Card> observable, Card oldValue, Card newValue) {
+                                LoginController.sound.playMain("CHOOSE_CART");
                                 mainArmy.getItems().add(newValue);
                                 allArmy.getItems().remove(oldValue);
                                 allLastValue = newValue;
@@ -156,6 +157,7 @@ public class DeckController {
 
     @FXML
     void endClick(MouseEvent event) {
+        LoginController.sound.playMain("CLICK");
         int mainLastIndex = -1;
         int allLastIndex = -1;
         if (mainLastValue != null) {
@@ -202,6 +204,7 @@ public class DeckController {
 
     @FXML
     void actionHandler(MouseEvent event) throws IOException {
+        LoginController.sound.playMain("CLICK");
         String fxmlAddress = getFxml(event);
         Parent root = FXMLLoader.load(getClass().getResource(fxmlAddress));
         Stage stage = (Stage) mainPage.getScene().getWindow();

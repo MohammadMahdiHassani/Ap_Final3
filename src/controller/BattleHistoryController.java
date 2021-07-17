@@ -43,6 +43,7 @@ public class BattleHistoryController {
     }
     @FXML
     void actionHandler(MouseEvent event) throws IOException {
+        LoginController.sound.playMain("CLICK");
         String fxmlAddress = getFxml(event);
         Parent root = FXMLLoader.load(getClass().getResource(fxmlAddress));
         Stage stage = (Stage) mainPage.getScene().getWindow();

@@ -8,6 +8,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -35,6 +37,8 @@ public class SignUpController {
 
             UserData userData = DataHandler.signUp(UserField.getText() , PasswordField1.getText() , PasswordField2.getText());
             if(userData != null){
+                LoginController.count++;
+                LoginController.mediaPlayer.stop();
                 FXMLLoader loader = new FXMLLoader() ;
                 loader.setLocation(getClass().getResource("../view/Menu.fxml"));
                 loader.load();
