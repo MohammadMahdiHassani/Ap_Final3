@@ -71,8 +71,8 @@ public class ArenaController implements EventHandler<MouseEvent> {
     private ProgressBar elixirProgress;
     private final ArenaModel model;
     private int countTime;
-    private Timer timer ;
-    private boolean isTimeUp ;
+    private Timer timer;
+    private boolean isTimeUp;
 
 
     public ArenaController() {
@@ -86,7 +86,7 @@ public class ArenaController implements EventHandler<MouseEvent> {
         new Thread(MenuController.transferDataReceive).start();
         initializeListArmy();
         arenaView.setBackgroundCell(model);
-        timer = new Timer() ;
+        timer = new Timer();
         startTimer();
         isTimeUp = false;
     }
@@ -106,6 +106,12 @@ public class ArenaController implements EventHandler<MouseEvent> {
                             update();
                             pause();
                             deployEndGameLogic();
+                            LoginController.sound.playMain("END");
+                            try {
+                                Thread.sleep(3000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                             loadGameOverPage();
                         }
                     }
@@ -118,51 +124,15 @@ public class ArenaController implements EventHandler<MouseEvent> {
 
     private void loadGameOverPage() {
 
-        Group group = new Group() ;
-        Stage stage = (Stage) elixirProgress.getScene().getWindow();
-        stage.setScene(new Scene(group , 200 , 200));
-        VBox vBox = new VBox() ;
-
-        group.getChildren().add(vBox) ;
-        Label label_1 = new Label() ;
-        Label label_2 = new Label() ;
-        vBox.getChildren().add(label_1);
-        vBox.getChildren().add(label_2);
-        vBox.setAlignment(Pos.BASELINE_CENTER);
-        if(model.getGameData().isPlayerWon()) {
-            label_1.setText("U Won");
-            label_2.setText("Gained Ex : 200");
-        }else {
-            label_1.setText("U Lost");
-            label_2.setText("Gained Ex : 70");
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/view/EndGame.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        Button button = new Button() ;
-        vBox.getChildren().add(button) ;
-
-        button.setText("Back to Menu");
-        button.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                stage.close() ;
-
-                Parent root = null;
-                try {
-                    root = FXMLLoader.load(getClass().getResource("../view/Menu.fxml"));
-                } catch (IOException e) {
-                    System.out.println("couldn't find fxml file");
-                }
-
-                Stage stage = new Stage() ;
-                stage.setScene(new Scene(root));
-                stage.setResizable(false);
-                stage.show();
-            }
-        });
-
-
+        Stage stage = (Stage) elixirProgress.getScene().getWindow();
+        stage.setScene(new Scene(root));
         stage.show();
-
-
     }
 
     private void deployEndGameLogic() {
@@ -187,6 +157,7 @@ public class ArenaController implements EventHandler<MouseEvent> {
         }
 
     }
+
     private void decreaseTime() {
 
         String[] time = ArenaView.getTimeLabel().getText().split(":");
@@ -203,13 +174,36 @@ public class ArenaController implements EventHandler<MouseEvent> {
                 newTime = min + ":0" + second;
             }
             if (min == 0) {
-                arenaView.setTimeLabel(newTime , Color.RED);
-                return ;
+                arenaView.setTimeLabel(newTime, Color.RED);
+                return;
             }
-            arenaView.setTimeLabel(newTime , Color.WHITE);
+            arenaView.setTimeLabel(newTime, Color.WHITE);
+        } else {
+            isTimeUp = true;
         }
-        else{
-            isTimeUp = true ;
+    }
+
+    public void checkSecond(int second) {
+        if (second == 10) {
+            LoginController.sound.playMain("TEN");
+        } else if (second == 9) {
+            LoginController.sound.playMain("NINE");
+        } else if (second == 8) {
+            LoginController.sound.playMain("EIGHT");
+        } else if (second == 7) {
+            LoginController.sound.playMain("SEVEN");
+        } else if (second == 6) {
+            LoginController.sound.playMain("SIX");
+        } else if (second == 5) {
+            LoginController.sound.playMain("FIVE");
+        } else if (second == 4) {
+            LoginController.sound.playMain("FOUR");
+        } else if (second == 3) {
+            LoginController.sound.playMain("THREE");
+        } else if (second == 2) {
+            LoginController.sound.playMain("TWO");
+        } else if (second == 1) {
+            LoginController.sound.playMain("ONE");
         }
     }
 
@@ -234,29 +228,30 @@ public class ArenaController implements EventHandler<MouseEvent> {
             card1 = CardFactory.makeCard(CellValue.GIANT, level);
         } else if (card.equals("ARCHER")) {
             card1 = CardFactory.makeCard(CellValue.ARCHER, level);
-        }else if (card.equals("BARBERIAN")) {
+        } else if (card.equals("BARBERIAN")) {
             card1 = CardFactory.makeCard(CellValue.BARBERIAN, level);
-        }else if (card.equals("BABY_DRAGON")) {
+        } else if (card.equals("BABY_DRAGON")) {
             card1 = CardFactory.makeCard(CellValue.BABY_DRAGON, level);
-        }else if (card.equals("WIZARD")) {
+        } else if (card.equals("WIZARD")) {
             card1 = CardFactory.makeCard(CellValue.WIZARD, level);
-        }else if (card.equals("VALKYRIE")) {
+        } else if (card.equals("VALKYRIE")) {
             card1 = CardFactory.makeCard(CellValue.VALKYRIE, level);
-        }else if (card.equals("CANNON")) {
+        } else if (card.equals("CANNON")) {
             card1 = CardFactory.makeCard(CellValue.CANNON, level);
-        }else if (card.equals("INFERNO")) {
+        } else if (card.equals("INFERNO")) {
             card1 = CardFactory.makeCard(CellValue.INFERNO, level);
-        }else if (card.equals("MINI_PEKA")) {
+        } else if (card.equals("MINI_PEKA")) {
             card1 = CardFactory.makeCard(CellValue.MINI_PEKA, level);
-        }else if (card.equals("RAGE")) {
+        } else if (card.equals("RAGE")) {
             card1 = CardFactory.makeCard(CellValue.RAGE, level);
-        }else if (card.equals("ARROWS")) {
+        } else if (card.equals("ARROWS")) {
             card1 = CardFactory.makeCard(CellValue.ARROWS, level);
-        }else if (card.equals("FIREBALL")) {
+        } else if (card.equals("FIREBALL")) {
             card1 = CardFactory.makeCard(CellValue.FIREBALL, level);
         }
 
         card1.setPoint(point2D);
+
         model.getLogic().data.botDeck.add(card1);
         model.getLogic().data.boardElements.add(card1);
         model.getLogic().data.getBotDeck().add(card1);
@@ -271,6 +266,7 @@ public class ArenaController implements EventHandler<MouseEvent> {
         model.move();
         serverLogic();
         arenaView.update(model);
+        serverLogic();
         processAnimations(model.getVectorMap());
     }
 
