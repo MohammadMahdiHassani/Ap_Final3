@@ -171,7 +171,7 @@ public class ArenaView extends Group {
         }
     }
 
-    public void shootCircles(Point2D starting_point, Point2D ending_point, int radius, Color color) {
+    public void shootCircles(Point2D starting_point, Point2D ending_point, double radius, Color color) {
 
         Circle circle = new Circle(starting_point.getX()*CELL_WIDTH + CELL_WIDTH/2 , starting_point.getY()*CELL_WIDTH + CELL_WIDTH/2, radius);
         circle.setFill(color);

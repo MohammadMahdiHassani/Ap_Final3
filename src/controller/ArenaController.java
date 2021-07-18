@@ -29,6 +29,7 @@ import model.GameElement;
 import model.cards.Card;
 import model.cards.CardFactory;
 import model.cards.CellValue;
+import model.cards.buildings.Inferno;
 import model.cards.levelEnums.Level;
 import model.cards.spells.Rage;
 import model.game.ArenaModel;
@@ -455,7 +456,7 @@ public class ArenaController implements EventHandler<MouseEvent> {
             else
                 color = Color.BLUE;
 
-            int radius = 0;
+            double radius = 0;
             if (i instanceof Tower) {
                 if (i instanceof KingTower)
                     radius = 5;
@@ -463,6 +464,8 @@ public class ArenaController implements EventHandler<MouseEvent> {
                     radius = 4;
             } else
                 radius = 3;
+            if(i instanceof Inferno)
+                radius = ((Inferno) i).getCicleRadius() ;
 
             if (i instanceof Rage) {
                 arenaView.scaleCircle(animationMap.get(i).get(0), i.getRange(), Color.PURPLE);

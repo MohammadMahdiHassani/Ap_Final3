@@ -75,7 +75,7 @@ public abstract class Building extends Card implements Serializable {
         this.hitPoint = hitPoint;
     }
 
-    public void setDamage(int damage) {
+    public synchronized void setDamage(int damage) {
         this.damage = damage;
     }
 

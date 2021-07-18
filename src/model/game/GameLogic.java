@@ -12,6 +12,7 @@ import model.GameElement;
 import model.cards.Card;
 import model.cards.CardFactory;
 import model.cards.buildings.Building;
+import model.cards.buildings.Inferno;
 import model.cards.levelEnums.Level;
 import model.cards.spells.Arrows;
 import model.cards.spells.FireBall;
@@ -234,8 +235,10 @@ public class GameLogic {
 
                 case INFERNO:
                 ArrayList<GameElement> target = findCardInRang(m);
-                if (target.size() != 0)
+                if (target.size() != 0) {
+                    ((Inferno) m).setTarget(target.get(0));
                     shootTarget(m, target);
+                }
         }
     }
 
