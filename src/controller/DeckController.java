@@ -125,7 +125,7 @@ public class DeckController {
                             }
                         }
                 );
-        mainArmy.setCellFactory(
+        mainArmy.setCellFactory (
                 new Callback<ListView<Card>, ListCell<Card>>() {
                     @Override
                     public ListCell<Card> call(ListView<Card> param) {

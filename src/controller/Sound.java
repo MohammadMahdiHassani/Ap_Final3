@@ -230,7 +230,7 @@ public class Sound {
             media = new Media(getClass().getResource("/sound/eight.wav").toExternalForm());
             mediaPlayer = new MediaPlayer(media);
             mediaPlayer.setCycleCount(1);
-            mediaPlayer.play();
+            mediaPlayer.play() ;
         } else if (sound.equals("NINE")) {
             media = new Media(getClass().getResource("/sound/nine.wav").toExternalForm());
             mediaPlayer = new MediaPlayer(media);

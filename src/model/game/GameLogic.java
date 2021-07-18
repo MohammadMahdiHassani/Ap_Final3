@@ -204,7 +204,7 @@ public class GameLogic {
         } else if (card.getValue().toString().equals("BABY_DRAGON")) {
             LoginController.sound.playMain("BABYDRAGON_ATTACK");
         } else if (card.getValue().toString().equals("WIZARD")) {
-            LoginController.sound.playMain("WIZARD_ATTACK");
+            LoginController.sound.playMain("WIZARD_ATTACK") ;
         } else if (card.getValue().toString().equals("MYKINGTOWER")) {
             LoginController.sound.playMain("KING_ATTACK");
         } else if (card.getValue().toString().equals("MYARCHERTOWER")) {

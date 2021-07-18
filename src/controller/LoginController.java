@@ -54,7 +54,7 @@ public class LoginController {
 
 
             UserData userData = DataHandler.getUser(UserField.getText(), PasswordField.getText());
-            if (userData == null) {
+            if (userData == null)  {
                 errorMessage.setVisible(true);
             } else {
                 mediaPlayer.stop();

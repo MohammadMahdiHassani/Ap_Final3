@@ -145,7 +145,7 @@ public class ArenaController implements EventHandler<MouseEvent> {
 
     }
 
-    private void loadGameOverPage() {
+    private void loadGameOverPage()  {
 
         Parent root = null;
         try {

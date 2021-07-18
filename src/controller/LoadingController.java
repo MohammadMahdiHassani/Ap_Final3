@@ -8,7 +8,7 @@ public class LoadingController {
     @FXML
     private ProgressBar loadingProgress;
 
-    public void initialize() {
+    public void initialize()  {
         LoginController.sound.playMain("LOADING");
         //progress();
     }
