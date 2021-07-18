@@ -142,7 +142,6 @@ public class ArenaView extends Group {
                 if (cellValues[i][j] == null) {
                     componentView[i][j].setImage(null);
                 } else if (cellValues[i][j].getValue() == MYKINGTOWER) {
-
                     componentView[i][j].setImage(MYKINGTOWER.getMyWalk());
                 } else if (cellValues[i][j].getValue() == MYARCHERTOWER) {
                     componentView[i][j].setImage(MYARCHERTOWER.getMyWalk());
@@ -151,31 +150,112 @@ public class ArenaView extends Group {
                 } else if (cellValues[i][j].getValue() == BOTKINGTOWER) {
                     componentView[i][j].setImage(BOTKINGTOWER.getMyWalk());
                 } else if (cellValues[i][j].getValue() == GIANT) {
-                    if (model.getLogic().isPlayerElement(getCardWithPoint(i, j, model))) {
-                        componentView[i][j].setImage(GIANT.getMyWalk());
-                    }
-                    else {
-                        componentView[i][j].setImage(GIANT.getMyWalk());
+                    if (model.getLogic().isPlayerElement(getCardWithPoint(j, i, model))) {
+                        if (getCardWithPoint(j, i, model).isAttack()) {
+                            componentView[i][j].setImage(GIANT.getMyAttack());
+                        } else {
+                            componentView[i][j].setImage(GIANT.getMyWalk());
+                        }
+                    } else if(model.getLogic().isBotElement(getCardWithPoint(j, i, model))) {
+                        if (getCardWithPoint(j, i, model).isAttack()) {
+                            componentView[i][j].setImage(GIANT.getBotAttack());
+                        } else {
+                            componentView[i][j].setImage(GIANT.getBotWalk());
+                        }
                     }
 
                 } else if (cellValues[i][j].getValue() == ARCHER) {
-                    componentView[i][j].setImage(ARCHER.getMyWalk());
+                    if (model.getLogic().isPlayerElement(getCardWithPoint(j, i, model))) {
+                        if (getCardWithPoint(j, i, model).isAttack()) {
+                            componentView[i][j].setImage(ARCHER.getMyAttack());
+                        } else {
+                            componentView[i][j].setImage(ARCHER.getMyWalk());
+                        }
+                    } else if(model.getLogic().isBotElement(getCardWithPoint(j, i, model))){
+                        if (getCardWithPoint(j, i, model).isAttack()) {
+                            componentView[i][j].setImage(ARCHER.getBotAttack());
+                        } else {
+                            componentView[i][j].setImage(ARCHER.getBotWalk());
+                        }
+                    }
                 } else if (cellValues[i][j].getValue() == CANNON) {
                     componentView[i][j].setImage(CANNON.getMyWalk());
+
                 } else if (cellValues[i][j].getValue() == BARBERIAN) {
-                    componentView[i][j].setImage(BARBERIAN.getMyWalk());
+                    if (model.getLogic().isPlayerElement(getCardWithPoint(j, i, model))) {
+                        if (getCardWithPoint(j, i, model).isAttack()) {
+                            componentView[i][j].setImage(BARBERIAN.getMyAttack());
+                        } else {
+                            componentView[i][j].setImage(BARBERIAN.getMyWalk());
+                        }
+                    } else if(model.getLogic().isBotElement(getCardWithPoint(j, i, model))){
+                        if (getCardWithPoint(j, i, model).isAttack()) {
+                            componentView[i][j].setImage(BARBERIAN.getBotAttack());
+                        } else {
+                            componentView[i][j].setImage(BARBERIAN.getBotWalk());
+                        }
+                    }
                 } else if (cellValues[i][j].getValue() == FIREBALL) {
                     componentView[i][j].setImage(FIREBALL.getMyWalk());
                 } else if (cellValues[i][j].getValue() == WIZARD) {
-                    componentView[i][j].setImage(WIZARD.getMyWalk());
+                    if (model.getLogic().isPlayerElement(getCardWithPoint(j, i, model))) {
+                        if (getCardWithPoint(j, i, model).isAttack()) {
+                            componentView[i][j].setImage(WIZARD.getMyAttack());
+                        } else {
+                            componentView[i][j].setImage(WIZARD.getMyWalk());
+                        }
+                    } else if(model.getLogic().isBotElement(getCardWithPoint(j, i, model))){
+                        if (getCardWithPoint(j, i, model).isAttack()) {
+                            componentView[i][j].setImage(WIZARD.getBotAttack());
+                        } else {
+                            componentView[i][j].setImage(WIZARD.getBotWalk());
+                        }
+                    }
                 } else if (cellValues[i][j].getValue() == MINI_PEKA) {
-                    componentView[i][j].setImage(MINI_PEKA.getMyWalk());
+                    if (model.getLogic().isPlayerElement(getCardWithPoint(j, i, model))) {
+                        if (getCardWithPoint(j, i, model).isAttack()) {
+                            componentView[i][j].setImage(MINI_PEKA.getMyAttack());
+                        } else {
+                            componentView[i][j].setImage(MINI_PEKA.getMyWalk());
+                        }
+                    } else if(model.getLogic().isBotElement(getCardWithPoint(j, i, model))){
+                        if (getCardWithPoint(j, i, model).isAttack()) {
+                            componentView[i][j].setImage(MINI_PEKA.getBotAttack());
+                        } else {
+                            componentView[i][j].setImage(MINI_PEKA.getBotWalk());
+                        }
+                    }
                 } else if (cellValues[i][j].getValue() == VALKYRIE) {
-                    componentView[i][j].setImage(VALKYRIE.getMyWalk());
+                    if (model.getLogic().isPlayerElement(getCardWithPoint(j, i, model))) {
+                        if (getCardWithPoint(j, i, model).isAttack()) {
+                            componentView[i][j].setImage(VALKYRIE.getMyAttack());
+                        } else {
+                            componentView[i][j].setImage(VALKYRIE.getMyWalk());
+                        }
+                    } else if(model.getLogic().isBotElement(getCardWithPoint(j, i, model))){
+                        if (getCardWithPoint(j, i, model).isAttack()) {
+                            componentView[i][j].setImage(VALKYRIE.getBotAttack());
+                        } else {
+                            componentView[i][j].setImage(VALKYRIE.getBotWalk());
+                        }
+                    }
                 } else if (cellValues[i][j].getValue() == RAGE) {
                     componentView[i][j].setImage(RAGE.getMyWalk());
                 } else if (cellValues[i][j].getValue() == BABY_DRAGON) {
-                    componentView[i][j].setImage(BABY_DRAGON.getMyWalk());
+                    if (model.getLogic().isPlayerElement(getCardWithPoint(j, i, model))) {
+                        if (getCardWithPoint(j, i, model).isAttack()) {
+                            componentView[i][j].setImage(BABY_DRAGON.getMyAttack());
+                        } else {
+                            componentView[i][j].setImage(BABY_DRAGON.getMyWalk());
+                        }
+                    } else if(model.getLogic().isBotElement(getCardWithPoint(j, i, model))){
+                        if (getCardWithPoint(j, i, model).isAttack()) {
+                            componentView[i][j].setImage(BABY_DRAGON.getBotAttack());
+                        } else {
+                            componentView[i][j].setImage(BABY_DRAGON.getBotWalk());
+                        }
+                    }
+
                 } else if (cellValues[i][j].getValue() == INFERNO) {
                     componentView[i][j].setImage(INFERNO.getMyWalk());
                 } else if (cellValues[i][j].getValue() == ARROWS) {

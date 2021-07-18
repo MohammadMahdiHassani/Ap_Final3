@@ -11,12 +11,23 @@ public abstract class GameElement implements Serializable {
     private Point2D point ;
     private int range ;
     private boolean isDead ;
+    private boolean isAttack;
+
+
+
     public GameElement(CellValue value, int range) {
         this.value = value ;
         this.range = range ;
         isDead = false ;
+        isAttack = false;
+    }
+    public boolean isAttack() {
+        return isAttack;
     }
 
+    public void setAttack(boolean attack) {
+        isAttack = attack;
+    }
     public CellValue getValue() {
         return value;
     }

@@ -297,8 +297,8 @@ public class ArenaController implements EventHandler<MouseEvent> {
     }
 
     private void updateScore() {
-        arenaView.getCrown2().setText(String.valueOf(model.getGameData().getPlayerScore()));
-        arenaView.getCrown1().setText(String.valueOf(model.getGameData().getBotScore()));
+        arenaView.getCrown1().setText(String.valueOf(model.getGameData().getPlayerScore()));
+        arenaView.getCrown2().setText(String.valueOf(model.getGameData().getBotScore()));
     }
 
     private void serverLogic() {

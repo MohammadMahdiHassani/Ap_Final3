@@ -246,8 +246,8 @@ public class GameLogic {
         ArrayList<GameElement> target = findCardInRang(m);
         if (target.size() != 0)
             shootTarget(m, target);
-//        else if (moveToBridge(m))
-//            moveToTower(m);
+        else if (moveToBridge(m))
+            moveToTower(m);
     }
 
     private void troopSpawn(Troop troop){
@@ -720,6 +720,7 @@ public class GameLogic {
     }
     private void setScore(GameElement element){
         if(element instanceof Tower){
+            LoginController.sound.playMain("CROWN");
             if(isPlayerElement(element))
             {
                 if(element instanceof KingTower)
