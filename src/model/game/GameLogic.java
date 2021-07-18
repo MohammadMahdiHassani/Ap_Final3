@@ -474,7 +474,7 @@ public class GameLogic {
         return false;
     }
 
-    private boolean isBotElement(GameElement card) {
+    public boolean isBotElement(GameElement card) {
         return data.botDeck.contains(card);
     }
 
@@ -482,7 +482,7 @@ public class GameLogic {
         return data.playerDeck.contains(card);
     }
 
-    private boolean isOccupied(Point2D point) {
+    public boolean isOccupied(Point2D point) {
         for (GameElement i : data.boardElements) {
             if (point.equals(i.getPoint()))
                 return true;
