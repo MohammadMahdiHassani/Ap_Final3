@@ -197,6 +197,7 @@ public class ArenaController implements EventHandler<MouseEvent> {
                 newTime = min + ":0" + second;
             }
             if (min == 0) {
+                checkSecond(second);
                 arenaView.setTimeLabel(newTime, Color.RED);
                 return;
             }
