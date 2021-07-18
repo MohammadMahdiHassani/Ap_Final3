@@ -27,6 +27,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Random;
 
+import static model.cards.CellValue.INFERNO;
+
 public class GameLogic {
     int speedCounter;
     private final ArenaModel model;
@@ -224,11 +226,16 @@ public class GameLogic {
         if(!m.isTimerStarted())
             m.startTimer();
         switch (m.getValue()) {
-            case CANNON:
+            case CANNON:{
                 ArrayList<GameElement> target = findCardInRang(m);
                 if (target.size() != 0)
                     shootTarget(m, target);
-            case INFERNO:
+                break; }
+
+                case INFERNO:
+                ArrayList<GameElement> target = findCardInRang(m);
+                if (target.size() != 0)
+                    shootTarget(m, target);
         }
     }
 
@@ -474,7 +481,7 @@ public class GameLogic {
         return false;
     }
 
-    private boolean isBotElement(GameElement card) {
+    boolean isBotElement(GameElement card) {
         return data.botDeck.contains(card);
     }
 
@@ -482,7 +489,7 @@ public class GameLogic {
         return data.playerDeck.contains(card);
     }
 
-    private boolean isOccupied(Point2D point) {
+    boolean isOccupied(Point2D point) {
         for (GameElement i : data.boardElements) {
             if (point.equals(i.getPoint()))
                 return true;
@@ -781,8 +788,9 @@ public class GameLogic {
             }
 
         }
-
         setPlayerWon(winner);
+        data.saveToHistory();
+        data.saveData();
     }
 
     private void setPlayerWon(boolean isPlayerTheWinner) {
