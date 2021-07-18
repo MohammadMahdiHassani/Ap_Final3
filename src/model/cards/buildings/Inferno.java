@@ -30,7 +30,7 @@ public class Inferno extends Building implements Serializable {
             }
         };
 
-        timer.scheduleAtFixedRate(task , 0 , 2000);
+        timer.schedule(task , 0 , 2000);
     }
 
     public void setTarget(GameElement ele){
@@ -46,8 +46,8 @@ public class Inferno extends Building implements Serializable {
         }
     }
 
-    public int getCicleRadius(){
-        return (getDamage() - infernoLevel.getMinDamage()) / (infernoLevel.getMaxDamage() - infernoLevel.getMinDamage()) * 2 + 3 ;
+    public double getCicleRadius(){
+        return (getDamage() - infernoLevel.getMinDamage()) * 1.00 / (infernoLevel.getMaxDamage() - infernoLevel.getMinDamage()) * 2 + 3 ;
 
     }
 

@@ -246,8 +246,8 @@ public class GameLogic {
         ArrayList<GameElement> target = findCardInRang(m);
         if (target.size() != 0)
             shootTarget(m, target);
-        else if (moveToBridge(m))
-            moveToTower(m);
+//        else if (moveToBridge(m))
+//            moveToTower(m);
     }
 
     private void troopSpawn(Troop troop){
