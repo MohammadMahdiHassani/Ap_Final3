@@ -1,6 +1,7 @@
 package controller;
 
 import DataBase.DataHandler;
+import DataBase.GameHistory;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -74,6 +75,8 @@ public class ArenaController implements EventHandler<MouseEvent> {
     private Timer timer;
     private boolean isTimeUp;
 
+    private String user2;
+
 
     public ArenaController() {
 //       ArenaModel.setModel();
@@ -106,6 +109,7 @@ public class ArenaController implements EventHandler<MouseEvent> {
                             update();
                             pause();
                             deployEndGameLogic();
+                            addGameHistory();
                             LoginController.sound.playMain("END");
                             try {
                                 Thread.sleep(3000);
@@ -120,6 +124,25 @@ public class ArenaController implements EventHandler<MouseEvent> {
         };
         long frameTimeInMilliseconds = (long) (1000.0 / FRAMES_PER_SECOND);
         timer.schedule(task, 0, frameTimeInMilliseconds);
+    }
+
+    public void addGameHistory()
+    {
+        String user1 = DataHandler.getUserData().getUserName();
+        String winner;
+        if (!MenuController.isOnServer)
+        {
+            user2 = "BOT";
+        }
+        if (model.getLogic().data.isPlayerWon())
+        {
+            winner = user1;
+        }
+        else {
+            winner = user2;
+        }
+        DataHandler.getUserData().getHistories().add(new GameHistory(user1,user2,winner));
+
     }
 
     private void loadGameOverPage() {
@@ -220,6 +243,7 @@ public class ArenaController implements EventHandler<MouseEvent> {
         String card = MenuController.transferDataReceive.getCard();
         double x = MenuController.transferDataReceive.getX();
         double y = MenuController.transferDataReceive.getY();
+        user2 = MenuController.transferDataReceive.getUserName();
         Level level = MenuController.transferDataReceive.getLevel();
         System.out.println(card + " was received");
         Point2D point2D = new Point2D(x, y);
@@ -306,7 +330,7 @@ public class ArenaController implements EventHandler<MouseEvent> {
         if (listArmy.getSelectionModel().getSelectedItem() != null) {
             if (listArmy.getSelectionModel().getSelectedItem().getCost() <= (elixirProgress.getProgress() * 10)) {
                 if (MenuController.isOnServer) {
-                    MenuController.transferDataSend.setRequest(new Request(listArmy.getSelectionModel().getSelectedItem().getValue().toString(), DataHandler.getLevel(), x, y));
+                    MenuController.transferDataSend.setRequest(new Request(listArmy.getSelectionModel().getSelectedItem().getValue().toString(), DataHandler.getLevel(),DataHandler.getUserData().getUserName(), x, y));
                     new Thread(MenuController.transferDataSend).start();
                 }
                 model.setCurrPoint(new Point2D(x, y));

@@ -39,7 +39,7 @@ public class ClientHandler implements Runnable {
     public Request changeDirection(Request request) {
         double x = request.getX();
         double y = request.getY();
-        System.out.println("x: "+x);
+        System.out.println("x: " + x);
         System.out.println("y: " + y);
 
 
@@ -58,9 +58,9 @@ public class ClientHandler implements Runnable {
         } else {
             y = y + (2 * Math.abs(y - 10));
         }
-        System.out.println("change x: "+x);
+        System.out.println("change x: " + x);
         System.out.println("change y: " + y);
-        Request request1 = new Request(request.getCard(), clientDetail.getUserDataServer().getLevel(), x, y);
+        Request request1 = new Request(request.getCard(), clientDetail.getUserDataServer().getLevel(), clientDetail.getUserDataServer().getUserName(), x, y);
         return request1;
 
     }

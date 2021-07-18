@@ -1,6 +1,7 @@
 package model.game;
 
 import DataBase.DataHandler;
+import controller.EndGameController;
 import controller.LoginController;
 import controller.MenuController;
 import javafx.geometry.Point2D;
@@ -11,7 +12,6 @@ import model.GameElement;
 import model.cards.Card;
 import model.cards.CardFactory;
 import model.cards.buildings.Building;
-import model.cards.levelEnums.Level;
 import model.cards.spells.Arrows;
 import model.cards.spells.FireBall;
 import model.cards.spells.Rage;
@@ -116,7 +116,7 @@ public class GameLogic {
 
             } else {
 
-                towerLogic((Tower) m) ;
+                towerLogic((Tower) m);
 
             }
 
@@ -204,10 +204,14 @@ public class GameLogic {
             LoginController.sound.playMain("BABYDRAGON_ATTACK");
         } else if (card.getValue().toString().equals("WIZARD")) {
             LoginController.sound.playMain("WIZARD_ATTACK");
-        } else if (card.getValue().toString().equals("KINGTOWER")) {
+        } else if (card.getValue().toString().equals("MYKINGTOWER")) {
             LoginController.sound.playMain("KING_ATTACK");
-        } else if (card.getValue().toString().equals("ARCHERTOWER")) {
+        } else if (card.getValue().toString().equals("MYARCHERTOWER")) {
             LoginController.sound.playMain("ARCHERTOWER_ATTACK");
+        } else if (card.getValue().toString().equals("BOTARCHERTOWER")) {
+            LoginController.sound.playMain("ARCHERTOWER_ATTACK");
+        } else if (card.getValue().toString().equals("BOTKINGTOWER")) {
+            LoginController.sound.playMain("KING_ATTACK");
         }
     }
 
@@ -276,15 +280,14 @@ public class GameLogic {
     }
 
     private void shootTarget(GameElement m, ArrayList<GameElement> targets) {
-        if(m instanceof Spell){
-            if(m instanceof Rage){
+        if (m instanceof Spell) {
+            if (m instanceof Rage) {
                 ((Rage) m).executeRage(targets);
-            }
-            else if(m instanceof FireBall){
+            } else if (m instanceof FireBall) {
 
-                ArrayList<GameElement> targetList = new ArrayList<>() ;
-                for(GameElement target : targets) {
-                    boolean flag = false ;
+                ArrayList<GameElement> targetList = new ArrayList<>();
+                for (GameElement target : targets) {
+                    boolean flag = false;
                     if (target instanceof Tower) {
                         ((Tower) target).decreaseHitPoint(((FireBall) m).getDamage());
                         flag = true;
@@ -364,13 +367,12 @@ public class GameLogic {
                 sound(m);
                 addToVectorMap(m, targetList);
             }
-        }
-        else if(m instanceof Tower){
-            if(!((Tower) m).isAllowedToHit())
-                return ;
-            ArrayList<GameElement> targetList = new ArrayList<>() ;
-            for(GameElement target : targets) {
-                boolean flag = false ;
+        } else if (m instanceof Tower) {
+            if (!((Tower) m).isAllowedToHit())
+                return;
+            ArrayList<GameElement> targetList = new ArrayList<>();
+            for (GameElement target : targets) {
+                boolean flag = false;
                 if (target instanceof Tower) {
                     ((Tower) target).decreaseHitPoint(((Tower) m).getDamage());
                     flag = true;
@@ -382,7 +384,7 @@ public class GameLogic {
                     flag = true;
                 }
                 if (flag)
-                    targetList.add(target) ;
+                    targetList.add(target);
             }
             sound(m);
             addToVectorMap(m, targetList);
@@ -392,7 +394,6 @@ public class GameLogic {
 
     private boolean moveToBridge(Troop card) {
         if (isBotElement(card) && card.getPoint().getY() >= 10) {
-            System.out.println("connect to bridge");
             return true;
         }
         else if (isPlayerElement(card) && card.getPoint().getY() <= 10)
@@ -461,7 +462,7 @@ public class GameLogic {
 
     private boolean canMove(Troop movingCard) {
 
-        switch(movingCard.getSpeed()){
+        switch (movingCard.getSpeed()) {
             case MEDIUM:
                 return speedCounter % 3 == 0;
             case FAST:
@@ -469,18 +470,18 @@ public class GameLogic {
             case SLOW:
                 return speedCounter % 5 == 0;
         }
-        return false ;
+        return false;
     }
 
-    public boolean isBotElement(GameElement card) {
+    private boolean isBotElement(GameElement card) {
         return data.botDeck.contains(card);
     }
 
-    public boolean isPlayerElement(GameElement card) {
+    private boolean isPlayerElement(GameElement card) {
         return data.playerDeck.contains(card);
     }
 
-    public boolean isOccupied(Point2D point) {
+    private boolean isOccupied(Point2D point) {
         for (GameElement i : data.boardElements) {
             if (point.equals(i.getPoint()))
                 return true;
@@ -488,40 +489,36 @@ public class GameLogic {
         return false;
     }
 
-    private ArrayList<GameElement> findCardInRang(GameElement card){
+    private ArrayList<GameElement> findCardInRang(GameElement card) {
 
-        ArrayList<GameElement> result = new ArrayList<>() ;
-        if(card instanceof Troop && ((Troop) card).isAreaSplash()) {
-
-                for (GameElement i : data.boardElements) {
-                    if (!isOpposing(i, card))
-                        continue;
-
-                    if (card.getRange() == 0) {
-                        if (isInNeighbourhood(i.getPoint(), card.getPoint()) && isTargetApproved(i, card)) {
-                            result.add(i);
-                        }
-                    } else {
-                        if (i.getPoint().distance(card.getPoint()) < card.getRange() && isTargetApproved(i, card)) {
-                            result.add(i);
-                        }
-
-                    }
-                }
-                if(card.getRange() != 0){
-                    result = deployAreaSplashLogic(result , (Card) card);
-                }
-        }
-
-        else if (card instanceof Spell) {
+        ArrayList<GameElement> result = new ArrayList<>();
+        if (card instanceof Troop && ((Troop) card).isAreaSplash()) {
 
             for (GameElement i : data.boardElements) {
-                if(card instanceof Rage)
-                {
+                if (!isOpposing(i, card))
+                    continue;
+
+                if (card.getRange() == 0) {
+                    if (isInNeighbourhood(i.getPoint(), card.getPoint()) && isTargetApproved(i, card)) {
+                        result.add(i);
+                    }
+                } else {
+                    if (i.getPoint().distance(card.getPoint()) < card.getRange() && isTargetApproved(i, card)) {
+                        result.add(i);
+                    }
+
+                }
+            }
+            if (card.getRange() != 0) {
+                result = deployAreaSplashLogic(result, (Card) card);
+            }
+        } else if (card instanceof Spell) {
+
+            for (GameElement i : data.boardElements) {
+                if (card instanceof Rage) {
                     if (isOpposing(i, card))
                         continue;
-                }
-                else {
+                } else {
                     if (!isOpposing(i, card))
                         continue;
                 }
@@ -530,124 +527,114 @@ public class GameLogic {
                 }
 
             }
-        }
+        } else {
 
-        else {
-
-                int minimumRang = 100;
-                for (GameElement i : data.boardElements) {
-                    if (!isOpposing(i, card))
-                        continue;
-                    if (card.getRange() != 0) {
-                        if (i.getPoint().distance(card.getPoint()) < card.getRange() && isTargetApproved(i, card)) {
-                            if (card.getRange() < minimumRang) {
-                                minimumRang = card.getRange();
-                                result.add(i);
-                            }
+            int minimumRang = 100;
+            for (GameElement i : data.boardElements) {
+                if (!isOpposing(i, card))
+                    continue;
+                if (card.getRange() != 0) {
+                    if (i.getPoint().distance(card.getPoint()) < card.getRange() && isTargetApproved(i, card)) {
+                        if (card.getRange() < minimumRang) {
+                            minimumRang = card.getRange();
+                            result.add(i);
                         }
-                    } else {
-                        if (isInNeighbourhood(i.getPoint(), card.getPoint()) && isTargetApproved(i, card)) {
-                            if (card.getRange() < minimumRang) {
-                                minimumRang = card.getRange();
-                                result.add(i);
-                            }
+                    }
+                } else {
+                    if (isInNeighbourhood(i.getPoint(), card.getPoint()) && isTargetApproved(i, card)) {
+                        if (card.getRange() < minimumRang) {
+                            minimumRang = card.getRange();
+                            result.add(i);
                         }
                     }
                 }
             }
-        return result ;
+        }
+        return result;
     }
 
-    private ArrayList<GameElement> deployAreaSplashLogic(ArrayList<GameElement> result , Card card) {
+    private ArrayList<GameElement> deployAreaSplashLogic(ArrayList<GameElement> result, Card card) {
 
-        int right = 0 ;
-        int left = 0 ;
-        int up = 0 ;
-        int down = 0 ;
-        int x = (int) card.getPoint().getX() ;
-        int y = (int) card.getPoint().getY() ;
+        int right = 0;
+        int left = 0;
+        int up = 0;
+        int down = 0;
+        int x = (int) card.getPoint().getX();
+        int y = (int) card.getPoint().getY();
 
-        for(GameElement i : result){
-            if(i.getPoint().getX() > x)
-                right++ ;
-            if(i.getPoint().getX() < x)
+        for (GameElement i : result) {
+            if (i.getPoint().getX() > x)
+                right++;
+            if (i.getPoint().getX() < x)
                 left++;
-            if(i.getPoint().getY() > y)
-                down++ ;
-            if(i.getPoint().getY() < y)
-                up++ ;
+            if (i.getPoint().getY() > y)
+                down++;
+            if (i.getPoint().getY() < y)
+                up++;
         }
 
-        int max = 0 ;
-        if(right >= max)
-            max = right ;
-        if(left >= max)
-            max = left ;
-        if(up >= max)
-            max = up ;
-        if(down >= max)
-            max = down ;
+        int max = 0;
+        if (right >= max)
+            max = right;
+        if (left >= max)
+            max = left;
+        if (up >= max)
+            max = up;
+        if (down >= max)
+            max = down;
 
-        ArrayList<GameElement> newArr = new ArrayList<>() ;
+        ArrayList<GameElement> newArr = new ArrayList<>();
 
-        if(max == down && max == up){
-            if(isPlayerElement(card))
-                up-- ;
+        if (max == down && max == up) {
+            if (isPlayerElement(card))
+                up--;
             else
-                down-- ;
+                down--;
         }
 
-        for(GameElement i : result){
-            if(max == down)
-            {
-                if(i.getPoint().getY() > y)
-                    newArr.add(i) ;
-            }
-            else if(max == up)
-            {
-                if(i.getPoint().getY() < y)
-                    newArr.add(i) ;
+        for (GameElement i : result) {
+            if (max == down) {
+                if (i.getPoint().getY() > y)
+                    newArr.add(i);
+            } else if (max == up) {
+                if (i.getPoint().getY() < y)
+                    newArr.add(i);
 
+            } else if (max == right) {
+                if (i.getPoint().getX() > x)
+                    newArr.add(i);
+            } else if (max == left) {
+                if (i.getPoint().getX() < x)
+                    newArr.add(i);
             }
-            else if(max == right){
-                 if(i.getPoint().getX() > x)
-                     newArr.add(i) ;
-            }
-            else if(max == left){
-                 if(i.getPoint().getX() < x)
-                     newArr.add(i) ;
-             }
 
         }
         return newArr;
     }
 
     private boolean isTargetApproved(GameElement target, GameElement attacker) {
-        if(target instanceof Spell)
-            return false ;
-        else if(attacker instanceof Tower)
-            return true ;
-        else if(attacker instanceof Troop){
-            switch (((Troop) attacker).getTarget())
-            {
+        if (target instanceof Spell)
+            return false;
+        else if (attacker instanceof Tower)
+            return true;
+        else if (attacker instanceof Troop) {
+            switch (((Troop) attacker).getTarget()) {
                 case ANY:
-                    return true ;
+                    return true;
                 case GROUND:
-                    return ! (target instanceof BabyDragon) ;
+                    return !(target instanceof BabyDragon);
                 case BUILDING:
                     return (target instanceof Building || target instanceof Tower);
             }
-        }
-        else if(attacker instanceof Building){
-            switch(((Building) attacker).getTarget()){
-                case GROUND :
-                    return ! (target instanceof BabyDragon) ;
+        } else if (attacker instanceof Building) {
+            switch (((Building) attacker).getTarget()) {
+                case GROUND:
+                    return !(target instanceof BabyDragon);
                 case ANY:
-                    return true ;
+                    return true;
             }
-        }
-        else return attacker instanceof Spell;
-        return false ;
+        } else return attacker instanceof Spell;
+        return false;
     }
 
     private boolean moveToTower(Troop card) {
@@ -682,8 +669,7 @@ public class GameLogic {
         if (currCard == null) {
             System.out.println("can't set current point -> current card is null");
             //return;
-        }
-        else {
+        } else {
 
             this.currPoint = currPoint;
 
@@ -740,69 +726,76 @@ public class GameLogic {
             }
         }
     }
-    private void addToVectorMap(GameElement element , ArrayList<GameElement> elementsArr){
-        ArrayList<Point2D> pointsArr = new ArrayList<>() ;
-        for(GameElement ele : elementsArr)
+
+    private void addToVectorMap(GameElement element, ArrayList<GameElement> elementsArr) {
+        ArrayList<Point2D> pointsArr = new ArrayList<>();
+        for (GameElement ele : elementsArr)
             pointsArr.add(ele.getPoint());
 
-        model.vectorMap.put(element , pointsArr);
+        model.vectorMap.put(element, pointsArr);
     }
 
-    public boolean isKingDead(){
-        int counter = 0 ;
-        for(GameElement i : data.playerDeck)
-            if(i instanceof KingTower)
-                counter++ ;
-        for(GameElement i : data.botDeck)
-            if(i instanceof KingTower)
-                counter++ ;
+    public boolean isKingDead() {
+        int counter = 0;
+        for (GameElement i : data.playerDeck)
+            if (i instanceof KingTower)
+                counter++;
+        for (GameElement i : data.botDeck)
+            if (i instanceof KingTower)
+                counter++;
 
-            return counter != 2 ;
+        return counter != 2;
     }
-    public void endGameLogic(){
-        boolean winner = false ;
-        if(isKingDead()) {
+
+    public void endGameLogic() {
+        boolean winner = false;
+        if (isKingDead()) {
             boolean flag = false;
             for (GameElement i : data.playerDeck)
                 if (i instanceof KingTower)
                     flag = true;
 
-            if (flag)winner = true ;
+            if (flag) winner = true;
+            else winner = false;
 
-        }
-        else
-        {
-            if(data.playerScore > data.botScore) winner = true ;
-            else if(data.playerScore == data.botScore){
-                int playerTowerHitPoint = 0 ;
-                for(GameElement i : data.playerDeck)
-                    if(i instanceof Tower)
-                        playerTowerHitPoint += ((Tower) i).getHitPoint() ;
+        } else {
+            if (data.playerScore > data.botScore) winner = true;
+            else if (data.playerScore == data.botScore) {
+                int playerTowerHitPoint = 0;
+                for (GameElement i : data.playerDeck)
+                    if (i instanceof Tower)
+                        playerTowerHitPoint += ((Tower) i).getHitPoint();
 
-                    int botTowerHitPoint = 0 ;
-                for(GameElement i : data.botDeck)
-                    if(i instanceof Tower)
-                        botTowerHitPoint += ((Tower) i).getHitPoint() ;
 
-                if(playerTowerHitPoint >= botTowerHitPoint)
-                winner = true ;
+                int botTowerHitPoint = 0;
+                for (GameElement i : data.botDeck)
+                    if (i instanceof Tower)
+                        botTowerHitPoint += ((Tower) i).getHitPoint();
+
+                if (playerTowerHitPoint >= botTowerHitPoint)
+                    winner = true;
+                else {
+                    winner = false;
+                }
             }
 
         }
 
-            setPlayerWon(winner);
-            data.saveToHistory();
-            data.saveData() ;
+        setPlayerWon(winner);
     }
-    private void setPlayerWon(boolean isPlayerTheWinner){
-        if (isPlayerTheWinner)
-        {
 
-            data.xpDealer(200); data.playerWon = true ;
-        }
-        else
-        {
-            data.xpDealer(70); data.playerWon = false ;
+    private void setPlayerWon(boolean isPlayerTheWinner) {
+        EndGameController.score1 = data.playerScore;
+        EndGameController.score2 = data.botScore;
+        if (isPlayerTheWinner) {
+            data.xpDealer(700);
+            data.cupDealer(30);
+            data.playerWon = true;
+            EndGameController.playerWon = true;
+        } else {
+            data.xpDealer(200);
+            data.playerWon = false;
+            EndGameController.playerWon = false;
         }
     }
 }
