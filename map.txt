@@ -1,6 +1,6 @@
 t s s s s s s s s s s s s s s s s l l
 t h g g g g g g g g g g g g g g g h t
-t g a - - - - - - k - - - - - - a g t
+t g a2 - - - - - - k2 - - - - - - a2 g t
 t g r g g g g g g g g g g g g g r g t
 s g r g g g g g g g g g g g g g r g s
 s g r g g g g g g g g g g g g g r g s
@@ -9,7 +9,7 @@ t g r g g g g g g g g g g g g g r g t
 t g r g g g g g g g g g g g g g r g p
 t g r g g g g g g g g g g g g g r g d
 m v b v v v v v v v v v v v v v b v m
-t g r g g g g g g g g g g g g g r g p
+t g r g g g g g g g g g g g g g r g *
 t g r g g g g g g g g g g g g g r g p
 t g r g g g g g g g g g g g g g r g t
 s g r g g g g g g g g g g g g g r g s

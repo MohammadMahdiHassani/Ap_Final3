@@ -79,10 +79,10 @@ public class ArenaModel {
                         BackGroundCellValues[row][column] = CellValue.FENCE;
                         break;
                     case "k":
-                        BackGroundCellValues[row][column] = CellValue.EMPTY;
-                        break;
                     case "a":
-                        BackGroundCellValues[row][column] = CellValue.EMPTY;
+                    case "a2":
+                    case "k2":
+                        BackGroundCellValues[row][column] = CellValue.DAMAGE;
                         break;
                     case "t":
                         BackGroundCellValues[row][column] = CellValue.TREE;
@@ -105,6 +105,7 @@ public class ArenaModel {
                         break;
                     case "*":
                         BackGroundCellValues[row][column] = CellValue.B_CROWN;
+                        break;
                     case "p":
                         BackGroundCellValues[row][column] = CellValue.POINT;
                         break;

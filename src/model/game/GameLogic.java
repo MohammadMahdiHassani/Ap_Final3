@@ -5,9 +5,6 @@ import controller.EndGameController;
 import controller.LoginController;
 import controller.MenuController;
 import javafx.geometry.Point2D;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.image.ImageView;
 import model.GameElement;
 import model.cards.Card;
 import model.cards.CardFactory;
@@ -16,13 +13,13 @@ import model.cards.spells.Arrows;
 import model.cards.spells.FireBall;
 import model.cards.spells.Rage;
 import model.cards.spells.Spell;
-import model.cards.troops.*;
+import model.cards.troops.BabyDragon;
+import model.cards.troops.Troop;
 import model.towers.ArcherTower;
 import model.towers.KingTower;
 import model.towers.Tower;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -215,10 +212,14 @@ public class GameLogic {
             LoginController.sound.playMain("BABYDRAGON_ATTACK");
         } else if (card.getValue().toString().equals("WIZARD")) {
             LoginController.sound.playMain("WIZARD_ATTACK");
-        } else if (card.getValue().toString().equals("KINGTOWER")) {
+        } else if (card.getValue().toString().equals("MYKINGTOWER")) {
             LoginController.sound.playMain("KING_ATTACK");
-        } else if (card.getValue().toString().equals("ARCHERTOWER")) {
+        } else if (card.getValue().toString().equals("MYARCHERTOWER")) {
             LoginController.sound.playMain("ARCHERTOWER_ATTACK");
+        } else if (card.getValue().toString().equals("BOTARCHERTOWER")) {
+            LoginController.sound.playMain("ARCHERTOWER_ATTACK");
+        } else if (card.getValue().toString().equals("BOTKINGTOWER")) {
+            LoginController.sound.playMain("KING_ATTACK");
         }
     }
 

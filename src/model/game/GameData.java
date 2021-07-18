@@ -63,12 +63,17 @@ public class GameData {
                 switch (value) {
 
                     case "k":
-                        boardElements.add(new KingTower(KingTowerLevel.LEVEL_1, new Point2D(column, row)));
+                        boardElements.add(new KingTower(KingTowerLevel.LEVEL_1, new Point2D(column, row),true));
                         break;
                     case "a":
-                        boardElements.add(new ArcherTower(ArcherTowerLevel.LEVEL_1, new Point2D(column, row)));
+                        boardElements.add(new ArcherTower(ArcherTowerLevel.LEVEL_1, new Point2D(column, row),true));
                         break;
-
+                    case "k2":
+                        boardElements.add(new KingTower(KingTowerLevel.LEVEL_1, new Point2D(column, row),false));
+                        break;
+                    case "a2":
+                        boardElements.add(new ArcherTower(ArcherTowerLevel.LEVEL_1, new Point2D(column, row),false));
+                        break;
                 }
                 column++;
             }
