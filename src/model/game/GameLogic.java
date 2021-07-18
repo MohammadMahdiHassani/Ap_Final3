@@ -714,16 +714,16 @@ public class GameLogic {
             if(isPlayerElement(element))
             {
                 if(element instanceof KingTower)
-                    data.playerScore += 3;
+                    data.botScore += 3;
                 else
-                    data.playerScore += 1;
+                    data.botScore += 1;
             }
             else
             {
                 if(element instanceof KingTower)
-                    data.botScore += 3;
+                    data.playerScore += 3;
                 else
-                    data.botScore += 1;
+                    data.playerScore += 1;
             }
         }
     }
