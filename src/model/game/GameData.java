@@ -39,11 +39,11 @@ public class GameData {
         gameLevel = DataHandler.getLevel() ;
         initboardElements();
         initPlayerDeck();
+        botGenesis = new ArrayList<>() ;
         initBotDeck();
         addingTowersTodecks();
         botScore = 0 ;
         playerScore = 0 ;
-        botGenesis = new ArrayList<>() ;
 
     }
 
