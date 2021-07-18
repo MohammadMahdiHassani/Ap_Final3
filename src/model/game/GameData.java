@@ -84,7 +84,6 @@ public class GameData {
             }
             row++;
         }
-
     }
 
     private void initBotDeck() {

@@ -484,11 +484,11 @@ public class GameLogic {
         return false;
     }
 
-    boolean isBotElement(GameElement card) {
+    public boolean isBotElement(GameElement card) {
         return data.botDeck.contains(card);
     }
 
-    private boolean isPlayerElement(GameElement card) {
+    public boolean isPlayerElement(GameElement card) {
         return data.playerDeck.contains(card);
     }
 
@@ -593,7 +593,6 @@ public class GameLogic {
             max = up;
         if (down >= max)
             max = down;
-
         ArrayList<GameElement> newArr = new ArrayList<>();
 
         if (max == down && max == up) {
@@ -724,16 +723,16 @@ public class GameLogic {
             if(isPlayerElement(element))
             {
                 if(element instanceof KingTower)
-                    data.playerScore += 3;
+                    data.botScore += 3;
                 else
-                    data.playerScore += 1;
+                    data.botScore += 1;
             }
             else
             {
                 if(element instanceof KingTower)
-                    data.botScore += 3;
+                    data.playerScore += 3;
                 else
-                    data.botScore += 1;
+                    data.playerScore += 1;
             }
         }
     }

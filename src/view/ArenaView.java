@@ -91,7 +91,7 @@ public class ArenaView extends Group {
                     cellView[i][j].setImage(GRASS.getThumbnailImage());
                 } else if (cellValues[i][j] == CellValue.ROAD) {
                     cellView[i][j].setImage(ROAD.getThumbnailImage());
-                }else if (cellValues[i][j] == CellValue.HROAD) {
+                } else if (cellValues[i][j] == CellValue.HROAD) {
                     cellView[i][j].setImage(HROAD.getThumbnailImage());
                 } else if (cellValues[i][j] == BRIDGE) {
                     cellView[i][j].setImage(BRIDGE.getThumbnailImage());
@@ -115,34 +115,49 @@ public class ArenaView extends Group {
                     cellView[i][j].setImage(R_CROWN.getThumbnailImage());
                 } else if (cellValues[i][j] == POINT) {
                     cellView[i][j].setImage(POINT.getThumbnailImage());
-                }
-                else if (cellValues[i][j] == DAMAGE) {
+                } else if (cellValues[i][j] == DAMAGE) {
                     cellView[i][j].setImage(DAMAGE.getThumbnailImage());
                 }
             }
         }
     }
 
+    public GameElement getCardWithPoint(int x, int y, ArenaModel model) {
+        for (int i = 0; i < model.getGameData().boardElements.size(); i++) {
+            if (x == model.getGameData().boardElements.get(i).getPoint().getX()) {
+                if (y == model.getGameData().boardElements.get(i).getPoint().getY()) {
+                    return model.getGameData().boardElements.get(i);
+                }
+            }
+        }
+        return null;
+    }
+
     public void update(ArenaModel model) {
 
         GameElement[][] cellValues = null;
         cellValues = model.getCellValues();
-
         for (int i = 0; i < rowCount; i++) {
             for (int j = 0; j < columnCount; j++) {
                 if (cellValues[i][j] == null) {
                     componentView[i][j].setImage(null);
-                } else if (cellValues[i][j].getValue() == CellValue.MYKINGTOWER) {
+                } else if (cellValues[i][j].getValue() == MYKINGTOWER) {
+
                     componentView[i][j].setImage(MYKINGTOWER.getMyWalk());
-                } else if (cellValues[i][j].getValue() == CellValue.MYARCHERTOWER) {
+                } else if (cellValues[i][j].getValue() == MYARCHERTOWER) {
                     componentView[i][j].setImage(MYARCHERTOWER.getMyWalk());
-                } else if (cellValues[i][j].getValue() == CellValue.BOTARCHERTOWER) {
+                } else if (cellValues[i][j].getValue() == BOTARCHERTOWER) {
                     componentView[i][j].setImage(BOTARCHERTOWER.getMyWalk());
-                }else if (cellValues[i][j].getValue() == CellValue.BOTKINGTOWER) {
+                } else if (cellValues[i][j].getValue() == BOTKINGTOWER) {
                     componentView[i][j].setImage(BOTKINGTOWER.getMyWalk());
-                }
-                else if (cellValues[i][j].getValue() == GIANT) {
-                    componentView[i][j].setImage(GIANT.getMyWalk());
+                } else if (cellValues[i][j].getValue() == GIANT) {
+                    if (model.getLogic().isPlayerElement(getCardWithPoint(i, j, model))) {
+                        componentView[i][j].setImage(GIANT.getMyWalk());
+                    }
+                    else {
+                        componentView[i][j].setImage(GIANT.getMyWalk());
+                    }
+
                 } else if (cellValues[i][j].getValue() == ARCHER) {
                     componentView[i][j].setImage(ARCHER.getMyWalk());
                 } else if (cellValues[i][j].getValue() == CANNON) {
@@ -161,7 +176,7 @@ public class ArenaView extends Group {
                     componentView[i][j].setImage(RAGE.getMyWalk());
                 } else if (cellValues[i][j].getValue() == BABY_DRAGON) {
                     componentView[i][j].setImage(BABY_DRAGON.getMyWalk());
-                }  else if (cellValues[i][j].getValue() == INFERNO) {
+                } else if (cellValues[i][j].getValue() == INFERNO) {
                     componentView[i][j].setImage(INFERNO.getMyWalk());
                 } else if (cellValues[i][j].getValue() == ARROWS) {
                     componentView[i][j].setImage(ARROWS.getMyWalk());
@@ -173,39 +188,40 @@ public class ArenaView extends Group {
 
     public void shootCircles(Point2D starting_point, Point2D ending_point, double radius, Color color) {
 
-        Circle circle = new Circle(starting_point.getX()*CELL_WIDTH + CELL_WIDTH/2 , starting_point.getY()*CELL_WIDTH + CELL_WIDTH/2, radius);
+        Circle circle = new Circle(starting_point.getX() * CELL_WIDTH + CELL_WIDTH / 2, starting_point.getY() * CELL_WIDTH + CELL_WIDTH / 2, radius);
         circle.setFill(color);
         this.getChildren().add(circle);
-        Duration duration =  Duration.millis(500);
-        TranslateTransition transition = new TranslateTransition(duration , circle);
-        transition.setToX(ending_point.subtract(starting_point).getX()*CELL_WIDTH);
-        transition.setToY(ending_point.subtract(starting_point).getY()*CELL_WIDTH);
+        Duration duration = Duration.millis(500);
+        TranslateTransition transition = new TranslateTransition(duration, circle);
+        transition.setToX(ending_point.subtract(starting_point).getX() * CELL_WIDTH);
+        transition.setToY(ending_point.subtract(starting_point).getY() * CELL_WIDTH);
 
-        FadeTransition fade = new FadeTransition(Duration.millis(100) , circle);
+        FadeTransition fade = new FadeTransition(Duration.millis(100), circle);
         fade.setFromValue(1.0);
         fade.setToValue(0.0);
 
-        SequentialTransition sequentialTransition = new SequentialTransition(transition , fade);
+        SequentialTransition sequentialTransition = new SequentialTransition(transition, fade);
         sequentialTransition.play();
 
     }
-    public void scaleCircle(Point2D starting_point , int range, Color color){
 
-        Circle circle = new Circle(starting_point.getX()*CELL_WIDTH + CELL_WIDTH/2 , starting_point.getY()*CELL_WIDTH + CELL_WIDTH/2, CELL_WIDTH/2);
+    public void scaleCircle(Point2D starting_point, int range, Color color) {
+
+        Circle circle = new Circle(starting_point.getX() * CELL_WIDTH + CELL_WIDTH / 2, starting_point.getY() * CELL_WIDTH + CELL_WIDTH / 2, CELL_WIDTH / 2);
         circle.setStroke(color);
         this.getChildren().add(circle);
         circle.setStrokeWidth(0.5);
         circle.setFill(Color.TRANSPARENT);
 
-        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(5000) , circle);
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(5000), circle);
         scaleTransition.setByX(range);
         scaleTransition.setByY(range);
 
-        FadeTransition fade = new FadeTransition(Duration.millis(100) , circle);
+        FadeTransition fade = new FadeTransition(Duration.millis(100), circle);
         fade.setFromValue(1.0);
         fade.setToValue(0.0);
 
-        SequentialTransition sequentialTransition = new SequentialTransition(scaleTransition , fade);
+        SequentialTransition sequentialTransition = new SequentialTransition(scaleTransition, fade);
         sequentialTransition.play();
 
 
@@ -229,11 +245,12 @@ public class ArenaView extends Group {
         this.initializeGrid();
     }
 
-    public void setTimeLabel(String text  , Color color){
+    public void setTimeLabel(String text, Color color) {
         timeLabel.setTextFill(color);
         timeLabel.setText(text);
 
     }
+
     public static Label getTimeLabel() {
         return timeLabel;
     }
