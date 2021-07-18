@@ -12,6 +12,7 @@ import model.GameElement;
 import model.cards.Card;
 import model.cards.CardFactory;
 import model.cards.buildings.Building;
+import model.cards.levelEnums.Level;
 import model.cards.spells.Arrows;
 import model.cards.spells.FireBall;
 import model.cards.spells.Rage;
