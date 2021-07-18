@@ -9,6 +9,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -31,6 +32,7 @@ public class ArenaView extends Group {
     private ProgressBar elixirProgress;
     private ImageView[][] cellView;
     private ImageView[][] componentView;
+    public static ImageView[][] king;
 
     public ArenaView() {
 
@@ -43,10 +45,12 @@ public class ArenaView extends Group {
         timeLabel = new Label("3:00");
         cellView = new ImageView[rowCount][columnCount];
         componentView = new ImageView[rowCount][columnCount];
+        king = new ImageView[rowCount][columnCount];
         for (int row = 0; row < rowCount; row++) {
             for (int column = 0; column < columnCount; column++) {
                 ImageView imageView = new ImageView();
                 ImageView imageView1 = new ImageView();
+                ImageView imageView2 = new ImageView();
                 imageView.setX(column * CELL_WIDTH);
                 imageView.setY(row * CELL_WIDTH);
                 imageView.setFitWidth(CELL_WIDTH);
@@ -55,10 +59,18 @@ public class ArenaView extends Group {
                 imageView1.setY(row * CELL_WIDTH);
                 imageView1.setFitWidth(CELL_WIDTH);
                 imageView1.setFitHeight(CELL_WIDTH);
+
+                imageView2.setX(column * CELL_WIDTH);
+                imageView2.setY(row * CELL_WIDTH);
+                imageView2.setFitWidth(CELL_WIDTH);
+                imageView2.setFitHeight(CELL_WIDTH);
+
                 cellView[row][column] = imageView;
                 componentView[row][column] = imageView1;
+                king[row][column] = imageView2;
                 this.getChildren().add(imageView);
                 this.getChildren().add(imageView1);
+                this.getChildren().add(imageView2);
             }
         }
         timeLabel.setLayoutX((CELL_WIDTH * 17) + 6);
@@ -143,11 +155,13 @@ public class ArenaView extends Group {
                     componentView[i][j].setImage(null);
                 } else if (cellValues[i][j].getValue() == MYKINGTOWER) {
                     componentView[i][j].setImage(MYKINGTOWER.getMyWalk());
+                    king[i][j].setImage(new Image("/view/photos/tower/myKing.png"));
                 } else if (cellValues[i][j].getValue() == MYARCHERTOWER) {
                     componentView[i][j].setImage(MYARCHERTOWER.getMyWalk());
                 } else if (cellValues[i][j].getValue() == BOTARCHERTOWER) {
                     componentView[i][j].setImage(BOTARCHERTOWER.getMyWalk());
                 } else if (cellValues[i][j].getValue() == BOTKINGTOWER) {
+                    king[i][j].setImage(new Image("/view/photos/tower/botKing.png"));
                     componentView[i][j].setImage(BOTKINGTOWER.getMyWalk());
                 } else if (cellValues[i][j].getValue() == GIANT) {
                     if (model.getLogic().isPlayerElement(getCardWithPoint(j, i, model))) {
