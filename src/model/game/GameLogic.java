@@ -675,24 +675,51 @@ public class GameLogic {
         return (Math.abs(point_1.getX() - point_2.getX()) <= 1 && Math.abs(point_1.getY() - point_2.getY()) <= 1);
     }
 
-    public void setCurrPoint(Point2D currPoint) {
+    public boolean limits(Card currCard, Point2D currPoint) {
+        if (currCard instanceof Spell)
+        {
+            return true;
+        }
         if (currCard == null)
-            return;
+            return false;
+        else if (botLogic.archerTower_left.isDead() || botLogic.archerTower_right.isDead()) {
+            if (botLogic.archerTower_right.isDead()) {
+                if (currPoint.getY() >= 7 && currPoint.getX() >= 6)
+                    return true;
+                // this.currPoint = currPoint;
 
+            } else if (botLogic.archerTower_left.isDead()) {
+                if (currPoint.getY() >= 6 && currPoint.getX() <= 6)
+                    return true;
+                //this.currPoint = currPoint;
+            }
+        }
+        if (currPoint.getY() >= 10)
+            return true;
+        //this.currPoint = currPoint;
+
+        return false;
+    }
+
+    public void setCurrPoint(Point2D currPoint) {
         this.currPoint = currPoint;
+//        if (currCard == null)
+//            return;
+//
+//        //this.currPoint = currPoint;
 //            else if (botLogic.archerTower_left.isDead() || botLogic.archerTower_right.isDead()) {
-//                    if(botLogic.archerTower_right.isDead()){
-//                        if(currPoint.getY() >= 7 && currPoint.getX() >= 6)
-//                            this.currPoint = currPoint ;
-//                    }
-//                    else if(botLogic.archerTower_left.isDead()){
-//                        if(currPoint.getY() >= 6 && currPoint.getX() <= 6)
-//                            this.currPoint = currPoint ;
-//                    }
-//            } else {
-//                if(currPoint.getY() >= 10)
+//            if (botLogic.archerTower_right.isDead()) {
+//                if (currPoint.getY() >= 7 && currPoint.getX() >= 6)
+//                    this.currPoint = currPoint;
+//            } else if (botLogic.archerTower_left.isDead()) {
+//                if (currPoint.getY() >= 6 && currPoint.getX() <= 6)
 //                    this.currPoint = currPoint;
 //            }
+//        } else {
+//            if (currPoint.getY() >= 10)
+//                this.currPoint = currPoint;
+//        }
+
     }
 
     public void setCurrCard(Card currCard) {

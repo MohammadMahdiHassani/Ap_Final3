@@ -226,6 +226,11 @@ public class Sound {
             mediaPlayer = new MediaPlayer(media);
             mediaPlayer.setCycleCount(1);
             mediaPlayer.play();
+        } else if (sound.equals("NO")) {
+            media = new Media(getClass().getResource("/sound/no.wav").toExternalForm());
+            mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setCycleCount(1);
+            mediaPlayer.play();
         } else if (sound.equals("EIGHT")) {
             media = new Media(getClass().getResource("/sound/eight.wav").toExternalForm());
             mediaPlayer = new MediaPlayer(media);
