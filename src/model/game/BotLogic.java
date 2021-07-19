@@ -35,7 +35,7 @@ public class BotLogic {
     private CellValue[] ArcherTowerDefenseDeck ;
     private CellValue[] KingTowerDefense ;
     private CellValue[] AttackingValues ;
-
+    private Point2D attckingPoint = null;
     private boolean criticalCondition ;
     private ArrayList<Point2D> criticalPoints ;
 
@@ -113,13 +113,16 @@ public class BotLogic {
 
     private void attack() {
 
-        Point2D point = getAttackingPoint();
+            if(attckingPoint == null)
+                attckingPoint = getAttackingPoint();
 
-            if(point != null)
+            if(attckingPoint != null)
             {
-                makeAttackingCard(AttackingValues[attckFlag], point) ;
-                if(attckFlag == 3)
-                    attckFlag = 0 ;
+                makeAttackingCard(AttackingValues[attckFlag], attckingPoint) ;
+                if(attckFlag == 3) {
+                    attckFlag = 0;
+                    attckingPoint = getAttackingPoint() ;
+                }
                 else
                     attckFlag++ ;
             }
@@ -259,6 +262,7 @@ public class BotLogic {
             criticalPoints.add(new Point2D(kingTower.getPoint().getX() + 2, kingTower.getPoint().getY() + 2));
         }
     }
+
     private boolean deployInfernos(){
 
         if(kingTower.getHitPoint() < 700){
@@ -457,10 +461,6 @@ public class BotLogic {
         }
         return false ;
     }
-
-
-
-
 
 }
 
