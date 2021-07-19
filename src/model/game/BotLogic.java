@@ -6,6 +6,7 @@ import model.cards.Card;
 import model.cards.CardFactory;
 import model.cards.CellValue;
 import model.cards.buildings.Building;
+import model.cards.buildings.Inferno;
 import model.cards.spells.Rage;
 import model.cards.spells.Spell;
 import model.cards.troops.Giant;
@@ -22,27 +23,33 @@ public class BotLogic {
     private final GameLogic mainLogic;
     private final GameData data;
     private KingTower kingTower ;
-    private ArcherTower archerTower_left ;
-    private ArcherTower archerTower_right ;
+    ArcherTower archerTower_left ;
+    ArcherTower archerTower_right ;
     private final int kingRadarRadius ;
     private final int archerRaderRadius ;
     private int criticalHitPoint ;
     private int lT = 0 ;
     private int rT = 0 ;
+    private int mT = 0 ;
     private CellValue[] ArcherTowerDefenseDeck ;
+    private CellValue[] KingTowerDefense ;
+    private boolean criticalCondition ;
+    private ArrayList<Point2D> criticalPoints ;
 
     public BotLogic(GameLogic mainlogic) {
         this.mainLogic = mainlogic;
         this.data = mainlogic.data;
         criticalHitPoint = 500 ;
-        kingRadarRadius = 5 ;
+        kingRadarRadius = 7 ;
         archerRaderRadius = 7 ;
+        criticalCondition = false ;
         getTowers();
         initDecks() ;
     }
 
     private void initDecks() {
         ArcherTowerDefenseDeck = new CellValue[]{WIZARD, CANNON, BABY_DRAGON, RAGE, FIREBALL};
+        KingTowerDefense = new CellValue[]{WIZARD, BABY_DRAGON, RAGE};
     }
 
     private void getTowers() {
@@ -96,7 +103,11 @@ public class BotLogic {
 
     private void smartBotLogic(){
         if(mainLogic.speedCounter % 5 == 0 )
-            isdefending();
+            if(!isdefending())
+                attack() ;
+    }
+
+    private void attack() {
     }
 
     private int KingRadar() {
@@ -154,36 +165,77 @@ public class BotLogic {
 
     private boolean protectTheKing(){
 
-        if(KingRadar() <= 1)
-           //King is protected
+        if(KingRadar() <= 1) {
+            //King is protected
+            setFlagsToZero(kingTower);
             return true;
-        else {
-
-
-
         }
 
+        else {
+            if(kingTower.getHitPoint() < 1000)
+                initCriticalProtocols() ;
 
+            if(!deployInfernos())
+            {
 
+                if(!makeBotCard(KingTowerDefense[getFlags(kingTower)] , kingTower)){
+                    incrementFlags(kingTower);
+                    makeBotCard(KingTowerDefense[getFlags(kingTower)] , kingTower);
+                }
+                incrementFlags(kingTower);
 
-        return true ;
+            }
+
+            return false ;
+        }
     }
+
+    private void initCriticalProtocols() {
+        if(!criticalCondition) {
+            criticalCondition = true;
+            kingRadarRadius = 10;
+            criticalPoints = new ArrayList<>();
+            criticalPoints.add(new Point2D(kingTower.getPoint().getX(), kingTower.getPoint().getY() + 3));
+            criticalPoints.add(new Point2D(kingTower.getPoint().getX() - 2, kingTower.getPoint().getY() + 2));
+            criticalPoints.add(new Point2D(kingTower.getPoint().getX() + 2, kingTower.getPoint().getY() + 2));
+        }
+    }
+    private boolean deployInfernos(){
+
+        if(kingTower.getHitPoint() < 700){
+            boolean flag = false ;
+            for (Point2D m : criticalPoints) {
+                if (mainLogic.isOccupied(m)){
+                    if(!(mainLogic.point2Element(m) instanceof Inferno))
+                        flag = true ;
+                    continue;}
+                GameElement inferno = CardFactory.makeCard(INFERNO, data.gameLevel);
+                inferno.setPoint(m);
+                data.boardElements.add(inferno);
+                data.botDeck.add(inferno);
+                return true ;
+            }
+            return !flag ;
+        }
+        return false ;
+    }
+
     private boolean protectTowers(){
 
-        boolean a , b = false ;
+        boolean a = false , b = false ;
         if(!archerTower_left.isDead())
             a = defendArcherTower(archerTower_left);
         if(!archerTower_right.isDead())
             b = defendArcherTower(archerTower_right);
 
-        return false;
+        return a && b;
 
     }
 
     private boolean defendArcherTower(ArcherTower archerTower) {
-        if(archerTower.isDead() || ArcherRadar(archerTower)>1) {
+        if(archerTower.isDead() || ArcherRadar(archerTower)<=1) {
             setFlagsToZero(archerTower) ;
-            return false;
+            return true;
         }
         else{
 
@@ -193,37 +245,40 @@ public class BotLogic {
             }
             incrementFlags(archerTower);
         }
-
-
-
-
-        return true ;
+        return false ;
     }
 
-    private int getFlags(ArcherTower archerTower) {
-        if(archerTower == archerTower_left )
+    private int getFlags(Tower tower) {
+        if(tower == archerTower_left )
             return lT ;
-        return rT ;
+        else if( tower == archerTower_right)
+            return rT ;
+        return mT ;
     }
 
-    private void setFlagsToZero(ArcherTower archerTower) {
+    private void setFlagsToZero(Tower tower) {
 
-        if(archerTower == archerTower_left)
+        if(tower == archerTower_left)
             lT = 0 ;
-        else
+        else if(tower == archerTower_right)
             rT = 0 ;
+        else if(tower == kingTower)
+            mT = 0 ;
     }
 
-    private void incrementFlags(ArcherTower archerTower){
-        if(archerTower == archerTower_left)
+    private void incrementFlags(Tower tower){
+        if(tower == archerTower_left)
             lT++ ;
-        else
+        else if(tower == archerTower_right)
             rT++ ;
-
+        else if(tower == kingTower)
+            mT++ ;
         if(lT > 4)
             lT = 0 ;
         if(rT > 4)
             rT = 0 ;
+        if(mT >= 3)
+            mT = 0 ;
     }
 
     private boolean makeBotCard(CellValue cellValue , Tower tower){
@@ -252,7 +307,6 @@ public class BotLogic {
                     }
                     if(flag)
                         return false;
-
                 }
                 else{
                     boolean flag = false ;
@@ -276,7 +330,7 @@ public class BotLogic {
 
 
 
-            defendingElement.setPoint(getDefendingPoint(archerTower_left));
+            defendingElement.setPoint(point);
             data.boardElements.add(defendingElement);
             data.botDeck.add(defendingElement);
             return true ;
@@ -285,11 +339,11 @@ public class BotLogic {
     }
 
     private boolean isdefending() {
-            return protectTheKing() || protectTowers();
+            return !(protectTheKing() && protectTowers());
     }
 
     private Point2D getDefendingPoint(Tower tower){
-        if(tower instanceof KingTower) {
+        if(tower == kingTower) {
             Point2D kingPoint = tower.getPoint();
             if (ArcherRadar(archerTower_left) > ArcherRadar(archerTower_right)) {
                 Point2D point;

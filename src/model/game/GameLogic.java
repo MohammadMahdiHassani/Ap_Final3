@@ -50,9 +50,7 @@ public class GameLogic {
         updateBoard();
         if (!MenuController.isOnServer)
             executeBot();
-        if (!MenuController.isOnServer) {
-            botLogic.executeBot();
-        }
+
 
     }
 
@@ -431,11 +429,9 @@ public class GameLogic {
     private void moveCard(Troop movingCard, Point2D point) {
         if (!canMove(movingCard))
             return;
-        if (ArenaController.countTime % 2 == 0)
-        {
+        if (ArenaController.countTime % 2 == 0) {
             movingCard.setWalk2(true);
-        }
-        else {
+        } else {
             movingCard.setWalk2(false);
         }
         Point2D cardPoint = movingCard.getPoint();
@@ -680,25 +676,27 @@ public class GameLogic {
     }
 
     public void setCurrPoint(Point2D currPoint) {
-//        if(!(currPoint.getY()>=11 && currPoint.getY()<=17))
-//            return ;
-        if (currCard == null) {
-            System.out.println("can't set current point -> current card is null");
-            //return;
-        } else {
+        if (currCard == null)
+            return;
 
-            this.currPoint = currPoint;
-
-            //listArmy.getSelectionModel().select(null);
-
-        }
-
-
+        this.currPoint = currPoint;
+//            else if (botLogic.archerTower_left.isDead() || botLogic.archerTower_right.isDead()) {
+//                    if(botLogic.archerTower_right.isDead()){
+//                        if(currPoint.getY() >= 7 && currPoint.getX() >= 6)
+//                            this.currPoint = currPoint ;
+//                    }
+//                    else if(botLogic.archerTower_left.isDead()){
+//                        if(currPoint.getY() >= 6 && currPoint.getX() <= 6)
+//                            this.currPoint = currPoint ;
+//                    }
+//            } else {
+//                if(currPoint.getY() >= 10)
+//                    this.currPoint = currPoint;
+//            }
     }
 
     public void setCurrCard(Card currCard) {
         this.currCard = currCard;
-
     }
 
     public boolean isOpposing(GameElement element_1, GameElement element_2) {
@@ -822,5 +820,12 @@ public class GameLogic {
             data.playerWon = false;
             EndGameController.playerWon = false;
         }
+    }
+
+    GameElement point2Element(Point2D point) {
+        for (GameElement i : data.boardElements)
+            if (i.getPoint().equals(point))
+                return i;
+        return null;
     }
 }
