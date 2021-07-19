@@ -25,7 +25,7 @@ public class BotLogic {
     private KingTower kingTower ;
     ArcherTower archerTower_left ;
     ArcherTower archerTower_right ;
-    private final int kingRadarRadius ;
+    private int kingRadarRadius ;
     private final int archerRaderRadius ;
     private int criticalHitPoint ;
     private int lT = 0 ;
