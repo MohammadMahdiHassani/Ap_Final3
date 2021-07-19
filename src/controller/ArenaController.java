@@ -72,7 +72,7 @@ public class ArenaController implements EventHandler<MouseEvent> {
     @FXML
     private ProgressBar elixirProgress;
     private final ArenaModel model;
-    private int countTime;
+    public static int countTime;
     private Timer timer;
     private boolean isTimeUp;
 
@@ -289,6 +289,7 @@ public class ArenaController implements EventHandler<MouseEvent> {
         updateTimer();
         increaseElixir();
         serverLogic();
+
         model.move();
         serverLogic();
         arenaView.update(model);
