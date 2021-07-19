@@ -27,6 +27,7 @@ import model.cards.CellValue;
 import model.cards.buildings.Inferno;
 import model.cards.levelEnums.Level;
 import model.cards.spells.Rage;
+import model.cards.troops.Troop;
 import model.game.ArenaModel;
 import model.towers.KingTower;
 import model.towers.Tower;
@@ -441,6 +442,9 @@ public class ArenaController implements EventHandler<MouseEvent> {
         if (animationMap.size() == 0)
             return;
         for (GameElement i : animationMap.keySet()) {
+
+            if(i instanceof Troop)
+                continue ;
 
             Point2D starting_point = i.getPoint();
             Color color;
