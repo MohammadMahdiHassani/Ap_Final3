@@ -703,22 +703,7 @@ public class GameLogic {
 
     public void setCurrPoint(Point2D currPoint) {
         this.currPoint = currPoint;
-//        if (currCard == null)
-//            return;
-//
-//        //this.currPoint = currPoint;
-//            else if (botLogic.archerTower_left.isDead() || botLogic.archerTower_right.isDead()) {
-//            if (botLogic.archerTower_right.isDead()) {
-//                if (currPoint.getY() >= 7 && currPoint.getX() >= 6)
-//                    this.currPoint = currPoint;
-//            } else if (botLogic.archerTower_left.isDead()) {
-//                if (currPoint.getY() >= 6 && currPoint.getX() <= 6)
-//                    this.currPoint = currPoint;
-//            }
-//        } else {
-//            if (currPoint.getY() >= 10)
-//                this.currPoint = currPoint;
-//        }
+
 
     }
 
