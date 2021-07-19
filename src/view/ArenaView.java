@@ -112,6 +112,9 @@ public class ArenaView extends Group {
             for (int j = 0; j < columnCount; j++) {
                 if (cellValues[i][j] == GRASS) {
                     cellView[i][j].setImage(GRASS.getThumbnailImage());
+
+                } else if (cellValues[i][j] == GRASS2) {
+                    cellView[i][j].setImage(GRASS2.getThumbnailImage());
                 } else if (cellValues[i][j] == CellValue.ROAD) {
                     cellView[i][j].setImage(ROAD.getThumbnailImage());
                 } else if (cellValues[i][j] == CellValue.HROAD) {

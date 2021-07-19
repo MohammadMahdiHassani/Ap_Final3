@@ -68,6 +68,9 @@ public class ArenaModel {
                     case "s":
                         BackGroundCellValues[row][column] = CellValue.STONE;
                         break;
+                    case "g1":
+                        BackGroundCellValues[row][column] = CellValue.GRASS2;
+                        break;
                     case "h":
                         BackGroundCellValues[row][column] = CellValue.SHRUB;
                         break;
