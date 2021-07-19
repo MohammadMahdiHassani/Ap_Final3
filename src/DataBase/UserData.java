@@ -6,7 +6,9 @@ import java.util.HashMap;
 
 import model.cards.CellValue;
 import model.cards.Card;
+import model.cards.levelEnums.ArcherTowerLevel;
 import model.cards.levelEnums.Botlevel;
+import model.cards.levelEnums.KingTowerLevel;
 import model.cards.levelEnums.Level;
 
 public class UserData implements Serializable {
@@ -17,6 +19,7 @@ public class UserData implements Serializable {
     private final ArrayList<GameHistory> histories ;
     private  ArrayList<Card> playerDeck;
     private Botlevel botlevel ;
+
 
     public UserData(String userName, String password){
         this.userName = userName ;

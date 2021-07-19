@@ -1,5 +1,7 @@
 package DataBase;
 
+import model.cards.levelEnums.ArcherTowerLevel;
+import model.cards.levelEnums.KingTowerLevel;
 import model.cards.levelEnums.Level;
 
 import java.io.*;
@@ -11,7 +13,8 @@ public class DataHandler {
 
     private static final Path path = Paths.get(System.getProperty("user.dir"));
     private static final File file = new File(path.toString() +"/src/DataBase/Files");
-
+    private ArcherTowerLevel archerTowerLevel;
+    private KingTowerLevel kingTowerLevel;
     private static UserData userData ;
 
     public static UserData signUp(String userName , String password_1 , String password_2){
@@ -112,6 +115,46 @@ public class DataHandler {
             return level;
         }
         return Level.LEVEL_1;
+    }
+
+    public static KingTowerLevel getKingTowerLevel()
+    {
+        if (userData != null) {
+            KingTowerLevel level = null;
+            if (userData.getXP() <= 300) {
+                level = KingTowerLevel.LEVEL_1;
+            } else if (userData.getXP() <= 500) {
+                level = KingTowerLevel.LEVEL_2;
+            } else if (userData.getXP() <= 900) {
+                level = KingTowerLevel.LEVEL_3;
+            } else if (userData.getXP() <= 1700) {
+                level = KingTowerLevel.LEVEL_4;
+            } else if (userData.getXP() > 1700) {
+                level = KingTowerLevel.LEVEL_5;
+            }
+            return level;
+        }
+        return KingTowerLevel.LEVEL_1;
+    }
+
+    public static ArcherTowerLevel getArcherTowerLevel()
+    {
+        if (userData != null) {
+            ArcherTowerLevel level = null;
+            if (userData.getXP() <= 300) {
+                level = ArcherTowerLevel.LEVEL_1;
+            } else if (userData.getXP() <= 500) {
+                level = ArcherTowerLevel.LEVEL_2;
+            } else if (userData.getXP() <= 900) {
+                level = ArcherTowerLevel.LEVEL_3;
+            } else if (userData.getXP() <= 1700) {
+                level = ArcherTowerLevel.LEVEL_4;
+            } else if (userData.getXP() > 1700) {
+                level = ArcherTowerLevel.LEVEL_5;
+            }
+            return level;
+        }
+        return ArcherTowerLevel.LEVEL_1;
     }
 
 }

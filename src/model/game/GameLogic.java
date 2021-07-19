@@ -250,16 +250,28 @@ public class GameLogic {
     private void troopSpawn(Troop troop) {
         int count = troop.getCount() - 1;
         ArrayList<Troop> troops = new ArrayList<>();
+        Level level = null;
+        if (isPlayerElement(troop)) {
+            level = DataHandler.getLevel();
+        }
+        if (isBotElement(troop)) {
+            if (MenuController.isOnServer) {
+                level = MenuController.transferDataReceive.getLevel();
+            } else {
+                level = DataHandler.getLevel();
+            }
+        }
         for (int i = 0; i < count; i++)
-            troops.add((Troop) CardFactory.makeCard(troop.getValue(), Level.LEVEL_1));
+            troops.add((Troop) CardFactory.makeCard(troop.getValue(), level));
 
         for (Troop t : troops) {
             Point2D point;
             if ((point = findEmptyCell(troop.getPoint())) != null) {
                 if (isPlayerElement(troop))
                     data.playerDeck.add(t);
-                else
+                else if (isBotElement(troop)) {
                     data.botDeck.add(t);
+                }
                 t.setPoint(point);
                 t.isSpawned();
                 data.boardElements.add(t);
@@ -676,8 +688,7 @@ public class GameLogic {
     }
 
     public boolean limits(Card currCard, Point2D currPoint) {
-        if (currCard instanceof Spell)
-        {
+        if (currCard instanceof Spell) {
             return true;
         }
         if (currCard == null)
@@ -703,7 +714,6 @@ public class GameLogic {
 
     public void setCurrPoint(Point2D currPoint) {
         this.currPoint = currPoint;
-
 
     }
 

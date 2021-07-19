@@ -25,9 +25,11 @@ import model.cards.Card;
 import model.cards.CardFactory;
 import model.cards.CellValue;
 import model.cards.buildings.Inferno;
+import model.cards.levelEnums.ArcherTowerLevel;
+import model.cards.levelEnums.KingTowerLevel;
 import model.cards.levelEnums.Level;
 import model.cards.spells.Rage;
-import model.cards.troops.Troop;
+import model.cards.troops.*;
 import model.game.ArenaModel;
 import model.towers.KingTower;
 import model.towers.Tower;
@@ -72,6 +74,7 @@ public class ArenaController implements EventHandler<MouseEvent> {
     private boolean isTimeUp;
 
     private String user2;
+
 
 
     public ArenaController() {
@@ -334,12 +337,10 @@ public class ArenaController implements EventHandler<MouseEvent> {
                     sound(listArmy.getSelectionModel().getSelectedItem());
                     removeFromListArmy(listArmy.getSelectionModel().getSelectedIndex());
 
-                }
-                else {
+                } else {
                     LoginController.sound.playMain("NO");
                 }
-            }
-            else {
+            } else {
                 LoginController.sound.playMain("NO");
             }
 
@@ -450,7 +451,13 @@ public class ArenaController implements EventHandler<MouseEvent> {
             return;
         for (GameElement i : animationMap.keySet()) {
 
-            if (i instanceof Troop)
+            if (i instanceof Giant)
+                continue;
+            if (i instanceof Barbarian)
+                continue;
+            if (i instanceof MiniPeka)
+                continue;
+            if (i instanceof Valkyrie)
                 continue;
 
             Point2D starting_point = i.getPoint();

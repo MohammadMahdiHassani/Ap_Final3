@@ -2,13 +2,15 @@ package model.game;
 
 import DataBase.DataHandler;
 import DataBase.UserData;
+import controller.ArenaController;
 import controller.MenuController;
 import javafx.geometry.Point2D;
 import model.GameElement;
 import model.cards.Card;
 import model.cards.CardFactory;
 import model.cards.CellValue;
-import model.cards.levelEnums.*;
+import model.cards.levelEnums.Botlevel;
+import model.cards.levelEnums.Level;
 import model.towers.ArcherTower;
 import model.towers.KingTower;
 import model.towers.Tower;
@@ -68,16 +70,25 @@ public class GameData {
                 switch (value) {
 
                     case "k":
-                        boardElements.add(new KingTower(KingTowerLevel.LEVEL_1, new Point2D(column, row), true));
+                        boardElements.add(new KingTower(DataHandler.getKingTowerLevel(), new Point2D(column, row), true));
                         break;
                     case "a":
-                        boardElements.add(new ArcherTower(ArcherTowerLevel.LEVEL_1, new Point2D(column, row), true));
+                        boardElements.add(new ArcherTower(DataHandler.getArcherTowerLevel(), new Point2D(column, row), true));
                         break;
+
                     case "k2":
-                        boardElements.add(new KingTower(KingTowerLevel.LEVEL_1, new Point2D(column, row), false));
+                        if (MenuController.isOnServer) {
+                            boardElements.add(new KingTower(MenuController.getBotKingTowerLevel(), new Point2D(column, row), false));
+                        } else {
+                            boardElements.add(new KingTower(DataHandler.getKingTowerLevel(), new Point2D(column, row), false));
+                        }
                         break;
                     case "a2":
-                        boardElements.add(new ArcherTower(ArcherTowerLevel.LEVEL_1, new Point2D(column, row), false));
+                        if (MenuController.isOnServer) {
+                            boardElements.add(new ArcherTower(MenuController.getBotArcherTowerLevel(), new Point2D(column, row), false));
+                        } else {
+                            boardElements.add(new ArcherTower(DataHandler.getArcherTowerLevel(), new Point2D(column, row), false));
+                        }
                         break;
                 }
                 column++;

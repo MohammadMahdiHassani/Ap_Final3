@@ -13,6 +13,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import model.cards.levelEnums.ArcherTowerLevel;
+import model.cards.levelEnums.KingTowerLevel;
+import model.cards.levelEnums.Level;
 import network.Client;
 import network.TransferDataReceive;
 import network.TransferDataSend;
@@ -48,6 +51,7 @@ public class MenuController {
     public static TransferDataSend transferDataSend;
 
     public static boolean isOnServer;
+    private static Level level;
 
     private UserData userData;
     public static Media media;
@@ -89,10 +93,9 @@ public class MenuController {
             stage.setResizable(false);
             stage.show();
             new Thread(transferDataReceive).start();
-            while (true)
-            {
-                if (transferDataReceive.isReceive())
-                {
+            while (true) {
+                if (transferDataReceive.isReceive()) {
+                    level = transferDataReceive.getLevel();
                     break;
                 }
                 Thread.sleep(100);
@@ -118,9 +121,7 @@ public class MenuController {
             stage.setScene(new Scene(root));
             stage.setResizable(false);
             stage.show();
-        }
-        else if ((event.getSource() == battleButton))
-        {
+        } else if ((event.getSource() == battleButton)) {
             mediaPlayer.stop();
             LoginController.sound.playMain("ATTACK_BUTTON");
             String fxmlAddress = getFxml(event);
@@ -145,6 +146,34 @@ public class MenuController {
             return "../view/Loading.fxml";
         } else {
             return "";
+        }
+    }
+
+    public static KingTowerLevel getBotKingTowerLevel() {
+        if (level == Level.LEVEL_1) {
+            return KingTowerLevel.LEVEL_1;
+        } else if (level == Level.LEVEL_2) {
+            return KingTowerLevel.LEVEL_2;
+        } else if (level == Level.LEVEL_3) {
+            return KingTowerLevel.LEVEL_3;
+        } else if (level == Level.LEVEL_4) {
+            return KingTowerLevel.LEVEL_4;
+        } else {
+            return KingTowerLevel.LEVEL_5;
+        }
+    }
+
+    public static ArcherTowerLevel getBotArcherTowerLevel() {
+        if (level == Level.LEVEL_1) {
+            return ArcherTowerLevel.LEVEL_1;
+        } else if (level == Level.LEVEL_2) {
+            return ArcherTowerLevel.LEVEL_2;
+        } else if (level == Level.LEVEL_3) {
+            return ArcherTowerLevel.LEVEL_3;
+        } else if (level == Level.LEVEL_4) {
+            return ArcherTowerLevel.LEVEL_4;
+        } else {
+            return ArcherTowerLevel.LEVEL_5;
         }
     }
 
