@@ -323,17 +323,24 @@ public class ArenaController implements EventHandler<MouseEvent> {
         System.out.println("MouseEvent setting currPoint to (" + x + "," + y + ")");
         mouseEvent.consume();
         if (listArmy.getSelectionModel().getSelectedItem() != null) {
-            if (listArmy.getSelectionModel().getSelectedItem().getCost() <= (elixirProgress.getProgress() * 10)) {
-                if (MenuController.isOnServer) {
-                    MenuController.transferDataSend.setRequest(new Request(listArmy.getSelectionModel().getSelectedItem().getValue().toString(), DataHandler.getLevel(), DataHandler.getUserData().getUserName(), x, y));
-                    new Thread(MenuController.transferDataSend).start();
+            if (model.getLogic().limits(listArmy.getSelectionModel().getSelectedItem(), new Point2D(x, y))) {
+                if (listArmy.getSelectionModel().getSelectedItem().getCost() <= (elixirProgress.getProgress() * 10)) {
+                    if (MenuController.isOnServer) {
+                        MenuController.transferDataSend.setRequest(new Request(listArmy.getSelectionModel().getSelectedItem().getValue().toString(), DataHandler.getLevel(), DataHandler.getUserData().getUserName(), x, y));
+                        new Thread(MenuController.transferDataSend).start();
+                    }
+                    model.setCurrPoint(new Point2D(x, y));
+                    elixirProgress.setProgress(elixirProgress.getProgress() - ((double) listArmy.getSelectionModel().getSelectedItem().getCost() / 10));
+                    sound(listArmy.getSelectionModel().getSelectedItem());
+                    removeFromListArmy(listArmy.getSelectionModel().getSelectedIndex());
+
                 }
-                model.setCurrPoint(new Point2D(x, y));
-                elixirProgress.setProgress(elixirProgress.getProgress() - ((double) listArmy.getSelectionModel().getSelectedItem().getCost() / 10));
-                sound(listArmy.getSelectionModel().getSelectedItem());
-                removeFromListArmy(listArmy.getSelectionModel().getSelectedIndex());
-
-
+                else {
+                    LoginController.sound.playMain("NO");
+                }
+            }
+            else {
+                LoginController.sound.playMain("NO");
             }
 
         }
@@ -443,8 +450,8 @@ public class ArenaController implements EventHandler<MouseEvent> {
             return;
         for (GameElement i : animationMap.keySet()) {
 
-//            if(i instanceof Troop)
-//                continue ;
+            if (i instanceof Troop)
+                continue;
 
             Point2D starting_point = i.getPoint();
             Color color;
