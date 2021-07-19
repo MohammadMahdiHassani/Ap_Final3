@@ -6,22 +6,17 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
-import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.VBox;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -40,9 +35,6 @@ import network.TransferDataReceive;
 import network.TransferDataSend;
 import view.ArenaView;
 
-import javafx.scene.input.MouseEvent;
-
-import java.awt.*;
 import java.io.IOException;
 import java.util.*;
 
@@ -51,6 +43,8 @@ public class ArenaController implements EventHandler<MouseEvent> {
 
     @FXML
     private ListView<Card> listArmy;
+
+    public static ArrayList<Card> cards;
     @FXML
     private ArenaView arenaView;
 
@@ -62,7 +56,7 @@ public class ArenaController implements EventHandler<MouseEvent> {
         return nextCardImage;
     }
 
-    public Card nextCard;
+    public static Card nextCard;
 
     private TransferDataSend transferDataSend;
     private TransferDataReceive transferDataReceive;
@@ -80,6 +74,7 @@ public class ArenaController implements EventHandler<MouseEvent> {
 
 
     public ArenaController() {
+        cards = new ArrayList<>();
 //       ArenaModel.setModel();
         model = new ArenaModel();
         arenaView = new ArenaView();
@@ -127,26 +122,22 @@ public class ArenaController implements EventHandler<MouseEvent> {
         timer.schedule(task, 0, frameTimeInMilliseconds);
     }
 
-    public void addGameHistory()
-    {
+    public void addGameHistory() {
         String user1 = DataHandler.getUserData().getUserName();
         String winner;
-        if (!MenuController.isOnServer)
-        {
+        if (!MenuController.isOnServer) {
             user2 = "BOT";
         }
-        if (model.getLogic().data.isPlayerWon())
-        {
+        if (model.getLogic().data.isPlayerWon()) {
             winner = user1;
-        }
-        else {
+        } else {
             winner = user2;
         }
-        DataHandler.getUserData().getHistories().add(new GameHistory(user1,user2,winner));
+        DataHandler.getUserData().getHistories().add(new GameHistory(user1, user2, winner));
 
     }
 
-    private void loadGameOverPage()  {
+    private void loadGameOverPage() {
 
         Parent root = null;
         try {
@@ -333,7 +324,7 @@ public class ArenaController implements EventHandler<MouseEvent> {
         if (listArmy.getSelectionModel().getSelectedItem() != null) {
             if (listArmy.getSelectionModel().getSelectedItem().getCost() <= (elixirProgress.getProgress() * 10)) {
                 if (MenuController.isOnServer) {
-                    MenuController.transferDataSend.setRequest(new Request(listArmy.getSelectionModel().getSelectedItem().getValue().toString(), DataHandler.getLevel(),DataHandler.getUserData().getUserName(), x, y));
+                    MenuController.transferDataSend.setRequest(new Request(listArmy.getSelectionModel().getSelectedItem().getValue().toString(), DataHandler.getLevel(), DataHandler.getUserData().getUserName(), x, y));
                     new Thread(MenuController.transferDataSend).start();
                 }
                 model.setCurrPoint(new Point2D(x, y));
@@ -379,6 +370,7 @@ public class ArenaController implements EventHandler<MouseEvent> {
         Random random = new Random();
         count = 0;
         listArmy.getItems().add(nextCard);
+        cards.add(nextCard);
 
         int indexRandom = random.nextInt(reminderCard.size());
         nextCard = reminderCard.get(indexRandom);
@@ -386,6 +378,7 @@ public class ArenaController implements EventHandler<MouseEvent> {
         reminderCard.add(listArmy.getItems().get(index));
         nextCardImage.setImage(nextCard.getValue().getThumbnailImage());
         listArmy.getItems().remove(index);
+        cards.remove(index);
         listArmy.getSelectionModel().select(null);
 
         count = 1;
@@ -402,6 +395,7 @@ public class ArenaController implements EventHandler<MouseEvent> {
             initFourCard.add(reminderCard.get(index));
             reminderCard.remove(index);
         }
+        cards = initFourCard;
         listArmy.setItems(FXCollections.observableArrayList(initFourCard));
         int index = random.nextInt(reminderCard.size());
         nextCard = reminderCard.get(index);
@@ -465,8 +459,8 @@ public class ArenaController implements EventHandler<MouseEvent> {
                     radius = 4;
             } else
                 radius = 3;
-            if(i instanceof Inferno)
-                radius = ((Inferno) i).getCicleRadius() ;
+            if (i instanceof Inferno)
+                radius = ((Inferno) i).getCicleRadius();
 
             if (i instanceof Rage) {
                 arenaView.scaleCircle(animationMap.get(i).get(0), i.getRange(), Color.PURPLE);

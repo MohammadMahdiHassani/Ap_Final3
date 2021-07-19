@@ -8,7 +8,10 @@ import model.GameElement;
 import model.cards.Card;
 import model.cards.CardFactory;
 import model.cards.CellValue;
-import model.cards.levelEnums.*;
+import model.cards.levelEnums.ArcherTowerLevel;
+import model.cards.levelEnums.Botlevel;
+import model.cards.levelEnums.KingTowerLevel;
+import model.cards.levelEnums.Level;
 import model.towers.ArcherTower;
 import model.towers.KingTower;
 import model.towers.Tower;
@@ -19,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GameData {
-    private UserData userData ;
+    private UserData userData;
     ArrayList<GameElement> playerDeck;
     public ArrayList<GameElement> botDeck;
     ArrayList<GameElement> botGenesis;
@@ -27,23 +30,23 @@ public class GameData {
     Botlevel botlevel;
     Point2D leftBridge;
     Point2D rightBridge;
-    Level gameLevel ;
-    int botScore ;
-    int playerScore ;
-    boolean playerWon ;
+    Level gameLevel;
+    int botScore;
+    int playerScore;
+    boolean playerWon;
 
     public GameData() {
 
-        userData = DataHandler.getUserData() ;
+        userData = DataHandler.getUserData();
         botlevel = userData.getBotlevel();
-        gameLevel = DataHandler.getLevel() ;
+        gameLevel = DataHandler.getLevel();
         initboardElements();
         initPlayerDeck();
-        botGenesis = new ArrayList<>() ;
+        botGenesis = new ArrayList<>();
         initBotDeck();
         addingTowersTodecks();
-        botScore = 0 ;
-        playerScore = 0 ;
+        botScore = 0;
+        playerScore = 0;
 
     }
 
@@ -68,16 +71,16 @@ public class GameData {
                 switch (value) {
 
                     case "k":
-                        boardElements.add(new KingTower(KingTowerLevel.LEVEL_1, new Point2D(column, row),true));
+                        boardElements.add(new KingTower(KingTowerLevel.LEVEL_1, new Point2D(column, row), true));
                         break;
                     case "a":
-                        boardElements.add(new ArcherTower(ArcherTowerLevel.LEVEL_1, new Point2D(column, row),true));
+                        boardElements.add(new ArcherTower(ArcherTowerLevel.LEVEL_1, new Point2D(column, row), true));
                         break;
                     case "k2":
-                        boardElements.add(new KingTower(KingTowerLevel.LEVEL_1, new Point2D(column, row),false));
+                        boardElements.add(new KingTower(KingTowerLevel.LEVEL_1, new Point2D(column, row), false));
                         break;
                     case "a2":
-                        boardElements.add(new ArcherTower(ArcherTowerLevel.LEVEL_1, new Point2D(column, row),false));
+                        boardElements.add(new ArcherTower(ArcherTowerLevel.LEVEL_1, new Point2D(column, row), false));
                         break;
                 }
                 column++;
@@ -88,8 +91,7 @@ public class GameData {
 
     private void initBotDeck() {
         botDeck = new ArrayList<>();
-        if (botlevel == null)
-        {
+        if (botlevel == null) {
             botlevel = Botlevel.RANDOME;
         }
         switch (botlevel) {
@@ -106,14 +108,14 @@ public class GameData {
 
     private void initHardBotDeck() {
 
-        botGenesis.add(CardFactory.makeCard(CellValue.BABY_DRAGON , gameLevel));
-        botGenesis.add(CardFactory.makeCard(CellValue.GIANT , gameLevel));
-        botGenesis.add(CardFactory.makeCard(CellValue.RAGE , gameLevel));
-        botGenesis.add(CardFactory.makeCard(CellValue.CANNON , gameLevel));
-        botGenesis.add(CardFactory.makeCard(CellValue.INFERNO , gameLevel));
-        botGenesis.add(CardFactory.makeCard(CellValue.FIREBALL , gameLevel));
-        botGenesis.add(CardFactory.makeCard(CellValue.WIZARD , gameLevel));
-        botGenesis.add(CardFactory.makeCard(CellValue.ARCHER , gameLevel));
+        botGenesis.add(CardFactory.makeCard(CellValue.BABY_DRAGON, gameLevel));
+        botGenesis.add(CardFactory.makeCard(CellValue.GIANT, gameLevel));
+        botGenesis.add(CardFactory.makeCard(CellValue.RAGE, gameLevel));
+        botGenesis.add(CardFactory.makeCard(CellValue.CANNON, gameLevel));
+        botGenesis.add(CardFactory.makeCard(CellValue.INFERNO, gameLevel));
+        botGenesis.add(CardFactory.makeCard(CellValue.FIREBALL, gameLevel));
+        botGenesis.add(CardFactory.makeCard(CellValue.WIZARD, gameLevel));
+        botGenesis.add(CardFactory.makeCard(CellValue.ARCHER, gameLevel));
 
     }
 
@@ -169,12 +171,11 @@ public class GameData {
         return playerScore;
     }
 
-    public void xpDealer(int x){
+    public void xpDealer(int x) {
         userData.addXP(x);
     }
 
-    public void cupDealer(int x)
-    {
+    public void cupDealer(int x) {
         userData.setTroopy(userData.getTroopy() + x);
     }
 
@@ -182,13 +183,17 @@ public class GameData {
         return playerWon;
     }
 
-    public void saveToHistory(){
-        String Winner ;
-        if(isPlayerWon())
+    public void saveToHistory() {
+        String Winner;
+        if (isPlayerWon())
             Winner = userData.getUserName();
         else
-            Winner = "bot" ;
-        userData.addToHistory(userData.getUserName(), "Bot" , Winner);
+            Winner = "bot";
+        if (!MenuController.isOnServer) {
+            userData.addToHistory(userData.getUserName(), "Bot", Winner);
+        } else {
+            userData.addToHistory(userData.getUserName(), MenuController.transferDataReceive.getUserName(), Winner);
+        }
     }
 
     public void saveData() {

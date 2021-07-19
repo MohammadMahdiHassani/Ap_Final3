@@ -1,6 +1,7 @@
 package model.game;
 
 import DataBase.DataHandler;
+import controller.ArenaController;
 import controller.EndGameController;
 import controller.LoginController;
 import controller.MenuController;
@@ -789,7 +790,15 @@ public class GameLogic {
         }
         setPlayerWon(winner);
         data.saveToHistory();
+        reStoreDeck();
         data.saveData();
+    }
+
+    public void reStoreDeck() {
+        DataHandler.getUserData().getPlayerDeck().add(ArenaController.nextCard);
+        for (int i = 0; i < ArenaController.cards.size(); i++) {
+            DataHandler.getUserData().getPlayerDeck().add(ArenaController.cards.get(i));
+        }
     }
 
     private void setPlayerWon(boolean isPlayerTheWinner) {
