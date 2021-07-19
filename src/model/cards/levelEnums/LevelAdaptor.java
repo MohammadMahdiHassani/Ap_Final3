@@ -20,6 +20,39 @@ public class LevelAdaptor {
                     if(i.toString().equals(level.toString()))
                         return (GiantLevel) i ;
                 }
+            case MYKINGTOWER:
+                for (KingTowerLevel i : KingTowerLevel.values())
+                {
+                    if (i.toString().equals(level.toString()))
+                    {
+                        return (KingTowerLevel) i;
+                    }
+                }
+            case BOTKINGTOWER:
+                for (KingTowerLevel i : KingTowerLevel.values())
+                {
+                    if (i.toString().equals(level.toString()))
+                    {
+                        return (KingTowerLevel) i;
+                    }
+                }
+            case MYARCHERTOWER:
+                for (ArcherTowerLevel i : ArcherTowerLevel.values())
+                {
+                    if (i.toString().equals(level.toString()))
+                    {
+                        return (ArcherTowerLevel) i;
+                    }
+                }
+            case BOTARCHERTOWER:
+                for (ArcherTowerLevel i : ArcherTowerLevel.values())
+                {
+                    if (i.toString().equals(level.toString()))
+                    {
+                        return (ArcherTowerLevel) i;
+                    }
+                }
+
 
             case BARBERIAN:
                 for(BarbarianLevel i : BarbarianLevel.values()){
