@@ -174,21 +174,6 @@ public class DeckController {
             allArmy.getItems().remove(allArmy.getItems().size() - 1);
         }
         DataHandler.getUserData().setPlayerDeck(new ArrayList(mainArmy.getItems()));
-//        Path path = Paths.get(System.getProperty("user.dir"));
-//        File file = new File(path.toString() + "/src/DataBase/Files");
-//        File userFile = new File(file + "/" + DataHandler.getUserData().getUserName() + ".ser") ;
-//        try {
-//            FileOutputStream fileOutputStream = new FileOutputStream(userFile);
-//            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-//            objectOutputStream.writeObject(DataHandler.getUserData());
-//            objectOutputStream.close();
-//            fileOutputStream.close();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-        //DataHandler.saveToFile(DataHandler.getUserData());
     }
 
     @FXML

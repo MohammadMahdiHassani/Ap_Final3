@@ -31,8 +31,11 @@ public class BotLogic {
     private int lT = 0 ;
     private int rT = 0 ;
     private int mT = 0 ;
+    private int attckFlag = 0 ;
     private CellValue[] ArcherTowerDefenseDeck ;
     private CellValue[] KingTowerDefense ;
+    private CellValue[] AttackingValues ;
+
     private boolean criticalCondition ;
     private ArrayList<Point2D> criticalPoints ;
 
@@ -50,6 +53,7 @@ public class BotLogic {
     private void initDecks() {
         ArcherTowerDefenseDeck = new CellValue[]{WIZARD, CANNON, BABY_DRAGON, RAGE, FIREBALL};
         KingTowerDefense = new CellValue[]{WIZARD, BABY_DRAGON, RAGE};
+        AttackingValues = new CellValue[]{GIANT , RAGE , BABY_DRAGON, WIZARD};
     }
 
     private void getTowers() {
@@ -102,12 +106,68 @@ public class BotLogic {
     }
 
     private void smartBotLogic(){
-        if(mainLogic.speedCounter % 5 == 0 )
+        if(mainLogic.speedCounter % 7 == 0 )
             if(!isdefending())
                 attack() ;
     }
 
     private void attack() {
+
+        Point2D point = getAttackingPoint();
+
+            if(point != null)
+            {
+                makeAttackingCard(AttackingValues[attckFlag], point) ;
+                if(attckFlag == 3)
+                    attckFlag = 0 ;
+                else
+                    attckFlag++ ;
+            }
+    }
+
+    private void makeAttackingCard(CellValue attackingValue, Point2D point) {
+        GameElement attacker = CardFactory.makeCard(attackingValue , data.gameLevel) ;
+        attacker.setPoint(point) ;
+        data.botDeck.add(attacker) ;
+        data.boardElements.add(attacker) ;
+    }
+
+    private Point2D getAttackingPoint() {
+        ArrayList<Tower> towers = getPlayerArcherTowers();
+        if(towers.size() == 2)
+        {
+            int leftCounter = 0 ;
+            int rightCounter = 0 ;
+            for(GameElement i : data.playerDeck){
+                if(i.getPoint().getX() < 9)
+                    leftCounter++ ;
+                else
+                    rightCounter++ ;
+            }
+
+            if(rightCounter > leftCounter)
+                return mainLogic.findEmptyCell(new Point2D(3 , 8));
+            else
+                return mainLogic.findEmptyCell(new Point2D(15 , 8));
+        }
+
+        else if(towers.size() == 1){
+            if(towers.get(0).getPoint().getX() < 9)
+                return mainLogic.findEmptyCell(new Point2D(15 , 12));
+            else
+                return mainLogic.findEmptyCell(new Point2D(3 , 12)) ;
+        }
+
+        return null ;
+
+    }
+    private ArrayList<Tower> getPlayerArcherTowers(){
+        ArrayList<Tower> towers = new ArrayList<>() ;
+        for(GameElement i : data.playerDeck){
+            if(i instanceof ArcherTower)
+                towers.add((Tower) i) ;
+        }
+        return towers ;
     }
 
     private int KingRadar() {
@@ -161,7 +221,6 @@ public class BotLogic {
         }
         return tempArr ;
     }
-
 
     private boolean protectTheKing(){
 
@@ -221,15 +280,7 @@ public class BotLogic {
     }
 
     private boolean protectTowers(){
-
-        boolean a = false , b = false ;
-        if(!archerTower_left.isDead())
-            a = defendArcherTower(archerTower_left);
-        if(!archerTower_right.isDead())
-            b = defendArcherTower(archerTower_right);
-
-        return a && b;
-
+            return defendArcherTower(archerTower_left) && defendArcherTower(archerTower_right);
     }
 
     private boolean defendArcherTower(ArcherTower archerTower) {
@@ -279,6 +330,9 @@ public class BotLogic {
             rT = 0 ;
         if(mT >= 3)
             mT = 0 ;
+
+
+        attckFlag = 0 ;
     }
 
     private boolean makeBotCard(CellValue cellValue , Tower tower){
@@ -348,7 +402,7 @@ public class BotLogic {
             if (ArcherRadar(archerTower_left) > ArcherRadar(archerTower_right)) {
                 Point2D point;
                 for (int i = (int) kingPoint.getX() - 1; i >= kingPoint.getX() - 3; i--) {
-                    for (int j = (int) kingPoint.getY() + 3; j >= kingPoint.getY(); j--) {
+                    for (int j = (int) kingPoint.getY() ; j <= kingPoint.getY() + 3; j++) {
                         if (!mainLogic.isOccupied(point = new Point2D(i, j)))
                             return point;
                     }
@@ -357,7 +411,7 @@ public class BotLogic {
             else {
                 Point2D point;
                 for (int i = (int) kingPoint.getX() + 1; i <= kingPoint.getX() + 3; i++) {
-                    for (int j = (int) kingPoint.getY() + 3; j >= kingPoint.getY(); j--) {
+                    for (int j = (int) kingPoint.getY() ; j <= kingPoint.getY() + 3; j++) {
                         if (!mainLogic.isOccupied(point = new Point2D(i, j)))
                             return point;
                     }
@@ -368,7 +422,7 @@ public class BotLogic {
                 if(tower == archerTower_left){
                     Point2D point;
                     for (int i = (int) archerTower_left.getPoint().getX() + 2; i >= archerTower_left.getPoint().getX() ; i--) {
-                        for (int j = (int) archerTower_left.getPoint().getY() + 3; j >= archerTower_left.getPoint().getY(); j--) {
+                        for (int j = (int) archerTower_left.getPoint().getY(); j <= archerTower_left.getPoint().getY() + 3; j++) {
                             if (!mainLogic.isOccupied(point = new Point2D(i, j)))
                                 return point;
                         }
@@ -377,7 +431,7 @@ public class BotLogic {
                 else{
                     Point2D point;
                     for (int i = (int) archerTower_right.getPoint().getX() - 2 ; i <= archerTower_right.getPoint().getX() ; i++) {
-                        for (int j = (int) archerTower_right.getPoint().getY() + 3 ; j >= archerTower_right.getPoint().getY(); j--) {
+                        for (int j = (int) archerTower_right.getPoint().getY() ; j <= archerTower_right.getPoint().getY() + 3 ; j++) {
                             if (!mainLogic.isOccupied(point = new Point2D(i, j)))
                                 return point;
                         }

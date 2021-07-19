@@ -27,7 +27,7 @@ public abstract class Tower extends GameElement {
         hitSpeedCounter = 0.8f ;
         return true ;
     }
-    public void decreaseHitPoint(int hit){
+    public void decreaseHitPoint(double hit){
         hitPoint -= hit;
         if(hitPoint < 0){
             this.killCard();

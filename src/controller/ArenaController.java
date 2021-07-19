@@ -443,8 +443,8 @@ public class ArenaController implements EventHandler<MouseEvent> {
             return;
         for (GameElement i : animationMap.keySet()) {
 
-            if(i instanceof Troop)
-                continue ;
+//            if(i instanceof Troop)
+//                continue ;
 
             Point2D starting_point = i.getPoint();
             Color color;

@@ -296,7 +296,7 @@ public class GameLogic {
                 for (GameElement target : targets) {
                     boolean flag = false;
                     if (target instanceof Tower) {
-                        ((Tower) target).decreaseHitPoint(((FireBall) m).getDamage());
+                        ((Tower) target).decreaseHitPoint(((FireBall) m).getDamage() * 0.5);
                         flag = true;
                     } else if (target instanceof Troop) {
                         ((Troop) target).decreaseHitPoint(((FireBall) m).getDamage());
@@ -314,7 +314,7 @@ public class GameLogic {
                 for (GameElement target : targets) {
                     boolean flag = false;
                     if (target instanceof Tower) {
-                        ((Tower) target).decreaseHitPoint(((Arrows) m).getDamage());
+                        ((Tower) target).decreaseHitPoint(((Arrows) m).getDamage() * 0.5);
                         flag = true;
                     } else if (target instanceof Troop) {
                         ((Troop) target).decreaseHitPoint(((Arrows) m).getDamage());

@@ -375,8 +375,8 @@ public class ArenaView extends Group {
         circle.setFill(Color.TRANSPARENT);
 
         ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(5000), circle);
-        scaleTransition.setByX(range);
-        scaleTransition.setByY(range);
+        scaleTransition.setByX(range - 1);
+        scaleTransition.setByY(range - 1);
 
         FadeTransition fade = new FadeTransition(Duration.millis(100), circle);
         fade.setFromValue(1.0);
