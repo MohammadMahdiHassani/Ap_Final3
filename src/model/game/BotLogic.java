@@ -94,10 +94,10 @@ public class BotLogic {
         mainLogic.playerMoved = false;
 
         Card card = mainLogic.getRandomCard();
-
         Point2D randomPoint = mainLogic.getRandomPoint();
         while (mainLogic.isOccupied(randomPoint))
             randomPoint = mainLogic.getRandomPoint();
+        card.setPoint(randomPoint);
         data.botDeck.add(mainLogic.addToBoard(card, randomPoint));
         mainLogic.checkForSpawnedPlayers(card);
 
