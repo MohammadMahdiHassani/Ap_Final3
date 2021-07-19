@@ -12,6 +12,7 @@ public abstract class GameElement implements Serializable {
     private int range ;
     private boolean isDead ;
     private boolean isAttack;
+    private boolean isWalk2;
 
 
 
@@ -47,6 +48,14 @@ public abstract class GameElement implements Serializable {
     }
     public boolean isDead(){
         return isDead ;
+    }
+
+    public boolean isWalk2() {
+        return isWalk2;
+    }
+
+    public void setWalk2(boolean walk2) {
+        isWalk2 = walk2;
     }
 }
 

@@ -32,6 +32,7 @@ public class ArenaView extends Group {
     private ProgressBar elixirProgress;
     private ImageView[][] cellView;
     private ImageView[][] componentView;
+    private ProgressBar[][] healthBar;
     public static ImageView[][] king;
 
     public ArenaView() {
@@ -46,11 +47,19 @@ public class ArenaView extends Group {
         cellView = new ImageView[rowCount][columnCount];
         componentView = new ImageView[rowCount][columnCount];
         king = new ImageView[rowCount][columnCount];
+        healthBar = new ProgressBar[rowCount][columnCount];
         for (int row = 0; row < rowCount; row++) {
             for (int column = 0; column < columnCount; column++) {
                 ImageView imageView = new ImageView();
                 ImageView imageView1 = new ImageView();
                 ImageView imageView2 = new ImageView();
+                ProgressBar progressBar = new ProgressBar();
+
+                progressBar.setProgress(0.3);
+
+                progressBar.setLayoutX(column * CELL_WIDTH);
+                progressBar.setLayoutY(row * CELL_WIDTH - 10);
+                progressBar.setPrefSize(CELL_WIDTH, 5);
                 imageView.setX(column * CELL_WIDTH);
                 imageView.setY(row * CELL_WIDTH);
                 imageView.setFitWidth(CELL_WIDTH);
@@ -68,9 +77,11 @@ public class ArenaView extends Group {
                 cellView[row][column] = imageView;
                 componentView[row][column] = imageView1;
                 king[row][column] = imageView2;
+                healthBar[row][column] = progressBar;
                 this.getChildren().add(imageView);
                 this.getChildren().add(imageView1);
                 this.getChildren().add(imageView2);
+
             }
         }
         timeLabel.setLayoutX((CELL_WIDTH * 17) + 6);
@@ -168,13 +179,21 @@ public class ArenaView extends Group {
                         if (getCardWithPoint(j, i, model).isAttack()) {
                             componentView[i][j].setImage(GIANT.getMyAttack());
                         } else {
-                            componentView[i][j].setImage(GIANT.getMyWalk());
+                            if (getCardWithPoint(j, i, model).isWalk2()) {
+                                componentView[i][j].setImage(GIANT.getMyWalk2());
+                            } else {
+                                componentView[i][j].setImage(GIANT.getMyWalk());
+                            }
                         }
-                    } else if(model.getLogic().isBotElement(getCardWithPoint(j, i, model))) {
+                    } else if (model.getLogic().isBotElement(getCardWithPoint(j, i, model))) {
                         if (getCardWithPoint(j, i, model).isAttack()) {
                             componentView[i][j].setImage(GIANT.getBotAttack());
                         } else {
-                            componentView[i][j].setImage(GIANT.getBotWalk());
+                            if (getCardWithPoint(j, i, model).isWalk2()) {
+                                componentView[i][j].setImage(GIANT.getBotWalk2());
+                            } else {
+                                componentView[i][j].setImage(GIANT.getBotWalk());
+                            }
                         }
                     }
 
@@ -183,13 +202,21 @@ public class ArenaView extends Group {
                         if (getCardWithPoint(j, i, model).isAttack()) {
                             componentView[i][j].setImage(ARCHER.getMyAttack());
                         } else {
-                            componentView[i][j].setImage(ARCHER.getMyWalk());
+                            if (getCardWithPoint(j, i, model).isWalk2()) {
+                                componentView[i][j].setImage(ARCHER.getMyWalk2());
+                            } else {
+                                componentView[i][j].setImage(ARCHER.getMyWalk());
+                            }
                         }
-                    } else if(model.getLogic().isBotElement(getCardWithPoint(j, i, model))){
+                    } else if (model.getLogic().isBotElement(getCardWithPoint(j, i, model))) {
                         if (getCardWithPoint(j, i, model).isAttack()) {
                             componentView[i][j].setImage(ARCHER.getBotAttack());
                         } else {
-                            componentView[i][j].setImage(ARCHER.getBotWalk());
+                            if (getCardWithPoint(j, i, model).isWalk2()) {
+                                componentView[i][j].setImage(ARCHER.getBotWalk2());
+                            } else {
+                                componentView[i][j].setImage(ARCHER.getBotWalk());
+                            }
                         }
                     }
                 } else if (cellValues[i][j].getValue() == CANNON) {
@@ -200,13 +227,21 @@ public class ArenaView extends Group {
                         if (getCardWithPoint(j, i, model).isAttack()) {
                             componentView[i][j].setImage(BARBERIAN.getMyAttack());
                         } else {
-                            componentView[i][j].setImage(BARBERIAN.getMyWalk());
+                            if (getCardWithPoint(j, i, model).isWalk2()) {
+                                componentView[i][j].setImage(BARBERIAN.getMyWalk2());
+                            } else {
+                                componentView[i][j].setImage(BARBERIAN.getMyWalk());
+                            }
                         }
-                    } else if(model.getLogic().isBotElement(getCardWithPoint(j, i, model))){
+                    } else if (model.getLogic().isBotElement(getCardWithPoint(j, i, model))) {
                         if (getCardWithPoint(j, i, model).isAttack()) {
                             componentView[i][j].setImage(BARBERIAN.getBotAttack());
                         } else {
-                            componentView[i][j].setImage(BARBERIAN.getBotWalk());
+                            if (getCardWithPoint(j, i, model).isWalk2()) {
+                                componentView[i][j].setImage(BARBERIAN.getBotWalk2());
+                            } else {
+                                componentView[i][j].setImage(BARBERIAN.getBotWalk());
+                            }
                         }
                     }
                 } else if (cellValues[i][j].getValue() == FIREBALL) {
@@ -216,13 +251,21 @@ public class ArenaView extends Group {
                         if (getCardWithPoint(j, i, model).isAttack()) {
                             componentView[i][j].setImage(WIZARD.getMyAttack());
                         } else {
-                            componentView[i][j].setImage(WIZARD.getMyWalk());
+                            if (getCardWithPoint(j, i, model).isWalk2()) {
+                                componentView[i][j].setImage(WIZARD.getMyWalk2());
+                            } else {
+                                componentView[i][j].setImage(WIZARD.getMyWalk());
+                            }
                         }
-                    } else if(model.getLogic().isBotElement(getCardWithPoint(j, i, model))){
+                    } else if (model.getLogic().isBotElement(getCardWithPoint(j, i, model))) {
                         if (getCardWithPoint(j, i, model).isAttack()) {
                             componentView[i][j].setImage(WIZARD.getBotAttack());
                         } else {
-                            componentView[i][j].setImage(WIZARD.getBotWalk());
+                            if (getCardWithPoint(j, i, model).isWalk2()) {
+                                componentView[i][j].setImage(WIZARD.getBotWalk2());
+                            } else {
+                                componentView[i][j].setImage(WIZARD.getBotWalk());
+                            }
                         }
                     }
                 } else if (cellValues[i][j].getValue() == MINI_PEKA) {
@@ -230,13 +273,21 @@ public class ArenaView extends Group {
                         if (getCardWithPoint(j, i, model).isAttack()) {
                             componentView[i][j].setImage(MINI_PEKA.getMyAttack());
                         } else {
-                            componentView[i][j].setImage(MINI_PEKA.getMyWalk());
+                            if (getCardWithPoint(j, i, model).isWalk2()) {
+                                componentView[i][j].setImage(MINI_PEKA.getMyWalk2());
+                            } else {
+                                componentView[i][j].setImage(MINI_PEKA.getMyWalk());
+                            }
                         }
-                    } else if(model.getLogic().isBotElement(getCardWithPoint(j, i, model))){
+                    } else if (model.getLogic().isBotElement(getCardWithPoint(j, i, model))) {
                         if (getCardWithPoint(j, i, model).isAttack()) {
                             componentView[i][j].setImage(MINI_PEKA.getBotAttack());
                         } else {
-                            componentView[i][j].setImage(MINI_PEKA.getBotWalk());
+                            if (getCardWithPoint(j, i, model).isWalk2()) {
+                                componentView[i][j].setImage(MINI_PEKA.getBotWalk2());
+                            } else {
+                                componentView[i][j].setImage(MINI_PEKA.getBotWalk());
+                            }
                         }
                     }
                 } else if (cellValues[i][j].getValue() == VALKYRIE) {
@@ -244,13 +295,21 @@ public class ArenaView extends Group {
                         if (getCardWithPoint(j, i, model).isAttack()) {
                             componentView[i][j].setImage(VALKYRIE.getMyAttack());
                         } else {
-                            componentView[i][j].setImage(VALKYRIE.getMyWalk());
+                            if (getCardWithPoint(j, i, model).isWalk2()) {
+                                componentView[i][j].setImage(VALKYRIE.getMyWalk2());
+                            } else {
+                                componentView[i][j].setImage(VALKYRIE.getMyWalk());
+                            }
                         }
-                    } else if(model.getLogic().isBotElement(getCardWithPoint(j, i, model))){
+                    } else if (model.getLogic().isBotElement(getCardWithPoint(j, i, model))) {
                         if (getCardWithPoint(j, i, model).isAttack()) {
                             componentView[i][j].setImage(VALKYRIE.getBotAttack());
                         } else {
-                            componentView[i][j].setImage(VALKYRIE.getBotWalk());
+                            if (getCardWithPoint(j, i, model).isWalk2()) {
+                                componentView[i][j].setImage(VALKYRIE.getBotWalk2());
+                            } else {
+                                componentView[i][j].setImage(VALKYRIE.getBotWalk());
+                            }
                         }
                     }
                 } else if (cellValues[i][j].getValue() == RAGE) {
@@ -260,13 +319,21 @@ public class ArenaView extends Group {
                         if (getCardWithPoint(j, i, model).isAttack()) {
                             componentView[i][j].setImage(BABY_DRAGON.getMyAttack());
                         } else {
-                            componentView[i][j].setImage(BABY_DRAGON.getMyWalk());
+                            if (getCardWithPoint(j, i, model).isWalk2()) {
+                                componentView[i][j].setImage(BABY_DRAGON.getMyWalk2());
+                            } else {
+                                componentView[i][j].setImage(BABY_DRAGON.getMyWalk());
+                            }
                         }
-                    } else if(model.getLogic().isBotElement(getCardWithPoint(j, i, model))){
+                    } else if (model.getLogic().isBotElement(getCardWithPoint(j, i, model))) {
                         if (getCardWithPoint(j, i, model).isAttack()) {
                             componentView[i][j].setImage(BABY_DRAGON.getBotAttack());
                         } else {
-                            componentView[i][j].setImage(BABY_DRAGON.getBotWalk());
+                            if (getCardWithPoint(j, i, model).isWalk2()) {
+                                componentView[i][j].setImage(BABY_DRAGON.getBotWalk2());
+                            } else {
+                                componentView[i][j].setImage(BABY_DRAGON.getBotWalk());
+                            }
                         }
                     }
 

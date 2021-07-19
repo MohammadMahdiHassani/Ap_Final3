@@ -50,8 +50,9 @@ public class GameLogic {
         updateBoard();
         if (!MenuController.isOnServer)
             executeBot();
-
-        botLogic.executeBot();
+        if (!MenuController.isOnServer) {
+            botLogic.executeBot();
+        }
 
     }
 
@@ -430,6 +431,13 @@ public class GameLogic {
     private void moveCard(Troop movingCard, Point2D point) {
         if (!canMove(movingCard))
             return;
+        if (ArenaController.countTime % 2 == 0)
+        {
+            movingCard.setWalk2(true);
+        }
+        else {
+            movingCard.setWalk2(false);
+        }
         Point2D cardPoint = movingCard.getPoint();
         int a1 = (int) (point.getX() - cardPoint.getX());
         int a2 = (int) (point.getY() - cardPoint.getY());
