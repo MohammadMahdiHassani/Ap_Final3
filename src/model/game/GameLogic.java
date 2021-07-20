@@ -261,8 +261,9 @@ public class GameLogic {
                 level = DataHandler.getLevel();
             }
         }
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < count; i++) {
             troops.add((Troop) CardFactory.makeCard(troop.getValue(), level));
+        }
 
         for (Troop t : troops) {
             Point2D point;

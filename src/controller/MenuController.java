@@ -60,6 +60,7 @@ public class MenuController {
     public void initialize() {
 //        media = new Media(getClass().getResource("/sound/menu.wav").toExternalForm());
 //        mediaPlayer = new MediaPlayer(media);
+        isOnServer = false;
         if (LoginController.count == 1) {
 
             media = new Media(getClass().getResource("/sound/menu.wav").toExternalForm());
