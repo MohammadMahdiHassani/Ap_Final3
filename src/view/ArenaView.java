@@ -57,13 +57,24 @@ public class ArenaView extends Group {
                 ImageView imageView1 = new ImageView();
                 ImageView imageView2 = new ImageView();
                 ImageView imageView3 = new ImageView();
-                ProgressBar progressBar = new ProgressBar();
+                ProgressBar progressBar = null;
+                if (row == 2 && (column == 2 || column == 9 || column == columnCount - 3)) {
+                    progressBar = new ProgressBar();
+                    progressBar.setProgress(0.3);
+                    progressBar.setLayoutX(column * CELL_WIDTH);
+                    progressBar.setLayoutY(row * CELL_WIDTH - 13);
+                    progressBar.setPrefSize(CELL_WIDTH, 5);
+                }
 
-                progressBar.setProgress(0.3);
+                if (row == rowCount - 3 && (column == 2 || column == 9 || column == columnCount - 3))
+                {
+                    progressBar = new ProgressBar();
+                    progressBar.setProgress(0.3);
+                    progressBar.setLayoutX(column * CELL_WIDTH);
+                    progressBar.setLayoutY(row * CELL_WIDTH - 7);
+                    progressBar.setPrefSize(CELL_WIDTH, 5);
+                }
 
-                progressBar.setLayoutX(column * CELL_WIDTH);
-                progressBar.setLayoutY(row * CELL_WIDTH - 10);
-                progressBar.setPrefSize(CELL_WIDTH, 5);
                 imageView.setX(column * CELL_WIDTH);
                 imageView.setY(row * CELL_WIDTH);
                 imageView.setFitWidth(CELL_WIDTH);
@@ -86,12 +97,18 @@ public class ArenaView extends Group {
                 cellView[row][column] = imageView;
                 componentView[row][column] = imageView1;
                 assetView[row][column] = imageView2;
-                healthBar[row][column] = progressBar;
+                if (progressBar != null) {
+                    healthBar[row][column] = progressBar;
+                }
                 assetView2[row][column] = imageView3;
                 this.getChildren().add(imageView);
                 this.getChildren().add(imageView2);
                 this.getChildren().add(imageView1);
                 this.getChildren().add(imageView3);
+                if (progressBar != null)
+                {
+                    this.getChildren().add(progressBar);
+                }
 
 
             }
