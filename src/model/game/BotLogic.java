@@ -98,8 +98,10 @@ public class BotLogic {
         while (mainLogic.isOccupied(randomPoint))
             randomPoint = mainLogic.getRandomPoint();
         card.setPoint(randomPoint);
-        data.botDeck.add(mainLogic.addToBoard(card, randomPoint));
-        mainLogic.checkForSpawnedPlayers(card);
+
+        Card newCard = mainLogic.addToBoard(card, randomPoint) ;
+        data.botDeck.add(newCard);
+        mainLogic.checkForSpawnedPlayers(newCard);
 
         mainLogic.sound(card);
 

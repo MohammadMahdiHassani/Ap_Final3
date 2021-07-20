@@ -82,7 +82,7 @@ public class GameLogic {
         while (elements.get(x) instanceof Tower) {
             x = rnd.nextInt(elements.size());
         }
-        return CardFactory.makeCard(elements.get(x).getValue() , data.gameLevel) ;
+        return (Card) elements.get(x) ;
     }
 
     Point2D getRandomPoint() {
@@ -262,7 +262,7 @@ public class GameLogic {
             }
         }
         for (int i = 0; i < count; i++)
-            troops.add((Troop) CardFactory.makeCard(troop.getValue(), level));
+            troops.add((Troop) CardFactory.makeCard(troop.getValue(), data.gameLevel));
 
         for (Troop t : troops) {
             Point2D point;
