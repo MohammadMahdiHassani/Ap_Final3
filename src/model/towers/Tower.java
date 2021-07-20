@@ -9,13 +9,19 @@ public abstract class Tower extends GameElement {
 
     private int damage ;
     private int hitPoint ;
+    private int initHit;
 
     public Tower(CellValue value , Point2D point ,  float hitSpeed, int rang, int damage, int hitPoint) {
         super(value , rang) ;
         this.hitSpeed = hitSpeed;
         this.damage = damage;
         this.hitPoint = hitPoint;
+        initHit = hitPoint;
         this.setPoint(point);
+    }
+
+    public int getInitHit() {
+        return initHit;
     }
 
     private float hitSpeedCounter = 0.8f;

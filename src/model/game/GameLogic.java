@@ -21,6 +21,7 @@ import model.cards.troops.Troop;
 import model.towers.ArcherTower;
 import model.towers.KingTower;
 import model.towers.Tower;
+import view.ArenaView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -298,6 +299,13 @@ public class GameLogic {
         return null;
     }
 
+    public void matchBarWithTower(Tower tower)
+    {
+        int x = (int) tower.getPoint().getX();
+        int y = (int) tower.getPoint().getY();
+        ArenaView.healthBar[y][x].setProgress((double) tower.getHitPoint()/tower.getInitHit());
+    }
+
     private void shootTarget(GameElement m, ArrayList<GameElement> targets) {
         if (m instanceof Spell) {
             if (m instanceof Rage) {
@@ -309,6 +317,7 @@ public class GameLogic {
                     boolean flag = false;
                     if (target instanceof Tower) {
                         ((Tower) target).decreaseHitPoint(((FireBall) m).getDamage() * 0.5);
+                        matchBarWithTower((Tower) target);
                         flag = true;
                     } else if (target instanceof Troop) {
                         ((Troop) target).decreaseHitPoint(((FireBall) m).getDamage());
@@ -327,6 +336,7 @@ public class GameLogic {
                     boolean flag = false;
                     if (target instanceof Tower) {
                         ((Tower) target).decreaseHitPoint(((Arrows) m).getDamage() * 0.5);
+                        matchBarWithTower((Tower) target);
                         flag = true;
                     } else if (target instanceof Troop) {
                         ((Troop) target).decreaseHitPoint(((Arrows) m).getDamage());
@@ -349,6 +359,7 @@ public class GameLogic {
                 boolean flag = false;
                 if (target instanceof Tower) {
                     ((Tower) target).decreaseHitPoint(((Building) m).getDamage());
+                    matchBarWithTower((Tower) target);
                     flag = true;
                 } else if (target instanceof Troop) {
                     ((Troop) target).decreaseHitPoint(((Building) m).getDamage());
@@ -373,6 +384,7 @@ public class GameLogic {
                     boolean flag = false;
                     if (target instanceof Tower) {
                         ((Tower) target).decreaseHitPoint(((Troop) m).getDamage());
+                        matchBarWithTower((Tower) target);
                         flag = true;
                     } else if (target instanceof Troop) {
                         ((Troop) target).decreaseHitPoint(((Troop) m).getDamage());
@@ -395,6 +407,7 @@ public class GameLogic {
                 boolean flag = false;
                 if (target instanceof Tower) {
                     ((Tower) target).decreaseHitPoint(((Tower) m).getDamage());
+                    matchBarWithTower((Tower) target);
                     flag = true;
                 } else if (target instanceof Troop) {
                     ((Troop) target).decreaseHitPoint(((Tower) m).getDamage());
@@ -738,6 +751,10 @@ public class GameLogic {
     }
 
     private void deletFromBoard(GameElement card) {
+        if (card instanceof Tower)
+        {
+            ArenaView.healthBar[(int) card.getPoint().getY()][(int) card.getPoint().getX()].setVisible(false);
+        }
         setScore(card);
         if (isPlayerElement(card))
             data.playerDeck.remove(card);

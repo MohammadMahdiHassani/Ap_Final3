@@ -33,7 +33,7 @@ public class ArenaView extends Group {
     //private ImageView[][] assetView;
     private ImageView[][] cellView;
     private ImageView[][] componentView;
-    private ProgressBar[][] healthBar;
+    public static ProgressBar[][] healthBar;
     public static ImageView[][] assetView;
     public static ImageView[][] assetView2;
 
@@ -60,19 +60,19 @@ public class ArenaView extends Group {
                 ProgressBar progressBar = null;
                 if (row == 2 && (column == 2 || column == 9 || column == columnCount - 3)) {
                     progressBar = new ProgressBar();
-                    progressBar.setProgress(0.3);
-                    progressBar.setLayoutX(column * CELL_WIDTH);
-                    progressBar.setLayoutY(row * CELL_WIDTH - 13);
-                    progressBar.setPrefSize(CELL_WIDTH, 5);
-                }
-
-                if (row == rowCount - 3 && (column == 2 || column == 9 || column == columnCount - 3))
-                {
-                    progressBar = new ProgressBar();
-                    progressBar.setProgress(0.3);
+                    progressBar.setProgress(1);
+                    progressBar.setStyle("-fx-accent: red");
                     progressBar.setLayoutX(column * CELL_WIDTH);
                     progressBar.setLayoutY(row * CELL_WIDTH - 7);
-                    progressBar.setPrefSize(CELL_WIDTH, 5);
+                    progressBar.setPrefSize(CELL_WIDTH, 9);
+                }
+
+                if (row == rowCount - 3 && (column == 2 || column == 9 || column == columnCount - 3)) {
+                    progressBar = new ProgressBar();
+                    progressBar.setProgress(1);
+                    progressBar.setLayoutX(column * CELL_WIDTH);
+                    progressBar.setLayoutY(row * CELL_WIDTH - 7);
+                    progressBar.setPrefSize(CELL_WIDTH, 9);
                 }
 
                 imageView.setX(column * CELL_WIDTH);
@@ -105,8 +105,7 @@ public class ArenaView extends Group {
                 this.getChildren().add(imageView2);
                 this.getChildren().add(imageView1);
                 this.getChildren().add(imageView3);
-                if (progressBar != null)
-                {
+                if (progressBar != null) {
                     this.getChildren().add(progressBar);
                 }
 
@@ -134,8 +133,16 @@ public class ArenaView extends Group {
     }
 
     public void setAsset() {
+
         for (int i = 0; i < rowCount; i++) {
             for (int j = 0; j < columnCount; j++) {
+                if (i == 2 && (j == 2 || j == 9 || j == columnCount - 3)) {
+                    healthBar[i][j].setProgress(3);
+                }
+
+                if (i == rowCount - 3 && (j == 2 || j == 9 || j == columnCount - 3)) {
+                    healthBar[i][j].setProgress(3);
+                }
                 if ((i != 9 && i != 8 && i != 11 && i != 12 && i != 10) || (j != columnCount - 1)) {
                     if (j != 0 || i != 10) {
                         if (i == 0) {
@@ -256,7 +263,7 @@ public class ArenaView extends Group {
                     componentView[i][j].setImage(null);
                 } else if (cellValues[i][j].getValue() == MYKINGTOWER) {
                     componentView[i][j].setImage(MYKINGTOWER.getMyWalk());
-                   // assetView[i][j].setImage(new Image("/view/photos/tower/myKing.png"));
+                    // assetView[i][j].setImage(new Image("/view/photos/tower/myKing.png"));
                 } else if (cellValues[i][j].getValue() == MYARCHERTOWER) {
                     componentView[i][j].setImage(MYARCHERTOWER.getMyWalk());
                 } else if (cellValues[i][j].getValue() == BOTARCHERTOWER) {

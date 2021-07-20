@@ -276,6 +276,7 @@ public class ArenaController implements EventHandler<MouseEvent> {
         model.getLogic().data.botDeck.add(card1);
         model.getLogic().data.boardElements.add(card1);
         model.getLogic().data.getBotDeck().add(card1);
+        model.getLogic().checkForSpawnedPlayers(card1);
         sound(card1);
     }
 
@@ -284,7 +285,6 @@ public class ArenaController implements EventHandler<MouseEvent> {
         updateTimer();
         increaseElixir();
         serverLogic();
-
         model.move();
         serverLogic();
         arenaView.update(model);
