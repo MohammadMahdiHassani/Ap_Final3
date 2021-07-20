@@ -82,7 +82,7 @@ public class GameLogic {
         while (elements.get(x) instanceof Tower) {
             x = rnd.nextInt(elements.size());
         }
-        return (Card) elements.get(x);
+        return CardFactory.makeCard(elements.get(x).getValue() , data.gameLevel) ;
     }
 
     Point2D getRandomPoint() {
@@ -262,6 +262,7 @@ public class GameLogic {
             }
         }
         for (int i = 0; i < count; i++)
+            troops.add((Troop) CardFactory.makeCard(troop.getValue(), data.gameLevel));
             troops.add((Troop) CardFactory.makeCard(troop.getValue(), level));
 
         for (Troop t : troops) {
@@ -269,9 +270,8 @@ public class GameLogic {
             if ((point = findEmptyCell(troop.getPoint())) != null) {
                 if (isPlayerElement(troop))
                     data.playerDeck.add(t);
-                else if (isBotElement(troop)) {
+                else
                     data.botDeck.add(t);
-                }
                 t.setPoint(point);
                 t.isSpawned();
                 data.boardElements.add(t);
@@ -668,7 +668,7 @@ public class GameLogic {
             if (!(i instanceof Tower))
                 continue;
             if (i.getPoint().distance(card.getPoint()) < closestDistance) {
-                if ((isPlayerElement(card) && isBotElement(i)) || (isPlayerElement(i) && isBotElement(card))) {
+                if (isPlayerElement(card) && isBotElement(i) || isPlayerElement(i) && isBotElement(card)) {
                     closestDistance = i.getPoint().distance(card.getPoint());
                     towerPoint = i.getPoint();
                 }
@@ -714,6 +714,7 @@ public class GameLogic {
 
     public void setCurrPoint(Point2D currPoint) {
         this.currPoint = currPoint;
+
 
     }
 
