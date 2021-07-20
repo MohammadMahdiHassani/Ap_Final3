@@ -30,10 +30,12 @@ public class ArenaView extends Group {
     private int columnCount;
     private int countTime;
     private ProgressBar elixirProgress;
+    //private ImageView[][] assetView;
     private ImageView[][] cellView;
     private ImageView[][] componentView;
     private ProgressBar[][] healthBar;
-    public static ImageView[][] king;
+    public static ImageView[][] assetView;
+    public static ImageView[][] assetView2;
 
     public ArenaView() {
 
@@ -46,13 +48,15 @@ public class ArenaView extends Group {
         timeLabel = new Label("3:00");
         cellView = new ImageView[rowCount][columnCount];
         componentView = new ImageView[rowCount][columnCount];
-        king = new ImageView[rowCount][columnCount];
+        assetView = new ImageView[rowCount][columnCount];
+        assetView2 = new ImageView[rowCount][columnCount];
         healthBar = new ProgressBar[rowCount][columnCount];
         for (int row = 0; row < rowCount; row++) {
             for (int column = 0; column < columnCount; column++) {
                 ImageView imageView = new ImageView();
                 ImageView imageView1 = new ImageView();
                 ImageView imageView2 = new ImageView();
+                ImageView imageView3 = new ImageView();
                 ProgressBar progressBar = new ProgressBar();
 
                 progressBar.setProgress(0.3);
@@ -69,6 +73,11 @@ public class ArenaView extends Group {
                 imageView1.setFitWidth(CELL_WIDTH);
                 imageView1.setFitHeight(CELL_WIDTH);
 
+                imageView3.setX(column * CELL_WIDTH);
+                imageView3.setY(row * CELL_WIDTH);
+                imageView3.setFitWidth(CELL_WIDTH);
+                imageView3.setFitHeight(CELL_WIDTH);
+
                 imageView2.setX(column * CELL_WIDTH);
                 imageView2.setY(row * CELL_WIDTH);
                 imageView2.setFitWidth(CELL_WIDTH);
@@ -76,11 +85,14 @@ public class ArenaView extends Group {
 
                 cellView[row][column] = imageView;
                 componentView[row][column] = imageView1;
-                king[row][column] = imageView2;
+                assetView[row][column] = imageView2;
                 healthBar[row][column] = progressBar;
+                assetView2[row][column] = imageView3;
                 this.getChildren().add(imageView);
-                this.getChildren().add(imageView1);
                 this.getChildren().add(imageView2);
+                this.getChildren().add(imageView1);
+                this.getChildren().add(imageView3);
+
 
             }
         }
@@ -104,6 +116,60 @@ public class ArenaView extends Group {
 
     }
 
+    public void setAsset() {
+        for (int i = 0; i < rowCount; i++) {
+            for (int j = 0; j < columnCount; j++) {
+                if ((i != 9 && i != 8 && i != 11 && i != 12 && i != 10) || (j != columnCount - 1)) {
+                    if (j != 0 || i != 10) {
+                        if (i == 0) {
+                            assetView[i][j].setImage(TREE.getThumbnailImage());
+                        }
+                        if (i == rowCount - 1) {
+                            assetView[i][j].setImage(TREE.getThumbnailImage());
+                        }
+                        if (j == 0) {
+                            assetView[i][j].setImage(TREE.getThumbnailImage());
+                        }
+                        if (j == columnCount - 1) {
+                            assetView[i][j].setImage(TREE.getThumbnailImage());
+                        }
+                    }
+                }
+            }
+        }
+        assetView[2][2].setImage(new Image("/view/photos/tower/damageTower.png"));
+        assetView[2][9].setImage(new Image("/view/photos/tower/damageTower.png"));
+        assetView[2][columnCount - 3].setImage(new Image("/view/photos/tower/damageTower.png"));
+        assetView[rowCount - 3][2].setImage(new Image("/view/photos/tower/damageTower.png"));
+        assetView[rowCount - 3][9].setImage(new Image("/view/photos/tower/damageTower.png"));
+        assetView[rowCount - 3][columnCount - 3].setImage(new Image("/view/photos/tower/damageTower.png"));
+
+
+        assetView[10][0].setImage(new Image("/view/photos/background/lHome.png"));
+        assetView[10][columnCount - 1].setImage(new Image("/view/photos/background/rHome.png"));
+        assetView[10][columnCount - 3].setImage(new Image("/view/photos/background/bridge.png"));
+        assetView[10][2].setImage(new Image("/view/photos/background/bridge.png"));
+        assetView[rowCount - 2][2].setImage(new Image("/view/photos/background/fence.png"));
+        assetView[rowCount - 2][3].setImage(new Image("/view/photos/background/fence.png"));
+        assetView[rowCount - 2][columnCount - 2].setImage(new Image("/view/photos/background/fence.png"));
+        assetView[rowCount - 2][columnCount - 3].setImage(new Image("/view/photos/background/fence.png"));
+        assetView[1][2].setImage(new Image("/view/photos/background/fence.png"));
+        assetView[1][3].setImage(new Image("/view/photos/background/fence.png"));
+        assetView[1][columnCount - 4].setImage(new Image("/view/photos/background/fence.png"));
+        assetView[1][columnCount - 3].setImage(new Image("/view/photos/background/fence.png"));
+        assetView[1][9].setImage(new Image("/view/photos/background/clock.png"));
+        for (int j = 1; j < columnCount - 1; j++) {
+            assetView[rowCount - 2][j].setImage(new Image("/view/photos/background/fence.png"));
+            if (j != 9) {
+                assetView[1][j].setImage(new Image("/view/photos/background/fence.png"));
+            }
+        }
+
+        assetView2[2][9].setImage(new Image("/view/photos/tower/botKing.png"));
+        assetView2[rowCount - 3][9].setImage(new Image("/view/photos/tower/myKing.png"));
+
+    }
+
     public void setBackgroundCell(ArenaModel model) {
         CellValue[][] cellValues = null;
         cellValues = model.getBackGroundCellValues();
@@ -115,6 +181,9 @@ public class ArenaView extends Group {
 
                 } else if (cellValues[i][j] == GRASS2) {
                     cellView[i][j].setImage(GRASS2.getThumbnailImage());
+
+                } else if (cellValues[i][j] == GRASS3) {
+                    cellView[i][j].setImage(GRASS3.getThumbnailImage());
                 } else if (cellValues[i][j] == CellValue.ROAD) {
                     cellView[i][j].setImage(ROAD.getThumbnailImage());
                 } else if (cellValues[i][j] == CellValue.HROAD) {
@@ -146,6 +215,7 @@ public class ArenaView extends Group {
                 }
             }
         }
+        setAsset();
     }
 
     public GameElement getCardWithPoint(int x, int y, ArenaModel model) {
@@ -169,13 +239,13 @@ public class ArenaView extends Group {
                     componentView[i][j].setImage(null);
                 } else if (cellValues[i][j].getValue() == MYKINGTOWER) {
                     componentView[i][j].setImage(MYKINGTOWER.getMyWalk());
-                    king[i][j].setImage(new Image("/view/photos/tower/myKing.png"));
+                   // assetView[i][j].setImage(new Image("/view/photos/tower/myKing.png"));
                 } else if (cellValues[i][j].getValue() == MYARCHERTOWER) {
                     componentView[i][j].setImage(MYARCHERTOWER.getMyWalk());
                 } else if (cellValues[i][j].getValue() == BOTARCHERTOWER) {
                     componentView[i][j].setImage(BOTARCHERTOWER.getMyWalk());
                 } else if (cellValues[i][j].getValue() == BOTKINGTOWER) {
-                    king[i][j].setImage(new Image("/view/photos/tower/botKing.png"));
+                    //assetView[i][j].setImage(new Image("/view/photos/tower/botKing.png"));
                     componentView[i][j].setImage(BOTKINGTOWER.getMyWalk());
                 } else if (cellValues[i][j].getValue() == GIANT) {
                     if (model.getLogic().isPlayerElement(getCardWithPoint(j, i, model))) {

@@ -668,7 +668,7 @@ public class GameLogic {
             if (!(i instanceof Tower))
                 continue;
             if (i.getPoint().distance(card.getPoint()) < closestDistance) {
-                if (isPlayerElement(card) && isBotElement(i) || isPlayerElement(i) && isBotElement(card)) {
+                if ((isPlayerElement(card) && isBotElement(i)) || (isPlayerElement(i) && isBotElement(card))) {
                     closestDistance = i.getPoint().distance(card.getPoint());
                     towerPoint = i.getPoint();
                 }

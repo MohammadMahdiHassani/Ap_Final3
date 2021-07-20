@@ -84,7 +84,7 @@ public class ArenaModel {
                     case "a":
                     case "a2":
                     case "k2":
-                        BackGroundCellValues[row][column] = CellValue.DAMAGE;
+                        BackGroundCellValues[row][column] = CellValue.ROAD;
                         break;
                     case "t":
                         BackGroundCellValues[row][column] = CellValue.TREE;
@@ -104,6 +104,9 @@ public class ArenaModel {
                         break;
                     case "d" :
                         BackGroundCellValues[row][column] = CellValue.R_CROWN;
+                        break;
+                    case "g2":
+                        BackGroundCellValues[row][column] = CellValue.GRASS3;
                         break;
                     case "*":
                         BackGroundCellValues[row][column] = CellValue.B_CROWN;
