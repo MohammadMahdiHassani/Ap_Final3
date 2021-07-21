@@ -80,12 +80,18 @@ public class BotLogic {
                 randomBotLogic();
                 break;
             case MEDIUM:
+                mediumBotLogic();
                 break;
             case HARD:
                 smartBotLogic();
 
         }
 
+    }
+
+    private void mediumBotLogic() {
+        if(mainLogic.speedCounter % 7 == 0 )
+            isdefending();
     }
 
     private void randomBotLogic(){
