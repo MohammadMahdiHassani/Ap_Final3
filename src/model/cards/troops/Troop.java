@@ -12,6 +12,7 @@ public abstract class Troop extends Card implements Serializable {
 
     private int hitPoint ;
     private int damage ;
+    private int initHit;
     private Speed speed ;
     private float hitSpeed ;
     private Target target ;
@@ -20,7 +21,11 @@ public abstract class Troop extends Card implements Serializable {
     private boolean isSpawned ;
 
 
-    public Troop(CellValue value , int hitPoint, int damage, Speed speed, float hitSpeed, Target target, int cost, int count,int range , boolean areaSplash ) {
+    public int getInitHit() {
+        return initHit;
+    }
+
+    public Troop(CellValue value , int hitPoint, int damage, Speed speed, float hitSpeed, Target target, int cost, int count, int range , boolean areaSplash ) {
         super(value ,range, cost);
         this.hitPoint = hitPoint;
         this.damage = damage;
@@ -30,6 +35,7 @@ public abstract class Troop extends Card implements Serializable {
         this.count = count;
         this.areaSplash = areaSplash ;
         this.isSpawned = false ;
+        initHit = hitPoint;
     }
 
     private float hitSpeedCounter = 0.8f;

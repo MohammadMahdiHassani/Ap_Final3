@@ -6,9 +6,11 @@ import javafx.animation.ScaleTransition;
 import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
 import javafx.geometry.Point2D;
+import javafx.scene.CacheHint;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TableRow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
@@ -16,7 +18,10 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
 import model.GameElement;
+import model.cards.Card;
 import model.cards.CellValue;
+import model.cards.buildings.Building;
+import model.cards.troops.Troop;
 import model.game.ArenaModel;
 
 import static model.cards.CellValue.*;
@@ -66,13 +71,20 @@ public class ArenaView extends Group {
                     progressBar.setLayoutY(row * CELL_WIDTH - 7);
                     progressBar.setPrefSize(CELL_WIDTH, 9);
                 }
-
-                if (row == rowCount - 3 && (column == 2 || column == 9 || column == columnCount - 3)) {
+                else if (row == rowCount - 3 && (column == 2 || column == 9 || column == columnCount - 3)) {
                     progressBar = new ProgressBar();
                     progressBar.setProgress(1);
                     progressBar.setLayoutX(column * CELL_WIDTH);
                     progressBar.setLayoutY(row * CELL_WIDTH - 7);
                     progressBar.setPrefSize(CELL_WIDTH, 9);
+                }
+                else {
+                    progressBar = new ProgressBar();
+                    progressBar.setProgress(1);
+                    progressBar.setLayoutX(column * CELL_WIDTH);
+                    progressBar.setLayoutY(row * CELL_WIDTH - 7);
+                    progressBar.setPrefSize(CELL_WIDTH - 6, 8);
+                    progressBar.setVisible(false);
                 }
 
                 imageView.setX(column * CELL_WIDTH);
@@ -253,12 +265,54 @@ public class ArenaView extends Group {
         return null;
     }
 
+    public void matchProgressWithCard(Card card,ArenaModel model)
+    {
+        if (card instanceof Troop)
+        {
+            if (model.getLogic().isBotElement(card))
+            {
+                healthBar[(int) card.getPoint().getY()][(int) card.getPoint().getX()].setVisible(true);
+                healthBar[(int) card.getPoint().getY()][(int) card.getPoint().getX()].setProgress((double) ((Troop) card).getHitPoint()/((Troop) card).getInitHit());
+                healthBar[(int) card.getPoint().getY()][(int) card.getPoint().getX()].setStyle("-fx-accent: red");
+            }
+            else if (model.getLogic().isPlayerElement(card))
+            {
+                healthBar[(int) card.getPoint().getY()][(int) card.getPoint().getX()].setVisible(true);
+                healthBar[(int) card.getPoint().getY()][(int) card.getPoint().getX()].setProgress((double) ((Troop) card).getHitPoint()/((Troop) card).getInitHit());
+                healthBar[(int) card.getPoint().getY()][(int) card.getPoint().getX()].setStyle("-fx-accent: blue");
+            }
+        }
+        else if (card instanceof Building)
+        {
+            if (model.getLogic().isBotElement(card))
+            {
+                healthBar[(int) card.getPoint().getY()][(int) card.getPoint().getX()].setVisible(true);
+                healthBar[(int) card.getPoint().getY()][(int) card.getPoint().getX()].setProgress((double) ((Building) card).getHitPoint()/((Building) card).getInitHit());
+                healthBar[(int) card.getPoint().getY()][(int) card.getPoint().getX()].setStyle("-fx-accent: red");
+            }
+            else if (model.getLogic().isPlayerElement(card))
+            {
+                healthBar[(int) card.getPoint().getY()][(int) card.getPoint().getX()].setVisible(true);
+                healthBar[(int) card.getPoint().getY()][(int) card.getPoint().getX()].setProgress((double) ((Building) card).getHitPoint()/((Building) card).getInitHit());
+                healthBar[(int) card.getPoint().getY()][(int) card.getPoint().getX()].setStyle("-fx-accent: blue");
+            }
+        }
+    }
     public void update(ArenaModel model) {
 
         GameElement[][] cellValues = null;
         cellValues = model.getCellValues();
         for (int i = 0; i < rowCount; i++) {
             for (int j = 0; j < columnCount; j++) {
+                if ((i != 2 || (j != 2 && j != 9 && j != columnCount - 3))&& ((i != rowCount - 3 || (j != 2 && j != 9 && j != columnCount - 3)))) {
+                    healthBar[i][j].setVisible(false);
+                    GameElement gameElement = getCardWithPoint(j, i, model);
+                    if (gameElement != null) {
+                        if (gameElement instanceof Card) {
+                            matchProgressWithCard((Card) gameElement, model);
+                        }
+                    }
+                }
                 if (cellValues[i][j] == null) {
                     componentView[i][j].setImage(null);
                 } else if (cellValues[i][j].getValue() == MYKINGTOWER) {

@@ -11,6 +11,7 @@ public abstract class Building extends Card implements Serializable {
     private Target target ;
     private int lifeTime ;
     private int hitPoint ;
+    private int initHit;
     private int damage ;
     private boolean isTimerStarted ;
     public Building(CellValue value , int cost, int range , Target target , float hitSpeed , int lifeTime , int hitPoint , int damage) {
@@ -21,8 +22,14 @@ public abstract class Building extends Card implements Serializable {
         this.hitPoint = hitPoint ;
         this.damage = damage ;
         isTimerStarted = false ;
+        initHit = hitPoint;
 
     }
+
+    public int getInitHit() {
+        return initHit;
+    }
+
     private float hitSpeedCounter = 0.8f;
     public boolean isAllowedToHit(){
         if(hitSpeedCounter < hitSpeed) {
