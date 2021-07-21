@@ -1,12 +1,5 @@
 package network;
 
-import DataBase.DataHandler;
-import DataBase.UserData;
-import model.cards.Card;
-import model.cards.CardFactory;
-import model.cards.CellValue;
-import model.cards.levelEnums.Level;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -59,6 +52,7 @@ public class Server {
 //    }
 
     public void connect() {
+
         clientDetails = new ArrayList<>();
         try {
             serverSocket = new ServerSocket(9000);
@@ -68,6 +62,7 @@ public class Server {
         for (int i = 0; i < 2; i++) {
             try {
                 Socket socket = serverSocket.accept();
+                System.out.println("salam");
                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
                 ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
                 UserDataServer userDataServer = (UserDataServer) objectInputStream.readObject();
@@ -81,7 +76,7 @@ public class Server {
 
         for (int i = 0; i < 2; i++) {
             try {
-                clientDetails.get(i).getObjectOutputStream().writeObject(new Request(clientDetails.get(i).getUserDataServer().getLevel().toString(),clientDetails.get(i).getUserDataServer().getLevel(),clientDetails.get(i).getUserDataServer().getUserName(),0,0));
+                clientDetails.get(i).getObjectOutputStream().writeObject(new Request(clientDetails.get(i).getUserDataServer().getLevel().toString(), clientDetails.get(i).getUserDataServer().getLevel(), clientDetails.get(i).getUserDataServer().getUserName(), 0, 0));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -98,6 +93,7 @@ public class Server {
             Thread thread = new Thread(new ClientHandler(clientDetails.get(i), this));
             thread.start();
         }
+
         //System.out.println("finish connection");
     }
 

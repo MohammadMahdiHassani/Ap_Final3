@@ -45,9 +45,13 @@ public class TransferDataReceive implements Runnable{
                 isReceive = true;
                 break;
             } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
+                System.out.println("some error in connection");
             }
         }
+    }
+
+    public ObjectInputStream getObjectInputStream() {
+        return objectInputStream;
     }
 
     public double getY() {

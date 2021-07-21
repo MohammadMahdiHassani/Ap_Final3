@@ -31,7 +31,8 @@ public class ClientHandler implements Runnable {
                     server.sendRequest(0, request1);
                 }
             } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
+                System.out.println("the client was disconnect");
+                break;
             }
         }
     }

@@ -99,7 +99,7 @@ public class MenuController {
                     level = transferDataReceive.getLevel();
                     break;
                 }
-                Thread.sleep(100);
+                Thread.sleep(200);
             }
 
             transferDataReceive.setReceive(false);
@@ -151,6 +151,7 @@ public class MenuController {
     }
 
     public static KingTowerLevel getBotKingTowerLevel() {
+        System.out.println(level);
         if (level == Level.LEVEL_1) {
             return KingTowerLevel.LEVEL_1;
         } else if (level == Level.LEVEL_2) {

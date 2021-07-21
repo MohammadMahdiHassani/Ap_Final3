@@ -23,6 +23,7 @@ import model.towers.KingTower;
 import model.towers.Tower;
 import view.ArenaView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -263,7 +264,7 @@ public class GameLogic {
             }
         }
         for (int i = 0; i < count; i++)
-            troops.add((Troop) CardFactory.makeCard(troop.getValue(), data.gameLevel));
+            troops.add((Troop) CardFactory.makeCard(troop.getValue(), /*data.gameLevel*/ level));
 
         for (Troop t : troops) {
             Point2D point;
@@ -712,7 +713,7 @@ public class GameLogic {
                     return true;
                 // this.currPoint = currPoint;
 
-            } else if (botLogic.archerTower_left.isDead()) {
+            }if (botLogic.archerTower_left.isDead()) {
                 if (currPoint.getY() >= 6 && currPoint.getX() <= 6)
                     return true;
                 //this.currPoint = currPoint;

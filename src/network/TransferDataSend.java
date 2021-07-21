@@ -20,7 +20,7 @@ public class TransferDataSend implements Runnable{
         try {
             objectOutputStream.writeObject(request);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("some error in connection");
         }
     }
 
@@ -40,4 +40,7 @@ public class TransferDataSend implements Runnable{
         return y;
     }
 
+    public ObjectOutputStream getObjectOutputStream() {
+        return objectOutputStream;
+    }
 }
