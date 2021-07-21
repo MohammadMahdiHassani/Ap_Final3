@@ -17,13 +17,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import model.cards.*;
+import model.cards.Card;
+import model.cards.CardFactory;
+import model.cards.CellValue;
 import model.cards.levelEnums.Level;
-import model.game.ArenaModel;
 
-import java.io.*;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -62,9 +61,10 @@ public class DeckController {
             FXCollections.observableArrayList();
     private Card mainLastValue;
     private Card allLastValue;
+    private int count;
 
     public void initialize() {
-
+        count = 0;
         TroopyCounter.setText(String.valueOf(DataHandler.getUserData().getTroopy()));
         XPprogressSlider.setProgress((1.0 * DataHandler.getUserData().getXP()) / 2500);
         xp.setText(DataHandler.getUserData().getXP() + "");
@@ -97,6 +97,7 @@ public class DeckController {
             allArmies.add(CardFactory.makeCard(cellValues.get(i), level));
 
         }
+        allArmies.add(null);
 
 
         allArmy.setItems(allArmies);
@@ -105,9 +106,11 @@ public class DeckController {
                 new ChangeListener<Card>() {
                     @Override
                     public void changed(ObservableValue<? extends Card> observable, Card oldValue, Card newValue) {
-                        allArmy.getItems().add(newValue);
-                        mainArmy.getItems().remove(oldValue);
-                        mainLastValue = newValue;
+                        if (count == 0)
+                        {
+                            removeFromMainArmy(mainArmy.getSelectionModel().getSelectedIndex());
+                            LoginController.sound.playMain("CHOOSE_CART");
+                        }
                     }
                 }
         );
@@ -118,14 +121,23 @@ public class DeckController {
                         new ChangeListener<Card>() {
                             @Override
                             public void changed(ObservableValue<? extends Card> observable, Card oldValue, Card newValue) {
-                                LoginController.sound.playMain("CHOOSE_CART");
-                                mainArmy.getItems().add(newValue);
-                                allArmy.getItems().remove(oldValue);
-                                allLastValue = newValue;
+                                System.out.println("card");
+                                if (count == 0) {
+                                    if (mainArmy.getItems().size() < 8) {
+                                        System.out.println("ok");
+                                        LoginController.sound.playMain("CHOOSE_CART");
+                                        removeFromListArmy(allArmy.getSelectionModel().getSelectedIndex());
+                                    } else {
+                                        LoginController.sound.playMain("NO");
+
+                                    }
+                                }
+
+
                             }
                         }
                 );
-        mainArmy.setCellFactory (
+        mainArmy.setCellFactory(
                 new Callback<ListView<Card>, ListCell<Card>>() {
                     @Override
                     public ListCell<Card> call(ListView<Card> param) {
@@ -144,40 +156,63 @@ public class DeckController {
         );
     }
 
+    public void removeFromListArmy(int index) {
+        count = 1;
+        mainArmy.getItems().add(allArmy.getItems().get(index));
+        allArmies.remove(index);
+        allArmy.setItems(allArmies);
+        allArmy.getSelectionModel().select(allArmy.getItems().size() - 1);
+        count = 0;
+    }
+
+    public void removeFromMainArmy(int index)
+    {
+        count = 1;
+        allArmy.getItems().remove(null);
+        allArmy.getItems().add(mainArmy.getItems().get(index));
+        allArmy.getItems().add(null);
+        allArmy.getSelectionModel().select(allArmy.getItems().size() - 1);
+        mainArmies.remove(index);
+        mainArmy.setItems(mainArmies);
+        mainArmy.getSelectionModel().select(mainArmy.getItems().size() - 1);
+        count = 0;
+    }
+
     @FXML
     void endClick(MouseEvent event) {
         LoginController.sound.playMain("CLICK");
-        int mainLastIndex = -1;
-        int allLastIndex = -1;
-        if (mainLastValue != null) {
-            for (int i = 0; i < mainArmy.getItems().size(); i++) {
-                if (mainArmy.getItems().get(i).getValue() == mainLastValue.getValue()) {
-                    mainLastIndex = i;
-                    break;
-                }
-            }
-        }
-        if (allLastValue != null) {
-            for (int i = 0; i < allArmy.getItems().size(); i++) {
-                if (allArmy.getItems().get(i).getValue() == allLastValue.getValue()) {
-                    allLastIndex = i;
-                    break;
-                }
-            }
-        }
-        if (allArmy.getItems().size() > allLastIndex && allLastIndex >= 0) {
-            allArmy.getItems().remove(allLastIndex);
-            mainArmy.getItems().remove(mainArmy.getItems().size() - 1);
-        }
-        if (mainArmy.getItems().size() > mainLastIndex && mainLastIndex >= 0) {
-            mainArmy.getItems().remove(mainLastIndex);
-            allArmy.getItems().remove(allArmy.getItems().size() - 1);
-        }
+//        int mainLastIndex = -1;
+//        int allLastIndex = -1;
+//        if (mainLastValue != null) {
+//            for (int i = 0; i < mainArmy.getItems().size(); i++) {
+//                if (mainArmy.getItems().get(i).getValue() == mainLastValue.getValue()) {
+//                    mainLastIndex = i;
+//                    break;
+//                }
+//            }
+//        }
+//        if (allLastValue != null) {
+//            for (int i = 0; i < allArmy.getItems().size(); i++) {
+//                if (allArmy.getItems().get(i).getValue() == allLastValue.getValue()) {
+//                    allLastIndex = i;
+//                    break;
+//                }
+//            }
+//        }
+//        if (allArmy.getItems().size() > allLastIndex && allLastIndex >= 0) {
+//            allArmy.getItems().remove(allLastIndex);
+//            mainArmy.getItems().remove(mainArmy.getItems().size() - 1);
+//        }
+//        if (mainArmy.getItems().size() > mainLastIndex && mainLastIndex >= 0) {
+//            mainArmy.getItems().remove(mainLastIndex);
+//            allArmy.getItems().remove(allArmy.getItems().size() - 1);
+//        }
         DataHandler.getUserData().setPlayerDeck(new ArrayList(mainArmy.getItems()));
     }
 
     @FXML
     void actionHandler(MouseEvent event) throws IOException {
+        DataHandler.getUserData().setPlayerDeck(new ArrayList(mainArmy.getItems()));
         LoginController.sound.playMain("CLICK");
         String fxmlAddress = getFxml(event);
         Parent root = FXMLLoader.load(getClass().getResource(fxmlAddress));
